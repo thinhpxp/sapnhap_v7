@@ -123,39 +123,19 @@
                     <button id="lookup-btn" disabled data-i18n-key="lookupButton">Look Up</button>
                 </div>
 
-                <!-- <div id="notification-area"></div> -->
                 <!-- Ô HIỂN THỊ KẾT QUẢ -->
-
                 <div id="result-container" class="hidden">
-                    <h2 data-i18n-key="resultsTitle">Lookup Results</h2>
+                    <h2 data-i18n-key="resultsTitle">Kết Quả Tra Cứu</h2>
                     <div id="result-content">
                         <div id="old-address-display"></div>
                         <hr class="result-divider">
                         <div id="new-address-display"></div>
                     </div>
-                    <!-- ... (bên trong <div id="result-container">) ... -->
-                    <hr class="result-divider">
-                    <div id="new-address-display"></div>
-                </div> <!-- kết thúc của result-content -->
 
-                <!-- === THÊM MỚI: Nút và Modal cho Trung tâm Hành chính === -->
-                <div id="admin-center-actions" class="hidden">
-                    <button id="show-admin-centers-btn" data-i18n-key="showAdminCentersBtn">Xem Địa chỉ Trung tâm Hành chính</button>
-                </div>
-
-            </div> <!-- kết thúc của result-container -->
-
-<!-- === THÊM MỚI: Cấu trúc Modal (đặt ở cuối thẻ <body>) === -->
-<div id="admin-center-modal" class="modal-overlay hidden">
-    <div class="modal-content">
-        <button id="modal-close-btn" class="modal-close">&times;</button>
-        <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
-        <div id="modal-body">
-            <!-- Nội dung sẽ được điền bởi JavaScript -->
-        </div>
-    </div>
-</div>
-<!-- ======================================================= -->
+                    <!-- Nút "Xem địa chỉ..." sẽ được đặt ở đây, bên trong result-container nhưng ngoài result-content -->
+                    <div id="admin-center-actions" class="hidden">
+                        <button id="show-admin-centers-btn" data-i18n-key="showAdminCentersBtn">Xem Địa chỉ Trung tâm Hành chính</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,5 +195,16 @@
     </script>
     <script src="/_vercel/insights/script.js" defer></script>
     <!-- ============================ -->
+<!-- === THÊM MỚI: Cấu trúc Modal (đặt ở cuối thẻ <body>) === -->
+    <div id="admin-center-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
+            <div id="modal-body">
+                <!-- Nội dung sẽ được điền bởi JavaScript -->
+            </div>
+        </div>
+    </div>
+    <!-- ======================================================= -->
 </body>
 </html>

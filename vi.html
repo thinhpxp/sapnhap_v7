@@ -124,29 +124,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <hr class="result-divider">
                         <div id="new-address-display"></div>
                     </div>
-                    <!-- ... (bên trong <div id="result-container">) ... -->
-                    <hr class="result-divider">
-                    <div id="new-address-display"></div>
-                </div> <!-- kết thúc của result-content -->
 
-                <!-- === THÊM MỚI: Nút và Modal cho Trung tâm Hành chính === -->
-                <div id="admin-center-actions" class="hidden">
-                    <button id="show-admin-centers-btn" data-i18n-key="showAdminCentersBtn">Xem Địa chỉ Trung tâm Hành chính</button>
-                </div>
-
-            </div> <!-- kết thúc của result-container -->
-
-<!-- === THÊM MỚI: Cấu trúc Modal (đặt ở cuối thẻ <body>) === -->
-<div id="admin-center-modal" class="modal-overlay hidden">
-    <div class="modal-content">
-        <button id="modal-close-btn" class="modal-close">&times;</button>
-        <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
-        <div id="modal-body">
-            <!-- Nội dung sẽ được điền bởi JavaScript -->
-        </div>
-    </div>
-</div>
-<!-- ======================================================= -->
+                    <!-- Nút "Xem địa chỉ..." sẽ được đặt ở đây, bên trong result-container nhưng ngoài result-content -->
+                    <div id="admin-center-actions" class="hidden">
+                        <button id="show-admin-centers-btn" data-i18n-key="showAdminCentersBtn">Xem Địa chỉ Trung tâm Hành chính</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,16 +169,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             </div>
         </div>
+
     </div>
-
+    <!-- === THÊM MỚI: Cấu trúc Modal (đặt ở cuối thẻ <body>) === -->
+    <div id="admin-center-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
+            <div id="modal-body">
+                <!-- Nội dung sẽ được điền bởi JavaScript -->
+            </div>
+        </div>
+    </div>
+    <!-- ======================================================= -->
     <footer style="text-align: center; padding: 10px; margin-top: 10px; font-size: 0.9em; color: var(--text-muted);">
-
         <a href="/vi" data-i18n-key="footerHome">Trang chủ</a> |
         <a href="/vi/about.html" data-i18n-key="footerAbout">Giới thiệu</a> |
         <a href="/vi/contact.html" data-i18n-key="footerContact">Liên hệ</a> |
         <a href="/vi/policies.html" data-i18n-key="footerPolicies">Chính sách</a>
         <p style="margin-top: 10px; margin-bottom: 0;">© 2025</p>
     </footer>
+
     <script src="/choices.min.js" defer></script>
     <script src="/data/old_data.js" defer></script>
     <script src="/locales/vi.js" defer></script> <!-- Nạp tệp ngôn ngữ Tiếng Việt -->
