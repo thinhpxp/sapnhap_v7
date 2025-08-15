@@ -177,7 +177,17 @@
             </div>
         </div>
     </div>
-
+    <!-- === ĐẶT MODAL VÀO ĐÂY, NGAY TRƯỚC KHI ĐÓNG BODY === -->
+    <div id="admin-center-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
+            <div id="modal-body">
+                <!-- Nội dung sẽ được điền bởi JavaScript -->
+            </div>
+        </div>
+    </div>
+    <!-- ======================================================= -->
     <footer style="text-align: center; padding: 10px; margin-top: 10px; font-size: 0.9em; color: var(--text-muted);">
         <a href="/en" data-i18n-key="footerHome">Home</a> |
         <a href="/en/about.html" data-i18n-key="footerAbout">About</a> |
@@ -195,16 +205,6 @@
     </script>
     <script src="/_vercel/insights/script.js" defer></script>
     <!-- ============================ -->
-<!-- === THÊM MỚI: Cấu trúc Modal (đặt ở cuối thẻ <body>) === -->
-    <div id="admin-center-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <button id="modal-close-btn" class="modal-close">&times;</button>
-            <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
-            <div id="modal-body">
-                <!-- Nội dung sẽ được điền bởi JavaScript -->
-            </div>
-        </div>
-    </div>
-    <!-- ======================================================= -->
+
 </body>
 </html>

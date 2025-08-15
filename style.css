@@ -759,3 +759,6 @@ button#lookup-btn:disabled {
     font-size: 0.9em;
     color: var(--text-muted);
 }
+.hidden {
+    display: none !important;
+}

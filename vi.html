@@ -165,13 +165,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <ul id="realtime-locations-list">
                  <!-- Dữ liệu sẽ được điền vào đây bởi JS -->
                 </ul>
-                <!--Hiển thị lượt truy vấn-->
 
             </div>
         </div>
 
+    </div> <!-- Đóng Container -->
+ <!-- === ĐẶT MODAL VÀO ĐÂY, NGAY TRƯỚC KHI ĐÓNG BODY === -->
+    <div id="admin-center-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
+            <div id="modal-body">
+                <!-- Nội dung sẽ được điền bởi JavaScript -->
+            </div>
+        </div>
     </div>
-
+    <!-- ======================================================= -->
     <footer style="text-align: center; padding: 10px; margin-top: 10px; font-size: 0.9em; color: var(--text-muted);">
         <a href="/vi" data-i18n-key="footerHome">Trang chủ</a> |
         <a href="/vi/about.html" data-i18n-key="footerAbout">Giới thiệu</a> |
@@ -190,5 +199,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
     <script src="/_vercel/insights/script.js" defer></script>
     <!-- ============================ -->
+
 </body>
 </html>
