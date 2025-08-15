@@ -66,4 +66,12 @@ window.translations = {
   "realtimeNoActivity": "No recent activity yet.",
   "realtimeError": "Could not load data.",
   "realtimeLoading": "Loading data...",
+
+  //địa chỉ trung tâm hành chính
+  "showAdminCentersBtn": "View Administrative Center Addresses",
+  "modalTitle": "Administrative Agency Addresses",
+  "loading": "Loading...",
+  "agency_ubnd": "People's Committee",
+  "agency_ttpvhcc": "Public Administration Service Center",
+
 };

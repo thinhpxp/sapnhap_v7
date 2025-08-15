@@ -124,6 +124,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <hr class="result-divider">
                         <div id="new-address-display"></div>
                     </div>
+                    <!-- ... (bên trong <div id="result-container">) ... -->
+                    <hr class="result-divider">
+                    <div id="new-address-display"></div>
+                </div> <!-- kết thúc của result-content -->
+
+                <!-- === THÊM MỚI: Nút và Modal cho Trung tâm Hành chính === -->
+                <div id="admin-center-actions" class="hidden">
+                    <button id="show-admin-centers-btn" data-i18n-key="showAdminCentersBtn">Xem Địa chỉ Trung tâm Hành chính</button>
+                </div>
+
+            </div> <!-- kết thúc của result-container -->
+
+<!-- === THÊM MỚI: Cấu trúc Modal (đặt ở cuối thẻ <body>) === -->
+<div id="admin-center-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <button id="modal-close-btn" class="modal-close">&times;</button>
+        <h3 data-i18n-key="modalTitle">Địa chỉ các Cơ quan Hành chính</h3>
+        <div id="modal-body">
+            <!-- Nội dung sẽ được điền bởi JavaScript -->
+        </div>
+    </div>
+</div>
+<!-- ======================================================= -->
                 </div>
             </div>
         </div>

@@ -62,5 +62,13 @@ window.translations = {
   "realtimeNoActivity": "Chưa có hoạt động nào gần đây.",
   "realtimeError": "Không thể tải dữ liệu.",
   "realtimeLoading": "Đang tải dữ liệu...",
+
+  //địa chỉ trung tâm hành chính
+  "showAdminCentersBtn": "Xem Địa chỉ Trung tâm Hành chính",
+  "modalTitle": "Địa chỉ các Cơ quan Hành chính",
+  "loading": "Đang tải...",
+  "agency_ubnd": "Ủy ban Nhân dân",
+  "agency_ttpvhcc": "Trung tâm Phục vụ Hành chính Công",
+
 };
 
