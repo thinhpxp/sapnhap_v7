@@ -22,6 +22,12 @@ body {
     margin: 0;
     padding: 10px 20px;
 }
+.hidden {
+    display: none !important;
+}
+body.modal-open {
+    overflow: hidden;
+}
 
 /* --- LAYOUT 2 CỘT --- */
 .container {
@@ -759,6 +765,6 @@ button#lookup-btn:disabled {
     font-size: 0.9em;
     color: var(--text-muted);
 }
-.hidden {
-    display: none !important;
+body.modal-open {
+    overflow: hidden;
 }
