@@ -68,7 +68,7 @@ window.translations = {
   "modalTitle": "Địa chỉ các Cơ quan Hành chính",
   "loading": "Đang tải...",
   "lookingUp": "Đang tra cứu, vui lòng chờ...",
-  "noAdminCenterData": "Không có dữ liệu về các trung tâm hành chính cho đơn vị này.",
+  "noAdminCenterData": "Mình đang cập nhật các thông tin này.",
   "agency_ubnd": "Ủy ban Nhân dân",
   "agency_hdnd": "Hội đồng Nhân dân",
   "agency_ttpvhcc": "Trung tâm Phục vụ Hành chính Công",
