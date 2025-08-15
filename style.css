@@ -1,0 +1,657 @@
+/* --- NHẬP FONT CHỮ MỀM MẠI HƠN TỪ GOOGLE FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* --- BIẾN MÀU SẮC CHO CHỦ ĐỀ MINIMALISM --- */
+:root {
+    --bg-color: #f8f9fa;
+    --surface-color: #ffffff;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --success-color: #198754;
+    /* Màu cho trạng thái copied */
+}
+
+/* --- THIẾT LẬP CƠ BẢN --- */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 10px 20px;
+}
+
+/* --- LAYOUT 2 CỘT --- */
+.container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.left-column {
+    flex: 2;
+    min-width: 350px;
+    background: var(--surface-color);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.left-column-content-wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.right-column {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.right-column h2 {
+    margin-top: 0;
+}
+
+/* ... (Các style khác giữ nguyên) ... */
+h1 {
+    font-size: 1.8em;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    color: #1e76c4;
+    margin-bottom: 15px;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.right-column p {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+/* === STYLE CHO TOGGLE SWITCH (MỚI) === */
+.lookup-mode-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+}
+.mode-label {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+input:checked+.slider {
+    background-color: var(--primary-color);
+}
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+input:checked+.slider:before {
+    transform: translateX(22px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+/* ===================================== */
+
+
+/*======================================================
+    TÙY CHỈNH GIAO DIỆN CHOICES.JS
+======================================================
+*/
+/* Bọc bên ngoài */
+.choices {
+    margin-bottom: 5px;
+    #margin-right: 5px;
+}
+/* Phần tử chính, thay thế cho .form-control cũ */
+.choices__inner {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 7px 7px; /* Giảm padding dọc một chút để cân đối */
+    font-size: 13px;
+    min-height: auto;
+    max-width: -webkit-fill-available;
+}
+.is-focused .choices__inner {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.is-disabled .choices__inner {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+/* Ô nhập liệu tìm kiếm */
+.choices__input {
+    background-color: var(--surface-color);
+    font-size: 13px;
+}
+/* Danh sách các lựa chọn xổ xuống */
+.choices__list--dropdown {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+/* Mỗi lựa chọn trong danh sách */
+.choices__item--choice {
+    padding: 10px 15px;
+}
+/* Lựa chọn đang được trỏ chuột vào */
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background-color: var(--primary-color);
+    color: #a7caff;
+}
+/* Nút xóa lựa chọn (dấu X) */
+.choices__button {
+    margin-right: 15px;
+}
+
+/* Ẩn .form-control gốc khi Choices.js đã được áp dụng */
+.form-control.choices__input {
+    display: none;
+}
+
+.form-control,
+#manual-commune-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 13px;
+    font-size: 13px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus,
+#manual-commune-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+button#lookup-btn {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.15s ease-in-out;
+    margin-top: 10px;
+}
+
+button#lookup-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+button#lookup-btn:disabled {
+    background-color: #a7caff;
+    border-color: #a7caff;
+    cursor: not-allowed;
+}
+
+#notification-area {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.loading {
+    color: var(--text-muted);
+}
+
+.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+/* --- PHẦN STYLE CỦA VÙNG TRẢ KẾT QUẢ --- */
+#result-container {
+    margin-top: 15px;
+    padding: 25px;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+#result-container h2 {
+    margin-top: 0;
+    font-size: 1.3em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* --- PHẦN STYLE MỚI VÀ ĐƯỢC CẬP NHẬT --- */
+
+.address-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.address-line p {
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+    /* Cho phép text co giãn */
+}
+
+.copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    /* Không cho nút bị co lại */
+    transition: all 0.15s ease-in-out;
+}
+
+.copy-btn:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.copy-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.copy-btn.copied {
+    color: var(--success-color);
+    border-color: var(--success-color);
+    background-color: #e6f9ef;
+}
+
+/* --- (Các style cũ khác) --- */
+#result-content .label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+/* CSS MỚI cho kết quả tra cứu ngược */
+#result-content .old-units-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+#result-content .old-units-list li {
+    background-color: #e9ecef;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: var(--text-color);
+}
+
+
+.no-change {
+    font-style: italic;
+    color: #0f5132;
+    text-align: left;
+}
+
+.hidden {
+    display: none;
+}
+
+.result-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 15px 0;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .left-column,
+    .right-column {
+        padding: 20px;
+    }
+
+    .left-column-content-wrapper {
+        max-width: 100%;
+    }
+
+    .right-column {
+        background: var(--surface-color);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    p {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+}
+
+/* === CSS MỚI CHO LAYOUT 2 CỘT QR === */
+.image-container-grid {
+    display: flex;          /* Kích hoạt Flexbox */
+    gap: 2px;              /* Tạo khoảng cách giữa 2 cột */
+    width: 100%;
+    max-width: 550px;       /* Tăng chiều rộng tối đa để chứa 2 ảnh */
+    margin: 5px auto;
+}
+.intro {
+
+}
+
+.qr-column {
+    flex: 1;                /* Giúp 2 cột có chiều rộng bằng nhau */
+    display: flex;
+    flex-direction: column; /* Sắp xếp ảnh và chữ theo chiều dọc */
+    align-items: center;    /* Căn giữa nội dung trong cột */
+    background-color: var(--surface-color);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+    .qr-column{
+        padding: 0px;
+    }
+}
+
+.qr-column img {
+   /*  width: 100%;            /* Ảnh co giãn theo chiều rộng của cột */
+    /* height: 80%;
+   /*  aspect-ratio: 616 / 943; Giữ đúng tỷ lệ ảnh bạn yêu cầu */
+    object-fit: cover;      /* Đảm bảo ảnh lấp đầy khung mà không bị méo */
+    border-radius: 6px;
+    display: block;
+    padding: 2px;
+}
+
+.qr-caption {
+    margin-top: 10px;       /* Khoảng cách giữa ảnh và chú thích */
+    margin-bottom: 0;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* CSS cho phần hỗ trợ Buy me a Coffee */
+
+/* Bao quanh ảnh để dễ dàng căn chỉnh */
+.qr-column .coffee-image-wrapper {
+    text-align: center; /* Căn giữa ảnh trong cột */
+    margin-top: 5px;  /* Khoảng cách phía trên ảnh */
+}
+
+/* Định dạng cho ảnh */
+.qr-column .coffee-support-image {
+    max-width: 100%; /* Đảm bảo ảnh không bị tràn ra ngoài cột */
+    height: auto;   /* Giữ tỉ lệ khung hình của ảnh */
+    width: 190px;   /* Đặt chiều rộng mong muốn cho ảnh (ví dụ: 150px). Điều chỉnh theo ý bạn. */
+    aspect-ratio: auto;
+    display: inline-block; /* Giúp text-align center hoạt động tốt */
+    border-radius: 8px; /* Bo tròn nhẹ góc ảnh (tùy chọn) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng nhẹ cho ảnh (tùy chọn) */
+}
+/* Định dạng ảnh bank qr ở giao diện tiếng Việt */
+.qr-column .bank-qrcode {
+    max-width: 100%; /* Đảm bảo ảnh không bị tràn ra ngoài cột */
+    width: 95%;
+    height: auto;    /* Giữ tỉ lệ khung hình của ảnh */
+    aspect-ratio: 1576 / 721;
+    object-fit: contain; /* Đảm bảo toàn bộ ảnh được hiển thị, không bị cắt xén */
+    display: inline-block; /* Giúp text-align center hoạt động tốt */
+    border-radius: 8px; /* Bo tròn nhẹ góc ảnh (tùy chọn) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng nhẹ cho ảnh (tùy chọn) */
+}
+.qr-column p qr-caption { /* Áp dụng cho tất cả p trừ .qr-caption */
+    color: var(--text-muted); /* Sử dụng biến CSS nếu có */
+    font-size: 0.85em; /* Tăng nhẹ font size để dễ đọc hơn */
+}
+
+/* Định dạng cho chú thích ảnh */
+.qr-column .qr-caption{
+    font-weight: bold; /* In đậm chú thích */
+    margin-bottom: 5px; /* Khoảng cách dưới chú thích */
+}
+
+/* === CSS CHO HỘP MÙ VUI VẺ === */
+.mystery-box-container {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+#mystery-box {
+    cursor: pointer;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    #padding: 10px;
+    #min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    position: relative; /* Cần cho spinner */
+    overflow: hidden; /* Ẩn phần thừa của ảnh */
+}
+
+#mystery-box:hover {
+    background-color: #f0f7ff;
+}
+
+#mystery-box img {
+    width: 100%;
+    height: 100%;
+    max-height: 450px;
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy khung mà không bị méo */
+    border-radius: 6px;
+    display: block;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#mystery-box.loading-state img {
+    opacity: 0.3; /* Làm mờ ảnh cũ khi đang tải ảnh mới */
+}
+
+/* Spinner CSS */
+.loading-spinner {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid var(--primary-color); /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* === THÊM MỚI: Style cho mã code === */
+.unit-code {
+    font-size: 0.8em;
+    color: #f54d4d;
+    margin-left: 8px;
+    font-style: italic;
+}
+/* STYLE CHUYỂN ĐỔI NGÔN NGỮ */
+.language-switcher{
+    text-align: center;
+}
+
+/* === THÊM MỚI: Style cho dòng hiển thị mã code === */
+.address-codes {
+    font-family: 'Courier New', Courier, monospace; /* Font chữ đơn cách để các số thẳng hàng */
+    font-size: 0.85em;
+    color: #ec2204;
+    background-color: #ffea6b80; /* Một màu nền nhẹ để phân biệt */
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 2px;
+    margin-bottom: 8px; /* Thêm khoảng cách với dòng tiếp theo */
+    text-align: left;
+    word-spacing: -2px; /* Giảm nhẹ khoảng cách giữa các từ */
+}
+
+.address-codes .label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-style: normal; /* Ghi đè các style italic nếu có */
+}
+
+/* Ghi đè một vài style cho danh sách kết quả tra cứu ngược */
+#result-content .old-units-list li .address-codes {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-size: 0.9em; /* Hơi lớn hơn một chút để dễ đọc trong danh sách */
+}
+
+/* === STYLE CHO CÁC TOGGLE SWITCH === */
+/* Nhóm các selector lại để tái sử dụng style chung */
+.lookup-mode-container,
+.accent-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+}
+
+/* Style riêng cho switch accent để giảm khoảng cách */
+.accent-toggle-container {
+    margin-top: -10px;
+    margin-bottom: 25px;
+}
+
+/* Nhóm các selector lại để tái sử dụng style chung */
+.mode-label,
+.accent-mode-label {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Phần còn lại của .switch, .slider... không cần thay đổi vì chúng đã chung chung */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+/* GOOGLE CITY */
+#realtime-users-container {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+#realtime-users-container h4 {
+    margin-top: 0;
+    font-size: 1em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+#realtime-locations-list {
+    list-style-type: '🌍'; /* Dùng emoji làm dấu đầu dòng */
+    padding-left: 20px;
+    margin: 0;
+    max-height: 150px; /* Giới hạn chiều cao và cho phép cuộn */
+    overflow-y: auto;
+    font-size: 0.9em;
+}
+#realtime-locations-list li {
+    padding-left: 10px;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}

@@ -1,0 +1,18 @@
+{
+  "name": "sapnhap_v3.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "choices.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google-analytics/data": "^5.2.0",
+    "@supabase/supabase-js": "^2.50.5",
+    "@vercel/analytics": "^1.5.0"
+  }
+}

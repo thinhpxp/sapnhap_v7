@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/vi",
+      "destination": "/vi.html"
+    },
+    {
+      "source": "/vi/:path*",
+      "destination": "/vi.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/en.html"
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/en.html"
+    },
+    {
+      "source": "/",
+      "destination": "/vi.html"
+    }
+  ]
+}
