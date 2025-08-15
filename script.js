@@ -22,12 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const communeSelectEl = document.getElementById('commune-select');
     const newProvinceSelectEl = document.getElementById('new-province-select');
     const newCommuneSelectEl = document.getElementById('new-commune-select');
-    // === THÊM MỚI: Element cho switch accent ===
+    // Element cho switch accent
     const accentToggleContainer = document.getElementById('accent-toggle-container');
     const accentToggle = document.getElementById('accent-toggle');
-
     const forwardControls = document.getElementById('forward-controls');
     const reverseControls = document.getElementById('reverse-controls');
+     // THÊM MỚI: Các element cho nút và modal để xem địa chỉ hành chính
+    const adminCenterActions = document.getElementById('admin-center-actions');
+    const showAdminCentersBtn = document.getElementById('show-admin-centers-btn');
+    const adminCenterModal = document.getElementById('admin-center-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalBody = document.getElementById('modal-body');
 
     // === BIỂU TƯỢNG SVG ===
     const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
@@ -35,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === QUẢN LÝ TRẠNG THÁI ===
     let isReverseMode = false;
+    let newWardCodeForModal = null; // THÊM MỚI: Biến để lưu mã xã mới cho modal
     let removeAccents = false; // Mặc định là TẮT (hiển thị có dấu)
     let provinceChoices, districtChoices, communeChoices;
     let newProvinceChoices, newCommuneChoices;
@@ -239,6 +245,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if(newCommuneSelectEl) newCommuneSelectEl.addEventListener('choice', (event) => {
             lookupBtn.disabled = !event.detail.value;
         });
+
+        // === THÊM MỚI: Các sự kiện cho nút và modal ===
+        if (showAdminCentersBtn) {
+            showAdminCentersBtn.addEventListener('click', handleShowAdminCenters);
+        }
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+        if (adminCenterModal) {
+            // Đóng modal khi click vào lớp phủ bên ngoài
+            adminCenterModal.addEventListener('click', (event) => {
+                if (event.target === adminCenterModal) {
+                    closeModal();
+                }
+            });
+        }
     }
 
    // === LOGIC TRA CỨU CHÍNH ===
@@ -265,6 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         resultContainer.classList.remove('hidden');
 
+         // Reset trạng thái của chức năng Xem địa chỉ hành chính
+        if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        newWardCodeForModal = null;
+
         try {
             const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
             const data = await response.json();
@@ -288,6 +314,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
                 newAddressDisplay.innerHTML = resultsHtml;
+
+                // === THÊM MỚI: Lưu mã và hiển thị nút để Xem địa chỉ hành chính
+                newWardCodeForModal = data.new_ward_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
             }
         } catch (error) {
             console.error('Lỗi khi tra cứu xuôi:', error);
@@ -309,6 +339,10 @@ document.addEventListener('DOMContentLoaded', () => {
         oldAddressDisplay.innerHTML = '';
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         resultContainer.classList.remove('hidden');
+
+        // Reset trạng thái của chức năng Xem địa chỉ hành chính
+        if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        newWardCodeForModal = null;
 
         try {
             const response = await fetch(`/api/lookup-reverse?code=${newWardCode}`);
@@ -344,6 +378,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel').replace(':', '')}</span> ${fullNewAddress}</p></div>`;
                 newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
             }
+            // === THÊM MỚI: Lưu mã và hiển thị nút của chức năng Xem địa chỉ hành chính ===
+            // Dù có kết quả hay không, chúng ta vẫn có mã xã mới
+            newWardCodeForModal = newWardCode;
+            if (adminCenterActions) adminCenterActions.classList.remove('hidden');
         } catch (error) {
              console.error('Lỗi khi tra cứu ngược:', error);
              oldAddressDisplay.innerHTML = '';
@@ -367,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         }).catch(err => { console.error('Lỗi khi copy: ', err); });
     }
-
+    // Tải ảnh ngẩu nhiên từ unsplash và hiển thị trong mysteryBox ở giao diện tiếng Anh
     async function fetchRandomImage() {
         if (!mysteryBox || !spinner) return;
         spinner.classList.remove('hidden');
@@ -396,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mysteryBox.innerHTML = `<p style="color: red; font-size: 0.9em;">Could not load image.</p>`;
         }
     }
-            // Hiển thị lượt tra cứu từ GOOGLE ANALYTICS
+    // Hiển thị lượt tra cứu từ GOOGLE ANALYTICS
     async function displayEventCount() {
         const counterElement = document.getElementById('event-counter');
         if (!counterElement) return;
@@ -418,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Hàm mới để lấy và hiển thị dữ liệu người truy cập thời gian thực GOOGLE ANALYTICS
+    // Lấy và hiển thị dữ liệu người truy cập thời gian thực GOOGLE ANALYTICS
     async function displayRealtimeLocations() {
         const listElement = document.getElementById('realtime-locations-list');
         const totalUsersElement = document.getElementById('realtime-total-users');
@@ -460,6 +498,52 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error("Không thể hiển thị hoạt động thời gian thực:", error);
             listElement.innerHTML = oldContent || `<li>${t('realtimeError', 'Không thể tải dữ liệu.')}</li>`;
+        }
+    }
+
+    //Các hàm chức năng Xem địa chỉ hành chính
+    function openModal() {
+        if (adminCenterModal) {
+            adminCenterModal.classList.remove('hidden');
+        }
+    }
+
+    function closeModal() {
+        if (adminCenterModal) {
+            adminCenterModal.classList.add('hidden');
+        }
+    }
+
+    async function handleShowAdminCenters() {
+        if (!newWardCodeForModal) return;
+
+        openModal();
+        modalBody.innerHTML = `<p>${t('loading', 'Đang tải...')}</p>`;
+
+        try {
+            const response = await fetch(`/api/get-admin-centers?code=${newWardCodeForModal}`);
+            if (!response.ok) throw new Error('Could not fetch administrative centers.');
+            const data = await response.json();
+
+            if (data.length > 0) {
+                const listHtml = data.map(item => {
+                    // Dịch loại cơ quan, nếu không có bản dịch thì dùng lại mã gốc
+                    const agencyName = t(`agency_${item.agency_type}`, item.agency_type.toUpperCase());
+                    return `
+                        <li>
+                            <span class="agency-type">${agencyName}</span>
+                            <span class="agency-address">${item.address}</span>
+                        </li>
+                    `;
+                }).join('');
+                modalBody.innerHTML = `<ul>${listHtml}</ul>`;
+            } else {
+                modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Không có dữ liệu về các trung tâm hành chính cho đơn vị này.')}</p>`;
+            }
+
+        } catch (error) {
+            console.error("Lỗi khi lấy địa chỉ TTHC:", error);
+            modalBody.innerHTML = `<p class="error">${error.message}</p>`;
         }
     }
 
