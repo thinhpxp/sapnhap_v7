@@ -538,7 +538,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('');
                 modalBody.innerHTML = `<ul>${listHtml}</ul>`;
             } else {
-                modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Không có dữ liệu về các trung tâm hành chính cho đơn vị này.')}</p>`;
+                modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Không có dữ liệu.')}</p>`;
+                //modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Chưa có dữ liệu về các trung tâm hành chính cho đơn vị này.')}</p>`;
             }
 
         } catch (error) {

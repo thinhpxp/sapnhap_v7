@@ -67,7 +67,10 @@ window.translations = {
   "showAdminCentersBtn": "Xem Địa chỉ Trung tâm Hành chính",
   "modalTitle": "Địa chỉ các Cơ quan Hành chính",
   "loading": "Đang tải...",
+  "lookingUp": "Đang tra cứu, vui lòng chờ...",
+  "noAdminCenterData": "Không có dữ liệu về các trung tâm hành chính cho đơn vị này.",
   "agency_ubnd": "Ủy ban Nhân dân",
+  "agency_hdnd": "Hội đồng Nhân dân",
   "agency_ttpvhcc": "Trung tâm Phục vụ Hành chính Công",
 
 };

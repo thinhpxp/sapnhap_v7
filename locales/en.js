@@ -71,6 +71,8 @@ window.translations = {
   "showAdminCentersBtn": "View Administrative Center Addresses",
   "modalTitle": "Administrative Agency Addresses",
   "loading": "Loading...",
+  "noAdminCenterData": "No data available for administrative centers for this unit.",
+  "lookingUp": "Looking up, please wait...",
   "agency_ubnd": "People's Committee",
   "agency_ttpvhcc": "Public Administration Service Center",
 
