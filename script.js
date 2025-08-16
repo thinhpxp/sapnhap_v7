@@ -537,6 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.length > 0) {
+                    const listHtml = data.map(item => {
                     // === GHI CHÚ THAY ĐỔI: Sử dụng hàm t() để dịch agency_type ===
                     // 1. Xây dựng khóa dịch, ví dụ: "agency_ubnd"
                     const translationKey = `agency_${item.agency_type.toLowerCase()}`;
