@@ -73,6 +73,7 @@ window.translations = {
   "agency_hdnd": "Hội đồng Nhân dân",
   "agency_mttq": "Mặt trận tổ quốc",
   "agency_tiep_dan": "Nơi tiếp dân cấp tỉnh",
+  "agency_ttpvhcc_tinh": "Trung tâm phục vụ hành chính công tỉnh",
   "agency_ttpvhcc": "Trung tâm Phục vụ Hành chính Công",
 
 };
