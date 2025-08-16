@@ -74,6 +74,8 @@ window.translations = {
   "noAdminCenterData": "No data available for administrative centers for this unit.",
   "lookingUp": "Looking up, please wait...",
   "agency_ubnd": "People's Committee",
+  "agency_hdnd": "People’s Council",
+  "agency_mttq": "Vietnam Fatherland Front",
   "agency_ttpvhcc": "Public Administration Service Center",
 
 };

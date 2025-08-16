@@ -71,6 +71,7 @@ window.translations = {
   "noAdminCenterData": "Mình đang cập nhật các thông tin này.",
   "agency_ubnd": "Ủy ban Nhân dân",
   "agency_hdnd": "Hội đồng Nhân dân",
+  "agency_mttq": "Mặt trận tổ quốc",
   "agency_ttpvhcc": "Trung tâm Phục vụ Hành chính Công",
 
 };
