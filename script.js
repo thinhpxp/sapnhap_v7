@@ -537,8 +537,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.length > 0) {
-                const listHtml = data.map(item => {
-                    const agencyName = t(`agency_${item.agency_type}`, item.agency_type.toUpperCase());
+                    // === GHI CHÚ THAY ĐỔI: Sử dụng hàm t() để dịch agency_type ===
+                    // 1. Xây dựng khóa dịch, ví dụ: "agency_ubnd"
+                    const translationKey = `agency_${item.agency_type.toLowerCase()}`;
+                    // 2. Dùng hàm t() để lấy bản dịch.
+                    //    Nếu không có, dùng lại giá trị gốc và viết hoa chữ cái đầu.
+                    const fallbackName = item.agency_type.charAt(0).toUpperCase() + item.agency_type.slice(1);
+                    const agencyName = t(translationKey, fallbackName);
+                    // ==========================================================
                     return `
                         <li>
                             <span class="agency-type">${agencyName}</span>

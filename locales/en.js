@@ -76,6 +76,7 @@ window.translations = {
   "agency_ubnd": "People's Committee",
   "agency_hdnd": "People’s Council",
   "agency_mttq": "Vietnam Fatherland Front",
+  "agency_tiep_dan": "The place of receptionist at the provincial level"
   "agency_ttpvhcc": "Public Administration Service Center",
 
 };
