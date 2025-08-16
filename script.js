@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === QUẢN LÝ TRẠNG THÁI ===
     let isReverseMode = false;
     let newWardCodeForModal = null; // THÊM MỚI: Biến để lưu mã xã mới cho modal
+    let newProvinceCodeForModal = null;  // THÊM MỚI: Biến để lưu mã tỉnh mới cho modal
     let removeAccents = false; // Mặc định là TẮT (hiển thị có dấu)
     let provinceChoices, districtChoices, communeChoices;
     let newProvinceChoices, newCommuneChoices;
@@ -317,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // === THÊM MỚI: Lưu mã và hiển thị nút để Xem địa chỉ hành chính
                 newWardCodeForModal = data.new_ward_code;
+                newProvinceCodeForModal = data.new_province_code;
                 if (adminCenterActions) adminCenterActions.classList.remove('hidden');
             }
         } catch (error) {
@@ -380,7 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // === THÊM MỚI: Lưu mã và hiển thị nút của chức năng Xem địa chỉ hành chính ===
             // Dù có kết quả hay không, chúng ta vẫn có mã xã mới
-            newWardCodeForModal = newWardCode;
+            //newWardCodeForModal = newWardCode;
+            newWardCodeForModal = data[0].new_ward_code;
+            newProvinceCodeForModal = data[0].new_province_code;
             if (adminCenterActions) adminCenterActions.classList.remove('hidden');
         } catch (error) {
              console.error('Lỗi khi tra cứu ngược:', error);
@@ -515,19 +519,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function handleShowAdminCenters() {
-        if (!newWardCodeForModal) return;
+         // GHI CHÚ THAY ĐỔI: Kiểm tra cả hai mã code cần thiết trước khi tiếp tục.
+        // Biến newWardCodeForModal và newProvinceCodeForModal sẽ được gán trong các hàm tra cứu.
+        if (!newWardCodeForModal || !newProvinceCodeForModal) {
+            console.error("Thiếu mã xã hoặc tỉnh để tra cứu trung tâm hành chính.");
+            return;
+        }
 
         openModal();
         modalBody.innerHTML = `<p>${t('loading', 'Đang tải...')}</p>`;
 
         try {
-            const response = await fetch(`/api/get-admin-centers?code=${newWardCodeForModal}`);
+            // GHI CHÚ THAY ĐỔI: Gọi API với cả hai tham số ward_code và province_code.
+            const response = await fetch(`/api/get-admin-centers?ward_code=${newWardCodeForModal}&province_code=${newProvinceCodeForModal}`);
+
             if (!response.ok) throw new Error('Could not fetch administrative centers.');
             const data = await response.json();
 
             if (data.length > 0) {
                 const listHtml = data.map(item => {
-                    // Dịch loại cơ quan, nếu không có bản dịch thì dùng lại mã gốc
                     const agencyName = t(`agency_${item.agency_type}`, item.agency_type.toUpperCase());
                     return `
                         <li>
@@ -539,7 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalBody.innerHTML = `<ul>${listHtml}</ul>`;
             } else {
                 modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Không có dữ liệu.')}</p>`;
-                //modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Chưa có dữ liệu về các trung tâm hành chính cho đơn vị này.')}</p>`;
             }
 
         } catch (error) {

@@ -1,56 +1,55 @@
 // /api/get-admin-centers.js
 import { createClient } from '@supabase/supabase-js';
 
-// Khởi tạo Supabase client
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
-/**
- * Xử lý yêu cầu API để lấy danh sách các trung tâm hành chính.
- * @param {object} request - Đối tượng yêu cầu, chứa query parameters.
- * @param {object} response - Đối tượng phản hồi để gửi lại cho client.
- */
 export default async function handler(request, response) {
-  // Lấy mã xã mới từ tham số URL, ví dụ: /api/get-admin-centers?code=12345
-  const { code } = request.query;
+  // GHI CHÚ THAY ĐỔI: API giờ đây nhận cả ward_code và province_code.
+  const { ward_code, province_code } = request.query;
 
-  // === BƯỚC 1: Xác thực đầu vào ===
-  // Nếu không có mã code, trả về lỗi 400 (Bad Request)
-  if (!code) {
-    return response.status(400).json({ error: 'Thiếu tham số mã xã mới (code).' });
+  // Kiểm tra đầu vào
+  if (!ward_code || !province_code) {
+    return response.status(400).json({ error: 'Thiếu tham số ward_code hoặc province_code.' });
   }
 
-  const newWardCode = parseInt(code, 10);
-  // Nếu mã code không phải là một số hợp lệ, cũng trả về lỗi
-  if (isNaN(newWardCode)) {
-    return response.status(400).json({ error: 'Mã xã mới không hợp lệ.' });
-  }
+  const wardCode = parseInt(ward_code, 10);
+  const provinceCode = parseInt(province_code, 10);
 
   try {
-    // === BƯỚC 2: Truy vấn cơ sở dữ liệu ===
-    // Truy vấn vào bảng 'admin_centers'
-    const { data, error } = await supabase
-      .from('admin_centers')
-      .select('agency_type, address') // Chỉ lấy 2 cột cần thiết
-      .eq('new_ward_code', newWardCode); // Lọc theo mã xã mới
+    // GHI CHÚ THAY ĐỔI: Thực hiện hai truy vấn song song để tăng hiệu suất.
+    // Promise.all sẽ đợi cả hai truy vấn hoàn thành.
+    const [wardCentersResponse, provinceCentersResponse] = await Promise.all([
+      // Truy vấn 1: Lấy dữ liệu từ bảng cấp xã/phường
+      supabase
+        .from('ward_admin_centers')
+        .select('agency_type, address')
+        .eq('new_ward_code', wardCode),
 
-    // Nếu có lỗi từ Supabase, ném lỗi để khối catch xử lý
-    if (error) {
-      console.error('Lỗi truy vấn Supabase trong get-admin-centers:', error);
-      throw error;
-    }
+      // Truy vấn 2: Lấy dữ liệu từ bảng cấp tỉnh
+      supabase
+        .from('province_admin_centers')
+        .select('agency_type, address')
+        .eq('new_province_code', provinceCode)
+    ]);
 
-    // === BƯỚC 3: Trả về kết quả thành công ===
-    // Trả về một mảng các đối tượng. Mảng này có thể rỗng nếu không tìm thấy địa chỉ nào.
-    response.status(200).json(data);
+    // Kiểm tra lỗi cho từng truy vấn
+    if (wardCentersResponse.error) throw wardCentersResponse.error;
+    if (provinceCentersResponse.error) throw provinceCentersResponse.error;
+
+    // GHI CHÚ THAY ĐỔI: Gộp kết quả từ hai truy vấn lại thành một mảng duy nhất.
+    const combinedData = [
+      ...(wardCentersResponse.data || []),
+      ...(provinceCentersResponse.data || [])
+    ];
+
+    // Trả về mảng đã được gộp
+    response.status(200).json(combinedData);
 
   } catch (error) {
-    // === BƯỚC 4: Xử lý lỗi chung ===
-    // Ghi lại lỗi chi tiết trên server để debug
-    console.error('Lỗi cuối cùng trong API get-admin-centers:', error);
-    // Trả về một thông báo lỗi chung chung cho client
+    console.error('Lỗi API get-admin-centers:', error);
     response.status(500).json({ error: 'Lỗi máy chủ nội bộ khi lấy địa chỉ trung tâm hành chính.' });
   }
 }
