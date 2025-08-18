@@ -80,5 +80,6 @@ window.translations = {
   "agency_ttpvhcc_tinh": "Provincial Public Administration Service Center",
   "agency_ubnd_tinh": "Provincial People's Committee",
   "agency_ttpvhcc": "Public Administration Service Center",
+  "agency_dang_uy": "party committee",
 
 };
