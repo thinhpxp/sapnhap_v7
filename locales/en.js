@@ -81,5 +81,6 @@ window.translations = {
   "agency_ubnd_tinh": "Provincial People's Committee",
   "agency_ttpvhcc": "Public Administration Service Center",
   "agency_dang_uy": "party committee",
+  "agency_cong_an_xa": "Commune police",
 
 };

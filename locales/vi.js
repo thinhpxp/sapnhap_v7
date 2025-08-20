@@ -77,6 +77,7 @@ window.translations = {
   "agency_ubnd_tinh": "UBND tỉnh",
   "agency_ttpvhcc": "Trung tâm Phục vụ Hành chính Công",
   "agency_dang_uy": "Đảng ủy",
+  "agency_cong_an_xa": "Công an xã",
 
 };
 
