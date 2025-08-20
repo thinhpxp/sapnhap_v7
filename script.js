@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copiedIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
 
     // === QUẢN LÝ TRẠNG THÁI ===
+    let allProvincesData = [];
     let isReverseMode = false;
     let newWardCodeForModal = null; // THÊM MỚI: Biến để lưu mã xã mới cho modal
     let newProvinceCodeForModal = null;  // THÊM MỚI: Biến để lưu mã tỉnh mới cho modal
@@ -121,27 +122,14 @@ document.addEventListener('DOMContentLoaded', () => {
         newProvinceChoices = new Choices(newProvinceSelectEl, { ...choicesConfig });
         newCommuneChoices = new Choices(newCommuneSelectEl, { ...choicesConfig });
 
-        if (window.allProvincesData && window.allProvincesData.length > 0) {
-            const localizedOldData = window.allProvincesData.map(province => ({
-                ...province,
-                name: localize(province.name, null),
-                districts: province.districts.map(district => ({
-                    ...district,
-                    name: localize(district.name, null),
-                    wards: district.wards.map(ward => ({ ...ward, name: localize(ward.name, null) }))
-                }))
-            }));
-            updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
-        } else {
-            showNotification(t('errorLoadOldData', "Lỗi tải dữ liệu cũ."), "error");
-        }
 
         resetChoice(districtChoices, t('oldDistrictPlaceholder'));
         resetChoice(communeChoices, t('oldCommunePlaceholder'));
         resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
 
         addEventListeners();
-        loadNewProvincesDropdown();
+        loadOldDataDropdowns(); //Gọi địa chỉ mới
+        loadNewProvincesDropdown(); //Gọi địa chỉ cũ
         // gọi hàm hiển thị lượt tra cứu GOOGLE ANALYTICS
         displayEventCount();
         setInterval(displayEventCount, 30000);
@@ -150,6 +138,35 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tự động làm mới sau mỗi 60 giây
         setInterval(displayRealtimeLocations, 75000);
     }
+    // THÊM MỚI: Hàm tải dữ liệu cho dropdown Cũ
+    async function loadOldDataDropdowns() {
+        resetChoice(provinceChoices, t('oldProvinceLoading', 'Đang tải tỉnh/thành...'));
+        try {
+            const response = await fetch('/api/get-old-data');
+            if(!response.ok) throw new Error(t('errorLoadOldData'));
+
+            allProvincesData = await response.json(); // Lưu dữ liệu vào biến cục bộ
+
+            const localizedOldData = allProvincesData.map(province => ({
+                ...province,
+                name: localize(province.name, null),
+                districts: province.districts.map(district => ({
+                    ...district,
+                    name: localize(district.name, null),
+                    wards: district.wards.map(ward => ({ ...ward, name: localize(ward.name, null) }))
+                }))
+            }));
+
+            updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
+            provinceChoices.enable();
+
+        } catch (error) {
+            console.error(error);
+            resetChoice(provinceChoices, t('errorLoadOldData'));
+            showNotification(error.message, 'error');
+        }
+    }
+
 
     async function loadNewProvincesDropdown() {
         resetChoice(newProvinceChoices, t('newProvinceLoading'));
@@ -198,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if(provinceSelectEl) provinceSelectEl.addEventListener('choice', (event) => {
-            const selectedProvince = window.allProvincesData.find(p => p.code == event.detail.value);
+            const selectedProvince = allProvincesData.find(p => p.code == event.detail.value);
             if (selectedProvince && selectedProvince.districts) {
                 const localizedDistricts = selectedProvince.districts.map(d => ({...d, name: localize(d.name, null)}));
                 updateChoices(districtChoices, t('oldDistrictPlaceholder'), localizedDistricts);
@@ -209,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if(districtSelectEl) districtSelectEl.addEventListener('choice', (event) => {
             const provinceCode = provinceChoices.getValue(true);
-            const selectedProvince = window.allProvincesData.find(p => p.code == provinceCode);
+            const selectedProvince = allProvincesData.find(p => p.code == provinceCode);
             const selectedDistrict = selectedProvince?.districts.find(d => d.code == event.detail.value);
             if (selectedDistrict && selectedDistrict.wards) {
                 const localizedWards = selectedDistrict.wards.map(w => ({...w, name: localize(w.name, null)}));
