@@ -8,11 +8,9 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-WFV4ML8F');</script>
     <!-- End Google Tag Manager -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-     <!-- === DỮ LIỆU CÓ CẤU TRÚC THEO QUY ĐỊNH GOOGLE (SCHEMA.ORG) === -->
+     <!-- === GOOGLE (SCHEMA.ORG) === -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -21,8 +19,7 @@
       "url": "https://sapnhap.org/en"
     }
     </script>
-
-    <!-- ================= SEO ĐA NGÔN NGỮ ================= -->
+    <!-- ================= ĐA NGÔN NGỮ ================= -->
     <title data-i18n-key="pageTitle">Vietnam Administrative Unit Merger Lookup 2025</title>
     <meta name="description" data-i18n-key="pageDescription" content="A quick and accurate tool to look up information about the merger and renaming of commune-level administrative units in Vietnam.">
     <link rel="canonical" href="https://sapnhap.org/en" />
@@ -30,8 +27,7 @@
     <link rel="alternate" hreflang="en-US" href="https://sapnhap.org/en" />
     <link rel="alternate" hreflang="x-default" href="https://sapnhap.org/vi" />
     <!-- ==================================================== -->
-
-    <!-- ================= SEO CHO MẠNG XÃ HỘI (OPEN GRAPH) ================= -->
+    <!-- ================= (OPEN GRAPH) ================= -->
     <meta property="og:title" content="Vietnam Administrative Unit Merger Lookup" />
     <meta property="og:description" content="A quick and accurate tool to look up information about the merger and renaming of commune-level administrative units in Vietnam." />
     <meta property="og:type" content="website" />
@@ -40,22 +36,18 @@
     <meta property="og:image:alt" content="Interface of the administrative unit lookup page" />
     <meta property="og:locale" content="en_US" />
     <meta property="fb:app_id" content="1272895690870001" />
-
-    <!-- === SEO CHO X.COM (TWITTER CARDS) === -->
+    <!-- === X.COM (TWITTER CARDS) === -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vietnam Administrative Unit Merger Lookup">
     <meta name="twitter:description" content="A quick and accurate tool to look up information about the merger and renaming of commune-level administrative units in Vietnam.">
     <meta name="twitter:image" content="https://sapnhap.org/social-preview.png">
     <meta name="twitter:image:alt" content="Interface of the administrative unit lookup page">
     <meta name="twitter:site" content="@thinhpxp">
-
     <!-- === FAVICON === -->
     <link rel="icon" href="/favicon.png" type="image/x-icon">
-
     <!-- === CSS === -->
     <link rel="stylesheet" href="/choices.min.css" />
     <link rel="stylesheet" href="/style.css">
-
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -68,11 +60,11 @@
         <div class="left-column">
             <div class="left-column-content-wrapper">
                 <h1 data-i18n-key="mainHeading">Merger Address Lookup</h1>
-               <!-- === LIÊN KẾT CHUYỂN ĐỔI NGÔN NGỮ === -->
+               <!-- === CHUYỂN ĐỔI NGÔN NGỮ === -->
                 <div class="language-switcher">
                     <a href="/vi" class="active" style="color: #f54d4d; font-size: 0.8em;">Vietnamese</a> | <a class="eng" href="/en" style="font-size: 0.8em; color: #054b6c;">English</a>
                 </div>
-                <!-- === KẾT THÚC LIÊN KẾT CHUYỂN ĐỔI NGÔN NGỮ === -->
+                <!-- ====== -->
                 <p id="lookup-description" data-i18n-key="lookupDescriptionOldToNew">Select the old address to find the corresponding new administrative unit.</p>
 
                 <div class="lookup-mode-container">
@@ -83,7 +75,7 @@
                     </label>
                     <span class="mode-label" data-i18n-key="newToOld">New → Old</span>
                 </div>
-                <!-- === THÊM MỚI: Switch loại bỏ dấu với class riêng biệt === -->
+
                 <div id="accent-toggle-container" class="accent-toggle-container hidden">
                     <span class="accent-mode-label" data-i18n-key="withAccents">With Accents</span>
                     <label class="switch"> <!-- Giữ nguyên class switch vì nó là cấu trúc chung -->
@@ -94,7 +86,7 @@
                 </div>
                 <!-- ======================================= -->
                 <div id="controls">
-                    <!-- === KHUNG TRA CỨU XUÔI === -->
+                    <!-- === TRA CỨU XUÔI === -->
                     <div id="forward-controls">
                         <div class="form-group">
                             <label for="province-select" data-i18n-key="oldProvinceLabel">Province / City (Old)</label>
@@ -109,7 +101,7 @@
                             <select id="commune-select" class="form-control" disabled></select>
                         </div>
                     </div>
-                    <!-- === KHUNG TRA CỨU NGƯỢC === -->
+                    <!-- === TRA CỨU NGƯỢC === -->
                     <div id="reverse-controls" class="hidden">
                          <div class="form-group">
                             <label for="new-province-select" data-i18n-key="newProvinceLabel">Province / City (New)</label>
@@ -123,7 +115,7 @@
                     <button id="lookup-btn" disabled data-i18n-key="lookupButton">Look Up</button>
                 </div>
 
-                <!-- Ô HIỂN THỊ KẾT QUẢ -->
+                <!-- HIỂN THỊ KẾT QUẢ -->
                 <div id="result-container" class="hidden">
                     <h2 data-i18n-key="resultsTitle">Kết Quả Tra Cứu</h2>
                     <div id="result-content">
@@ -131,16 +123,12 @@
                         <hr class="result-divider">
                         <div id="new-address-display"></div>
                     </div>
-
-                    <!-- Nút "Xem địa chỉ..." sẽ được đặt ở đây, bên trong result-container nhưng ngoài result-content -->
                     <div id="admin-center-actions" class="hidden">
                         <button id="show-admin-centers-btn" data-i18n-key="showAdminCentersBtn">Xem Địa chỉ Trung tâm Hành chính</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Cột bên phải (giữ nguyên không cần data-i18n-key) -->
-        <!-- Nội dung tiếng Anh tự nhập không cần sử dụng /locales/en.js -->
         <div class="right-column">
               <h2>DON'T WORRY</h2>
              <p class="intro" style="font-size:0.8em; text-align: left; margin-bottom: 5px;">
@@ -177,7 +165,7 @@
             </div>
         </div>
     </div>
-    <!-- === ĐẶT MODAL VÀO ĐÂY, NGAY TRƯỚC KHI ĐÓNG BODY === -->
+    <!-- === MODAL  === -->
     <div id="admin-center-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <button id="modal-close-btn" class="modal-close">&times;</button>
@@ -198,12 +186,11 @@
     <script src="/choices.min.js" defer></script>
     <script src="/locales/en.js" defer></script> <!-- Nạp tệp ngôn ngữ Tiếng Anh -->
     <script src="/script.js" defer></script>
-     <!-- === VERCEL WEB ANALYTICS === -->
+     <!-- === V_ANALYTICS === -->
     <script>
       window.va = window.va || function () { (window.va.q = window.va.q || []).push(arguments); };
     </script>
     <script src="/_vercel/insights/script.js" defer></script>
     <!-- ============================ -->
-
 </body>
 </html>
