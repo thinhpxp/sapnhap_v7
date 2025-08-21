@@ -80,10 +80,10 @@ window.translations = {
   "agency_cong_an_xa": "Công an xã",
 
    // ...
-  "feedbackDescription": "Nê, hãy nhắn cho mình!",
+  "feedbackDescription": "Bạn phát hiện có sự thay đổi địa danh? Hãy nhắn cho mình.",
   "feedbackPlaceholder": "Nhập góp ý của bạn...",
   "feedbackSendBtn": "Gửi",
-  "feedbackSuccess": "Bạn phát hiện có sự thay đổi địa danh? Hãy nhắn cho mình.",
+  "feedbackSuccess": "Cám ơn, các phản hồi sẽ được mình xử lý vào mỗi cuối tuần",
   "feedbackError": "Gửi thất bại, vui lòng thử lại.",
 // ...
 };
