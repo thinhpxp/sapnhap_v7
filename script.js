@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminCenterModal = document.getElementById('admin-center-modal');
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const modalBody = document.getElementById('modal-body');
+    // Khung góp ý
+    const feedbackInput = document.getElementById('feedback-input');
+    const feedbackSendBtn = document.getElementById('feedback-send-btn');
+    const feedbackMessage = document.getElementById('feedback-message');
 
     // === BIỂU TƯỢNG SVG ===
     const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
@@ -122,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
         newProvinceChoices = new Choices(newProvinceSelectEl, { ...choicesConfig });
         newCommuneChoices = new Choices(newCommuneSelectEl, { ...choicesConfig });
 
-
         resetChoice(districtChoices, t('oldDistrictPlaceholder'));
         resetChoice(communeChoices, t('oldCommunePlaceholder'));
         resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
@@ -137,6 +140,28 @@ document.addEventListener('DOMContentLoaded', () => {
         displayRealtimeLocations(); // Hàm mới
         // Tự động làm mới sau mỗi 60 giây
         setInterval(displayRealtimeLocations, 75000);
+        setTimeout(() => {
+            loadInitialData();
+        }, 0);
+    }
+
+     // THÊM MỚI: Hàm riêng để tải dữ liệu ban đầu
+    function loadInitialData() {
+        if (window.allProvincesData && window.allProvincesData.length > 0) {
+            window.allProvincesData.sort((a, b) => a.code - b.code);
+            updateChoices(provinceChoices, t('oldProvincePlaceholder'), window.allProvincesData);
+        } else {
+            showNotification(t('errorLoadOldData', "Lỗi tải dữ liệu cũ."), "error");
+        }
+
+        resetChoice(districtChoices, t('oldDistrictPlaceholder'));
+        resetChoice(communeChoices, t('oldCommunePlaceholder'));
+        resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
+
+        loadNewProvincesDropdown();
+        displayEventCount();
+        displayRealtimeLocations();
+        setInterval(displayRealtimeLocations, 90000);
     }
     // THÊM MỚI: Hàm tải dữ liệu cho dropdown Cũ
     async function loadOldDataDropdowns() {
@@ -279,6 +304,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+         // === THÊM MỚI: Lắng nghe sự kiện cho form Góp ý ===
+        if (feedbackSendBtn) {
+            feedbackSendBtn.addEventListener('click', handleSubmitFeedback);
+        }
+        if (feedbackInput) {
+            // Cho phép gửi bằng phím Enter
+            feedbackInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    handleSubmitFeedback();
+                }
+            });
+        }
     }
 
    // === LOGIC TRA CỨU CHÍNH ===
@@ -407,6 +444,58 @@ document.addEventListener('DOMContentLoaded', () => {
              console.error('Lỗi khi tra cứu ngược:', error);
              oldAddressDisplay.innerHTML = '';
              newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
+        }
+    }
+
+    // === THÊM MỚI: Hàm xử lý gửi Góp ý ===
+    async function handleSubmitFeedback() {
+        if (!feedbackInput || !feedbackSendBtn || !feedbackMessage) return;
+
+        const message = feedbackInput.value.trim();
+        if (message.length === 0) {
+            return; // Không làm gì nếu input rỗng
+        }
+
+        // Vô hiệu hóa form để tránh gửi nhiều lần
+        feedbackSendBtn.disabled = true;
+        feedbackInput.disabled = true;
+        feedbackSendBtn.textContent = '...';
+
+        try {
+            const response = await fetch('/api/submit-feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Lỗi không xác định');
+            }
+
+            // Hiển thị thông báo thành công
+            feedbackMessage.textContent = t('feedbackSuccess', 'Gửi thành công!');
+            feedbackMessage.className = 'success';
+            feedbackMessage.classList.remove('hidden');
+            feedbackInput.value = ''; // Xóa nội dung input
+
+        } catch (error) {
+            console.error('Lỗi khi gửi góp ý:', error);
+            // Hiển thị thông báo lỗi
+            feedbackMessage.textContent = t('feedbackError', 'Gửi thất bại.');
+            feedbackMessage.className = 'error';
+            feedbackMessage.classList.remove('hidden');
+        } finally {
+            // Kích hoạt lại form sau một khoảng thời gian
+            setTimeout(() => {
+                feedbackSendBtn.disabled = false;
+                feedbackInput.disabled = false;
+                feedbackSendBtn.textContent = t('feedbackSendBtn', 'Gửi');
+                feedbackMessage.classList.add('hidden');
+            }, 3000); // 3 giây
         }
     }
 

@@ -83,4 +83,13 @@ window.translations = {
   "agency_dang_uy": "party committee",
   "agency_cong_an_xa": "Commune police",
 
+  // ...
+  "feedbackTitle": "Send us your feedback",
+  "feedbackDescription": "Have a suggestion or found a bug? Let us know!",
+  "feedbackPlaceholder": "Enter your feedback...",
+  "feedbackSendBtn": "Send",
+  "feedbackSuccess": "Sent successfully! Thank you for your feedback.",
+  "feedbackError": "Failed to send, please try again."
+   // ...
+
 };

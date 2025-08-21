@@ -20,5 +20,11 @@
       "source": "/",
       "destination": "/vi.html"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/send-weekly-feedback",
+      "schedule": "0 10 * * 6"
+    }
   ]
 }
