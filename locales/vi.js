@@ -80,12 +80,11 @@ window.translations = {
   "agency_cong_an_xa": "Công an xã",
 
    // ...
-  "feedbackTitle": "Góp ý cho chúng tôi",
-  "feedbackDescription": "Bạn có góp ý hay phát hiện lỗi? Hãy gửi cho chúng tôi!",
+  "feedbackDescription": "Bạn có góp ý hay phát hiện lỗi? Hãy gửi cho tôi!",
   "feedbackPlaceholder": "Nhập góp ý của bạn...",
   "feedbackSendBtn": "Gửi",
   "feedbackSuccess": "Gửi thành công! Cảm ơn bạn đã góp ý.",
-  "feedbackError": "Gửi thất bại, vui lòng thử lại."
+  "feedbackError": "Gửi thất bại, vui lòng thử lại.",
 // ...
 };
 

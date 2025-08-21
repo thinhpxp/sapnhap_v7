@@ -85,10 +85,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === HÀM DỊCH THUẬT & BẢN ĐỊA HÓA ===
     function applyTranslations() {
+        // Dịch nội dung text (innerHTML)
         document.querySelectorAll('[data-i18n-key]').forEach(el => {
             const key = el.getAttribute('data-i18n-key');
             el.innerHTML = t(key, el.innerHTML);
         });
+
+        // === THÊM MỚI: Dịch các thuộc tính placeholder ===
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            const translation = t(key);
+            if (translation) {
+                el.setAttribute('placeholder', translation);
+            }
+        });
+
+        // Cập nhật các thuộc tính meta và title
         document.title = t('pageTitle', "Tra Cứu Sáp Nhập");
         const descEl = document.querySelector('meta[name="description"]');
         if (descEl) descEl.setAttribute('content', t('pageDescription'));
@@ -489,13 +501,12 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackMessage.className = 'error';
             feedbackMessage.classList.remove('hidden');
         } finally {
-            // Kích hoạt lại form sau một khoảng thời gian
             setTimeout(() => {
                 feedbackSendBtn.disabled = false;
                 feedbackInput.disabled = false;
                 feedbackSendBtn.textContent = t('feedbackSendBtn', 'Gửi');
                 feedbackMessage.classList.add('hidden');
-            }, 3000); // 3 giây
+            }, 4000);
         }
     }
 

@@ -84,12 +84,11 @@ window.translations = {
   "agency_cong_an_xa": "Commune police",
 
   // ...
-  "feedbackTitle": "Send us your feedback",
-  "feedbackDescription": "Have a suggestion or found a bug? Let us know!",
+  "feedbackDescription": "Have a suggestion or found a bug? Let me know!",
   "feedbackPlaceholder": "Enter your feedback...",
   "feedbackSendBtn": "Send",
   "feedbackSuccess": "Sent successfully! Thank you for your feedback.",
-  "feedbackError": "Failed to send, please try again."
+  "feedbackError": "Failed to send, please try again.",
    // ...
 
 };
