@@ -87,7 +87,7 @@ window.translations = {
   "feedbackDescription": "Have a suggestion or found a bug? Let me know!",
   "feedbackPlaceholder": "Enter your feedback...",
   "feedbackSendBtn": "Send",
-  "feedbackSuccess": "Sent successfully! Thank you for your feedback.",
+  "feedbackSuccess": "Thank you. Feedback will be checked every weekend.",
   "feedbackError": "Failed to send, please try again.",
    // ...
 

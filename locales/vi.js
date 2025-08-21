@@ -83,7 +83,7 @@ window.translations = {
   "feedbackDescription": "Bạn có góp ý hay phát hiện lỗi? Hãy gửi cho tôi!",
   "feedbackPlaceholder": "Nhập góp ý của bạn...",
   "feedbackSendBtn": "Gửi",
-  "feedbackSuccess": "Gửi thành công! Cảm ơn bạn đã góp ý.",
+  "feedbackSuccess": "Cảm ơn bạn. Các feedback sẽ được tổng hợp và review mỗi cuối tuần.",
   "feedbackError": "Gửi thất bại, vui lòng thử lại.",
 // ...
 };
