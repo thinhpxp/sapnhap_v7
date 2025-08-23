@@ -27,7 +27,7 @@ async function sendTelegramMessage(text) {
 
 export default async function handler(request, response) {
   // GHI CHÚ: Một lớp bảo mật để đảm bảo chỉ có Vercel Cron Job mới có thể gọi API này.
-  const authHeader = request.headers.get('authorization');
+  const authHeader = request.headers['authorization'];
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return response.status(401).json({ error: 'Unauthorized' });
   }
