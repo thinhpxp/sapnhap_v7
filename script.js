@@ -467,7 +467,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (message.length === 0) {
             return; // Không làm gì nếu input rỗng
         }
+        // GHI CHÚ THAY ĐỔI: Bắt đầu thu thập ngữ cảnh
+        const context = {};
 
+        // Xác định chế độ tra cứu hiện tại
+        context.mode = isReverseMode ? 'Tra cứu ngược' : 'Tra cứu xuôi';
+
+        // Lấy thông tin từ các dropdown đang được chọn
+        if (isReverseMode) {
+            const newProvince = newProvinceChoices.getValue();
+            if (newProvince) {
+                context.province = { code: newProvince.value, name: newProvince.label };
+            }
+        } else {
+            const oldProvince = provinceChoices.getValue();
+            if (oldProvince) {
+                context.province = { code: oldProvince.value, name: oldProvince.label };
+            }
+            const oldDistrict = districtChoices.getValue();
+            if (oldDistrict) {
+                context.district = { code: oldDistrict.value, name: oldDistrict.label };
+            }
+        }// Kết thúc thu thập ngữ cảnh
         // Vô hiệu hóa form để tránh gửi nhiều lần
         feedbackSendBtn.disabled = true;
         feedbackInput.disabled = true;
@@ -479,11 +500,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message }),
+                body: JSON.stringify({ message: message, context: context }),
             });
 
             const data = await response.json();
-
             if (!response.ok) {
                 throw new Error(data.error || 'Lỗi không xác định');
             }

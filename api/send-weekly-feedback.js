@@ -36,7 +36,7 @@ export default async function handler(request, response) {
     // 1. Lấy tất cả các tin nhắn chưa được gửi
     const { data: messages, error: selectError } = await supabase
       .from('feedback')
-      .select('id, message, created_at')
+      .select('id, message, created_at, context')
       .eq('is_sent_to_telegram', false);
     if (selectError) throw selectError;
 
@@ -52,6 +52,19 @@ export default async function handler(request, response) {
       const date = new Date(msg.created_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
       // Sử dụng ký tự Markdown của Telegram
       telegramMessage += `*[${date}]:*\n\`\`\`\n${msg.message}\n\`\`\`\n\n`;
+      if (msg.context && Object.keys(msg.context).length > 0) {
+        telegramMessage += `*Ngữ cảnh lúc gửi:*\n`;
+        if(msg.context.mode) {
+             telegramMessage += `- Chế độ: ${msg.context.mode}\n`;
+        }
+        if(msg.context.province) {
+            telegramMessage += `- Tỉnh: ${msg.context.province.name} (Code: ${msg.context.province.code})\n`;
+        }
+        if(msg.context.district) {
+            telegramMessage += `- Huyện: ${msg.context.district.name} (Code: ${msg.context.district.code})\n`;
+        }
+      }
+      telegramMessage += `\n---\n\n`;
     });
 
     // 3. Gửi đến Telegram
