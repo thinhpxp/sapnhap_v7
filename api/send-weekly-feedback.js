@@ -46,7 +46,7 @@ export default async function handler(request, response) {
     }
 
     // 2. Định dạng tin nhắn để gửi đi
-    let telegramMessage = `*Tổng hợp Góp ý Tuần Này (${messages.length} tin nhắn mới):*\n\n`;
+    let telegramMessage = `*Sapnhap.org: Tổng hợp Góp ý Tuần Này (${messages.length} tin nhắn mới):*\n\n`;
     messages.forEach(msg => {
       // Định dạng ngày tháng cho dễ đọc
       const date = new Date(msg.created_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
