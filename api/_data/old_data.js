@@ -55595,6 +55595,14 @@ export const allProvincesData = [
             "short_codename": "tan_tien"
           },
           {
+            "name": "Phường Thống Nhất",
+            "code": 1235,
+            "codename": "phuong_thong_nhat",
+            "division_type": "xã",
+            "short_codename": "thong_nhat",
+            "has_history": true
+          },
+          {
             "name": "Phường Tự An",
             "code": 24148,
             "codename": "phuong_tu_an",
@@ -67724,7 +67732,7 @@ export const allProvincesData = [
             "codename": "xa_an_khach",
             "division_type": "xã",
             "short_codename": "an_khanh",
-            "has_history": true,
+            "has_history": true
           },
           {
             "name": "Xã Tân Thạch",
