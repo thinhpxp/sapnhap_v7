@@ -12,45 +12,63 @@ export default async function handler(request, response) {
     return response.status(400).json({ error: 'Thiếu tham số mã xã cũ (code).' });
   }
 
-  const oldWardCode = parseInt(code, 10);
+  const initialOldWardCode = parseInt(code, 10);
+  let finalOldWardCode = initialOldWardCode; // Mã sẽ dùng để tra cứu trong bảng full_vietnam
+  let historyRecords = []; // Mảng để lưu trữ lịch sử
 
   try {
-    // === THAY ĐỔI LỚN: Không dùng .maybeSingle() nữa ===
-    // Lấy về một mảng kết quả và chỉ giới hạn ở kết quả đầu tiên tìm thấy.
-    const { data, error } = await supabase
-      .from('full_vietnam')
-      .select(`
-        old_ward_code,
-        old_district_code,
-        old_province_code,
-        new_ward_name,
-        new_ward_code,
-        new_province_name,
-        new_province_code
-      `)
-      .eq('old_ward_code', oldWardCode)
-      .limit(1); // Giới hạn chỉ lấy 1 bản ghi để đảm bảo hiệu năng
+   // === GHI CHÚ THAY ĐỔI: BƯỚC 1 - KIỂM TRA LỊCH SỬ ===
+    // Truy vấn vào bảng historical_changes để xem mã ban đầu có lịch sử không.
+    const { data: historyData, error: historyError } = await supabase
+      .from('historical_changes')
+      .select('*')
+      .eq('original_ward_code', initialOldWardCode);
 
-    if (error) throw error;
-
-    // Kiểm tra xem mảng data có phần tử nào không
-    const record = data && data.length > 0 ? data[0] : null;
-
-    if (!record) {
-      // Không tìm thấy, tức là địa chỉ không đổi
-      return response.status(200).json({ changed: false });
+    if (historyError) {
+      // Nếu có lỗi ở đây, vẫn tiếp tục nhưng ghi lại lỗi
+      console.error('Lỗi khi tra cứu lịch sử:', historyError);
     }
 
-    // Trả về dữ liệu của bản ghi đầu tiên tìm thấy
+    // Nếu tìm thấy lịch sử
+    if (historyData && historyData.length > 0) {
+        console.log(`Tìm thấy ${historyData.length} bản ghi lịch sử cho mã ${initialOldWardCode}.`);
+        // Gán lại mã tra cứu cuối cùng bằng mã trung gian
+        // Giả sử chỉ lấy bản ghi lịch sử đầu tiên nếu có nhiều
+        finalOldWardCode = historyData[0].intermediate_ward_code;
+        historyRecords = historyData; // Lưu lại toàn bộ lịch sử để trả về
+    }
+
+    // === GHI CHÚ: BƯỚC 2 - TRA CỨU SÁP NHẬP CUỐI CÙNG ===
+    // Sử dụng finalOldWardCode (có thể là mã gốc hoặc mã trung gian)
+    const { data: finalRecord, error: finalError } = await supabase
+      .from('full_vietnam')
+      .select(`
+        old_ward_code, old_district_code, old_province_code,
+        new_ward_name, new_ward_en_name, new_ward_code,
+        new_province_name, new_province_en_name, new_province_code
+      `)
+      .eq('old_ward_code', finalOldWardCode)
+      .limit(1);
+
+    if (finalError) throw finalError;
+
+    const result = finalRecord && finalRecord.length > 0 ? finalRecord[0] : null;
+
+    if (!result) {
+      // Không tìm thấy sáp nhập cuối cùng -> địa chỉ không đổi
+      // Nhưng vẫn có thể có lịch sử thay đổi trước đó
+      return response.status(200).json({
+        changed: historyRecords.length > 0, // 'changed' là true nếu có lịch sử
+        history: historyRecords
+      });
+    }
+
+    // === GHI CHÚ: BƯỚC 3 - TRẢ VỀ KẾT QUẢ TỔNG HỢP ===
+    // Trả về kết quả cuối cùng KÈM THEO lịch sử (nếu có)
     response.status(200).json({
       changed: true,
-      old_ward_code: record.old_ward_code,
-      old_district_code: record.old_district_code,
-      old_province_code: record.old_province_code,
-      new_ward_name: record.new_ward_name,
-      new_ward_code: record.new_ward_code,
-      new_province_name: record.new_province_name,
-      new_province_code: record.new_province_code,
+      ...result,
+      history: historyRecords
     });
 
   } catch (error) {

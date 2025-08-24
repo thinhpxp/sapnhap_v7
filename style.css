@@ -835,3 +835,30 @@ body.modal-open {
     background-color: #f8d7da;
     color: #dc3545;
 }
+/* === THÊM MỚI: Style cho phần hiển thị lịch sử === */
+#history-display {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+}
+
+#history-display h4 {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#history-display ul {
+    list-style-type: '📜';
+    padding-left: 20px;
+    margin: 0;
+}
+
+#history-display li {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    padding-left: 10px;
+    margin-bottom: 8px;
+}

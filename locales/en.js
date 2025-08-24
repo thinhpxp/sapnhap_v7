@@ -90,5 +90,6 @@ window.translations = {
   "feedbackSuccess": "Thank you. Feedback will be checked every weekend.",
   "feedbackError": "Failed to send, please try again.",
    // ...
-
+  "historyTitle": "Change History (before 01/07/2025):",
+  "historyEntry": "On {date}: <b>{from}</b> was merged into <b>{to}</b>.",
 };

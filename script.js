@@ -131,6 +131,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if(communeChoices) communeChoices.destroy();
         if(newProvinceChoices) newProvinceChoices.destroy();
         if(newCommuneChoices) newCommuneChoices.destroy();
+        // Xử lý lịch sử
+        if (window.allProvincesData && window.allProvincesData.length > 0) {
+            window.allProvincesData.sort((a, b) => a.code - b.code);
+            // CẬP NHẬT: Thêm biểu tượng cho xã có lịch sử
+            const localizedOldData = window.allProvincesData.map(province => ({
+                ...province,
+                districts: province.districts.map(district => ({
+                    ...district,
+                    wards: district.wards.map(ward => ({
+                        ...ward,
+                        name: ward.has_history ? `${ward.name} 📜` : ward.name
+                    }))
+                }))
+            }));
+            updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
+        } else {
+            showNotification(t('errorLoadOldData'), "error");
+        }
 
         provinceChoices = new Choices(provinceSelectEl, { ...choicesConfig });
         districtChoices = new Choices(districtSelectEl, { ...choicesConfig });
@@ -356,19 +374,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
          // Reset trạng thái của chức năng Xem địa chỉ hành chính
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        if (historyDisplay) historyDisplay.classList.add('hidden');
         newWardCodeForModal = null;
+        newProvinceCodeForModal = null;
 
         try {
             const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Server error');
+            // === GHI CHÚ THAY ĐỔI: XỬ LÝ VÀ HIỂN THỊ LỊCH SỬ ===
+            if (data.history && data.history.length > 0) {
+                const historyHtml = data.history.map(entry => {
+                    // Định dạng lại ngày tháng cho dễ đọc
+                    const date = new Date(entry.change_date).toLocaleDateString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
+                    // Lấy bản dịch và thay thế các placeholder
+                    return `<li>${t('historyEntry')
+                                .replace('{date}', date)
+                                .replace('{from}', entry.original_ward_name)
+                                .replace('{to}', entry.intermediate_ward_name)}</li>`;
+                }).join('');
 
-            if (data.changed === false) {
+                historyDisplay.innerHTML = `<h4>${t('historyTitle')}</h4><ul>${historyHtml}</ul>`;
+                historyDisplay.classList.remove('hidden');
+            }
+            // =======================================================
+
+            if (!data.changed) {
                 newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
-            } else {
+            } else if (data.new_ward_name){ // Kiểm tra xem có kết quả sáp nhập cuối cùng không
                 const newWardName = localize(data.new_ward_name, data.new_ward_en_name);
                 const newProvinceName = localize(data.new_province_name, data.new_province_en_name);
                 const newAddressForDisplay = `${newWardName}, ${newProvinceName}`;
+                const newCodes = `${data.new_ward_code}, ${data.new_province_code}`;
 
                 // --- KHÔI PHỤC: Hiển thị mã code mới ---
                 const newCodes = `${data.new_ward_code}, ${data.new_province_code}`;
