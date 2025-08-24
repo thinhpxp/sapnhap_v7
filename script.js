@@ -405,18 +405,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newWardName = localize(data.new_ward_name, data.new_ward_en_name);
                 const newProvinceName = localize(data.new_province_name, data.new_province_en_name);
                 const newAddressForDisplay = `${newWardName}, ${newProvinceName}`;
-                const newCodes = `${data.new_ward_code}, ${data.new_province_code}`;
-
+                const newCodesForward = `${data.new_ward_code}, ${data.new_province_code}`;
                 // --- KHÔI PHỤC: Hiển thị mã code mới ---
-                const newCodes = `${data.new_ward_code}, ${data.new_province_code}`;
-                const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+                const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodesForward})`;
 
                 let resultsHtml = `
                     <div class="address-line">
                         <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
                         <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
                     </div>
-                    <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+                    <div class="address-codes"><span class="label">New Code:</span> ${newCodesForward}</div>`;
                 newAddressDisplay.innerHTML = resultsHtml;
 
                 // === THÊM MỚI: Lưu mã và hiển thị nút để Xem địa chỉ hành chính
@@ -456,14 +454,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.length > 0) {
                 // --- KHÔI PHỤC: Hiển thị địa chỉ mới và mã mới ---
-                const newCodes = `${data[0].new_ward_code}, ${data[0].new_province_code}`;
-                const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodes})`;
+                const newCodesReverse = `${data[0].new_ward_code}, ${data[0].new_province_code}`;
+                const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodesReverse})`;
                 let newAddressHtml = `
                     <div class="address-line">
                         <p><span class="label">${t('newAddressLabel').replace(':', '')}</span> ${fullNewAddress}</p>
                         <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
                     </div>
-                    <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+                    <div class="address-codes"><span class="label">New Code:</span> ${newCodesReverse}</div>`;
                 oldAddressDisplay.innerHTML = newAddressHtml;
 
                 // --- KHÔI PHỤC: Hiển thị danh sách địa chỉ cũ kèm mã code ---
