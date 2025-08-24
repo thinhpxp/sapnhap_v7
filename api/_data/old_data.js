@@ -67718,6 +67718,14 @@ export const allProvincesData = [
         "division_type": "huyện",
         "short_codename": "chau_thanh",
         "wards": [
+        {
+            "name": "Xã An Khánh",
+            "code": 1234,
+            "codename": "xa_an_khach",
+            "division_type": "xã",
+            "short_codename": "an_khanh",
+            "has_history": true,
+          },
           {
             "name": "Xã Tân Thạch",
             "code": 28804,
