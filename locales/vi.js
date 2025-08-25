@@ -87,6 +87,6 @@ window.translations = {
   "feedbackError": "Gửi thất bại, vui lòng thử lại.",
 // ...
   "historyTitle": "Lịch sử thay đổi (trước 01/07/2025):",
-  "historyEntry": "Ngày {date}: <b>{from}</b> đã được sáp nhập thành <b>{to}</b>.",
+  "historyEntry": "Ngày {date}: <b>{from}</b> đã được sáp nhập vào <b>{to}</b>.",
 };
 
