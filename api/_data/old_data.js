@@ -45610,6 +45610,22 @@ export const allProvincesData = [
         ]
       },
       {
+         "name": "Huyện Nông Sơn",
+        "code": 519,
+        "codename": "huyen_nong_son",
+        "division_type": "huyện",
+        "short_codename": "nong_giang",
+        "wards": [
+          {
+            "name": "Đã sáp nhập toàn bộ vào huyện Quế Sơn từ 1/1/2025",
+            "code": 200668,
+            "codename": "xa_chom",
+            "division_type": "xã",
+            "short_codename": "chom"
+          }
+        ]
+      },
+      {
         "name": "Huyện Tây Giang",
         "code": 504,
         "codename": "huyen_tay_giang",
