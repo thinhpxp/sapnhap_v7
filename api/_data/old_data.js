@@ -70169,7 +70169,8 @@ export const allProvincesData = [
             "code": 29770,
             "codename": "phuong_cai_von",
             "division_type": "xã",
-            "short_codename": "cai_von"
+            "short_codename": "cai_von",
+            "is_split_case": true,
           },
           {
             "name": "Phường Thành Phước",
