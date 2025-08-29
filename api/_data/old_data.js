@@ -45617,7 +45617,7 @@ export const allProvincesData = [
         "short_codename": "nong_giang",
         "wards": [
           {
-            "name": "Đã sáp nhập toàn bộ vào huyện Quế Sơn từ 1/1/2025",
+            "name": "Đã sáp nhập toàn bộ các xã vào huyện Quế Sơn từ 1/1/2025",
             "code": 200668,
             "codename": "xa_chom",
             "division_type": "xã",
