@@ -1,4 +1,4 @@
-// /api/lookup-forward.js
+// /api/lookup-forward.js - Phiên bản nâng cấp, hỗ trợ tra cứu chia tách
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -7,69 +7,109 @@ const supabase = createClient(
 );
 
 export default async function handler(request, response) {
-  const { code } = request.query;
+  // GHI CHÚ THAY ĐỔI: Nhận thêm một tham số 'is_split' từ client
+  // để biết đây có phải là trường hợp đặc biệt hay không.
+  const { code, is_split } = request.query;
+
   if (!code) {
     return response.status(400).json({ error: 'Thiếu tham số mã xã cũ (code).' });
   }
 
-  const initialOldWardCode = parseInt(code, 10);
-  let finalOldWardCode = initialOldWardCode; // Mã sẽ dùng để tra cứu trong bảng full_vietnam
-  let historyRecords = []; // Mảng để lưu trữ lịch sử
+  const oldWardCode = parseInt(code, 10);
 
   try {
-   // === GHI CHÚ THAY ĐỔI: BƯỚC 1 - KIỂM TRA LỊCH SỬ ===
-    // Truy vấn vào bảng historical_changes để xem mã ban đầu có lịch sử không.
-    const { data: historyData, error: historyError } = await supabase
-      .from('historical_changes')
-      .select('*')
-      .eq('original_ward_code', initialOldWardCode);
+    // === GHI CHÚ CỐT LÕI: Rẽ nhánh logic dựa trên cờ 'is_split' ===
 
-    if (historyError) {
-      // Nếu có lỗi ở đây, vẫn tiếp tục nhưng ghi lại lỗi
-      console.error('Lỗi khi tra cứu lịch sử:', historyError);
-    }
+    if (is_split === 'true') {
+      // --- LUỒNG XỬ LÝ CHO TRƯỜNG HỢP CHIA TÁCH ---
+      console.log(`API: Xử lý trường hợp chia tách cho mã ${oldWardCode}`);
 
-    // Nếu tìm thấy lịch sử
-    if (historyData && historyData.length > 0) {
-        console.log(`Tìm thấy ${historyData.length} bản ghi lịch sử cho mã ${initialOldWardCode}.`);
-        // Gán lại mã tra cứu cuối cùng bằng mã trung gian
-        // Giả sử chỉ lấy bản ghi lịch sử đầu tiên nếu có nhiều
-        finalOldWardCode = historyData[0].intermediate_ward_code;
-        historyRecords = historyData; // Lưu lại toàn bộ lịch sử để trả về
-    }
+      // 1. Lấy tất cả các phần đã được chia tách từ bảng split_details
+      const { data: splitParts, error: splitError } = await supabase
+        .from('split_details')
+        .select('split_part_description, new_ward_code')
+        .eq('old_ward_code', oldWardCode);
 
-    // === GHI CHÚ: BƯỚC 2 - TRA CỨU SÁP NHẬP CUỐI CÙNG ===
-    // Sử dụng finalOldWardCode (có thể là mã gốc hoặc mã trung gian)
-    const { data: finalRecord, error: finalError } = await supabase
-      .from('full_vietnam')
-      .select(`
-        old_ward_code, old_district_code, old_province_code,
-        new_ward_name, new_ward_en_name, new_ward_code,
-        new_province_name, new_province_en_name, new_province_code
-      `)
-      .eq('old_ward_code', finalOldWardCode)
-      .limit(1);
+      if (splitError) throw splitError;
+      if (!splitParts || splitParts.length === 0) {
+        return response.status(404).json({ error: 'Không tìm thấy chi tiết chia tách cho mã này.' });
+      }
 
-    if (finalError) throw finalError;
+      // 2. Lấy danh sách các mã xã mới không trùng lặp
+      const newWardCodes = [...new Set(splitParts.map(part => part.new_ward_code))];
 
-    const result = finalRecord && finalRecord.length > 0 ? finalRecord[0] : null;
+      // 3. Lấy thông tin chi tiết của các xã mới đó từ bảng full_vietnam
+      const { data: newUnits, error: newUnitsError } = await supabase
+        .from('full_vietnam')
+        .select('new_ward_code, new_ward_name, new_ward_en_name, new_province_name, new_province_en_name, new_province_code')
+        .in('new_ward_code', newWardCodes);
 
-    if (!result) {
-      // Không tìm thấy sáp nhập cuối cùng -> địa chỉ không đổi
-      // Nhưng vẫn có thể có lịch sử thay đổi trước đó
+      if (newUnitsError) throw newUnitsError;
+
+      // 4. Ghép nối thông tin lại để trả về cho client
+      const splitResults = splitParts.map(part => {
+        const correspondingNewUnit = newUnits.find(unit => unit.new_ward_code === part.new_ward_code);
+        return {
+          description: part.split_part_description,
+          new_address: correspondingNewUnit || null
+        };
+      });
+
+      // 5. Trả về đối tượng JSON có cấu trúc đặc biệt
       return response.status(200).json({
-        changed: historyRecords.length > 0, // 'changed' là true nếu có lịch sử
+        changed: true,
+        is_split_case: true,
+        split_results: splitResults,
+        history: [] // Trường hợp chia tách không cần lịch sử riêng
+      });
+
+    } else {
+      // --- LUỒNG XỬ LÝ BÌNH THƯỜNG (kết hợp lịch sử) ---
+      console.log(`API: Xử lý trường hợp thông thường cho mã ${oldWardCode}`);
+
+      let finalOldWardCode = oldWardCode;
+      let historyRecords = [];
+
+      // 1. Kiểm tra lịch sử
+      const { data: historyData, error: historyError } = await supabase
+        .from('historical_changes')
+        .select('*')
+        .eq('original_ward_code', oldWardCode);
+
+      if (historyError) console.error('Lỗi khi tra cứu lịch sử:', historyError);
+
+      if (historyData && historyData.length > 0) {
+        finalOldWardCode = historyData[0].intermediate_ward_code;
+        historyRecords = historyData;
+      }
+
+      // 2. Tra cứu sáp nhập cuối cùng
+      const { data: finalRecord, error: finalError } = await supabase
+        .from('full_vietnam')
+        .select('old_ward_code, old_district_code, old_province_code, new_ward_name, new_ward_en_name, new_ward_code, new_province_name, new_province_en_name, new_province_code')
+        .eq('old_ward_code', finalOldWardCode)
+        .limit(1);
+
+      if (finalError) throw finalError;
+
+      const result = finalRecord && finalRecord.length > 0 ? finalRecord[0] : null;
+
+      if (!result) {
+        return response.status(200).json({
+          changed: historyRecords.length > 0,
+          is_split_case: false,
+          history: historyRecords
+        });
+      }
+
+      // 3. Trả về kết quả tổng hợp
+      return response.status(200).json({
+        changed: true,
+        is_split_case: false,
+        ...result,
         history: historyRecords
       });
     }
-
-    // === GHI CHÚ: BƯỚC 3 - TRẢ VỀ KẾT QUẢ TỔNG HỢP ===
-    // Trả về kết quả cuối cùng KÈM THEO lịch sử (nếu có)
-    response.status(200).json({
-      changed: true,
-      ...result,
-      history: historyRecords
-    });
 
   } catch (error) {
     console.error('Lỗi API Tra Cứu Xuôi:', error);
