@@ -21312,6 +21312,13 @@ export const allProvincesData = [
             "short_codename": "hung_long"
           },
           {
+            "name": "Xã Vân Đồn",
+            "code": 1236,
+            "codename": "xa_van_don",
+            "division_type": "xã",
+            "short_codename": "van_dong"
+          },
+          {
             "name": "Xã Yên Kiện",
             "code": 8038,
             "codename": "xa_yen_kien",
