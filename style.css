@@ -836,13 +836,21 @@ body.modal-open {
     color: #dc3545;
 }
 /* === THÊM MỚI: Style cho phần hiển thị lịch sử === */
-#history-display {
+/* === CẬP NHẬT: Style cho phần hiển thị lịch sử === */
+/* Style chung cho cả hai chế độ tra cứu */
+.history-display {
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px dashed var(--border-color);
 }
+/* Style riêng cho lịch sử trong danh sách tra cứu ngược */
+.old-units-list .history-display {
+    border-top: 1px solid #dcdcdc;
+    margin-top: 8px;
+    padding-top: 8px;
+}
 
-#history-display h4 {
+.history-display h4 {
     font-size: 0.9em;
     font-weight: 600;
     color: var(--text-color);
@@ -850,13 +858,13 @@ body.modal-open {
     margin-bottom: 10px;
 }
 
-#history-display ul {
+.history-display ul {
     list-style-type: '📜';
     padding-left: 20px;
     margin: 0;
 }
 
-#history-display li {
+.history-display li {
     font-size: 0.85em;
     color: var(--text-muted);
     padding-left: 10px;

@@ -479,9 +479,9 @@ document.addEventListener('DOMContentLoaded', () => {
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         resultContainer.classList.remove('hidden');
 
-        // Reset trạng thái của chức năng Xem địa chỉ hành chính
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
         newWardCodeForModal = null;
+        newProvinceCodeForModal = null; // Thêm reset cho an toàn
 
         try {
             const response = await fetch(`/api/lookup-reverse?code=${newWardCode}`);
@@ -489,7 +489,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(data.error || 'Server error');
 
             if (data.length > 0) {
-                // --- KHÔI PHỤC: Hiển thị địa chỉ mới và mã mới ---
                 const newCodesReverse = `${data[0].new_ward_code}, ${data[0].new_province_code}`;
                 const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodesReverse})`;
                 let newAddressHtml = `
@@ -500,11 +499,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="address-codes"><span class="label">New Code:</span> ${newCodesReverse}</div>`;
                 oldAddressDisplay.innerHTML = newAddressHtml;
 
-                // --- KHÔI PHỤC: Hiển thị danh sách địa chỉ cũ kèm mã code ---
                 const oldUnitsFullAddresses = data.map(record => {
-                    let historyHtml = ''; // Chuỗi HTML cho lịch sử của riêng mục này
+                    let historyHtml = '';
 
-                    // Nếu có lịch sử, tạo HTML cho nó
+                    // GHI CHÚ SỬA LỖI: Kiểm tra history có tồn tại và không phải null
                     if (record.history) {
                         const date = new Date(record.history.change_date).toLocaleDateString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
                         const historyItem = `<li>${t('historyEntry')
@@ -512,8 +510,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     .replace('{from}', record.history.original_ward_name)
                                     .replace('{to}', record.history.intermediate_ward_name)}</li>`;
 
+                        // GHI CHÚ SỬA LỖI: Dùng class thay vì id để tránh trùng lặp
                         historyHtml = `
-                            <div id="history-display" style="margin-top: 8px;">
+                            <div class="history-display" style="margin-top: 8px;">
                                 <ul>${historyItem}</ul>
                             </div>
                         `;
@@ -525,20 +524,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     return `
                         <li>
                             ${ward}, ${district}, ${province}
-                            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>${historyHtml}
+                            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
+                            ${historyHtml}
                         </li>`;
                 }).join('');
                 newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsFullAddresses}</ul>`;
+
+                // === GHI CHÚ SỬA LỖI: Di chuyển khối code này vào bên trong `if` ===
+                // Chỉ lưu mã và hiển thị nút khi chắc chắn có dữ liệu
+                newWardCodeForModal = data[0].new_ward_code;
+                newProvinceCodeForModal = data[0].new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+                // =============================================================
+
             } else {
                 oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel').replace(':', '')}</span> ${fullNewAddress}</p></div>`;
                 newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
             }
-            // === THÊM MỚI: Lưu mã và hiển thị nút của chức năng Xem địa chỉ hành chính ===
-            // Dù có kết quả hay không, chúng ta vẫn có mã xã mới
-            //newWardCodeForModal = newWardCode;
-            newWardCodeForModal = data[0].new_ward_code;
-            newProvinceCodeForModal = data[0].new_province_code;
-            if (adminCenterActions) adminCenterActions.classList.remove('hidden');
         } catch (error) {
              console.error('Lỗi khi tra cứu ngược:', error);
              oldAddressDisplay.innerHTML = '';
