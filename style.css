@@ -835,43 +835,42 @@ body.modal-open {
     background-color: #f8d7da;
     color: #dc3545;
 }
-/* === THÊM MỚI: Style cho phần hiển thị lịch sử === */
-#history-display {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px dashed var(--border-color);
+/* --- Style nền tảng cho các hộp ghi chú --- */
+.history-display,
+.split-context-note {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #555; /* Một màu tối hơn một chút so với text-muted */
+    background-color: #f0f2f5; /* Nền xám nhẹ, nhất quán */
+    padding: 8px 12px;
+    margin-top: 8px;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary-color); /* Đường viền nhấn mạnh bên trái */
 }
 
-#history-display h4 {
+/* --- Style riêng cho khối Lịch sử (có danh sách) --- */
+.history-display h4 {
     font-size: 0.9em;
     font-weight: 600;
     color: var(--text-color);
     margin-top: 0;
     margin-bottom: 10px;
+    font-style: normal; /* Bỏ in nghiêng cho tiêu đề */
 }
 
-#history-display ul {
+.history-display ul {
     list-style-type: '📜';
     padding-left: 20px;
     margin: 0;
 }
 
-#history-display li {
-    font-size: 0.85em;
-    color: var(--text-muted);
+.history-display li {
     padding-left: 10px;
     margin-bottom: 8px;
+    font-style: normal; /* Bỏ in nghiêng cho nội dung trong danh sách */
 }
-/* Thêm vào cuối file style.css */
-.split-results-list {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-.split-results-list li {
-    padding: 8px;
-    border-bottom: 1px solid var(--border-color);
-}
-.split-results-list li:last-child {
-    border-bottom: none;
+
+/* Đảm bảo li cuối cùng không có margin dưới */
+.history-display li:last-child {
+    margin-bottom: 0;
 }
