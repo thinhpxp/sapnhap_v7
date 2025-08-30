@@ -1,4 +1,4 @@
-// /api/lookup-reverse.js - Phiên bản cuối cùng, dựa trên schema chính xác
+// /api/lookup-reverse.js - Phiên bản nâng cấp, hỗ trợ tra cứu chia tách ngược
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -15,31 +15,42 @@ export default async function handler(request, response) {
   const newWardCode = parseInt(code, 10);
 
   try {
-    // === THAY ĐỔI CỐT LÕI: Sử dụng tên bảng và các cột chính xác ===
-    const { data, error } = await supabase
-      .from('full_vietnam') // Tên bảng chính xác
-      .select(`
-        old_ward_name,
-        old_ward_code,
-        old_district_name,
-        old_district_code,
-        old_province_name,
-        old_province_code,
-        new_ward_code,
-        new_province_code
-      `) // Lấy chính xác các cột cần thiết
+    // === BƯỚC 1: Tìm các đơn vị cũ trực tiếp như bình thường ===
+    const { data: directOldUnits, error: directError } = await supabase
+      .from('full_vietnam')
+      .select('*') // Lấy tất cả thông tin ban đầu
       .eq('new_ward_code', newWardCode);
 
-    if (error) {
-      console.error('Lỗi truy vấn Supabase trong lookup-reverse:', error);
-      throw error;
+    if (directError) throw directError;
+    if (!directOldUnits || directOldUnits.length === 0) {
+      return response.status(200).json([]);
     }
 
-    // Trả về dữ liệu cho client
-    response.status(200).json(data);
+    // === GHI CHÚ CỐT LÕI: BƯỚC 2 - "ĐIỀU TRA" BỐI CẢNH CHIA TÁCH ===
+    // Tạo một mảng các "lời hứa" (Promise), mỗi lời hứa là một cuộc gọi RPC
+    // để tìm bối cảnh chia tách cho từng đơn vị cũ tìm được.
+    const contextPromises = directOldUnits.map(unit =>
+      supabase.rpc('get_split_context', { p_old_ward_code: unit.old_ward_code })
+    );
+
+    // Thực thi tất cả các "lời hứa" song song để tăng hiệu suất
+    const contextResults = await Promise.all(contextPromises);
+
+    // === GHI CHÚ: BƯỚC 3 - GHÉP NỐI KẾT QUẢ ===
+    // Thêm trường 'split_context' vào mỗi đơn vị cũ
+    const finalResults = directOldUnits.map((unit, index) => {
+      const contextData = contextResults[index].data;
+      return {
+        ...unit,
+        // Chỉ thêm context nếu nó tồn tại và chứa nhiều hơn 1 mảnh ghép (có sự chia tách thực sự)
+        split_context: (contextData && contextData.length > 1) ? contextData : null
+      };
+    });
+
+    response.status(200).json(finalResults);
 
   } catch (error) {
-    console.error('Lỗi cuối cùng trong API Tra Cứu Ngược:', error);
+    console.error('Lỗi API Tra Cứu Ngược:', error);
     response.status(500).json({ error: 'Lỗi máy chủ nội bộ.' });
   }
 }

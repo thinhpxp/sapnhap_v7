@@ -91,4 +91,7 @@ window.translations = {
   "splitCaseNote": "Lưu ý: Đơn vị này được chia tách và sáp nhập vào nhiều nơi khác nhau.",
   "mergedInto": "đã sáp nhập thành",
   "noMergeInfo": "Không có thông tin sáp nhập."
+  // ...
+  "reverseSplitContextNote": "Lưu ý: Đây là một phần của một đơn vị cũ. Các phần khác ({parts}) đã được sáp nhập vào nơi khác."
+  // ...
 };
