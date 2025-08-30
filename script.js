@@ -379,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
          // Reset trạng thái của chức năng Xem địa chỉ hành chính
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
         if (historyDisplay) historyDisplay.classList.add('hidden');
+        resultContainer.classList.remove('hidden');
         newWardCodeForModal = null;
         newProvinceCodeForModal = null;
 
@@ -477,13 +478,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         oldAddressDisplay.innerHTML = '';
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
+        if (historyDisplay) historyDisplay.classList.add('hidden'); // Ẩn lịch sử cũ
+        if (adminCenterActions) adminCenterActions.classList.add('hidden'); // Ẩn nút hành chính
         resultContainer.classList.remove('hidden');
-
-        // Reset trạng thái
-        if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        // Reset biến trạng thái
         newWardCodeForModal = null;
         newProvinceCodeForModal = null;
-
         try {
             const response = await fetch(`/api/lookup-reverse?code=${newWardCode}`);
             const data = await response.json();
