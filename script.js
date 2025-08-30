@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return `
                         <li>
                             ${ward}, ${district}, ${province}
-                            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
+                            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>${historyHtml}
                         </li>`;
                 }).join('');
                 newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsFullAddresses}</ul>`;
