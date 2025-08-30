@@ -386,16 +386,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // === GHI CHÚ CỐT LÕI 1: KIỂM TRA CỜ is_split_case ===
             // Tìm lại dữ liệu gốc của xã đã chọn để kiểm tra cờ is_split_case
             const provinceData = allProvincesData.find(p => p.code == provinceChoices.getValue(true));
-            const districtData = provinceData.districts.find(d => d.code == districtChoices.getValue(true));
-            const wardData = districtData.wards.find(w => w.code == oldWardCode);
-
+            // Kiểm tra null an toàn
+            const districtData = provinceData ? provinceData.districts.find(d => d.code == districtChoices.getValue(true)) : null;
+            const wardData = districtData ? districtData.wards.find(w => w.code == oldWardCode) : null;
             const isSplit = wardData && wardData.is_split_case === true;
 
             // === GHI CHÚ CỐT LÕI 2: XÂY DỰNG URL API ĐỘNG ===
             // Gửi thêm is_split=true nếu đây là trường hợp chia tách
             const apiUrl = `/api/lookup-forward?code=${oldWardCode}${isSplit ? '&is_split=true' : ''}`;
 
-            console.log(`Đang gọi API: ${apiUrl}`);
             const response = await fetch(apiUrl);
             //const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
             const data = await response.json();
