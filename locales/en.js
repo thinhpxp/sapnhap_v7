@@ -94,8 +94,8 @@ window.translations = {
   "historyEntry": "On {date}: <b>{from}</b> was merged into <b>{to}</b>.",
   "splitCaseNote": "Note: This unit was split and merged into multiple different places.",
   "mergedInto": "was merged into",
-  "noMergeInfo": "No merger information available."
+  "noMergeInfo": "No merger information available.",
   // ...
-  "reverseSplitContextNote": "Note: This is part of a former unit. Other parts ({parts}) were merged elsewhere."
+  "reverseSplitContextNote": "Note: This is part of a former unit. Other parts ({parts}) were merged elsewhere.",
   // ...
 };
