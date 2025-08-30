@@ -862,3 +862,16 @@ body.modal-open {
     padding-left: 10px;
     margin-bottom: 8px;
 }
+/* Thêm vào cuối file style.css */
+.split-results-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+.split-results-list li {
+    padding: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+.split-results-list li:last-child {
+    border-bottom: none;
+}

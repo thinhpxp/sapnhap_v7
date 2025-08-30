@@ -88,5 +88,8 @@ window.translations = {
 // ...
   "historyTitle": "Lịch sử thay đổi (trước 01/07/2025):",
   "historyEntry": "Ngày {date}: <b>{from}</b> đã được sáp nhập vào <b>{to}</b>.",
+  "splitCaseNote": "Lưu ý: Đơn vị này được chia tách và sáp nhập vào nhiều nơi khác nhau.",
+  "mergedInto": "đã sáp nhập thành",
+  "noMergeInfo": "Không có thông tin sáp nhập."
 };
 

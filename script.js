@@ -141,10 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 ...province,
                 districts: province.districts.map(district => ({
                     ...district,
-                    wards: district.wards.map(ward => ({
-                        ...ward,
-                        name: ward.has_history ? `${ward.name} 📜` : ward.name
-                    }))
+                     wards: district.wards.map(ward => {
+                        let name = ward.name;
+                        if (ward.has_history) name = `${name} 📜`;
+                        if (ward.is_split_case) name = `${name} 쪼`; // Biểu tượng cho chia tách
+                        return { ...ward, name: name };
+                    })
                 }))
             }));
             updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
@@ -381,9 +383,25 @@ document.addEventListener('DOMContentLoaded', () => {
         newProvinceCodeForModal = null;
 
         try {
-            const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
+            // === GHI CHÚ CỐT LÕI 1: KIỂM TRA CỜ is_split_case ===
+            // Tìm lại dữ liệu gốc của xã đã chọn để kiểm tra cờ is_split_case
+            const provinceData = window.allProvincesData.find(p => p.code == provinceChoices.getValue(true));
+            const districtData = provinceData.districts.find(d => d.code == districtChoices.getValue(true));
+            const wardData = districtData.wards.find(w => w.code == oldWardCode);
+
+            const isSplit = wardData && wardData.is_split_case === true;
+
+            // === GHI CHÚ CỐT LÕI 2: XÂY DỰNG URL API ĐỘNG ===
+            // Gửi thêm is_split=true nếu đây là trường hợp chia tách
+            const apiUrl = `/api/lookup-forward?code=${oldWardCode}${isSplit ? '&is_split=true' : ''}`;
+
+            console.log(`Đang gọi API: ${apiUrl}`);
+            const response = await fetch(apiUrl);
+            //const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
             const data = await response.json();
+
             if (!response.ok) throw new Error(data.error || 'Server error');
+
             // === GHI CHÚ THAY ĐỔI: XỬ LÝ VÀ HIỂN THỊ LỊCH SỬ ===
             if (data.history && data.history.length > 0) {
                 const historyHtml = data.history.map(entry => {
@@ -403,11 +421,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!data.changed) {
                 newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
-            } else if (data.new_ward_name){ // Kiểm tra xem có kết quả sáp nhập cuối cùng không
+            }else if (data.is_split_case) {
+                // --- Xử lý hiển thị cho trường hợp CHIA TÁCH ---
+                const splitHtml = data.split_results.map(result => {
+                    if (result.new_address) {
+                        const newAddress = `${result.new_address.new_ward_name}, ${result.new_address.new_province_name}`;
+                        return `<li><b>${result.description}:</b> ${t('mergedInto', 'sáp nhập thành')} <b>${newAddress}</b></li>`;
+                    }
+                    return `<li><b>${result.description}:</b> ${t('noMergeInfo', 'Không có thông tin sáp nhập.')}</li>`;
+                }).join('');
+
+                newAddressDisplay.innerHTML = `
+                    <p class="split-case-note">${t('splitCaseNote', 'Lưu ý: Đơn vị này được chia tách và sáp nhập vào nhiều nơi.')}</p>
+                    <ul class="split-results-list">${splitHtml}</ul>
+                `;
+            }
+             else if (data.new_ward_name){ // Kiểm tra xem có kết quả sáp nhập cuối cùng không
                 const newWardName = localize(data.new_ward_name, data.new_ward_en_name);
                 const newProvinceName = localize(data.new_province_name, data.new_province_en_name);
-                const newAddressForDisplay = `${newWardName}, ${newProvinceName}`;
+                //const newAddressForDisplay = `${newWardName}, ${newProvinceName}`;
                 const newCodesForward = `${data.new_ward_code}, ${data.new_province_code}`;
+                const newAddressForDisplay = `${data.new_ward_name}, ${data.new_province_name}`;
+                //const newCodes = `${data.new_ward_code}, ${data.new_province_code}`;
                 // --- KHÔI PHỤC: Hiển thị mã code mới ---
                 const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodesForward})`;
 

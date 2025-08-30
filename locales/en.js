@@ -92,4 +92,9 @@ window.translations = {
    // ...
   "historyTitle": "Change History (before 01/07/2025):",
   "historyEntry": "On {date}: <b>{from}</b> was merged into <b>{to}</b>.",
+  // ...
+  "splitCaseNote": "Note: This unit was split and merged into multiple different places.",
+  "mergedInto": "was merged into",
+  "noMergeInfo": "No merger information available."
+  // ...
 };
