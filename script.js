@@ -501,7 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const oldUnitsFullAddresses = data.map(record => {
                     let historyHtml = '';
-
                     // GHI CHÚ SỬA LỖI: Kiểm tra history có tồn tại và không phải null
                     if (record.history) {
                         const date = new Date(record.history.change_date).toLocaleDateString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
@@ -521,11 +520,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     const district = localize(record.old_district_name, record.old_district_en_name);
                     const province = localize(record.old_province_name, record.old_province_en_name);
                     const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
+                     let splitContextHtml = ''; // Chuỗi HTML cho ghi chú chia tách
+
+                    // GHI CHÚ THAY ĐỔI: Kiểm tra xem có thông tin split_context không
+                    if (record.split_context) {
+                        const context = record.split_context;
+                        // Lấy tên đơn vị mới mà phần này đã sáp nhập vào (ví dụ: Xã D)
+                        const currentNewUnitName = newCommuneChoices.getValue().label;
+
+                        // Xây dựng chuỗi HTML ghi chú
+                        const noteText = t('splitContextNote', 'Đây là một phần của "{original_name}", các phần khác đã được sáp nhập vào các đơn vị khác.')
+                                        .replace('{original_name}', context.split_part_description.split(' của ')[1] || 'đơn vị gốc');
+
+                        splitContextHtml = `<div class="split-context-note">${noteText}</div>`;
+                    }
+
                     return `
                         <li>
                             ${ward}, ${district}, ${province}
                             <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
-                            ${historyHtml}
+                            ${splitContextHtml}
                         </li>`;
                 }).join('');
                 newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsFullAddresses}</ul>`;

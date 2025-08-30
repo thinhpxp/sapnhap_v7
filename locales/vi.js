@@ -90,6 +90,9 @@ window.translations = {
   "historyEntry": "Ngày {date}: <b>{from}</b> đã được sáp nhập vào <b>{to}</b>.",
   "splitCaseNote": "Lưu ý: Đơn vị này được chia tách và sáp nhập vào nhiều nơi khác nhau.",
   "mergedInto": "đã sáp nhập thành",
-  "noMergeInfo": "Không có thông tin sáp nhập."
+  "noMergeInfo": "Không có thông tin sáp nhập.",
+  // ...
+   "splitContextNote": "Lưu ý: Đây là một phần của \"{original_name}\", các phần khác đã được sáp nhập vào các đơn vị khác.",
+  // ...
 };
 
