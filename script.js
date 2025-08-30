@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // === GHI CHÚ CỐT LÕI 1: KIỂM TRA CỜ is_split_case ===
             // Tìm lại dữ liệu gốc của xã đã chọn để kiểm tra cờ is_split_case
-            const provinceData = window.allProvincesData.find(p => p.code == provinceChoices.getValue(true));
+            const provinceData = allProvincesData.find(p => p.code == provinceChoices.getValue(true));
             const districtData = provinceData.districts.find(d => d.code == districtChoices.getValue(true));
             const wardData = districtData.wards.find(w => w.code == oldWardCode);
 
