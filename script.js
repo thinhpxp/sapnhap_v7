@@ -502,6 +502,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // --- KHÔI PHỤC: Hiển thị danh sách địa chỉ cũ kèm mã code ---
                 const oldUnitsFullAddresses = data.map(record => {
+                    let historyHtml = ''; // Chuỗi HTML cho lịch sử của riêng mục này
+
+                    // Nếu có lịch sử, tạo HTML cho nó
+                    if (record.history) {
+                        const date = new Date(record.history.change_date).toLocaleDateString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
+                        const historyItem = `<li>${t('historyEntry')
+                                    .replace('{date}', date)
+                                    .replace('{from}', record.history.original_ward_name)
+                                    .replace('{to}', record.history.intermediate_ward_name)}</li>`;
+
+                        historyHtml = `
+                            <div id="history-display" style="margin-top: 8px;">
+                                <ul>${historyItem}</ul>
+                            </div>
+                        `;
+                    }
                     const ward = localize(record.old_ward_name, record.old_ward_en_name);
                     const district = localize(record.old_district_name, record.old_district_en_name);
                     const province = localize(record.old_province_name, record.old_province_en_name);
