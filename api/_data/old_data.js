@@ -39,7 +39,8 @@ export const allProvincesData = [
             "code": 7,
             "codename": "phuong_cong_vi",
             "division_type": "xã",
-            "short_codename": "cong_vi"
+            "short_codename": "cong_vi",
+            "is_split_case": true
           },
           {
             "name": "Phường Liễu Giai",
@@ -60,35 +61,40 @@ export const allProvincesData = [
             "code": 16,
             "codename": "phuong_ngoc_ha",
             "division_type": "xã",
-            "short_codename": "ngoc_ha"
+            "short_codename": "ngoc_ha",
+            "is_split_case": true
           },
           {
             "name": "Phường Điện Biên",
             "code": 19,
             "codename": "phuong_dien_bien",
             "division_type": "xã",
-            "short_codename": "dien_bien"
+            "short_codename": "dien_bien",
+            "is_split_case": true
           },
           {
             "name": "Phường Đội Cấn",
             "code": 22,
             "codename": "phuong_doi_can",
             "division_type": "xã",
-            "short_codename": "doi_can"
+            "short_codename": "doi_can",
+            "is_split_case": true
           },
           {
             "name": "Phường Ngọc Khánh",
             "code": 25,
             "codename": "phuong_ngoc_khanh",
             "division_type": "xã",
-            "short_codename": "ngoc_khanh"
+            "short_codename": "ngoc_khanh",
+            "is_split_case": true
           },
           {
             "name": "Phường Kim Mã",
             "code": 28,
             "codename": "phuong_kim_ma",
             "division_type": "xã",
-            "short_codename": "kim_ma"
+            "short_codename": "kim_ma",
+            "is_split_case": true
           },
           {
             "name": "Phường Giảng Võ",
@@ -102,7 +108,8 @@ export const allProvincesData = [
             "code": 34,
             "codename": "phuong_thanh_cong",
             "division_type": "xã",
-            "short_codename": "thanh_cong"
+            "short_codename": "thanh_cong",
+            "is_split_case": true
           }
         ]
       },
@@ -160,7 +167,8 @@ export const allProvincesData = [
             "code": 55,
             "codename": "phuong_cua_dong",
             "division_type": "xã",
-            "short_codename": "cua_dong"
+            "short_codename": "cua_dong",
+            "is_split_case": true
           },
           {
             "name": "Phường Lý Thái Tổ",
@@ -195,28 +203,32 @@ export const allProvincesData = [
             "code": 70,
             "codename": "phuong_hang_trong",
             "division_type": "xã",
-            "short_codename": "hang_trong"
+            "short_codename": "hang_trong",
+            "is_split_case": true
           },
           {
             "name": "Phường Cửa Nam",
             "code": 73,
             "codename": "phuong_cua_nam",
             "division_type": "xã",
-            "short_codename": "cua_nam"
+            "short_codename": "cua_nam",
+            "is_split_case": true
           },
           {
             "name": "Phường Hàng Bông",
             "code": 76,
             "codename": "phuong_hang_bong",
             "division_type": "xã",
-            "short_codename": "hang_bong"
+            "short_codename": "hang_bong",
+            "is_split_case": true
           },
           {
             "name": "Phường Tràng Tiền",
             "code": 79,
             "codename": "phuong_trang_tien",
             "division_type": "xã",
-            "short_codename": "trang_tien"
+            "short_codename": "trang_tien",
+            "is_split_case": true
           },
           {
             "name": "Phường Trần Hưng Đạo",
@@ -302,7 +314,8 @@ export const allProvincesData = [
             "code": 112,
             "codename": "phuong_thuy_khue",
             "division_type": "xã",
-            "short_codename": "thuy_khue"
+            "short_codename": "thuy_khue",
+            "is_split_case": true
           }
         ]
       },
@@ -418,7 +431,8 @@ export const allProvincesData = [
             "code": 157,
             "codename": "phuong_nghia_do",
             "division_type": "xã",
-            "short_codename": "nghia_do"
+            "short_codename": "nghia_do",
+            "is_split_case": true
           },
           {
             "name": "Phường Nghĩa Tân",
@@ -483,14 +497,16 @@ export const allProvincesData = [
             "code": 178,
             "codename": "phuong_cat_linh",
             "division_type": "xã",
-            "short_codename": "cat_linh"
+            "short_codename": "cat_linh",
+            "is_split_case": true
           },
           {
             "name": "Phường Văn Miếu - Quốc Tử Giám",
             "code": 181,
             "codename": "phuong_van_mieu_quoc_tu_giam",
             "division_type": "xã",
-            "short_codename": "van_mieu_quoc_tu_giam"
+            "short_codename": "van_mieu_quoc_tu_giam",
+            "is_split_case": true
           },
           {
             "name": "Phường Láng Thượng",
@@ -504,7 +520,8 @@ export const allProvincesData = [
             "code": 190,
             "codename": "phuong_o_cho_dua",
             "division_type": "xã",
-            "short_codename": "o_cho_dua"
+            "short_codename": "o_cho_dua",
+            "is_split_case": true
           },
           {
             "name": "Phường Văn Chương",
@@ -518,14 +535,16 @@ export const allProvincesData = [
             "code": 196,
             "codename": "phuong_hang_bot",
             "division_type": "xã",
-            "short_codename": "hang_bot"
+            "short_codename": "hang_bot",
+            "is_split_case": true
           },
           {
             "name": "Phường Láng Hạ",
             "code": 199,
             "codename": "phuong_lang_ha",
             "division_type": "xã",
-            "short_codename": "lang_ha"
+            "short_codename": "lang_ha",
+            "is_split_case": true
           },
           {
             "name": "Phường Khâm Thiên",
@@ -546,7 +565,8 @@ export const allProvincesData = [
             "code": 208,
             "codename": "phuong_nam_dong",
             "division_type": "xã",
-            "short_codename": "nam_dong"
+            "short_codename": "nam_dong",
+            "is_split_case": true
           },
           {
             "name": "Phường Quang Trung",
@@ -560,14 +580,16 @@ export const allProvincesData = [
             "code": 217,
             "codename": "phuong_trung_liet",
             "division_type": "xã",
-            "short_codename": "trung_liet"
+            "short_codename": "trung_liet",
+            "is_split_case": true
           },
           {
             "name": "Phường Phương Liên - Trung Tự",
             "code": 226,
             "codename": "phuong_phuong_lien_trung_tu",
             "division_type": "xã",
-            "short_codename": "phuong_lien_trung_tu"
+            "short_codename": "phuong_lien_trung_tu",
+            "is_split_case": true
           },
           {
             "name": "Phường Kim Liên",
@@ -581,7 +603,8 @@ export const allProvincesData = [
             "code": 232,
             "codename": "phuong_phuong_mai",
             "division_type": "xã",
-            "short_codename": "phuong_mai"
+            "short_codename": "phuong_mai",
+            "is_split_case": true
           },
           {
             "name": "Phường Thịnh Quang",
@@ -611,7 +634,8 @@ export const allProvincesData = [
             "code": 241,
             "codename": "phuong_nguyen_du",
             "division_type": "xã",
-            "short_codename": "nguyen_du"
+            "short_codename": "nguyen_du",
+            "is_split_case": true
           },
           {
             "name": "Phường Bạch Đằng",
@@ -625,14 +649,16 @@ export const allProvincesData = [
             "code": 247,
             "codename": "phuong_pham_dinh_ho",
             "division_type": "xã",
-            "short_codename": "pham_dinh_ho"
+            "short_codename": "pham_dinh_ho",
+            "is_split_case": true
           },
           {
             "name": "Phường Lê Đại Hành",
             "code": 256,
             "codename": "phuong_le_dai_hanh",
             "division_type": "xã",
-            "short_codename": "le_dai_hanh"
+            "short_codename": "le_dai_hanh",
+            "is_split_case": true
           },
           {
             "name": "Phường Đồng Nhân",
@@ -653,14 +679,16 @@ export const allProvincesData = [
             "code": 268,
             "codename": "phuong_thanh_luong",
             "division_type": "xã",
-            "short_codename": "thanh_luong"
+            "short_codename": "thanh_luong",
+            "is_split_case": true
           },
           {
             "name": "Phường Thanh Nhàn",
             "code": 271,
             "codename": "phuong_thanh_nhan",
             "division_type": "xã",
-            "short_codename": "thanh_nhan"
+            "short_codename": "thanh_nhan",
+            "is_split_case": true
           },
           {
             "name": "Phường Bách Khoa",
@@ -681,7 +709,8 @@ export const allProvincesData = [
             "code": 283,
             "codename": "phuong_vinh_tuy",
             "division_type": "xã",
-            "short_codename": "vinh_tuy"
+            "short_codename": "vinh_tuy",
+            "is_split_case": true
           },
           {
             "name": "Phường Quỳnh Mai",
@@ -709,7 +738,8 @@ export const allProvincesData = [
             "code": 298,
             "codename": "phuong_truong_dinh",
             "division_type": "xã",
-            "short_codename": "truong_dinh"
+            "short_codename": "truong_dinh",
+            "is_split_case": true
           }
         ]
       },
@@ -732,7 +762,8 @@ export const allProvincesData = [
             "code": 304,
             "codename": "phuong_vinh_hung",
             "division_type": "xã",
-            "short_codename": "vinh_hung"
+            "short_codename": "vinh_hung",
+            "is_split_case": true
           },
           {
             "name": "Phường Định Công",
@@ -746,7 +777,8 @@ export const allProvincesData = [
             "code": 310,
             "codename": "phuong_mai_dong",
             "division_type": "xã",
-            "short_codename": "mai_dong"
+            "short_codename": "mai_dong",
+            "is_split_case": true
           },
           {
             "name": "Phường Tương Mai",
@@ -15541,7 +15573,8 @@ export const allProvincesData = [
             "code": 5461,
             "codename": "phuong_gia_sang",
             "division_type": "xã",
-            "short_codename": "gia_sang"
+            "short_codename": "gia_sang",
+            "is_split_case": true
           },
           {
             "name": "Phường Tân Lập",
@@ -15555,7 +15588,8 @@ export const allProvincesData = [
             "code": 5467,
             "codename": "phuong_cam_gia",
             "division_type": "xã",
-            "short_codename": "cam_gia"
+            "short_codename": "cam_gia",
+            "is_split_case": true
           },
           {
             "name": "Phường Phú Xá",
@@ -16656,7 +16690,8 @@ export const allProvincesData = [
             "code": 5932,
             "codename": "xa_thuong_dinh",
             "division_type": "xã",
-            "short_codename": "thuong_dinh"
+            "short_codename": "thuong_dinh",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Hòa",
@@ -18150,14 +18185,16 @@ export const allProvincesData = [
             "code": 6622,
             "codename": "xa_binh_xa",
             "division_type": "xã",
-            "short_codename": "binh_xa"
+            "short_codename": "binh_xa",
+            "is_split_case": true
           },
           {
             "name": "Xã Kiên Mộc",
             "code": 6625,
             "codename": "xa_kien_moc",
             "division_type": "xã",
-            "short_codename": "kien_moc"
+            "short_codename": "kien_moc",
+            "is_split_case": true
           },
           {
             "name": "Xã Đình Lập",
@@ -18245,7 +18282,8 @@ export const allProvincesData = [
             "code": 6655,
             "codename": "phuong_ha_khau",
             "division_type": "xã",
-            "short_codename": "ha_khau"
+            "short_codename": "ha_khau",
+            "is_split_case": true
           },
           {
             "name": "Phường Cao Xanh",
@@ -18392,7 +18430,8 @@ export const allProvincesData = [
             "code": 7042,
             "codename": "xa_dong_lam",
             "division_type": "xã",
-            "short_codename": "dong_lam"
+            "short_codename": "dong_lam",
+            "is_split_case": true
           },
           {
             "name": "Xã Hòa Bình",
@@ -18676,7 +18715,8 @@ export const allProvincesData = [
             "code": 6799,
             "codename": "xa_hai_hoa",
             "division_type": "xã",
-            "short_codename": "hai_hoa"
+            "short_codename": "hai_hoa",
+            "is_split_case": true
           },
           {
             "name": "Xã Dương Huy",
@@ -18727,7 +18767,8 @@ export const allProvincesData = [
             "code": 6820,
             "codename": "phuong_trung_vuong",
             "division_type": "xã",
-            "short_codename": "trung_vuong"
+            "short_codename": "trung_vuong",
+            "is_split_case": true
           },
           {
             "name": "Phường Nam Khê",
@@ -18806,7 +18847,8 @@ export const allProvincesData = [
             "code": 6853,
             "codename": "xa_vo_ngai",
             "division_type": "xã",
-            "short_codename": "vo_ngai"
+            "short_codename": "vo_ngai",
+            "is_split_case": true
           },
           {
             "name": "Xã Lục Hồn",
@@ -18850,7 +18892,8 @@ export const allProvincesData = [
             "code": 6868,
             "codename": "xa_dai_duc",
             "division_type": "xã",
-            "short_codename": "dai_duc"
+            "short_codename": "dai_duc",
+            "is_split_case": true
           },
           {
             "name": "Xã Phong Dụ",
@@ -18871,14 +18914,16 @@ export const allProvincesData = [
             "code": 6877,
             "codename": "xa_dong_ngu",
             "division_type": "xã",
-            "short_codename": "dong_ngu"
+            "short_codename": "dong_ngu",
+            "is_split_case": true
           },
           {
             "name": "Xã Yên Than",
             "code": 6880,
             "codename": "xa_yen_than",
             "division_type": "xã",
-            "short_codename": "yen_than"
+            "short_codename": "yen_than",
+            "is_split_case": true
           },
           {
             "name": "Xã Đông Hải",
@@ -18892,7 +18937,8 @@ export const allProvincesData = [
             "code": 6886,
             "codename": "xa_hai_lang",
             "division_type": "xã",
-            "short_codename": "hai_lang"
+            "short_codename": "hai_lang",
+            "is_split_case": true
           },
           {
             "name": "Xã Tiên Lãng",
@@ -19043,7 +19089,8 @@ export const allProvincesData = [
             "code": 6946,
             "codename": "xa_quang_long",
             "division_type": "xã",
-            "short_codename": "quang_long"
+            "short_codename": "quang_long",
+            "is_split_case": true
           },
           {
             "name": "Xã Đường Hoa",
@@ -19273,7 +19320,8 @@ export const allProvincesData = [
             "code": 7093,
             "codename": "phuong_duc_chinh",
             "division_type": "xã",
-            "short_codename": "duc_chinh"
+            "short_codename": "duc_chinh",
+            "is_split_case": true
           },
           {
             "name": "Phường Tràng An",
@@ -19478,7 +19526,8 @@ export const allProvincesData = [
             "code": 7180,
             "codename": "xa_lien_hoa",
             "division_type": "xã",
-            "short_codename": "lien_hoa"
+            "short_codename": "lien_hoa",
+            "is_split_case": true
           },
           {
             "name": "Phường Phong Cốc",
@@ -24549,7 +24598,8 @@ export const allProvincesData = [
             "code": 10540,
             "codename": "phuong_tu_minh",
             "division_type": "xã",
-            "short_codename": "tu_minh"
+            "short_codename": "tu_minh",
+            "is_split_case": true
           },
           {
             "name": "Phường Việt Hoà",
@@ -24698,7 +24748,8 @@ export const allProvincesData = [
             "code": 10570,
             "codename": "phuong_cong_hoa",
             "division_type": "xã",
-            "short_codename": "cong_hoa"
+            "short_codename": "cong_hoa",
+            "is_split_case": true
           },
           {
             "name": "Phường Hoàng Tân",
@@ -24733,7 +24784,8 @@ export const allProvincesData = [
             "code": 10585,
             "codename": "phuong_van_duc",
             "division_type": "xã",
-            "short_codename": "van_duc"
+            "short_codename": "van_duc",
+            "is_split_case": true
           },
           {
             "name": "Phường Thái Học",
@@ -24847,7 +24899,8 @@ export const allProvincesData = [
             "code": 10639,
             "codename": "xa_cong_hoa",
             "division_type": "xã",
-            "short_codename": "cong_hoa"
+            "short_codename": "cong_hoa",
+            "is_split_case": true
           },
           {
             "name": "Xã Thái Tân",
@@ -25003,7 +25056,8 @@ export const allProvincesData = [
             "code": 10729,
             "codename": "xa_thuong_quan",
             "division_type": "xã",
-            "short_codename": "thuong_quan"
+            "short_codename": "thuong_quan",
+            "is_split_case": true
           },
           {
             "name": "Phường An Phụ",
@@ -25075,14 +25129,16 @@ export const allProvincesData = [
             "code": 10762,
             "codename": "xa_vu_dung",
             "division_type": "xã",
-            "short_codename": "vu_dung"
+            "short_codename": "vu_dung",
+            "is_split_case": true
           },
           {
             "name": "Xã Tuấn Việt",
             "code": 10768,
             "codename": "xa_tuan_viet",
             "division_type": "xã",
-            "short_codename": "tuan_viet"
+            "short_codename": "tuan_viet",
+            "is_split_case": true
           },
           {
             "name": "Xã Kim Xuyên",
@@ -25131,7 +25187,8 @@ export const allProvincesData = [
             "code": 10798,
             "codename": "xa_hoa_binh",
             "division_type": "xã",
-            "short_codename": "hoa_binh"
+            "short_codename": "hoa_binh",
+            "is_split_case": true
           },
           {
             "name": "Xã Tam Kỳ",
@@ -25175,7 +25232,8 @@ export const allProvincesData = [
             "code": 10816,
             "codename": "xa_hong_lac",
             "division_type": "xã",
-            "short_codename": "hong_lac"
+            "short_codename": "hong_lac",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Việt",
@@ -25189,14 +25247,16 @@ export const allProvincesData = [
             "code": 10828,
             "codename": "xa_cam_viet",
             "division_type": "xã",
-            "short_codename": "cam_viet"
+            "short_codename": "cam_viet",
+            "is_split_case": true
           },
           {
             "name": "Xã Thanh An",
             "code": 10831,
             "codename": "xa_thanh_an",
             "division_type": "xã",
-            "short_codename": "thanh_an"
+            "short_codename": "thanh_an",
+            "is_split_case": true
           },
           {
             "name": "Xã Thanh Lang",
@@ -25224,7 +25284,8 @@ export const allProvincesData = [
             "code": 10846,
             "codename": "xa_thanh_hai",
             "division_type": "xã",
-            "short_codename": "thanh_hai"
+            "short_codename": "thanh_hai",
+            "is_split_case": true
           },
           {
             "name": "Xã Thanh Xuân",
@@ -25296,7 +25357,8 @@ export const allProvincesData = [
             "code": 10891,
             "codename": "thi_tran_lai_cach",
             "division_type": "xã",
-            "short_codename": "lai_cach"
+            "short_codename": "lai_cach",
+            "is_split_case": true
           },
           {
             "name": "Xã Cẩm Hưng",
@@ -25373,7 +25435,8 @@ export const allProvincesData = [
             "code": 10933,
             "codename": "xa_phuc_dien",
             "division_type": "xã",
-            "short_codename": "phuc_dien"
+            "short_codename": "phuc_dien",
+            "is_split_case": true
           },
           {
             "name": "Xã Cẩm Đông",
@@ -25445,7 +25508,8 @@ export const allProvincesData = [
             "code": 10969,
             "codename": "xa_thuc_khang",
             "division_type": "xã",
-            "short_codename": "thuc_khang"
+            "short_codename": "thuc_khang",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Hồng",
@@ -25466,7 +25530,8 @@ export const allProvincesData = [
             "code": 10981,
             "codename": "xa_thai_minh",
             "division_type": "xã",
-            "short_codename": "thai_minh"
+            "short_codename": "thai_minh",
+            "is_split_case": true
           },
           {
             "name": "Xã Cổ Bì",
@@ -25487,14 +25552,16 @@ export const allProvincesData = [
             "code": 10990,
             "codename": "xa_thai_duong",
             "division_type": "xã",
-            "short_codename": "thai_duong"
+            "short_codename": "thai_duong",
+            "is_split_case": true
           },
           {
             "name": "Xã Thái Hòa",
             "code": 10993,
             "codename": "xa_thai_hoa",
             "division_type": "xã",
-            "short_codename": "thai_hoa"
+            "short_codename": "thai_hoa",
+            "is_split_case": true
           },
           {
             "name": "Xã Bình Xuyên",
@@ -25517,28 +25584,32 @@ export const allProvincesData = [
             "code": 10999,
             "codename": "thi_tran_gia_loc",
             "division_type": "xã",
-            "short_codename": "gia_loc"
+            "short_codename": "gia_loc",
+            "is_split_case": true
           },
           {
             "name": "Xã Thống Nhất",
             "code": 11008,
             "codename": "xa_thong_nhat",
             "division_type": "xã",
-            "short_codename": "thong_nhat"
+            "short_codename": "thong_nhat",
+            "is_split_case": true
           },
           {
             "name": "Xã Yết Kiêu",
             "code": 11020,
             "codename": "xa_yet_kieu",
             "division_type": "xã",
-            "short_codename": "yet_kieu"
+            "short_codename": "yet_kieu",
+            "is_split_case": true
           },
           {
             "name": "Xã Gia Phúc",
             "code": 11035,
             "codename": "xa_gia_phuc",
             "division_type": "xã",
-            "short_codename": "gia_phuc"
+            "short_codename": "gia_phuc",
+            "is_split_case": true
           },
           {
             "name": "Xã Gia Tiến",
@@ -25587,14 +25658,16 @@ export const allProvincesData = [
             "code": 11056,
             "codename": "xa_doan_thuong",
             "division_type": "xã",
-            "short_codename": "doan_thuong"
+            "short_codename": "doan_thuong",
+            "is_split_case": true
           },
           {
             "name": "Xã Thống Kênh",
             "code": 11059,
             "codename": "xa_thong_kenh",
             "division_type": "xã",
-            "short_codename": "thong_kenh"
+            "short_codename": "thong_kenh",
+            "is_split_case": true
           },
           {
             "name": "Xã Nhật Quang",
@@ -25608,7 +25681,8 @@ export const allProvincesData = [
             "code": 11071,
             "codename": "xa_quang_duc",
             "division_type": "xã",
-            "short_codename": "quang_duc"
+            "short_codename": "quang_duc",
+            "is_split_case": true
           }
         ]
       },
@@ -25736,7 +25810,8 @@ export const allProvincesData = [
             "code": 11143,
             "codename": "xa_tien_dong",
             "division_type": "xã",
-            "short_codename": "tien_dong"
+            "short_codename": "tien_dong",
+            "is_split_case": true
           },
           {
             "name": "Xã Nguyên Giáp",
@@ -25894,14 +25969,16 @@ export const allProvincesData = [
             "code": 11239,
             "codename": "thi_tran_thanh_mien",
             "division_type": "xã",
-            "short_codename": "thanh_mien"
+            "short_codename": "thanh_mien",
+            "is_split_case": true
           },
           {
             "name": "Xã Thanh Tùng",
             "code": 11242,
             "codename": "xa_thanh_tung",
             "division_type": "xã",
-            "short_codename": "thanh_tung"
+            "short_codename": "thanh_tung",
+            "is_split_case": true
           },
           {
             "name": "Xã Phạm Kha",
@@ -25922,7 +25999,8 @@ export const allProvincesData = [
             "code": 11251,
             "codename": "xa_doan_tung",
             "division_type": "xã",
-            "short_codename": "doan_tung"
+            "short_codename": "doan_tung",
+            "is_split_case": true
           },
           {
             "name": "Xã Hồng Quang",
@@ -26080,7 +26158,8 @@ export const allProvincesData = [
             "code": 11587,
             "codename": "phuong_dai_ban",
             "division_type": "xã",
-            "short_codename": "dai_ban"
+            "short_codename": "dai_ban",
+            "is_split_case": true
           },
           {
             "name": "Phường An Hưng",
@@ -26131,21 +26210,24 @@ export const allProvincesData = [
             "code": 11341,
             "codename": "phuong_gia_vien",
             "division_type": "xã",
-            "short_codename": "gia_vien"
+            "short_codename": "gia_vien",
+            "is_split_case": true
           },
           {
             "name": "Phường Cầu Đất",
             "code": 11344,
             "codename": "phuong_cau_dat",
             "division_type": "xã",
-            "short_codename": "cau_dat"
+            "short_codename": "cau_dat",
+            "is_split_case": true
           },
           {
             "name": "Phường Đông Khê",
             "code": 11350,
             "codename": "phuong_dong_khe",
             "division_type": "xã",
-            "short_codename": "dong_khe"
+            "short_codename": "dong_khe",
+            "is_split_case": true
           },
           {
             "name": "Phường Đằng Giang",
@@ -26159,7 +26241,8 @@ export const allProvincesData = [
             "code": 11365,
             "codename": "phuong_lach_tray",
             "division_type": "xã",
-            "short_codename": "lach_tray"
+            "short_codename": "lach_tray",
+            "is_split_case": true
           }
         ]
       },
@@ -26175,14 +26258,16 @@ export const allProvincesData = [
             "code": 11371,
             "codename": "phuong_an_bien",
             "division_type": "xã",
-            "short_codename": "an_bien"
+            "short_codename": "an_bien",
+            "is_split_case": true
           },
           {
             "name": "Phường Trần Nguyên Hãn",
             "code": 11383,
             "codename": "phuong_tran_nguyen_han",
             "division_type": "xã",
-            "short_codename": "tran_nguyen_han"
+            "short_codename": "tran_nguyen_han",
+            "is_split_case": true
           },
           {
             "name": "Phường Hàng Kênh",
@@ -26217,7 +26302,8 @@ export const allProvincesData = [
             "code": 11407,
             "codename": "phuong_vinh_niem",
             "division_type": "xã",
-            "short_codename": "vinh_niem"
+            "short_codename": "vinh_niem",
+            "is_split_case": true
           }
         ]
       },
@@ -26240,7 +26326,8 @@ export const allProvincesData = [
             "code": 11411,
             "codename": "phuong_dong_hai_2",
             "division_type": "xã",
-            "short_codename": "dong_hai_2"
+            "short_codename": "dong_hai_2",
+            "is_split_case": true
           },
           {
             "name": "Phường Đằng Lâm",
@@ -26268,7 +26355,8 @@ export const allProvincesData = [
             "code": 11419,
             "codename": "phuong_nam_hai",
             "division_type": "xã",
-            "short_codename": "nam_hai"
+            "short_codename": "nam_hai",
+            "is_split_case": true
           },
           {
             "name": "Phường Cát Bi",
@@ -26305,7 +26393,8 @@ export const allProvincesData = [
             "code": 11434,
             "codename": "phuong_bac_son",
             "division_type": "xã",
-            "short_codename": "bac_son"
+            "short_codename": "bac_son",
+            "is_split_case": true
           },
           {
             "name": "Phường Nam Sơn",
@@ -26326,14 +26415,16 @@ export const allProvincesData = [
             "code": 11443,
             "codename": "phuong_tran_thanh_ngo",
             "division_type": "xã",
-            "short_codename": "tran_thanh_ngo"
+            "short_codename": "tran_thanh_ngo",
+            "is_split_case": true
           },
           {
             "name": "Phường Văn Đẩu",
             "code": 11446,
             "codename": "phuong_van_dau",
             "division_type": "xã",
-            "short_codename": "van_dau"
+            "short_codename": "van_dau",
+            "is_split_case": true
           },
           {
             "name": "Phường Bắc Hà",
@@ -26356,7 +26447,8 @@ export const allProvincesData = [
             "code": 11455,
             "codename": "phuong_ngoc_xuyen",
             "division_type": "xã",
-            "short_codename": "ngoc_xuyen"
+            "short_codename": "ngoc_xuyen",
+            "is_split_case": true
           },
           {
             "name": "Phường Hải Sơn",
@@ -26370,7 +26462,8 @@ export const allProvincesData = [
             "code": 11461,
             "codename": "phuong_van_huong",
             "division_type": "xã",
-            "short_codename": "van_huong"
+            "short_codename": "van_huong",
+            "is_split_case": true
           },
           {
             "name": "Phường Minh Đức",
@@ -26421,14 +26514,16 @@ export const allProvincesData = [
             "code": 11689,
             "codename": "phuong_anh_dung",
             "division_type": "xã",
-            "short_codename": "anh_dung"
+            "short_codename": "anh_dung",
+            "is_split_case": true
           },
           {
             "name": "Phường Hải Thành",
             "code": 11692,
             "codename": "phuong_hai_thanh",
             "division_type": "xã",
-            "short_codename": "hai_thanh"
+            "short_codename": "hai_thanh",
+            "is_split_case": true
           },
           {
             "name": "Phường Hoà Nghĩa",
@@ -26442,7 +26537,8 @@ export const allProvincesData = [
             "code": 11740,
             "codename": "phuong_tan_thanh",
             "division_type": "xã",
-            "short_codename": "tan_thanh"
+            "short_codename": "tan_thanh",
+            "is_split_case": true
           }
         ]
       },
@@ -26465,7 +26561,8 @@ export const allProvincesData = [
             "code": 11485,
             "codename": "xa_lien_xuan",
             "division_type": "xã",
-            "short_codename": "lien_xuan"
+            "short_codename": "lien_xuan",
+            "is_split_case": true
           },
           {
             "name": "Phường Lưu Kiếm",
@@ -26514,7 +26611,8 @@ export const allProvincesData = [
             "code": 11521,
             "codename": "phuong_le_hong_phong",
             "division_type": "xã",
-            "short_codename": "le_hong_phong"
+            "short_codename": "le_hong_phong",
+            "is_split_case": true
           },
           {
             "name": "Phường Hoà Bình",
@@ -26528,14 +26626,16 @@ export const allProvincesData = [
             "code": 11530,
             "codename": "phuong_thuy_ha",
             "division_type": "xã",
-            "short_codename": "thuy_ha"
+            "short_codename": "thuy_ha",
+            "is_split_case": true
           },
           {
             "name": "Phường An Lư",
             "code": 11533,
             "codename": "phuong_an_lu",
             "division_type": "xã",
-            "short_codename": "an_lu"
+            "short_codename": "an_lu",
+            "is_split_case": true
           },
           {
             "name": "Phường Phạm Ngũ Lão",
@@ -26591,7 +26691,8 @@ export const allProvincesData = [
             "code": 11572,
             "codename": "phuong_hoa_dong",
             "division_type": "xã",
-            "short_codename": "hoa_dong"
+            "short_codename": "hoa_dong",
+            "is_split_case": true
           },
           {
             "name": "Phường Dương Quan",
@@ -26621,7 +26722,8 @@ export const allProvincesData = [
             "code": 11584,
             "codename": "phuong_le_thien",
             "division_type": "xã",
-            "short_codename": "le_thien"
+            "short_codename": "le_thien",
+            "is_split_case": true
           },
           {
             "name": "Phường An Hoà",
@@ -26642,7 +26744,8 @@ export const allProvincesData = [
             "code": 11596,
             "codename": "phuong_tan_tien",
             "division_type": "xã",
-            "short_codename": "tan_tien"
+            "short_codename": "tan_tien",
+            "is_split_case": true
           },
           {
             "name": "Phường Nam Sơn",
@@ -26656,14 +26759,16 @@ export const allProvincesData = [
             "code": 11614,
             "codename": "phuong_an_hai",
             "division_type": "xã",
-            "short_codename": "an_hai"
+            "short_codename": "an_hai",
+            "is_split_case": true
           },
           {
             "name": "Phường Đồng Thái",
             "code": 11617,
             "codename": "phuong_dong_thai",
             "division_type": "xã",
-            "short_codename": "dong_thai"
+            "short_codename": "dong_thai",
+            "is_split_case": true
           },
           {
             "name": "Phường An Đồng",
@@ -26756,7 +26861,8 @@ export const allProvincesData = [
             "code": 11656,
             "codename": "thi_tran_truong_son",
             "division_type": "xã",
-            "short_codename": "truong_son"
+            "short_codename": "truong_son",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Dân",
@@ -26770,7 +26876,8 @@ export const allProvincesData = [
             "code": 11662,
             "codename": "xa_thai_son",
             "division_type": "xã",
-            "short_codename": "thai_son"
+            "short_codename": "thai_son",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Viên",
@@ -26891,7 +26998,8 @@ export const allProvincesData = [
             "code": 11728,
             "codename": "xa_kien_hung",
             "division_type": "xã",
-            "short_codename": "kien_hung"
+            "short_codename": "kien_hung",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Phong",
@@ -26912,7 +27020,8 @@ export const allProvincesData = [
             "code": 11746,
             "codename": "xa_doan_xa",
             "division_type": "xã",
-            "short_codename": "doan_xa"
+            "short_codename": "doan_xa",
+            "is_split_case": true
           },
           {
             "name": "Xã Tú Sơn",
@@ -27012,7 +27121,8 @@ export const allProvincesData = [
             "code": 11791,
             "codename": "xa_tan_minh",
             "division_type": "xã",
-            "short_codename": "tan_minh"
+            "short_codename": "tan_minh",
+            "is_split_case": true
           },
           {
             "name": "Xã Tiên Thắng",
@@ -27472,7 +27582,8 @@ export const allProvincesData = [
             "code": 11989,
             "codename": "xa_lac_dao",
             "division_type": "xã",
-            "short_codename": "lac_dao"
+            "short_codename": "lac_dao",
+            "is_split_case": true
           },
           {
             "name": "Xã Chỉ Đạo",
@@ -27507,7 +27618,8 @@ export const allProvincesData = [
             "code": 12004,
             "codename": "xa_dinh_du",
             "division_type": "xã",
-            "short_codename": "dinh_du"
+            "short_codename": "dinh_du",
+            "is_split_case": true
           },
           {
             "name": "Xã Minh Hải",
@@ -28198,7 +28310,8 @@ export const allProvincesData = [
             "code": 12322,
             "codename": "xa_ngoc_thanh",
             "division_type": "xã",
-            "short_codename": "ngoc_thanh"
+            "short_codename": "ngoc_thanh",
+            "is_split_case": true
           },
           {
             "name": "Xã Diên Hồng",
@@ -30375,14 +30488,16 @@ export const allProvincesData = [
             "code": 13354,
             "codename": "phuong_tien_noi",
             "division_type": "xã",
-            "short_codename": "tien_noi"
+            "short_codename": "tien_noi",
+            "is_split_case": true
           },
           {
             "name": "Phường Hoàng Đông",
             "code": 13357,
             "codename": "phuong_hoang_dong",
             "division_type": "xã",
-            "short_codename": "hoang_dong"
+            "short_codename": "hoang_dong",
+            "is_split_case": true
           },
           {
             "name": "Xã Yên Nam",
@@ -30396,7 +30511,8 @@ export const allProvincesData = [
             "code": 13363,
             "codename": "xa_tien_ngoai",
             "division_type": "xã",
-            "short_codename": "tien_ngoai"
+            "short_codename": "tien_ngoai",
+            "is_split_case": true
           },
           {
             "name": "Xã Tiên Sơn",
@@ -32581,7 +32697,8 @@ export const allProvincesData = [
             "code": 14503,
             "codename": "xa_gia_tan",
             "division_type": "xã",
-            "short_codename": "gia_tan"
+            "short_codename": "gia_tan",
+            "is_split_case": true
           },
           {
             "name": "Xã Tiến Thắng",
@@ -33216,7 +33333,8 @@ export const allProvincesData = [
             "code": 14758,
             "codename": "phuong_dong_tho",
             "division_type": "xã",
-            "short_codename": "dong_tho"
+            "short_codename": "dong_tho",
+            "is_split_case": true
           },
           {
             "name": "Phường Nam Ngạn",
@@ -33510,7 +33628,8 @@ export const allProvincesData = [
             "code": 16435,
             "codename": "phuong_an_hung",
             "division_type": "xã",
-            "short_codename": "an_hung"
+            "short_codename": "an_hung",
+            "is_split_case": true
           },
           {
             "name": "Phường Quảng Thịnh",
@@ -34089,7 +34208,8 @@ export const allProvincesData = [
             "code": 15016,
             "codename": "thi_tran_son_lu",
             "division_type": "xã",
-            "short_codename": "son_lu"
+            "short_codename": "son_lu",
+            "is_split_case": true
           },
           {
             "name": "Xã Tam Lư",
@@ -34771,7 +34891,8 @@ export const allProvincesData = [
             "code": 15328,
             "codename": "xa_ha_binh",
             "division_type": "xã",
-            "short_codename": "ha_binh"
+            "short_codename": "ha_binh",
+            "is_split_case": true
           },
           {
             "name": "Xã Thái Lai",
@@ -35360,7 +35481,8 @@ export const allProvincesData = [
             "code": 15637,
             "codename": "xa_luan_khe",
             "division_type": "xã",
-            "short_codename": "luan_khe"
+            "short_codename": "luan_khe",
+            "is_split_case": true
           },
           {
             "name": "Xã Xuân Thắng",
@@ -35707,7 +35829,8 @@ export const allProvincesData = [
             "code": 15793,
             "codename": "xa_thieu_long",
             "division_type": "xã",
-            "short_codename": "thieu_long"
+            "short_codename": "thieu_long",
+            "is_split_case": true
           },
           {
             "name": "Xã Thiệu Giang",
@@ -36641,7 +36764,8 @@ export const allProvincesData = [
             "code": 16273,
             "codename": "xa_thanh_tan",
             "division_type": "xã",
-            "short_codename": "thanh_tan"
+            "short_codename": "thanh_tan",
+            "is_split_case": true
           },
           {
             "name": "Xã Thanh Kỳ",
@@ -43960,7 +44084,7 @@ export const allProvincesData = [
         "division_type": "huyện",
         "short_codename": "con_co",
         "wards": [
-            {
+          {
             "name": "Đảo Cồn Cỏ",
             "code": 471,
             "codename": "dao_con_co",
@@ -45331,7 +45455,8 @@ export const allProvincesData = [
             "code": 20296,
             "codename": "xa_hoa_lien",
             "division_type": "xã",
-            "short_codename": "hoa_lien"
+            "short_codename": "hoa_lien",
+            "is_split_case": true
           },
           {
             "name": "Xã Hòa Ninh",
@@ -45405,7 +45530,7 @@ export const allProvincesData = [
         "division_type": "huyện",
         "short_codename": "hoang_sa",
         "wards": [
-        {
+          {
             "name": "Quần đảo Hoàng Sa",
             "code": 498,
             "codename": "quan_dao_hoang_sa",
@@ -45617,7 +45742,7 @@ export const allProvincesData = [
         ]
       },
       {
-         "name": "Huyện Nông Sơn",
+        "name": "Huyện Nông Sơn",
         "code": 519,
         "codename": "huyen_nong_son",
         "division_type": "huyện",
@@ -47640,7 +47765,8 @@ export const allProvincesData = [
             "code": 21142,
             "codename": "xa_tra_bui",
             "division_type": "xã",
-            "short_codename": "tra_bui"
+            "short_codename": "tra_bui",
+            "is_split_case": true
           },
           {
             "name": "Xã Trà Thanh",
@@ -48544,14 +48670,14 @@ export const allProvincesData = [
         "division_type": "huyện",
         "short_codename": "ly_son",
         "wards": [
-        {
+          {
             "name": "Đảo Lý Sơn",
             "code": 536,
             "codename": "dao_ly_son",
             "division_type": "huyện",
             "short_codename": "ly_son"
           }
-          ]
+        ]
       }
     ]
   },
@@ -48765,7 +48891,8 @@ export const allProvincesData = [
             "code": 21634,
             "codename": "xa_an_nghia",
             "division_type": "xã",
-            "short_codename": "an_nghia"
+            "short_codename": "an_nghia",
+            "is_split_case": true
           }
         ]
       },
@@ -49707,14 +49834,16 @@ export const allProvincesData = [
             "code": 21997,
             "codename": "xa_canh_lien",
             "division_type": "xã",
-            "short_codename": "canh_lien"
+            "short_codename": "canh_lien",
+            "is_split_case": true
           },
           {
             "name": "Xã Canh Hiệp",
             "code": 22000,
             "codename": "xa_canh_hiep",
             "division_type": "xã",
-            "short_codename": "canh_hiep"
+            "short_codename": "canh_hiep",
+            "is_split_case": true
           },
           {
             "name": "Xã Canh Vinh",
@@ -49781,7 +49910,8 @@ export const allProvincesData = [
             "code": 22024,
             "codename": "phuong_9",
             "division_type": "xã",
-            "short_codename": "phuong_9"
+            "short_codename": "phuong_9",
+            "is_split_case": true
           },
           {
             "name": "Phường 4",
@@ -50316,7 +50446,8 @@ export const allProvincesData = [
             "code": 22228,
             "codename": "xa_eabia",
             "division_type": "xã",
-            "short_codename": "eabia"
+            "short_codename": "eabia",
+            "is_split_case": true
           },
           {
             "name": "Xã EaTrol",
@@ -50367,7 +50498,8 @@ export const allProvincesData = [
             "code": 22252,
             "codename": "xa_hoa_binh_1",
             "division_type": "xã",
-            "short_codename": "hoa_binh_1"
+            "short_codename": "hoa_binh_1",
+            "is_split_case": true
           },
           {
             "name": "Thị trấn Phú Thứ",
@@ -50460,7 +50592,8 @@ export const allProvincesData = [
             "code": 22312,
             "codename": "xa_hoa_tri",
             "division_type": "xã",
-            "short_codename": "hoa_tri"
+            "short_codename": "hoa_tri",
+            "is_split_case": true
           },
           {
             "name": "Xã Hòa An",
@@ -50518,7 +50651,8 @@ export const allProvincesData = [
             "code": 22246,
             "codename": "phuong_hoa_hiep_bac",
             "division_type": "xã",
-            "short_codename": "hoa_hiep_bac"
+            "short_codename": "hoa_hiep_bac",
+            "is_split_case": true
           },
           {
             "name": "Phường Hoà Vinh",
@@ -50876,14 +51010,16 @@ export const allProvincesData = [
             "code": 22435,
             "codename": "xa_cam_tan",
             "division_type": "xã",
-            "short_codename": "cam_tan"
+            "short_codename": "cam_tan",
+            "is_split_case": true
           },
           {
             "name": "Xã Cam Hòa",
             "code": 22438,
             "codename": "xa_cam_hoa",
             "division_type": "xã",
-            "short_codename": "cam_hoa"
+            "short_codename": "cam_hoa",
+            "is_split_case": true
           },
           {
             "name": "Xã Cam Hải Đông",
@@ -50911,7 +51047,8 @@ export const allProvincesData = [
             "code": 22450,
             "codename": "xa_cam_hiep_bac",
             "division_type": "xã",
-            "short_codename": "cam_hiep_bac"
+            "short_codename": "cam_hiep_bac",
+            "is_split_case": true
           },
           {
             "name": "Thị trấn Cam Đức",
@@ -50925,7 +51062,8 @@ export const allProvincesData = [
             "code": 22456,
             "codename": "xa_cam_hiep_nam",
             "division_type": "xã",
-            "short_codename": "cam_hiep_nam"
+            "short_codename": "cam_hiep_nam",
+            "is_split_case": true
           },
           {
             "name": "Xã Cam Phước Tây",
@@ -50946,14 +51084,16 @@ export const allProvincesData = [
             "code": 22465,
             "codename": "xa_cam_an_bac",
             "division_type": "xã",
-            "short_codename": "cam_an_bac"
+            "short_codename": "cam_an_bac",
+            "is_split_case": true
           },
           {
             "name": "Xã Cam An Nam",
             "code": 22471,
             "codename": "xa_cam_an_nam",
             "division_type": "xã",
-            "short_codename": "cam_an_nam"
+            "short_codename": "cam_an_nam",
+            "is_split_case": true
           },
           {
             "name": "Xã Suối Cát",
@@ -50967,7 +51107,8 @@ export const allProvincesData = [
             "code": 22711,
             "codename": "xa_suoi_tan",
             "division_type": "xã",
-            "short_codename": "suoi_tan"
+            "short_codename": "suoi_tan",
+            "is_split_case": true
           }
         ]
       },
@@ -51662,7 +51803,8 @@ export const allProvincesData = [
             "code": 22768,
             "codename": "phuong_dong_hai",
             "division_type": "xã",
-            "short_codename": "dong_hai"
+            "short_codename": "dong_hai",
+            "is_split_case": true
           },
           {
             "name": "Phường Mỹ Đông",
@@ -52326,7 +52468,8 @@ export const allProvincesData = [
             "code": 22978,
             "codename": "xa_phong_phu",
             "division_type": "xã",
-            "short_codename": "phong_phu"
+            "short_codename": "phong_phu",
+            "is_split_case": true
           },
           {
             "name": "Xã Vĩnh Hảo",
@@ -52503,7 +52646,8 @@ export const allProvincesData = [
             "code": 23053,
             "codename": "xa_hoa_thang",
             "division_type": "xã",
-            "short_codename": "hoa_thang"
+            "short_codename": "hoa_thang",
+            "is_split_case": true
           },
           {
             "name": "Xã Hồng Phong",
@@ -56932,7 +57076,8 @@ export const allProvincesData = [
             "code": 24550,
             "codename": "xa_ea_bhok",
             "division_type": "xã",
-            "short_codename": "ea_bhok"
+            "short_codename": "ea_bhok",
+            "is_split_case": true
           },
           {
             "name": "Xã Ea Hu",
@@ -59655,21 +59800,24 @@ export const allProvincesData = [
             "code": 25507,
             "codename": "xa_tan_phong",
             "division_type": "xã",
-            "short_codename": "tan_phong"
+            "short_codename": "tan_phong",
+            "is_split_case": true
           },
           {
             "name": "Xã Mỏ Công",
             "code": 25510,
             "codename": "xa_mo_cong",
             "division_type": "xã",
-            "short_codename": "mo_cong"
+            "short_codename": "mo_cong",
+            "is_split_case": true
           },
           {
             "name": "Xã Trà Vong",
             "code": 25513,
             "codename": "xa_tra_vong",
             "division_type": "xã",
-            "short_codename": "tra_vong"
+            "short_codename": "tra_vong",
+            "is_split_case": true
           }
         ]
       },
@@ -59727,7 +59875,8 @@ export const allProvincesData = [
             "code": 25534,
             "codename": "xa_suoi_day",
             "division_type": "xã",
-            "short_codename": "suoi_day"
+            "short_codename": "suoi_day",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Hiệp",
@@ -59785,14 +59934,16 @@ export const allProvincesData = [
             "code": 25555,
             "codename": "xa_suoi_da",
             "division_type": "xã",
-            "short_codename": "suoi_da"
+            "short_codename": "suoi_da",
+            "is_split_case": true
           },
           {
             "name": "Xã Phan",
             "code": 25558,
             "codename": "xa_phan",
             "division_type": "xã",
-            "short_codename": "phan"
+            "short_codename": "phan",
+            "is_split_case": true
           },
           {
             "name": "Xã Phước Ninh",
@@ -59806,7 +59957,8 @@ export const allProvincesData = [
             "code": 25564,
             "codename": "xa_phuoc_minh",
             "division_type": "xã",
-            "short_codename": "phuoc_minh"
+            "short_codename": "phuoc_minh",
+            "is_split_case": true
           },
           {
             "name": "Xã Bàu Năng",
@@ -59820,7 +59972,8 @@ export const allProvincesData = [
             "code": 25570,
             "codename": "xa_cha_la",
             "division_type": "xã",
-            "short_codename": "cha_la"
+            "short_codename": "cha_la",
+            "is_split_case": true
           },
           {
             "name": "Xã Cầu Khởi",
@@ -59892,7 +60045,8 @@ export const allProvincesData = [
             "code": 25597,
             "codename": "xa_thai_binh",
             "division_type": "xã",
-            "short_codename": "thai_binh"
+            "short_codename": "thai_binh",
+            "is_split_case": true
           },
           {
             "name": "Xã An Cơ",
@@ -60352,7 +60506,8 @@ export const allProvincesData = [
             "code": 25768,
             "codename": "phuong_hiep_an",
             "division_type": "xã",
-            "short_codename": "hiep_an"
+            "short_codename": "hiep_an",
+            "is_split_case": true
           },
           {
             "name": "Phường Tương Bình Hiệp",
@@ -60366,7 +60521,8 @@ export const allProvincesData = [
             "code": 25774,
             "codename": "phuong_chanh_my",
             "division_type": "xã",
-            "short_codename": "chanh_my"
+            "short_codename": "chanh_my",
+            "is_split_case": true
           }
         ]
       },
@@ -60396,7 +60552,8 @@ export const allProvincesData = [
             "code": 25822,
             "codename": "thi_tran_lai_uyen",
             "division_type": "xã",
-            "short_codename": "lai_uyen"
+            "short_codename": "lai_uyen",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Hưng",
@@ -60454,14 +60611,16 @@ export const allProvincesData = [
             "code": 25783,
             "codename": "xa_minh_thanh",
             "division_type": "xã",
-            "short_codename": "minh_thanh"
+            "short_codename": "minh_thanh",
+            "is_split_case": true
           },
           {
             "name": "Xã Minh Tân",
             "code": 25786,
             "codename": "xa_minh_tan",
             "division_type": "xã",
-            "short_codename": "minh_tan"
+            "short_codename": "minh_tan",
+            "is_split_case": true
           },
           {
             "name": "Xã Định An",
@@ -60489,14 +60648,16 @@ export const allProvincesData = [
             "code": 25798,
             "codename": "xa_dinh_hiep",
             "division_type": "xã",
-            "short_codename": "dinh_hiep"
+            "short_codename": "dinh_hiep",
+            "is_split_case": true
           },
           {
             "name": "Xã An Lập",
             "code": 25801,
             "codename": "xa_an_lap",
             "division_type": "xã",
-            "short_codename": "an_lap"
+            "short_codename": "an_lap",
+            "is_split_case": true
           },
           {
             "name": "Xã Long Tân",
@@ -60517,7 +60678,8 @@ export const allProvincesData = [
             "code": 25810,
             "codename": "xa_thanh_tuyen",
             "division_type": "xã",
-            "short_codename": "thanh_tuyen"
+            "short_codename": "thanh_tuyen",
+            "is_split_case": true
           }
         ]
       },
@@ -60533,7 +60695,8 @@ export const allProvincesData = [
             "code": 25813,
             "codename": "phuong_my_phuoc",
             "division_type": "xã",
-            "short_codename": "my_phuoc"
+            "short_codename": "my_phuoc",
+            "is_split_case": true
           },
           {
             "name": "Phường Chánh Phú Hòa",
@@ -60647,7 +60810,8 @@ export const allProvincesData = [
             "code": 25876,
             "codename": "xa_tam_lap",
             "division_type": "xã",
-            "short_codename": "tam_lap"
+            "short_codename": "tam_lap",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Long",
@@ -60791,7 +60955,8 @@ export const allProvincesData = [
             "code": 25948,
             "codename": "phuong_tan_dong_hiep",
             "division_type": "xã",
-            "short_codename": "tan_dong_hiep"
+            "short_codename": "tan_dong_hiep",
+            "is_split_case": true
           },
           {
             "name": "Phường Bình An",
@@ -60849,7 +61014,8 @@ export const allProvincesData = [
             "code": 25969,
             "codename": "phuong_binh_chuan",
             "division_type": "xã",
-            "short_codename": "binh_chuan"
+            "short_codename": "binh_chuan",
+            "is_split_case": true
           },
           {
             "name": "Phường Thuận Giao",
@@ -60898,7 +61064,8 @@ export const allProvincesData = [
             "code": 25990,
             "codename": "phuong_vinh_phu",
             "division_type": "xã",
-            "short_codename": "vinh_phu"
+            "short_codename": "vinh_phu",
+            "is_split_case": true
           }
         ]
       },
@@ -60970,7 +61137,8 @@ export const allProvincesData = [
             "code": 25918,
             "codename": "xa_tan_my",
             "division_type": "xã",
-            "short_codename": "tan_my"
+            "short_codename": "tan_my",
+            "is_split_case": true
           },
           {
             "name": "Xã Thường Tân",
@@ -62063,7 +62231,8 @@ export const allProvincesData = [
             "code": 26449,
             "codename": "xa_xuan_tam",
             "division_type": "xã",
-            "short_codename": "xuan_tam"
+            "short_codename": "xuan_tam",
+            "is_split_case": true
           },
           {
             "name": "Xã Suối Cát",
@@ -62811,14 +62980,14 @@ export const allProvincesData = [
         "division_type": "huyện",
         "short_codename": "con_dao",
         "wards": [
-        {
+          {
             "name": "Huyện Côn Đảo",
             "code": 755,
             "codename": "phuong_con_dao",
             "division_type": "huyện",
             "short_codename": "con_dao"
           }
-          ]
+        ]
       }
     ]
   },
@@ -62848,7 +63017,8 @@ export const allProvincesData = [
             "code": 26737,
             "codename": "phuong_da_kao",
             "division_type": "xã",
-            "short_codename": "da_kao"
+            "short_codename": "da_kao",
+            "is_split_case": true
           },
           {
             "name": "Phường Bến Nghé",
@@ -62869,7 +63039,8 @@ export const allProvincesData = [
             "code": 26746,
             "codename": "phuong_nguyen_thai_binh",
             "division_type": "xã",
-            "short_codename": "nguyen_thai_binh"
+            "short_codename": "nguyen_thai_binh",
+            "is_split_case": true
           },
           {
             "name": "Phường Phạm Ngũ Lão",
@@ -62883,7 +63054,8 @@ export const allProvincesData = [
             "code": 26752,
             "codename": "phuong_cau_ong_lanh",
             "division_type": "xã",
-            "short_codename": "cau_ong_lanh"
+            "short_codename": "cau_ong_lanh",
+            "is_split_case": true
           },
           {
             "name": "Phường Cô Giang",
@@ -63348,14 +63520,16 @@ export const allProvincesData = [
             "code": 27016,
             "codename": "phuong_son_ky",
             "division_type": "xã",
-            "short_codename": "son_ky"
+            "short_codename": "son_ky",
+            "is_split_case": true
           },
           {
             "name": "Phường Tân Quý",
             "code": 27019,
             "codename": "phuong_tan_quy",
             "division_type": "xã",
-            "short_codename": "tan_quy"
+            "short_codename": "tan_quy",
+            "is_split_case": true
           },
           {
             "name": "Phường Tân Thành",
@@ -63404,7 +63578,8 @@ export const allProvincesData = [
             "code": 27040,
             "codename": "phuong_tan_thoi_hoa",
             "division_type": "xã",
-            "short_codename": "tan_thoi_hoa"
+            "short_codename": "tan_thoi_hoa",
+            "is_split_case": true
           }
         ]
       },
@@ -63562,14 +63737,16 @@ export const allProvincesData = [
             "code": 26818,
             "codename": "phuong_linh_tay",
             "division_type": "xã",
-            "short_codename": "linh_tay"
+            "short_codename": "linh_tay",
+            "is_split_case": true
           },
           {
             "name": "Phường Linh Đông",
             "code": 26821,
             "codename": "phuong_linh_dong",
             "division_type": "xã",
-            "short_codename": "linh_dong"
+            "short_codename": "linh_dong",
+            "is_split_case": true
           },
           {
             "name": "Phường Bình Thọ",
@@ -63597,7 +63774,8 @@ export const allProvincesData = [
             "code": 26833,
             "codename": "phuong_long_thanh_my",
             "division_type": "xã",
-            "short_codename": "long_thanh_my"
+            "short_codename": "long_thanh_my",
+            "is_split_case": true
           },
           {
             "name": "Phường Tân Phú",
@@ -64341,7 +64519,8 @@ export const allProvincesData = [
             "code": 27448,
             "codename": "phuong_binh_tri_dong_a",
             "division_type": "xã",
-            "short_codename": "binh_tri_dong_a"
+            "short_codename": "binh_tri_dong_a",
+            "is_split_case": true
           },
           {
             "name": "Phường Bình Trị Đông B",
@@ -64355,14 +64534,16 @@ export const allProvincesData = [
             "code": 27454,
             "codename": "phuong_tan_tao",
             "division_type": "xã",
-            "short_codename": "tan_tao"
+            "short_codename": "tan_tao",
+            "is_split_case": true
           },
           {
             "name": "Phường Tân Tạo A",
             "code": 27457,
             "codename": "phuong_tan_tao_a",
             "division_type": "xã",
-            "short_codename": "tan_tao_a"
+            "short_codename": "tan_tao_a",
+            "is_split_case": true
           },
           {
             "name": "Phường An Lạc",
@@ -64727,7 +64908,8 @@ export const allProvincesData = [
             "code": 27598,
             "codename": "xa_pham_van_hai",
             "division_type": "xã",
-            "short_codename": "pham_van_hai"
+            "short_codename": "pham_van_hai",
+            "is_split_case": true
           },
           {
             "name": "Xã Vĩnh Lộc A",
@@ -64769,7 +64951,8 @@ export const allProvincesData = [
             "code": 27616,
             "codename": "xa_tan_kien",
             "division_type": "xã",
-            "short_codename": "tan_kien"
+            "short_codename": "tan_kien",
+            "is_split_case": true
           },
           {
             "name": "Xã Bình Hưng",
@@ -64790,7 +64973,8 @@ export const allProvincesData = [
             "code": 27625,
             "codename": "xa_an_phu_tay",
             "division_type": "xã",
-            "short_codename": "an_phu_tay"
+            "short_codename": "an_phu_tay",
+            "is_split_case": true
           },
           {
             "name": "Xã Hưng Long",
@@ -64920,7 +65104,8 @@ export const allProvincesData = [
             "code": 27673,
             "codename": "xa_an_thoi_dong",
             "division_type": "xã",
-            "short_codename": "an_thoi_dong"
+            "short_codename": "an_thoi_dong",
+            "is_split_case": true
           },
           {
             "name": "Xã Thạnh An",
@@ -65238,42 +65423,48 @@ export const allProvincesData = [
             "code": 27763,
             "codename": "xa_khanh_hung",
             "division_type": "xã",
-            "short_codename": "khanh_hung"
+            "short_codename": "khanh_hung",
+            "is_split_case": true
           },
           {
             "name": "Xã Thái Trị",
             "code": 27766,
             "codename": "xa_thai_tri",
             "division_type": "xã",
-            "short_codename": "thai_tri"
+            "short_codename": "thai_tri",
+            "is_split_case": true
           },
           {
             "name": "Xã Vĩnh Trị",
             "code": 27769,
             "codename": "xa_vinh_tri",
             "division_type": "xã",
-            "short_codename": "vinh_tri"
+            "short_codename": "vinh_tri",
+            "is_split_case": true
           },
           {
             "name": "Xã Thái Bình Trung",
             "code": 27772,
             "codename": "xa_thai_binh_trung",
             "division_type": "xã",
-            "short_codename": "thai_binh_trung"
+            "short_codename": "thai_binh_trung",
+            "is_split_case": true
           },
           {
             "name": "Xã Vĩnh Bình",
             "code": 27775,
             "codename": "xa_vinh_binh",
             "division_type": "xã",
-            "short_codename": "vinh_binh"
+            "short_codename": "vinh_binh",
+            "is_split_case": true
           },
           {
             "name": "Xã Vĩnh Thuận",
             "code": 27778,
             "codename": "xa_vinh_thuan",
             "division_type": "xã",
-            "short_codename": "vinh_thuan"
+            "short_codename": "vinh_thuan",
+            "is_split_case": true
           },
           {
             "name": "Xã Tuyên Bình",
@@ -65368,7 +65559,8 @@ export const allProvincesData = [
             "code": 27829,
             "codename": "xa_bac_hoa",
             "division_type": "xã",
-            "short_codename": "bac_hoa"
+            "short_codename": "bac_hoa",
+            "is_split_case": true
           },
           {
             "name": "Xã Hậu Thạnh Tây",
@@ -65717,7 +65909,8 @@ export const allProvincesData = [
             "code": 27967,
             "codename": "xa_duc_hoa_thuong",
             "division_type": "xã",
-            "short_codename": "duc_hoa_thuong"
+            "short_codename": "duc_hoa_thuong",
+            "is_split_case": true
           },
           {
             "name": "Xã Hòa Khánh Tây",
@@ -65938,7 +66131,8 @@ export const allProvincesData = [
             "code": 28057,
             "codename": "xa_nhi_thanh",
             "division_type": "xã",
-            "short_codename": "nhi_thanh"
+            "short_codename": "nhi_thanh",
+            "is_split_case": true
           },
           {
             "name": "Xã Mỹ An",
@@ -67756,7 +67950,7 @@ export const allProvincesData = [
         "division_type": "huyện",
         "short_codename": "chau_thanh",
         "wards": [
-        {
+          {
             "name": "Xã An Khánh",
             "code": 1234,
             "codename": "xa_an_khach",
@@ -70048,7 +70242,8 @@ export const allProvincesData = [
             "code": 29719,
             "codename": "thi_tran_tam_binh",
             "division_type": "xã",
-            "short_codename": "tam_binh"
+            "short_codename": "tam_binh",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Lộc",
@@ -70146,7 +70341,8 @@ export const allProvincesData = [
             "code": 29764,
             "codename": "xa_ngai_tu",
             "division_type": "xã",
-            "short_codename": "ngai_tu"
+            "short_codename": "ngai_tu",
+            "is_split_case": true
           },
           {
             "name": "Xã Bình Ninh",
@@ -70170,7 +70366,7 @@ export const allProvincesData = [
             "codename": "phuong_cai_von",
             "division_type": "xã",
             "short_codename": "cai_von",
-            "is_split_case": true,
+            "is_split_case": true
           },
           {
             "name": "Phường Thành Phước",
@@ -70235,7 +70431,8 @@ export const allProvincesData = [
             "code": 29821,
             "codename": "thi_tran_tra_on",
             "division_type": "xã",
-            "short_codename": "tra_on"
+            "short_codename": "tra_on",
+            "is_split_case": true
           },
           {
             "name": "Xã Xuân Hiệp",
@@ -70774,7 +70971,8 @@ export const allProvincesData = [
             "code": 29995,
             "codename": "xa_phu_thuan_b",
             "division_type": "xã",
-            "short_codename": "phu_thuan_b"
+            "short_codename": "phu_thuan_b",
+            "is_split_case": true
           },
           {
             "name": "Xã Phú Thuận A",
@@ -70997,7 +71195,8 @@ export const allProvincesData = [
             "code": 30079,
             "codename": "xa_gao_giong",
             "division_type": "xã",
-            "short_codename": "gao_giong"
+            "short_codename": "gao_giong",
+            "is_split_case": true
           },
           {
             "name": "Xã Phương Thịnh",
@@ -71655,7 +71854,8 @@ export const allProvincesData = [
             "code": 30334,
             "codename": "xa_vinh_chau",
             "division_type": "xã",
-            "short_codename": "vinh_chau"
+            "short_codename": "vinh_chau",
+            "is_split_case": true
           }
         ]
       },
@@ -71721,14 +71921,15 @@ export const allProvincesData = [
             "codename": "xa_phu_hoi",
             "division_type": "xã",
             "short_codename": "phu_hoi",
-            "is_split_case": true,
+            "is_split_case": true
           },
           {
             "name": "Xã Phước Hưng",
             "code": 30358,
             "codename": "xa_phuoc_hung",
             "division_type": "xã",
-            "short_codename": "phuoc_hung"
+            "short_codename": "phuoc_hung",
+            "is_split_case": true
           },
           {
             "name": "Xã Vĩnh Lộc",
@@ -74017,7 +74218,8 @@ export const allProvincesData = [
             "code": 31178,
             "codename": "phuong_bui_huu_nghia",
             "division_type": "xã",
-            "short_codename": "bui_huu_nghia"
+            "short_codename": "bui_huu_nghia",
+            "is_split_case": true
           },
           {
             "name": "Phường Long Hòa",
@@ -74031,7 +74233,8 @@ export const allProvincesData = [
             "code": 31183,
             "codename": "phuong_long_tuyen",
             "division_type": "xã",
-            "short_codename": "long_tuyen"
+            "short_codename": "long_tuyen",
+            "is_split_case": true
           }
         ]
       },
@@ -74105,7 +74308,8 @@ export const allProvincesData = [
             "code": 31207,
             "codename": "phuong_thot_not",
             "division_type": "xã",
-            "short_codename": "thot_not"
+            "short_codename": "thot_not",
+            "is_split_case": true
           },
           {
             "name": "Phường Thới Thuận",
@@ -76534,7 +76738,8 @@ export const allProvincesData = [
             "code": 32017,
             "codename": "phuong_6",
             "division_type": "xã",
-            "short_codename": "phuong_6"
+            "short_codename": "phuong_6",
+            "is_split_case": true
           },
           {
             "name": "Phường 7",
@@ -76576,7 +76781,8 @@ export const allProvincesData = [
             "code": 32029,
             "codename": "xa_tac_van",
             "division_type": "xã",
-            "short_codename": "tac_van"
+            "short_codename": "tac_van",
+            "is_split_case": true
           },
           {
             "name": "Xã Lý Văn Lâm",
@@ -76590,7 +76796,8 @@ export const allProvincesData = [
             "code": 32035,
             "codename": "xa_dinh_binh",
             "division_type": "xã",
-            "short_codename": "dinh_binh"
+            "short_codename": "dinh_binh",
+            "is_split_case": true
           },
           {
             "name": "Xã Hòa Thành",
@@ -76634,7 +76841,8 @@ export const allProvincesData = [
             "code": 32048,
             "codename": "xa_khanh_thuan",
             "division_type": "xã",
-            "short_codename": "khanh_thuan"
+            "short_codename": "khanh_thuan",
+            "is_split_case": true
           },
           {
             "name": "Xã Khánh Tiến",
@@ -76648,14 +76856,16 @@ export const allProvincesData = [
             "code": 32053,
             "codename": "xa_nguyen_phich",
             "division_type": "xã",
-            "short_codename": "nguyen_phich"
+            "short_codename": "nguyen_phich",
+            "is_split_case": true
           },
           {
             "name": "Xã Khánh Lâm",
             "code": 32056,
             "codename": "xa_khanh_lam",
             "division_type": "xã",
-            "short_codename": "khanh_lam"
+            "short_codename": "khanh_lam",
+            "is_split_case": true
           },
           {
             "name": "Xã Khánh An",
@@ -76806,7 +77016,8 @@ export const allProvincesData = [
             "code": 32107,
             "codename": "xa_tran_hoi",
             "division_type": "xã",
-            "short_codename": "tran_hoi"
+            "short_codename": "tran_hoi",
+            "is_split_case": true
           },
           {
             "name": "Xã Khánh Lộc",
@@ -76848,14 +77059,16 @@ export const allProvincesData = [
             "code": 32122,
             "codename": "xa_loi_an",
             "division_type": "xã",
-            "short_codename": "loi_an"
+            "short_codename": "loi_an",
+            "is_split_case": true
           },
           {
             "name": "Xã Phong Điền",
             "code": 32124,
             "codename": "xa_phong_dien",
             "division_type": "xã",
-            "short_codename": "phong_dien"
+            "short_codename": "phong_dien",
+            "is_split_case": true
           },
           {
             "name": "Xã Phong Lạc",
@@ -76927,21 +77140,24 @@ export const allProvincesData = [
             "code": 32142,
             "codename": "xa_dong_hung",
             "division_type": "xã",
-            "short_codename": "dong_hung"
+            "short_codename": "dong_hung",
+            "is_split_case": true
           },
           {
             "name": "Xã Đông Thới",
             "code": 32143,
             "codename": "xa_dong_thoi",
             "division_type": "xã",
-            "short_codename": "dong_thoi"
+            "short_codename": "dong_thoi",
+            "is_split_case": true
           },
           {
             "name": "Xã Tân Hưng Đông",
             "code": 32146,
             "codename": "xa_tan_hung_dong",
             "division_type": "xã",
-            "short_codename": "tan_hung_dong"
+            "short_codename": "tan_hung_dong",
+            "is_split_case": true
           },
           {
             "name": "Xã Trần Thới",
@@ -76971,7 +77187,8 @@ export const allProvincesData = [
             "code": 32155,
             "codename": "xa_ta_an_khuong",
             "division_type": "xã",
-            "short_codename": "ta_an_khuong"
+            "short_codename": "ta_an_khuong",
+            "is_split_case": true
           },
           {
             "name": "Xã Tạ An Khương Đông",
@@ -77085,14 +77302,16 @@ export const allProvincesData = [
             "code": 32191,
             "codename": "thi_tran_nam_can",
             "division_type": "xã",
-            "short_codename": "nam_can"
+            "short_codename": "nam_can",
+            "is_split_case": true
           },
           {
             "name": "Xã Hàm Rồng",
             "code": 32194,
             "codename": "xa_ham_rong",
             "division_type": "xã",
-            "short_codename": "ham_rong"
+            "short_codename": "ham_rong",
+            "is_split_case": true
           },
           {
             "name": "Xã Hiệp Tùng",
@@ -77120,7 +77339,8 @@ export const allProvincesData = [
             "code": 32203,
             "codename": "xa_hang_vinh",
             "division_type": "xã",
-            "short_codename": "hang_vinh"
+            "short_codename": "hang_vinh",
+            "is_split_case": true
           },
           {
             "name": "Xã Tam Giang",
@@ -77243,7 +77463,8 @@ export const allProvincesData = [
             "code": 32242,
             "codename": "xa_vien_an",
             "division_type": "xã",
-            "short_codename": "vien_an"
+            "short_codename": "vien_an",
+            "is_split_case": true
           },
           {
             "name": "Thị trấn Rạch Gốc",
@@ -77257,7 +77478,8 @@ export const allProvincesData = [
             "code": 32245,
             "codename": "xa_tan_an",
             "division_type": "xã",
-            "short_codename": "tan_an"
+            "short_codename": "tan_an",
+            "is_split_case": true
           },
           {
             "name": "Xã Đất Mũi",
