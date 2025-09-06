@@ -71720,7 +71720,8 @@ export const allProvincesData = [
             "code": 30355,
             "codename": "xa_phu_hoi",
             "division_type": "xã",
-            "short_codename": "phu_hoi"
+            "short_codename": "phu_hoi",
+            "is_split_case": true,
           },
           {
             "name": "Xã Phước Hưng",
