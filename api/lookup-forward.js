@@ -1,4 +1,4 @@
-// /api/lookup-forward.js - Phiên bản nâng cấp, hỗ trợ tra cứu chia tách
+// /api/lookup-forward.js - Phiên bản cuối cùng, xử lý tự tham chiếu trong trường hợp chia tách
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -7,8 +7,6 @@ const supabase = createClient(
 );
 
 export default async function handler(request, response) {
-  // GHI CHÚ THAY ĐỔI: Nhận thêm một tham số 'is_split' từ client
-  // để biết đây có phải là trường hợp đặc biệt hay không.
   const { code, is_split } = request.query;
 
   if (!code) {
@@ -18,16 +16,14 @@ export default async function handler(request, response) {
   const oldWardCode = parseInt(code, 10);
 
   try {
-    // === GHI CHÚ CỐT LÕI: Rẽ nhánh logic dựa trên cờ 'is_split' ===
-
     if (is_split === 'true') {
       // --- LUỒNG XỬ LÝ CHO TRƯỜNG HỢP CHIA TÁCH ---
       console.log(`API: Xử lý trường hợp chia tách cho mã ${oldWardCode}`);
 
-      // 1. Lấy tất cả các phần đã được chia tách từ bảng split_details
+      // GHI CHÚ THAY ĐỔI 1: Lấy thêm các cột tên từ split_details để làm dự phòng
       const { data: splitParts, error: splitError } = await supabase
         .from('split_details')
-        .select('split_part_description, new_ward_code')
+        .select('split_part_description, new_ward_code, new_ward_name, new_ward_en_name, new_province_name, new_province_en_name, new_province_code')
         .eq('old_ward_code', oldWardCode);
 
       if (splitError) throw splitError;
@@ -35,10 +31,8 @@ export default async function handler(request, response) {
         return response.status(404).json({ error: 'Không tìm thấy chi tiết chia tách cho mã này.' });
       }
 
-      // 2. Lấy danh sách các mã xã mới không trùng lặp
       const newWardCodes = [...new Set(splitParts.map(part => part.new_ward_code))];
 
-      // 3. Lấy thông tin chi tiết của các xã mới đó từ bảng full_vietnam
       const { data: newUnits, error: newUnitsError } = await supabase
         .from('full_vietnam')
         .select('new_ward_code, new_ward_name, new_ward_en_name, new_province_name, new_province_en_name, new_province_code')
@@ -46,54 +40,60 @@ export default async function handler(request, response) {
 
       if (newUnitsError) throw newUnitsError;
 
-      // 4. Ghép nối thông tin lại để trả về cho client
+      // GHI CHÚ THAY ĐỔI 2: Logic ghép nối thông minh hơn
       const splitResults = splitParts.map(part => {
-        const correspondingNewUnit = newUnits.find(unit => unit.new_ward_code === part.new_ward_code);
+        // Ưu tiên tìm thông tin chi tiết trong bảng full_vietnam
+        let correspondingNewUnit = newUnits.find(unit => unit.new_ward_code === part.new_ward_code);
+
+        // LOGIC DỰ PHÒNG: Nếu không tìm thấy (trường hợp tự sáp nhập)
+        // thì tự tạo đối tượng new_address từ chính thông tin có sẵn trong split_details.
+        if (!correspondingNewUnit) {
+            console.log(`Không tìm thấy mã ${part.new_ward_code} trong full_vietnam, sẽ tự tham chiếu từ split_details.`);
+            correspondingNewUnit = {
+                new_ward_code: part.new_ward_code,
+                new_ward_name: part.new_ward_name,
+                new_ward_en_name: part.new_ward_en_name,
+                new_province_name: part.new_province_name,
+                new_province_en_name: part.new_province_en_name,
+                new_province_code: part.new_province_code
+            };
+        }
+
         return {
           description: part.split_part_description,
-          new_address: correspondingNewUnit || null
+          new_address: correspondingNewUnit
         };
       });
 
-      // 5. Trả về đối tượng JSON có cấu trúc đặc biệt
       return response.status(200).json({
         changed: true,
         is_split_case: true,
         split_results: splitResults,
-        history: [] // Trường hợp chia tách không cần lịch sử riêng
+        history: []
       });
 
     } else {
       // --- LUỒNG XỬ LÝ BÌNH THƯỜNG (kết hợp lịch sử) ---
+      // Logic này được giữ nguyên hoàn toàn so với phiên bản gốc của bạn
       console.log(`API: Xử lý trường hợp thông thường cho mã ${oldWardCode}`);
-
       let finalOldWardCode = oldWardCode;
       let historyRecords = [];
-
-      // 1. Kiểm tra lịch sử
       const { data: historyData, error: historyError } = await supabase
         .from('historical_changes')
         .select('*')
         .eq('original_ward_code', oldWardCode);
-
       if (historyError) console.error('Lỗi khi tra cứu lịch sử:', historyError);
-
       if (historyData && historyData.length > 0) {
         finalOldWardCode = historyData[0].intermediate_ward_code;
         historyRecords = historyData;
       }
-
-      // 2. Tra cứu sáp nhập cuối cùng
       const { data: finalRecord, error: finalError } = await supabase
         .from('full_vietnam')
         .select('old_ward_code, old_district_code, old_province_code, new_ward_name, new_ward_en_name, new_ward_code, new_province_name, new_province_en_name, new_province_code')
         .eq('old_ward_code', finalOldWardCode)
         .limit(1);
-
       if (finalError) throw finalError;
-
       const result = finalRecord && finalRecord.length > 0 ? finalRecord[0] : null;
-
       if (!result) {
         return response.status(200).json({
           changed: historyRecords.length > 0,
@@ -101,8 +101,6 @@ export default async function handler(request, response) {
           history: historyRecords
         });
       }
-
-      // 3. Trả về kết quả tổng hợp
       return response.status(200).json({
         changed: true,
         is_split_case: false,
