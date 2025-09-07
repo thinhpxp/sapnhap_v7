@@ -704,7 +704,8 @@ export const allProvincesData = [
             "code": 280,
             "codename": "phuong_dong_tam",
             "division_type": "xã",
-            "short_codename": "dong_tam"
+            "short_codename": "dong_tam",
+            "is_split_case": true
           },
           {
             "name": "Phường Vĩnh Tuy",
