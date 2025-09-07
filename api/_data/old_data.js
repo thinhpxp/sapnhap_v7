@@ -132,7 +132,8 @@ export const allProvincesData = [
             "code": 40,
             "codename": "phuong_dong_xuan",
             "division_type": "xã",
-            "short_codename": "dong_xuan"
+            "short_codename": "dong_xuan",
+            "is_split_case": true
           },
           {
             "name": "Phường Hàng Mã",
