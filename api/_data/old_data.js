@@ -25626,7 +25626,8 @@ export const allProvincesData = [
             "code": 11041,
             "codename": "xa_le_loi",
             "division_type": "xã",
-            "short_codename": "le_loi"
+            "short_codename": "le_loi",
+            "is_split_case": true
           },
           {
             "name": "Xã Toàn Thắng",
