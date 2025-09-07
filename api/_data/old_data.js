@@ -643,7 +643,8 @@ export const allProvincesData = [
             "code": 244,
             "codename": "phuong_bach_dang",
             "division_type": "xã",
-            "short_codename": "bach_dang"
+            "short_codename": "bach_dang",
+            "is_split_case": true
           },
           {
             "name": "Phường Phạm Đình Hổ",
