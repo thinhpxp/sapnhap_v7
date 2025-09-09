@@ -345,13 +345,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDistrict = districtChoices.getValue(true);
         const selectedCommune = communeChoices.getValue(true);
         // =================================================
-        if (!selectedCommune || !selectedCommune.value) {
+         if (!selectedProvince || !selectedDistrict || !selectedCommune) {
             alert(t('alertSelectOldCommune'));
             return;
         }
-
-        const initialOldWardCode = selectedCommune.value;
-        const fullOldAddress = `${selectedCommune.label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+        const initialOldWardCode = selectedCommune;
+        const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
          // === GHI CHÚ THAY ĐỔI: Hiển thị mã code cũ ngay từ đầu ===
         const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
         let oldAddressHtml = `
