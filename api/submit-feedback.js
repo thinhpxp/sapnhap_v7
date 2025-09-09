@@ -1,11 +1,8 @@
 // /api/submit-feedback.js
 import { createClient } from '@supabase/supabase-js';
-
-// Khởi tạo Supabase client với các biến môi trường
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
+  db: { schema: 'api' }
+});
 
 /**
  * Xử lý yêu cầu POST để lưu một góp ý mới vào cơ sở dữ liệu.
