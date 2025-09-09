@@ -29186,6 +29186,14 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "dong_phuong"
           },
+           {
+            "name": "Xã An Châu",
+            "code": 12700,
+            "codename": "xa_an_chau",
+            "division_type": "xã",
+            "short_codename": "an_chau",
+            "has_history": true
+          },
           {
             "name": "Xã Liên An Đô",
             "code": 12700,
