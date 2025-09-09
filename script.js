@@ -377,7 +377,6 @@ document.addEventListener('DOMContentLoaded', () => {
             while (true) {
                if (visitedEventIds.size > 15) {
                     console.error("Vòng lặp truy vết quá dài, tự động dừng lại.");
-                    // GHI CHÚ SỬA LỖI: Sử dụng kết quả của vòng lặp cuối cùng hợp lệ
                     if (historyChain.length > 0) {
                         finalUnitData = historyChain[historyChain.length - 1];
                     }
@@ -397,30 +396,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const event = events[0];
 
-                // GHI CHÚ SỬA LỖI CỐT LÕI:
-                // Kiểm tra vòng lặp TRƯỚC KHI xử lý sự kiện hiện tại.
+                // === GHI CHÚ SỬA LỖI CỐT LÕI: LOGIC MỚI ===
+                // 1. Kiểm tra vòng lặp TRƯỚC khi thêm vào lịch sử
                 if (visitedEventIds.has(event.id)) {
                     console.error("Phát hiện vòng lặp sự kiện! Dừng lại.", event);
-                    // Lấy kết quả cuối cùng từ bước TRƯỚC ĐÓ, vốn đã được lưu trong historyChain.
+                    // Lấy kết quả cuối cùng từ bước TRƯỚC ĐÓ
                     if (historyChain.length > 0) {
                         finalUnitData = historyChain[historyChain.length - 1];
                     }
                     break;
                 }
+
+                // 2. Nếu không có vòng lặp, THÊM sự kiện này vào lịch sử và bộ nhớ
+                historyChain.push(event);
                 visitedEventIds.add(event.id);
+                // ===========================================
 
                 if (event.event_type === 'SPLIT_MERGE') {
                     finalResults = events;
+                    // Khi gặp chia tách, chúng ta không cần hiển thị lịch sử nữa, chỉ cần kết quả chia tách
+                    historyChain = []; // Xóa lịch sử để tránh hiển thị thừa
                     break;
                 }
 
                 if (event.new_ward_code === parseInt(currentCode, 10)) {
                     finalUnitData = event;
-                    historyChain.push(event);
                     break;
                 }
 
-                historyChain.push(event);
                 currentCode = event.new_ward_code;
             }
 
