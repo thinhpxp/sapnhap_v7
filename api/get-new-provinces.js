@@ -1,7 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
-  db: { schema: 'api' }
-});
+//const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { db: { schema: 'api' }});
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 export default async function handler(request, response) {
       try {
         const { data, error } = await supabase.rpc('get_unique_new_provinces');
