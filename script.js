@@ -375,9 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const visitedEventIds = new Set();
             // Vòng lặp để đi theo chuỗi sáp nhập (ví dụ: A -> AA -> AAA)
             while (true) {
-                // Thêm một lớp bảo vệ cuối cùng để tránh các trường hợp không lường trước
-                if (visitedEventIds.size > 15) {
-                    console.error("Vòng lặp truy vết quá dài (hơn 15 bước), tự động dừng lại.");
+               if (visitedEventIds.size > 15) {
+                    console.error("Vòng lặp truy vết quá dài, tự động dừng lại.");
+                    // GHI CHÚ SỬA LỖI: Sử dụng kết quả của vòng lặp cuối cùng hợp lệ
+                    if (historyChain.length > 0) {
+                        finalUnitData = historyChain[historyChain.length - 1];
+                    }
                     break;
                 }
 
@@ -385,7 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const events = await response.json();
                 if (!response.ok) throw new Error(events.error || 'Server error');
 
-                // Điều kiện dừng 1: Không còn sự kiện nào (đã đến đích)
                 if (events.length === 0) {
                     if (historyChain.length > 0) {
                         finalUnitData = historyChain[historyChain.length - 1];
@@ -395,24 +397,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const event = events[0];
 
-                // Điều kiện dừng 2: Phát hiện vòng lặp sự kiện (quay lại cùng một ID)
+                // GHI CHÚ SỬA LỖI CỐT LÕI:
+                // Kiểm tra vòng lặp TRƯỚC KHI xử lý sự kiện hiện tại.
                 if (visitedEventIds.has(event.id)) {
-                    console.error("Phát hiện vòng lặp sự kiện (cùng ID)! Dừng lại.", event);
-                    finalUnitData = event;
+                    console.error("Phát hiện vòng lặp sự kiện! Dừng lại.", event);
+                    // Lấy kết quả cuối cùng từ bước TRƯỚC ĐÓ, vốn đã được lưu trong historyChain.
+                    if (historyChain.length > 0) {
+                        finalUnitData = historyChain[historyChain.length - 1];
+                    }
                     break;
                 }
                 visitedEventIds.add(event.id);
 
-                // Điều kiện dừng 3: Gặp sự kiện chia tách (đây là trạng thái cuối)
                 if (event.event_type === 'SPLIT_MERGE') {
                     finalResults = events;
                     break;
                 }
 
-                // Điều kiện dừng 4: Không có sự tiến triển (đổi tên tại chỗ)
                 if (event.new_ward_code === parseInt(currentCode, 10)) {
                     finalUnitData = event;
-                    historyChain.push(event); // Thêm bước cuối này vào lịch sử
+                    historyChain.push(event);
                     break;
                 }
 
