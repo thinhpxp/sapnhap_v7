@@ -25,7 +25,7 @@ window.translations = {
   "newProvinceLabel": "Tỉnh / Thành phố (Mới)",
   "newCommuneLabel": "Phường / Xã / Thị trấn (Mới)",
   "newProvincePlaceholder": "Vui lòng chọn Tỉnh/Thành mới",
-  "newCommunePlaceholder": "Vui lòng chọn Tỉnh/Thành trước",
+  "newCommunePlaceholder": "Vui lòng chọn Xã/Phường",
   "newCommuneLoading": "Đang tải danh sách xã...",
   "newProvinceLoading": "Đang tải danh sách tỉnh mới...",
   "newProvinceError": "Lỗi khi tải danh sách tỉnh",
