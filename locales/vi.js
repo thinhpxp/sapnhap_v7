@@ -86,7 +86,7 @@ window.translations = {
   "feedbackSuccess": "Cám ơn, các phản hồi sẽ được mình xử lý vào mỗi cuối tuần",
   "feedbackError": "Gửi thất bại, vui lòng thử lại.",
 // ...
-  "historyTitle": "Lịch sử thay đổi (trước 01/07/2025):",
+  "historyTitle": "Lịch sử thay đổi:",
   "historyEntry": "Ngày {date}: <b>{from}</b> đã được sáp nhập vào <b>{to}</b>.",
   "splitCaseNote": "Lưu ý: Đơn vị này được chia tách và sáp nhập vào nhiều nơi khác nhau.",
   "mergedInto": "đã sáp nhập thành",

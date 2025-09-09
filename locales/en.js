@@ -90,7 +90,7 @@ window.translations = {
   "feedbackSuccess": "Thank you. Feedback will be checked every weekend.",
   "feedbackError": "Failed to send, please try again.",
    // ...
-  "historyTitle": "Change History (before 01/07/2025):",
+  "historyTitle": "Change History:",
   "historyEntry": "On {date}: <b>{from}</b> was merged into <b>{to}</b>.",
   "splitCaseNote": "Note: This unit was split and merged into multiple different places.",
   "mergedInto": "was merged into",

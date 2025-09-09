@@ -343,8 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
      // === KHAI BÁO BIẾN ===
         const selectedProvince = provinceChoices.getValue(true);
         const selectedDistrict = districtChoices.getValue(true);
-        //const selectedCommune = communeChoices.getValue(true);
-        const selectedCommune = communeChoices.getValue();
+        const selectedCommune = communeChoices.getValue(true);
         // =================================================
         if (!selectedCommune || !selectedCommune.value) {
             alert(t('alertSelectOldCommune'));
@@ -355,11 +354,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const fullOldAddress = `${selectedCommune.label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
          // === GHI CHÚ THAY ĐỔI: Hiển thị mã code cũ ngay từ đầu ===
         const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
-        let oldAddressHtml = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
+        let oldAddressHtml = `
+            <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
             <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
 
         // Dọn dẹp giao diện
-        oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
+        oldAddressDisplay.innerHTML = oldAddressHtml;
+        //oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         if (historyDisplay) historyDisplay.classList.add('hidden');
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
