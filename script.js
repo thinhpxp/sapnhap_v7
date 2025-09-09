@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
      // === KHAI BÁO BIẾN ===
         const selectedProvince = provinceChoices.getValue(true);
         const selectedDistrict = districtChoices.getValue(true);
-        const selectedCommune = communeChoices.getValue(true);
+        //const selectedCommune = communeChoices.getValue(true);
         const selectedCommune = communeChoices.getValue();
         // =================================================
         if (!selectedCommune || !selectedCommune.value) {
