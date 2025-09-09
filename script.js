@@ -340,7 +340,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // === LOGIC TRA CỨU CHÍNH ===
      async function handleForwardLookup() {
+     // === KHAI BÁO BIẾN ===
+        const selectedProvince = provinceChoices.getValue(true);
+        const selectedDistrict = districtChoices.getValue(true);
+        const selectedCommune = communeChoices.getValue(true);
         const selectedCommune = communeChoices.getValue();
+        // =================================================
         if (!selectedCommune || !selectedCommune.value) {
             alert(t('alertSelectOldCommune'));
             return;
@@ -350,8 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fullOldAddress = `${selectedCommune.label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
          // === GHI CHÚ THAY ĐỔI: Hiển thị mã code cũ ngay từ đầu ===
         const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
-        let oldAddressHtml = `
-            <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
+        let oldAddressHtml = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
             <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
 
         // Dọn dẹp giao diện
