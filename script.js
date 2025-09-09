@@ -421,6 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Trường hợp KHÔNG THAY ĐỔI
                 newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
             }
+          }
             catch (error) {
             console.error('Lỗi khi tra cứu xuôi:', error);
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
