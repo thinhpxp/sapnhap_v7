@@ -63347,7 +63347,8 @@ export const allProvincesData = [
             "code": 26929,
             "codename": "phuong_24",
             "division_type": "xã",
-            "short_codename": "phuong_24"
+            "short_codename": "phuong_24",
+            "has_history": true
           },
           {
             "name": "Phường 2",
