@@ -369,23 +369,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 const events = await response.json();
                 if (!response.ok) throw new Error(events.error || 'Server error');
 
-                // Dừng lại nếu không còn sự kiện nào (đã đến đích cuối)
+                // Điều kiện dừng 1: Không còn sự kiện nào
                 if (events.length === 0) {
-                    // Lấy thông tin của đơn vị cuối cùng từ sự kiện trước đó
                     if (historyChain.length > 0) {
                         finalUnitData = historyChain[historyChain.length - 1];
                     }
                     break;
                 }
 
-                // Dừng lại nếu đây là sự kiện chia tách (đây là trạng thái cuối cùng)
-                if (events[0].event_type === 'SPLIT_MERGE') {
+                const event = events[0];
+
+                // Điều kiện dừng 2: Gặp sự kiện chia tách
+                if (event.event_type === 'SPLIT_MERGE') {
                     finalResults = events;
                     break;
                 }
 
+                // === GHI CHÚ SỬA LỖI: Điều kiện dừng 3 - Chống kẹt vòng lặp ===
+                // Nếu mã mới trả về giống hệt mã hiện tại, có nghĩa là đã đến điểm cuối.
+                if (event.new_ward_code === currentCode) {
+                    finalUnitData = event;
+                    break;
+                }
+                // ==========================================================
+
                 // Nếu là sáp nhập đơn giản, thêm vào chuỗi lịch sử và tiếp tục
-                const event = events[0];
                 historyChain.push(event);
                 currentCode = event.new_ward_code;
             }
