@@ -29,7 +29,7 @@ window.translations = {
   "newProvinceLabel": "Province / City (New)",
   "newCommuneLabel": "Commune / Ward / Town (New)",
   "newProvincePlaceholder": "Please select a new Province/City",
-  "newCommunePlaceholder": "Please select Province/City first",
+  "newCommunePlaceholder": "Please select Ward",
   "newCommuneLoading": "Loading communes...",
   "newProvinceLoading": "Loading provinces...",
   "newProvinceError": "Error loading provinces",
