@@ -371,14 +371,21 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentCode = initialOldWardCode;
             let finalResults = [];
             let finalUnitData = null; // Dùng để lưu thông tin đơn vị cuối cùng
-
+            // === GHI CHÚ THAY ĐỔI CỐT LÕI: Sử dụng "bộ nhớ" dựa trên ID sự kiện ===
+            const visitedEventIds = new Set();
             // Vòng lặp để đi theo chuỗi sáp nhập (ví dụ: A -> AA -> AAA)
             while (true) {
+                // Thêm một lớp bảo vệ cuối cùng để tránh các trường hợp không lường trước
+                if (visitedEventIds.size > 15) {
+                    console.error("Vòng lặp truy vết quá dài (hơn 15 bước), tự động dừng lại.");
+                    break;
+                }
+
                 const response = await fetch(`/api/lookup-forward?code=${currentCode}`);
                 const events = await response.json();
                 if (!response.ok) throw new Error(events.error || 'Server error');
 
-                // Điều kiện dừng 1: Không còn sự kiện nào
+                // Điều kiện dừng 1: Không còn sự kiện nào (đã đến đích)
                 if (events.length === 0) {
                     if (historyChain.length > 0) {
                         finalUnitData = historyChain[historyChain.length - 1];
@@ -388,21 +395,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const event = events[0];
 
-                // Điều kiện dừng 2: Gặp sự kiện chia tách
+                // Điều kiện dừng 2: Phát hiện vòng lặp sự kiện (quay lại cùng một ID)
+                if (visitedEventIds.has(event.id)) {
+                    console.error("Phát hiện vòng lặp sự kiện (cùng ID)! Dừng lại.", event);
+                    finalUnitData = event;
+                    break;
+                }
+                visitedEventIds.add(event.id);
+
+                // Điều kiện dừng 3: Gặp sự kiện chia tách (đây là trạng thái cuối)
                 if (event.event_type === 'SPLIT_MERGE') {
                     finalResults = events;
                     break;
                 }
 
-                // === GHI CHÚ SỬA LỖI: Điều kiện dừng 3 - Chống kẹt vòng lặp ===
-                // Nếu mã mới trả về giống hệt mã hiện tại, có nghĩa là đã đến điểm cuối.
-                if (event.new_ward_code === currentCode) {
+                // Điều kiện dừng 4: Không có sự tiến triển (đổi tên tại chỗ)
+                if (event.new_ward_code === parseInt(currentCode, 10)) {
                     finalUnitData = event;
+                    historyChain.push(event); // Thêm bước cuối này vào lịch sử
                     break;
                 }
-                // ==========================================================
 
-                // Nếu là sáp nhập đơn giản, thêm vào chuỗi lịch sử và tiếp tục
                 historyChain.push(event);
                 currentCode = event.new_ward_code;
             }
