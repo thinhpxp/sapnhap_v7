@@ -434,8 +434,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const date = event.change_date ? new Date(event.change_date).toLocaleDateString(currentLang === 'vi' ? 'vi-VN' : 'en-US') : 'N/A';
                     return `<li>${t('historyEntry').replace('{date}', date).replace('{from}', event.old_ward_name).replace('{to}', event.new_ward_name)}</li>`;
                 }).join('');
-                historyDisplay.innerHTML = `<h4>${t('historyTitle')}</h4><ul>${historyHtml}</ul>`;
-                historyDisplay.classList.remove('hidden');
+                if(historyDisplay) {
+                    historyDisplay.innerHTML = `<h4>${t('historyTitle')}</h4><ul>${historyHtml}</ul>`;
+                    historyDisplay.classList.remove('hidden');
+                }
             }
 
             // 2. Hiển thị Kết quả Cuối cùng
