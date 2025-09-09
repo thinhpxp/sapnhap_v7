@@ -7,6 +7,7 @@ Allow: /
 # Disallow indexing of script and style files (optional but good practice)
 Disallow: /script.js
 Disallow: /data/*
+Disallow: /api/*
 Disallow: /style.css
 Disallow: /choices.min.css
 Disallow: /choices.min.js

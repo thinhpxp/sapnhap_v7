@@ -1,7 +1,0 @@
-the day you went away.
-ta sao yamada vẫn bị dính?
-Đã remove team member yama trong vercel.app
-Khởi tạo lại môi trường cho vercel.app
-- npm install -g vercel
-- vercel init
-Làm mới lại thông tin git
