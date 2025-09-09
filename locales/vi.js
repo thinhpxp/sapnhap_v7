@@ -7,7 +7,7 @@ window.translations = {
   "ogDescription": "Công cụ tra cứu nhanh thông tin sáp nhập, đổi tên các phường, xã, thị trấn tại Việt Nam giai đoạn 2023-2025.",
 
   // Giao diện chính
-  "mainHeading": "Tra cứu địa chỉ sáp nhập",
+  "mainHeading": "Tra cứu địa chỉ sáp nhập-v4",
   "lookupDescriptionOldToNew": "Chọn địa chỉ cũ để tìm thông tin đơn vị hành chính mới tương ứng.",
   "lookupDescriptionNewToOld": "Chọn địa chỉ mới để tìm các đơn vị hành chính cũ tương ứng.",
   "oldToNew": "Cũ → Mới",
