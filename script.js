@@ -348,6 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const initialOldWardCode = selectedCommune.value;
         const fullOldAddress = `${selectedCommune.label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+         // === GHI CHÚ THAY ĐỔI: Hiển thị mã code cũ ngay từ đầu ===
+        const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
+        let oldAddressHtml = `
+            <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
+            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
 
         // Dọn dẹp giao diện
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
@@ -414,13 +419,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Trường hợp CHIA TÁCH
                 const splitHtml = finalResults.map(result => {
                     const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
-                    return `<li><b>${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b></li>`;
+                    // === GHI CHÚ THAY ĐỔI: Thêm mã code mới cho từng phần chia tách ===
+                    const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
+                    return `
+                        <li>
+                            <b>${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b>
+                            <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
+                        </li>`;
                 }).join('');
                 newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>`;
             } else if (finalUnitData) {
                 // Trường hợp sáp nhập có ĐÍCH ĐẾN
                 const newAddressForDisplay = `${finalUnitData.new_ward_name}, ${finalUnitData.new_province_name}`;
-                newAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p></div>`;
+                // === GHI CHÚ THAY ĐỔI: Hiển thị mã code mới ===
+                const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
+                const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+                let resultsHtml = `
+                    <div class="address-line">
+                        <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
+                        <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
+                    </div>
+                    <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+                newAddressDisplay.innerHTML = resultsHtml;
                 // Kích hoạt nút xem địa chỉ TTHC
                 newWardCodeForModal = finalUnitData.new_ward_code;
                 newProvinceCodeForModal = finalUnitData.new_province_code;
@@ -480,15 +500,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (record.event_type === 'SPLIT_MERGE' && record.split_description) {
                          noteHtml = `<div class="split-context-note">${record.split_description}</div>`;
                     }
-
                     const ward = record.old_ward_name;
                     const district = record.old_district_name;
                     const province = record.old_province_name;
-
-                    return `<li>${ward}, ${district}, ${province}${noteHtml}</li>`;
+                    // === GHI CHÚ THAY ĐỔI: Hiển thị mã code cũ ===
+                    const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
+                    return `
+                        <li>
+                            ${ward}, ${district}, ${province}
+                            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
+                            ${noteHtml}
+                        </li>`;
                 }).join('');
                 newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsFullAddresses}</ul>`;
-
                 newWardCodeForModal = data[0].new_ward_code;
                 newProvinceCodeForModal = data[0].new_province_code;
                 if (adminCenterActions) adminCenterActions.classList.remove('hidden');
