@@ -29188,7 +29188,7 @@ export const allProvincesData = [
           },
            {
             "name": "Xã An Châu",
-            "code": 12700,
+            "code": 12700123,
             "codename": "xa_an_chau",
             "division_type": "xã",
             "short_codename": "an_chau",
