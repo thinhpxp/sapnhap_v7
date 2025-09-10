@@ -80,7 +80,7 @@ window.translations = {
   "agency_cong_an_xa": "Công an xã",
 
    // ...
-  "feedbackDescription": "Bạn phát hiện có sự thiếu sót? Hãy nhắn thật chi tiết cho mình",
+  "feedbackDescription": "Bạn phát hiện có sự thiếu sót? Hãy nhắn tin thật chi tiết cho mình",
   "feedbackPlaceholder": "Nhập góp ý của bạn...",
   "feedbackSendBtn": "Gửi",
   "feedbackSuccess": "Cám ơn, các phản hồi sẽ được mình xử lý vào mỗi cuối tuần",
