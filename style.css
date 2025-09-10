@@ -3,7 +3,7 @@
 
 /* --- BIẾN MÀU SẮC CHO CHỦ ĐỀ MINIMALISM --- */
 :root {
-    --bg-color: #f8f9fa;
+    --bg-color: #192f45;
     --surface-color: #ffffff;
     --text-color: #212529;
     --text-muted: #6c757d;
@@ -12,6 +12,27 @@
     --primary-hover: #0b5ed7;
     --success-color: #198754;
     /* Màu cho trạng thái copied */
+}
+footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: white; /* màu chữ chung */
+}
+
+footer a {
+  color: white;
+  text-decoration: none; /* bỏ gạch chân */
+}
+
+footer a:hover {
+  color: #ccc; /* đổi màu khi hover */
+}
+
+footer p {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 /* --- THIẾT LẬP CƠ BẢN --- */
