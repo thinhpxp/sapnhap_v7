@@ -339,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    // === LOGIC TRA CỨU CHÍNH ===
+   /*
    async function handleForwardLookup() {
         const selectedProvinceValue = provinceChoices.getValue(true);
         const selectedDistrictValue = districtChoices.getValue(true);
@@ -406,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
     }
+    */
    /*
        async function handleForwardLookup() {
         // === GHI CHÚ: Phần lấy thông tin đầu vào giữ nguyên ===
@@ -496,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     */
-/*
+
   async function handleForwardLookup() {
      // === KHAI BÁO BIẾN ===
         const selectedProvince = provinceChoices.getValue(true);
@@ -639,7 +641,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
     }
-*/
+
     async function handleReverseLookup() {
         const selectedNewProvince = newProvinceChoices.getValue();
         const selectedNewCommune = newCommuneChoices.getValue();
