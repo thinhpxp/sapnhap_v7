@@ -29193,7 +29193,7 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "an_chau",
             "has_history": true,
-            "history_description": "Thành lập xã Liên An Đô trên cơ sở toàn bộ 3,81 km² diện tích tự nhiên và quy mô dân số là 5.779 người của xã An Châu. Căn cứ nghị quyết số 1201/NQ-UBTVQH15 hiệu lực từ 1/11/2024 "
+            "history_description": "Xã An Châu đã trở thành xã Liên An Đô, căn cứ nghị quyết số 1201/NQ-UBTVQH15 hiệu lực từ 1/11/2024. Bạn hãy chuyển sang tra cứu xã Liên An Đô."
           },
           {
             "name": "Xã Liên An Đô",
@@ -55782,7 +55782,7 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "thong_nhat",
             "has_history": true,
-            "history_description": "Phường Thống Nhất sáp nhập vào Phường Tân Tiến theo nghị quyết 1193/NQ-UBTVQH15 hiệu lực từ 1/11/2024"
+            "history_description": "Phường Thống Nhất sáp nhập vào Phường Tân Tiến theo nghị quyết 1193/NQ-UBTVQH15 hiệu lực từ 1/11/2024. Bạn hãy chuyển sang tra cứu phường Tân Tiến"
           },
           {
             "name": "Phường Tự An",
@@ -63351,7 +63351,7 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "phuong_24",
             "has_history": true,
-            "history_description": "Phường 24 đã nhập toàn bộ diện tích  vào Phường 14 theo nghị quyết 1278/NQ-UBTVQH15 ngày 14/11/2024"
+            "history_description": "Phường 24 đã nhập toàn bộ diện tích  vào Phường 14 theo nghị quyết 1278/NQ-UBTVQH15 ngày 14/11/2024. Bạn hãy chuyển sang tra cứu phường 14."
           },
           {
             "name": "Phường 2",
@@ -67974,7 +67974,7 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "an_khanh",
             "has_history": true,
-            "history_description": "Xã An Khánh nhập vào thị trấn Châu Thành theo Nghị quyết số 1237/NQ-UBTVQH15, từ ngày 1-12-2024",
+            "history_description": "Xã An Khánh nhập vào thị trấn Châu Thành theo Nghị quyết số 1237/NQ-UBTVQH15, từ ngày 1-12-2024. Bạn hãy chuyển sang tra cứu tt.Châu Thành",
           },
           {
             "name": "Xã Tân Thạch",
