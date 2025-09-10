@@ -303,11 +303,15 @@ button#lookup-btn:disabled {
     padding: 25px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-
-    /* Pattern nền */
-    background-color: var(--bg-color); /* màu nền chính */
-    background-image: radial-gradient(var(--border-color) 8%, transparent 9%);
-    background-size: 20px 20px;
+    /* Pattern caro */
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--border-color) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--border-color) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--border-color) 75%);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
 }
 
 #result-container h2 {
