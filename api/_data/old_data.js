@@ -29193,7 +29193,7 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "an_chau",
             "has_history": true,
-            "history_description": "thành lập xã Liên An Đô trên cơ sở toàn bộ 3,81 km² diện tích tự nhiên và quy mô dân số là 5.779 người của xã An Châu. Căn cứ nghị quyết số 1201/NQ-UBTVQH15 hiệu lực từ 1/11/2024 "
+            "history_description": "Thành lập xã Liên An Đô trên cơ sở toàn bộ 3,81 km² diện tích tự nhiên và quy mô dân số là 5.779 người của xã An Châu. Căn cứ nghị quyết số 1201/NQ-UBTVQH15 hiệu lực từ 1/11/2024 "
           },
           {
             "name": "Xã Liên An Đô",
