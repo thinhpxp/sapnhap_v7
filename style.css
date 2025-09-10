@@ -874,3 +874,13 @@ body.modal-open {
 .history-display li:last-child {
     margin-bottom: 0;
 }
+/* history_description*/
+.history-suggestion {
+    background-color: #eef2f7;
+    border-left: 4px solid #6c757d;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #333;
+    text-align: left;
+}

@@ -339,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    // === LOGIC TRA CỨU CHÍNH ===
+   /*
      async function handleForwardLookup() {
      // === KHAI BÁO BIẾN ===
         const selectedProvince = provinceChoices.getValue(true);
@@ -477,6 +478,86 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
             catch (error) {
+            console.error('Lỗi khi tra cứu xuôi:', error);
+            newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
+        }
+    }
+*/
+async function handleForwardLookup() {
+        const selectedProvince = provinceChoices.getValue(true);
+        const selectedDistrict = districtChoices.getValue(true);
+        const selectedCommuneValue = communeChoices.getValue(true);
+
+        if (!selectedProvince || !selectedDistrict || !selectedCommuneValue) {
+            alert(t('alertSelectOldCommune'));
+            return;
+        }
+
+        const oldWardCode = selectedCommuneValue;
+        const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+
+        // Dọn dẹp giao diện
+        const oldCodes = `${selectedCommuneValue}, ${selectedDistrict}, ${selectedProvince}`;
+        oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div><div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
+        newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
+        if (historyDisplay) historyDisplay.classList.add('hidden'); // Vẫn giữ để ẩn nếu có
+        if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        resultContainer.classList.remove('hidden');
+
+        try {
+            // === GHI CHÚ CỐT LÕI 1: KIỂM TRA LỊCH SỬ TĨNH TRƯỚC ===
+            const provinceData = allProvincesData.find(p => p.code == selectedProvince);
+            const districtData = provinceData ? provinceData.districts.find(d => d.code == selectedDistrict) : null;
+            const wardData = districtData ? districtData.wards.find(w => w.code == oldWardCode) : null;
+
+            // Nếu xã có cờ 'has_history', chỉ hiển thị gợi ý và dừng lại
+            if (wardData && wardData.has_history && wardData.history_description) {
+                newAddressDisplay.innerHTML = `<div class="history-suggestion">${wardData.history_description}</div>`;
+                return; // Kết thúc hàm tại đây
+            }
+
+            const isSplit = wardData && wardData.is_split_case === true;
+            const apiUrl = `/api/lookup-forward?code=${oldWardCode}${isSplit ? '&is_split=true' : ''}`;
+
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Server error');
+
+            // === GHI CHÚ CỐT LÕI 2: LOGIC HIỂN THỊ ĐÃ ĐƯỢC ĐƠN GIẢN HÓA ===
+            // Không còn khối 'history' nữa
+
+            if (data.is_split_case) {
+                // Xử lý hiển thị cho trường hợp CHIA TÁCH
+                const splitHtml = data.split_results.map(result => {
+                    const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
+                    const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
+                    return `<li><b>${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b><div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div></li>`;
+                }).join('');
+                newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>`;
+
+                // Kích hoạt nút xem TTHC cho mảnh ghép đầu tiên
+                newWardCodeForModal = data.split_results[0].new_ward_code;
+                newProvinceCodeForModal = data.split_results[0].new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+
+            } else if (data.length > 0) {
+                // Trường hợp sáp nhập có ĐÍCH ĐẾN (thường chỉ có 1 kết quả)
+                const finalUnitData = data[0];
+                const newAddressForDisplay = `${finalUnitData.new_ward_name}, ${finalUnitData.new_province_name}`;
+                const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
+                const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+                let resultsHtml = `<div class="address-line"><p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p><button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button></div><div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+                newAddressDisplay.innerHTML = resultsHtml;
+
+                newWardCodeForModal = finalUnitData.new_ward_code;
+                newProvinceCodeForModal = finalUnitData.new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+            } else {
+                // Trường hợp KHÔNG THAY ĐỔI
+                newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
+            }
+
+        } catch (error) {
             console.error('Lỗi khi tra cứu xuôi:', error);
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
