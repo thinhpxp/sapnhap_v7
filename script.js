@@ -339,6 +339,74 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    // === LOGIC TRA CỨU CHÍNH ===
+   async function handleForwardLookup() {
+        const selectedProvinceValue = provinceChoices.getValue(true);
+        const selectedDistrictValue = districtChoices.getValue(true);
+        const selectedCommuneValue = communeChoices.getValue(true);
+
+        if (!selectedProvinceValue || !selectedDistrictValue || !selectedCommuneValue) {
+            alert(t('alertSelectOldCommune'));
+            return;
+        }
+
+        const initialOldWardCode = selectedCommuneValue;
+        const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+
+        const oldCodes = `${selectedCommuneValue}, ${selectedDistrictValue}, ${selectedProvinceValue}`;
+        let oldAddressHtml = `
+            <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
+            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
+
+        oldAddressDisplay.innerHTML = oldAddressHtml;
+        newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
+        if (historyDisplay) historyDisplay.classList.add('hidden');
+        if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        resultContainer.classList.remove('hidden');
+
+        try {
+            // === GHI CHÚ THAY ĐỔI CỐT LÕI: Loại bỏ hoàn toàn vòng lặp 'while' ===
+            // Chỉ thực hiện một lệnh gọi API duy nhất.
+            const response = await fetch(`/api/lookup-forward?code=${initialOldWardCode}`);
+            const events = await response.json();
+            if (!response.ok) throw new Error(events.error || 'Server error');
+
+            // === GHI CHÚ: Logic hiển thị giờ đây dựa trực tiếp vào kết quả API ===
+            if (events.length === 0) {
+                // Trường hợp KHÔNG THAY ĐỔI
+                newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
+            }
+            else if (events.length > 1 || (events.length === 1 && events[0].event_type === 'SPLIT_MERGE')) {
+                // Trường hợp CHIA TÁCH (nhiều kết quả hoặc 1 kết quả nhưng là SPLIT_MERGE)
+                const splitHtml = events.map(result => {
+                    const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
+                    const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
+                    return `<li><b>${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b><div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div></li>`;
+                }).join('');
+                newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>`;
+
+                newWardCodeForModal = events[0].new_ward_code;
+                newProvinceCodeForModal = events[0].new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+            }
+            else {
+                // Trường hợp sáp nhập có ĐÍCH ĐẾN (chỉ có 1 kết quả và là MERGE)
+                const finalUnitData = events[0];
+                const newAddressForDisplay = `${finalUnitData.new_ward_name}, ${finalUnitData.new_province_name}`;
+                const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
+                const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+                let resultsHtml = `<div class="address-line"><p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p><button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button></div><div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+                newAddressDisplay.innerHTML = resultsHtml;
+
+                newWardCodeForModal = finalUnitData.new_ward_code;
+                newProvinceCodeForModal = finalUnitData.new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Lỗi khi tra cứu xuôi:', error);
+            newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
+        }
+    }
+   /*
        async function handleForwardLookup() {
         // === GHI CHÚ: Phần lấy thông tin đầu vào giữ nguyên ===
         const selectedProvinceValue = provinceChoices.getValue(true);
@@ -427,6 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
     }
+    */
 /*
   async function handleForwardLookup() {
      // === KHAI BÁO BIẾN ===
