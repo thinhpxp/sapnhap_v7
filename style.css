@@ -302,8 +302,12 @@ button#lookup-btn:disabled {
     margin-top: 15px;
     padding: 25px;
     border-radius: 12px;
-    background-color: var(--bg-color);
     border: 1px solid var(--border-color);
+
+    /* Pattern nền */
+    background-color: var(--bg-color); /* màu nền chính */
+    background-image: radial-gradient(var(--border-color) 8%, transparent 9%);
+    background-size: 20px 20px;
 }
 
 #result-container h2 {
@@ -312,6 +316,7 @@ button#lookup-btn:disabled {
     padding-bottom: 5px;
     border-bottom: 1px solid var(--border-color);
 }
+
 
 /* --- PHẦN STYLE MỚI VÀ ĐƯỢC CẬP NHẬT --- */
 
