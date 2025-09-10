@@ -847,40 +847,15 @@ body.modal-open {
     border-radius: 4px;
     border-left: 3px solid var(--primary-color); /* Đường viền nhấn mạnh bên trái */
 }
-
-/* --- Style riêng cho khối Lịch sử (có danh sách) --- */
-.history-display h4 {
+/* === THÊM MỚI: Style cho ghi chú lịch sử tĩnh === */
+.history-note {
     font-size: 0.9em;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-style: normal; /* Bỏ in nghiêng cho tiêu đề */
-}
-
-.history-display ul {
-    list-style-type: '📜';
-    padding-left: 20px;
-    margin: 0;
-}
-
-.history-display li {
-    padding-left: 10px;
-    margin-bottom: 8px;
-    font-style: normal; /* Bỏ in nghiêng cho nội dung trong danh sách */
-}
-
-/* Đảm bảo li cuối cùng không có margin dưới */
-.history-display li:last-child {
-    margin-bottom: 0;
-}
-/* history_description*/
-.history-suggestion {
-    background-color: #eef2f7;
-    border-left: 4px solid #6c757d;
-    padding: 15px;
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: #333;
+    font-style: italic;
+    color: #5a2d00; /* Màu nâu sẫm */
+    background-color: #fff3cd; /* Nền vàng nhạt */
+    padding: 12px 15px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border-left: 4px solid #ffc107; /* Đường viền nhấn mạnh màu vàng */
     text-align: left;
 }
