@@ -1,4 +1,3 @@
-/*
 import { createClient } from '@supabase/supabase-js';
 //const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { db: { schema: 'api' }});
 const supabase = createClient(
@@ -21,7 +20,8 @@ export default async function handler(request, response) {
             response.status(500).json({ error: 'Lỗi máy chủ.' });
         }
 }
-*/
+
+/*
 // /api/lookup-forward.js - Phiên bản đơn giản hóa, không truy vết lịch sử
 import { createClient } from '@supabase/supabase-js';
 
@@ -74,3 +74,4 @@ export default async function handler(request, response) {
     response.status(500).json({ error: 'Lỗi máy chủ nội bộ.' });
   }
 }
+*/

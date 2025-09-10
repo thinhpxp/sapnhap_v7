@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 /*
-     async function handleForwardLookup() {
+  async function handleForwardLookup() {
      // === KHAI BÁO BIẾN ===
         const selectedProvince = provinceChoices.getValue(true);
         const selectedDistrict = districtChoices.getValue(true);
