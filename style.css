@@ -304,7 +304,7 @@ button#lookup-btn:disabled {
     border-radius: 12px;
     border: 1px solid var(--border-color);
     /* Pattern caro */
-    background-color: var(--bg-color);
+    background-color: #e3aae866;
     background-image:
         linear-gradient(45deg, var(--border-color) 25%, transparent 25%),
         linear-gradient(-45deg, var(--border-color) 25%, transparent 25%),
