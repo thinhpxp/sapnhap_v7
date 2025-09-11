@@ -834,6 +834,11 @@ body.modal-open {
     border-radius: 4px;
     border-left: 3px solid var(--primary-color); /* Đường viền nhấn mạnh bên trái */
 }
+.split-description {
+  color: #e63946;   /* Ví dụ: đỏ nổi bật */
+  font-weight: 400; /* Giữ in đậm */
+}
+
 /* === THÊM MỚI: Style cho ghi chú lịch sử tĩnh === */
 .history-note {
     font-size: 0.9em;

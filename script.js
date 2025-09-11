@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
                     return `
                         <li>
-                            <b>${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b>
+                            <b class="split-description">${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b>
                             <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
                         </li>`;
                 }).join('');
