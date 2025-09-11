@@ -72,7 +72,7 @@ body.modal-open {
     max-width: 80%;
     margin: 0 auto;
 }
-
+/*----------CỘT BÊN PHẢI VÀ CÁC PHẦN TỪ CON BÊN TRONG---------*/
 .right-column {
     flex: 1;
     padding-top: 20px;
@@ -82,6 +82,18 @@ body.modal-open {
     margin-top: 0;
 }
 
+.right-column .right-text {
+  color: white;
+  text-align: left;
+  font-size: 0.9em;
+}
+
+.right-column .right-title {
+  color: white;
+  text-align: left;
+}
+
+/********************************************************************************/
 /* ... (Các style khác giữ nguyên) ... */
 h1 {
     font-size: 1.8em;
@@ -97,10 +109,6 @@ p {
     margin-bottom: 15px;
     font-size: 1em;
     line-height: 1.6;
-}
-
-.right-column p {
-    text-align: left;
 }
 
 .form-group {
@@ -398,44 +406,6 @@ button#lookup-btn:disabled {
     background-color: var(--border-color);
     margin: 15px 0;
 }
-
-@media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-        max-width: 600px;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 20px 10px;
-    }
-
-    .left-column,
-    .right-column {
-        padding: 20px;
-    }
-
-    .left-column-content-wrapper {
-        max-width: 100%;
-    }
-
-    .right-column {
-        background: var(--surface-color);
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-    }
-
-    h1 {
-        font-size: 1.6em;
-    }
-
-    p {
-        font-size: 1em;
-        margin-bottom: 30px;
-    }
-}
-
 /* === CSS MỚI CHO LAYOUT 2 CỘT QR === */
 .image-container-grid {
     display: flex;          /* Kích hoạt Flexbox */
@@ -460,11 +430,7 @@ button#lookup-btn:disabled {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 768px) {
-    .qr-column{
-        padding: 0px;
-    }
-}
+
 
 .qr-column img {
    /*  width: 100%;            /* Ảnh co giãn theo chiều rộng của cột */
@@ -895,4 +861,45 @@ body.modal-open {
 
 .social-icons a:hover {
   color: var(--bg-color); /* đổi màu khi hover */
+}
+/*--------- CSS CHO THIẾT BỊ DI ĐỘNG ----------*/
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  .left-column,
+  .right-column {
+    padding: 20px;
+  }
+
+  .left-column-content-wrapper {
+    max-width: 100%;
+  }
+
+  .right-column {
+    /*background: aliceblue;*/ /* thay đổi theo yêu cầu */
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  p {
+    font-size: 1em;
+    margin-bottom: 30px;
+  }
+
+  .qr-column {
+    padding: 0px;
+  }
 }
