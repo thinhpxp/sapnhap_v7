@@ -824,7 +824,6 @@ body.modal-open {
     color: #dc3545;
 }
 /* --- Style nền tảng cho các hộp ghi chú --- */
-.history-display,
 .split-context-note {
     font-size: 0.85em;
     font-style: italic;
