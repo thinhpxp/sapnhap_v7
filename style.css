@@ -86,6 +86,7 @@ body.modal-open {
   color: white;
   text-align: left;
   font-size: 0.9em;
+  margin-bottom: 4px;
 }
 
 .right-column .right-title {
@@ -848,19 +849,21 @@ body.modal-open {
 }
 
 .social-icons {
-  margin-top: 5px;
+  margin-bottom: 5px;
   text-align: center;
+  padding-bottom: 15px;
 }
 
 .social-icons a {
   margin: 0 10px;
   font-size: 1em;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .social-icons a:hover {
-  color: var(--bg-color); /* đổi màu khi hover */
+  color: #43ffa3; /* đổi màu khi hover */
 }
 /*--------- CSS CHO THIẾT BỊ DI ĐỘNG ----------*/
 @media (max-width: 1024px) {
