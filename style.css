@@ -834,9 +834,11 @@ body.modal-open {
     border-radius: 4px;
     border-left: 3px solid var(--primary-color); /* Đường viền nhấn mạnh bên trái */
 }
+/* ------một phần diện tích tự nhiên, quy mô dân số------ */
 .split-description {
-  color: #e63946;   /* Ví dụ: đỏ nổi bật */
-  font-weight: 400; /* Giữ in đậm */
+  color: #e63946;
+  font-weight: 200;
+  font-size: 0.9em;
 }
 
 /* === THÊM MỚI: Style cho ghi chú lịch sử tĩnh === */
