@@ -45779,6 +45779,8 @@ export const allProvincesData = [
         "codename": "huyen_nong_son",
         "division_type": "huyện",
         "short_codename": "nong_giang",
+        "has_history": true,
+        "history_description": "Số: 1241/NQ-UBTVQH15; Ngày: 24/10/2024",
         "wards": [
           {
             "name": "Đã sáp nhập toàn bộ các xã vào huyện Quế Sơn từ 1/1/2025",
