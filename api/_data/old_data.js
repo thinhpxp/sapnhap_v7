@@ -22041,6 +22041,15 @@ export const allProvincesData = [
             "history_description": "Thành lập xã Nhật Tiến trên cơ sở nhập toàn bộ diện tích tự nhiên là 4,19 km2, quy mô dân số là 4.466 người của xã Phú Lạc, toàn bộ diện tích tự nhiên là 7,71 km2, quy mô dân số là 3.594 người của xã Chương Xá và toàn bộ diện tích tự nhiên là 9,55 km2, quy mô dân số là 5.637 người của xã Văn Khúc"
           },
           {
+            "name": "Xã Văn Khúc",
+            "code": 8419,
+            "codename": "xa_van_khuc",
+            "division_type": "xã",
+            "short_codename": "van_khuc",
+            "has_history": true,
+            "history_description": "Thành lập xã Nhật Tiến trên cơ sở nhập toàn bộ diện tích tự nhiên là 4,19 km2, quy mô dân số là 4.466 người của xã Phú Lạc, toàn bộ diện tích tự nhiên là 7,71 km2, quy mô dân số là 3.594 người của xã Chương Xá và toàn bộ diện tích tự nhiên là 9,55 km2, quy mô dân số là 5.637 người của xã Văn Khúc"
+          },
+          {
             "name": "Xã Hùng Việt",
             "code": 8416,
             "codename": "xa_hung_viet",
