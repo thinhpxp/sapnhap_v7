@@ -2306,6 +2306,24 @@ export const allProvincesData = [
             "short_codename": "nam_ha"
           },
           {
+            "name": "Xã Vân Hà",
+            "code": 9718,
+            "codename": "xa_van_ha",
+            "division_type": "xã",
+            "short_codename": "van_ha",
+            "has_history": true,
+            "history_description": "Xã Vân Hà và xã Vân Nam sáp nhập thành xã Nam Hà (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Nam Hà."
+          },
+          {
+            "name": "Xã Vân Nam",
+            "code": 97241286,
+            "codename": "xa_van_nam",
+            "division_type": "xã",
+            "short_codename": "van_nam",
+            "has_history": true,
+            "history_description": "Xã Vân Hà và xã Vân Nam sáp nhập thành xã Nam Hà (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Nam Hà."
+          },
+          {
             "name": "Xã Xuân Đình",
             "code": 9727,
             "codename": "xa_xuan_dinh",
