@@ -2323,6 +2323,33 @@ export const allProvincesData = [
             "has_history": true,
             "history_description": "Xã Vân Hà và xã Vân Nam sáp nhập thành xã Nam Hà (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Nam Hà."
           },
+           {
+            "name": "Xã Phúc Hòa",
+            "code": 9763,
+            "codename": "xa_phuc_hoa",
+            "division_type": "xã",
+            "short_codename": "phuc_hoa",
+            "has_history": true,
+            "history_description": "Xã Phúc Hòa sáp nhập thành thị trấn Phúc Thọ (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu thị trấn Phúc Thọ."
+          },
+          {
+            "name": "Xã Thượng Cốc",
+            "code": 9748,
+            "codename": "xa_thuong_co",
+            "division_type": "xã",
+            "short_codename": "thuong_coc",
+            "has_history": true,
+            "history_description": "Xã Thượng Cốc và xã Long Xuyên sáp nhập thành xã Long Thượng  (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Long Thượng."
+          },
+           {
+            "name": "Xã Long Xuyên",
+            "code": 97451286,
+            "codename": "xa_long_xuyen",
+            "division_type": "xã",
+            "short_codename": "long_xuyen",
+            "has_history": true,
+            "history_description": "Xã Thượng Cốc và xã Long Xuyên sáp nhập thành xã Long Thượng  (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Long Thượng."
+          },
           {
             "name": "Xã Xuân Đình",
             "code": 9727,
@@ -2350,6 +2377,24 @@ export const allProvincesData = [
             "codename": "xa_tich_loc",
             "division_type": "xã",
             "short_codename": "tich_loc"
+          },
+          {
+            "name": "Xã Thọ Lộc",
+            "code": 97421286,
+            "codename": "xa_tho_loc",
+            "division_type": "xã",
+            "short_codename": "tho_loc",
+            "has_history": true,
+            "history_description": "Xã Thọ Lộc và xã Tích Giang sáp nhập thành xã Tích Lộc (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Tích Lộc."
+          },
+          {
+            "name": "Xã Tích Giang",
+            "code": 9754,
+            "codename": "xa_tich_giang",
+            "division_type": "xã",
+            "short_codename": "tich_giang",
+            "has_history": true,
+            "history_description": "Xã Thọ Lộc và xã Tích Giang sáp nhập thành xã Tích Lộc (Nghị quyết 1286/NQ-UBTVQH15; Ngày: 14/11/2024). Bạn hãy chuyển sang tra cứu xã Tích Lộc."
           },
           {
             "name": "Xã Long Thượng",
