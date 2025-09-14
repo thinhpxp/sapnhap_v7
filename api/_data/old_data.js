@@ -2425,13 +2425,6 @@ export const allProvincesData = [
             "short_codename": "trach_my_loc"
           },
           {
-            "name": "Xã Phúc Hòa",
-            "code": 9763,
-            "codename": "xa_phuc_hoa",
-            "division_type": "xã",
-            "short_codename": "phuc_hoa"
-          },
-          {
             "name": "Xã Ngọc Tảo",
             "code": 9766,
             "codename": "xa_ngoc_tao",
