@@ -68050,7 +68050,7 @@ export const allProvincesData = [
             "division_type": "xã",
             "short_codename": "an_khanh",
             "has_history": true,
-            "history_description": "Xã An Khánh nhập vào thị trấn Châu Thành theo Nghị quyết số 1237/NQ-UBTVQH15, từ ngày 1-12-2024. Bạn hãy chuyển sang tra cứu tt.Châu Thành",
+            "history_description": "Xã An Khánh nhập vào thị trấn Châu Thành theo Nghị quyết số 1237/NQ-UBTVQH15, từ ngày 1-12-2024. Bạn hãy chuyển sang tra cứu tt.Châu Thành"
           },
           {
             "name": "Xã Tân Thạch",
