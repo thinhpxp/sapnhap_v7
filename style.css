@@ -387,7 +387,8 @@ button#lookup-btn:disabled {
     border-radius: 6px;
     margin-bottom: 5px;
     text-align: left;
-    color: var(--text-color);
+    font-size: 0.9em;
+    color: #03101e;
 }
 
 
