@@ -682,8 +682,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 context.province = { code: newProvince.value, name: newProvince.label };
             }
             const newCommune = newCommuneChoices.getValue();
-            if (newWard) {
-                context.ward = { code: newWard.value, name: newWard.label };
+            if (newCommune) {
+                context.commune = { code: newCommune.value, name: newCommune.label };
             }
         } else {
             const oldProvince = provinceChoices.getValue();
