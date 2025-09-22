@@ -661,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // === THÊM MỚI: Hàm xử lý gửi Góp ý ===
+    // === XỬ LÝ GÓP Ý - FEEDBACK ===
     async function handleSubmitFeedback() {
         if (!feedbackInput || !feedbackSendBtn || !feedbackMessage) return;
 
@@ -681,6 +681,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newProvince) {
                 context.province = { code: newProvince.value, name: newProvince.label };
             }
+            const newCommune = newCommuneChoices.getValue();
+            if (newWard) {
+                context.ward = { code: newWard.value, name: newWard.label };
+            }
         } else {
             const oldProvince = provinceChoices.getValue();
             if (oldProvince) {
@@ -689,6 +693,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const oldDistrict = districtChoices.getValue();
             if (oldDistrict) {
                 context.district = { code: oldDistrict.value, name: oldDistrict.label };
+            }
+            const oldCommune = communeChoices.getValue();
+            if (oldCommune) {
+                context.commune = { code: oldCommune.value, name: oldCommune.label };
             }
         }// Kết thúc thu thập ngữ cảnh
         // Vô hiệu hóa form để tránh gửi nhiều lần
