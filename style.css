@@ -827,7 +827,7 @@ body.modal-open {
 /* --- Style nền tảng cho các hộp ghi chú --- */
 .split-case-note {
     font-size: 0.9em;
-    font-style: bold;
+    font-weight: 700;
     color: #000000;
     text-transform: uppercase;
 }
@@ -842,11 +842,16 @@ body.modal-open {
     border-left: 3px solid var(--primary-color); /* Đường viền nhấn mạnh bên trái */
 }
 /* ------CHÚ THÍCH VỀ SỰ CHIA TÁCH VÀ SÁP NHẬP------ */
+.split-results-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
 .split-description {
-  margin-top: 6px;              /* tạo khoảng cách với dòng trên */
-  font-size: 0.9em;             /* nhỏ hơn text chính */
+  margin-top: 4px;              /* tạo khoảng cách với dòng trên */
+  font-size: 0.8em;             /* nhỏ hơn text chính */
   font-style: italic;           /* chữ nghiêng để phân biệt */
-  color: var(--text-muted);     /* màu xám nhẹ, đồng bộ theme */
+  color: #cf469c;     /* màu xám nhẹ, đồng bộ theme */
   line-height: 1.4;             /* dễ đọc hơn khi mô tả dài */
 }
 
