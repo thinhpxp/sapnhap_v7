@@ -847,6 +847,16 @@ body.modal-open {
     padding-left: 0;
     margin-top: 10px;
 }
+
+.split-results-list li {
+    background-color: #89b2dc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: 0.9em;
+    color: #03101e;
+}
 .split-description {
   margin-top: 4px;              /* tạo khoảng cách với dòng trên */
   font-size: 0.8em;             /* nhỏ hơn text chính */
