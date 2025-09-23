@@ -35,7 +35,7 @@ window.translations = {
   "lookupButton": "Tra Cứu",
   "resultsTitle": "Kết Quả Tra Cứu",
   "oldAddressLabel": "Địa chỉ cũ:",
-  "newAddressLabel": "Đã sáp nhập thành:",
+  "newAddressLabel": "Địa chỉ mới:",
   "mergedFromLabel": "Các đơn vị cũ hợp thành:",
   "noChangeMessage": "Địa chỉ này không có thông tin sáp nhập.",
   "noDataFoundMessage": "Địa chỉ này là một đơn vị hành chính mới và không có dữ liệu về các đơn vị cũ đã hợp thành.",

@@ -835,11 +835,13 @@ body.modal-open {
     border-radius: 4px;
     border-left: 3px solid var(--primary-color); /* Đường viền nhấn mạnh bên trái */
 }
-/* ------một phần diện tích tự nhiên, quy mô dân số------ */
+/* ------CHÚ THÍCH VỀ SỰ CHIA TÁCH VÀ SÁP NHẬP------ */
 .split-description {
-  color: #e63946;
-  font-weight: 200;
-  font-size: 0.9em;
+  margin-top: 6px;              /* tạo khoảng cách với dòng trên */
+  font-size: 0.9em;             /* nhỏ hơn text chính */
+  font-style: italic;           /* chữ nghiêng để phân biệt */
+  color: var(--text-muted);     /* màu xám nhẹ, đồng bộ theme */
+  line-height: 1.4;             /* dễ đọc hơn khi mô tả dài */
 }
 
 /* === THÊM MỚI: Style cho ghi chú lịch sử tĩnh === */
