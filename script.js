@@ -39,7 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackMessage = document.getElementById('feedback-message');
     // Lịch sử sáp nhập
     const historyDisplay = document.getElementById('history-display');
-
+ // QUICK SEARCH
+    const traditionalControls = document.getElementById('controls');
+    const quickSearchInterface = document.getElementById('quick-search-interface');
+    const interfaceModeToggle = document.getElementById('interface-mode-toggle');
     // === BIỂU TƯỢNG SVG ===
     const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
     const copiedIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
@@ -52,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let removeAccents = false; // Mặc định là TẮT (hiển thị có dấu)
     let provinceChoices, districtChoices, communeChoices;
     let newProvinceChoices, newCommuneChoices;
+    let isQuickSearchMode = false;
 
     // === CÁC HÀM TIỆN ÍCH ===
     function toNormalizedString(str) {
@@ -163,6 +167,42 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             loadInitialData();
         }, 0);
+    }
+
+    //Hàm quản lý việc chuyển đổi giao diện chính
+    function toggleInterfaceMode() {
+        isQuickSearchMode = interfaceModeToggle.checked;
+
+        if (isQuickSearchMode) {
+            // Chuyển sang chế độ Tra cứu Nhanh
+            if (traditionalControls) traditionalControls.classList.add('hidden');
+            if (quickSearchInterface) quickSearchInterface.classList.remove('hidden');
+            resultContainer.classList.add('hidden'); // Ẩn kết quả cũ
+
+            // GHI CHÚ CỐT LÕI: Tải động script cho tra cứu nhanh
+            // Chỉ tải script này một lần duy nhất.
+            if (!document.getElementById('quick-search-script')) {
+                console.log("Lần đầu kích hoạt Tra cứu Nhanh. Đang tải script...");
+                const script = document.createElement('script');
+                script.id = 'quick-search-script';
+                script.src = '/quick_script.js';
+                script.defer = true;
+                // Gán một hàm callback để biết khi nào script đã tải xong
+                script.onload = () => {
+                    console.log("quick_script.js đã tải xong.");
+                    // Nếu có một hàm khởi tạo trong quick_script.js, gọi nó ở đây
+                    if (window.initializeQuickSearch) {
+                        window.initializeQuickSearch();
+                    }
+                };
+                document.body.appendChild(script);
+            }
+
+        } else {
+            // Chuyển về chế độ Tra cứu Truyền thống
+            if (traditionalControls) traditionalControls.classList.remove('hidden');
+            if (quickSearchInterface) quickSearchInterface.classList.add('hidden');
+        }
     }
 
      // THÊM MỚI: Hàm riêng để tải dữ liệu ban đầu
@@ -335,6 +375,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     handleSubmitFeedback();
                 }
             });
+        }
+        // === THÊM MỚI: Listener cho switch chính ===
+        if (interfaceModeToggle) {
+            interfaceModeToggle.addEventListener('change', toggleInterfaceMode);
         }
     }
 

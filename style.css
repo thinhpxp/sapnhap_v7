@@ -936,3 +936,92 @@ body.modal-open {
     padding: 0px;
   }
 }
+
+/* =================================================== */
+/* === THÊM MỚI: STYLE CHO GIAO DIỆN TRA CỨU NHANH === */
+/* =================================================== */
+
+.quick-search-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 8px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
+.quick-search-group {
+    margin-bottom: 25px;
+}
+
+.quick-search-group label {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.search-input-wrapper {
+    position: relative;
+}
+
+.quick-search-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1em;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.quick-search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    outline: none;
+}
+
+.spinner-inline {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.quick-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+.quick-search-results li {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+.quick-search-results li:last-child {
+    border-bottom: none;
+}
+.quick-search-results li:hover {
+    background-color: #f8f9fa;
+}
+
+.quick-search-results .result-name {
+    font-weight: 600;
+    display: block;
+}
+
+.quick-search-results .result-context {
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
