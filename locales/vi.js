@@ -64,11 +64,11 @@ window.translations = {
   "realtimeLoading": "Đang tải dữ liệu...",
 
   //địa chỉ trung tâm hành chính
-  "showAdminCentersBtn": "Xem Địa chỉ Trung tâm Hành chính",
+  "showAdminCentersBtn": "Xem Địa chỉ Trung tâm Hành chính mới",
   "modalTitle": "Địa chỉ các Cơ quan Hành chính",
   "loading": "Đang tải...",
   "lookingUp": "Đang tra cứu, vui lòng chờ...",
-  "noAdminCenterData": "Mình đang cập nhật các thông tin này.",
+  "noAdminCenterData": "Mình đang cập nhật các thông tin này. Trường hợp bạn biết, có thể nhắn tin để mình bổ sung ngay.",
   "agency_ubnd": "Ủy ban Nhân dân",
   "agency_hdnd": "Hội đồng Nhân dân",
   "agency_mttq": "Mặt trận tổ quốc",
@@ -80,7 +80,7 @@ window.translations = {
   "agency_cong_an_xa": "Công an xã",
 
    // ...
-  "feedbackDescription": "Bạn phát hiện có sự thiếu sót? Hãy nhắn tin thật chi tiết cho mình nhé.",
+  "feedbackDescription": "Mọi góp ý, bổ sung xin hãy nhắn tin thật chi tiết cho mình nhé. Ví dụ: Trung tâm 1 cửa mới của phường X nay ở địa chỉ Y",
   "feedbackPlaceholder": "Nhập góp ý của bạn...",
   "feedbackSendBtn": "Gửi",
   "feedbackSuccess": "Cám ơn, các phản hồi sẽ được mình xử lý vào mỗi cuối tuần",
