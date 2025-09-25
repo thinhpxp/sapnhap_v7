@@ -4,11 +4,12 @@
 // để tránh làm ô nhiễm không gian tên toàn cục (window).
 (() => {
     // === KHAI BÁO BIẾN VÀ DOM ELEMENTS ===
+    const quickSearchInterface = document.getElementById('quick-search-interface');
     const quickSearchOldInput = document.getElementById('quick-search-old-input');
     const quickSearchNewInput = document.getElementById('quick-search-new-input');
     const oldResultsContainer = document.getElementById('quick-search-old-results');
     const newResultsContainer = document.getElementById('quick-search-new-results');
-    const resultContainer = document.getElementById('result-container'); // Tái sử dụng từ script.js
+    const resultContainer = document.getElementById('result-container');
     const oldAddressDisplay = document.getElementById('old-address-display');
     const newAddressDisplay = document.getElementById('new-address-display');
     const historyDisplay = document.getElementById('history-display');
