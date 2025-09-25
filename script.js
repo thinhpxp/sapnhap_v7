@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const traditionalControls = document.getElementById('controls');
     const quickSearchInterface = document.getElementById('quick-search-interface');
     const interfaceModeToggle = document.getElementById('interface-mode-toggle');
+    // === THÊM MỚI: DOM element cho switch Cũ/Mới ===
+    const traditionalModeSwitcher = document.getElementById('traditional-mode-switcher');
     // === BIỂU TƯỢNG SVG ===
     const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
     const copiedIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
@@ -178,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (traditionalControls) traditionalControls.classList.add('hidden');
             if (quickSearchInterface) quickSearchInterface.classList.remove('hidden');
             resultContainer.classList.add('hidden'); // Ẩn kết quả cũ
+            // === GHI CHÚ THAY ĐỔI: Ẩn switch Cũ/Mới khi ở chế độ Nhanh ===
+            if (traditionalModeSwitcher) traditionalModeSwitcher.classList.add('hidden');
 
             // GHI CHÚ CỐT LÕI: Tải động script cho tra cứu nhanh
             // Chỉ tải script này một lần duy nhất.
@@ -202,6 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Chuyển về chế độ Tra cứu Truyền thống
             if (traditionalControls) traditionalControls.classList.remove('hidden');
             if (quickSearchInterface) quickSearchInterface.classList.add('hidden');
+            // === GHI CHÚ THAY ĐỔI: Hiện lại switch Cũ/Mới khi quay về ===
+            if (traditionalModeSwitcher) traditionalModeSwitcher.classList.remove('hidden');
         }
     }
 

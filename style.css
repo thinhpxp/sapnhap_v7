@@ -131,6 +131,15 @@ label {
     margin-bottom: 20px;
     gap: 12px;
 }
+
+.quick-search-toggle-container {
+  margin-left: auto; /* đẩy nó về trái */
+}
+
+.lookup-mode-container {
+  margin-right: auto; /* đẩy nó về phải */
+}
+
 .mode-label {
     font-size: 0.9em;
     color: var(--text-muted);
