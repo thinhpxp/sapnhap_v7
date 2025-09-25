@@ -130,7 +130,7 @@
     }
 
     // === CÁC HÀM RENDER KẾT QUẢ CHI TIẾT ===
-    function renderForwardLookupResult(events, oldCommune) {
+    function renderForwardLookupResult(events, fullOldAddress) {
         // ... (Copy và điều chỉnh logic hiển thị từ hàm handleForwardLookup của script.js)
         //const fullOldAddress = oldCommune.label; // Cần thêm thông tin huyện/tỉnh nếu muốn đầy đủ
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
@@ -147,7 +147,7 @@
         }
     }
 
-    function renderReverseLookupResult(events, newCommune) {
+    function renderReverseLookupResult(events, fullNewAddress) {
         // ... (Copy và điều chỉnh logic hiển thị từ hàm handleReverseLookup của script.js)
         //const fullNewAddress = newCommune.label;
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel').replace(':','')}</span> ${fullNewAddress}</p></div>`;
