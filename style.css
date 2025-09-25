@@ -970,8 +970,8 @@ body.modal-open {
 
 .quick-search-input {
     width: 100%;
-    padding: 12px 15px;
-    font-size: 1.1em;
+    padding: 8px 8px;
+    font-size: 0.9em;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     box-sizing: border-box;
@@ -999,7 +999,7 @@ body.modal-open {
     list-style: none;
     padding: 0;
     margin: 8px 0 0 0;
-    border: 1px solid var(--border-color);
+    /* border: 1px solid var(--border-color); */
     border-radius: 8px;
     max-height: 250px;
     overflow-y: auto;

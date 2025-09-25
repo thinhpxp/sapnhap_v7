@@ -97,9 +97,9 @@ window.translations = {
   // ...
   "traditionalLookup": "Tìm nhanh",
   "quickLookup": "Tra cứu nhanh",
-  "quickSearchOldLabel": "Tìm theo tên địa chỉ cũ",
+  "quickSearchOldLabel": "Tìm theo tên Xã Phường cũ",
   "quickSearchOldPlaceholder": "Gõ tên xã/phường cũ...",
-  "quickSearchNewLabel": "Tìm theo tên địa chỉ mới",
+  "quickSearchNewLabel": "Tìm theo tên Xã Phường mới",
   "quickSearchNewPlaceholder": "Gõ tên xã/phường mới...",
 // ...
 };
