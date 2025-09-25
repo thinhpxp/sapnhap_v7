@@ -99,8 +99,7 @@ window.translations = {
   "reverseSplitContextNote": "Note: This is part of a former unit. Other parts ({parts}) were merged elsewhere.",
   // ...
   // ...
-  "traditionalLookup": "Traditional",
-  "quickLookup": "Quick Search",
+  "traditionalLookup": "Quick Search",
   "quickSearchOldLabel": "Search by old address name",
   "quickSearchOldPlaceholder": "Type old commune/ward name...",
   "quickSearchNewLabel": "Search by new address name",
