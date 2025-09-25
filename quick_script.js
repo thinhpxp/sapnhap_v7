@@ -152,7 +152,7 @@
     function renderForwardLookupResult(events, fullOldAddress) {
         // ... (Copy và điều chỉnh logic hiển thị từ hàm handleForwardLookup của script.js)
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
-        f (events.length === 0) {
+        if (events.length === 0) {
             newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
         }
         else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
