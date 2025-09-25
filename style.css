@@ -124,7 +124,7 @@ label {
 }
 
 /* === STYLE CHO TOGGLE SWITCH (MỚI) === */
-.lookup-mode-container {
+.lookup-mode-container, .quick-search-toggle-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -918,7 +918,6 @@ body.modal-open {
   }
 
   .right-column {
-    /*background: aliceblue;*/ /* thay đổi theo yêu cầu */
     border-radius: 12px;
     border: 1px solid var(--border-color);
   }
@@ -940,16 +939,11 @@ body.modal-open {
 /* =================================================== */
 /* === THÊM MỚI: STYLE CHO GIAO DIỆN TRA CỨU NHANH === */
 /* =================================================== */
-
-.quick-search-toggle-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    padding: 8px;
-    background-color: #e9ecef;
-    border-radius: 8px;
+/* Thẻ cha chứa 2 thẻ "quick-search-toggle-container và language-switcher */
+.header-bar {
+  display: flex;
+  justify-content: space-between; /* 2 khối nằm 2 đầu */
+  align-items: center;            /* căn giữa theo chiều dọc */
 }
 
 .quick-search-group {

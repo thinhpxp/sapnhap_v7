@@ -63,11 +63,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="left-column-content-wrapper">
                 <h1 data-i18n-key="mainHeading">Tra cứu địa chỉ sáp nhập - v4</h1>
                  <!-- === CHUYỂN ĐỔI NGÔN NGỮ === -->
-                <div class="language-switcher">
-                    <a href="/vi" class="active" style="color: #f54d4d; font-size: 0.8em;">Tiếng Việt</a> | <a class="eng" href="/en" style="font-size: 0.8em; color: #054b6c;">English</a>
-                </div>
-                <p id="lookup-description" data-i18n-key="lookupDescriptionOldToNew">Chọn địa chỉ cũ để tìm thông tin đơn vị hành chính mới tương ứng.</p>
+                  <div class="language-switcher">
+                    <a href="/vi" class="active" style="color: #f54d4d; font-size: 0.8em;">Tiếng Việt</a> |
+                    <a class="eng" href="/en" style="font-size: 0.8em; color: #054b6c;">English</a>
+                  </div>
 
+                <p id="lookup-description" data-i18n-key="lookupDescriptionOldToNew">Chọn địa chỉ cũ để tìm thông tin đơn vị hành chính mới tương ứng.</p>
+                <div class="header-bar">
                 <div class="lookup-mode-container">
                     <span class="mode-label" data-i18n-key="oldToNew">Cũ → Mới</span>
                     <label class="switch">
@@ -76,17 +78,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </label>
                     <span class="mode-label" data-i18n-key="newToOld">Mới → Cũ</span>
                 </div>
-  <!-- === THÊM MỚI: Switch chuyển đổi sang chế độ Tra cứu Nhanh === -->
-<div class="quick-search-toggle-container">
-    <span class="mode-label" data-i18n-key="traditionalLookup">Truyền thống</span>
-    <label class="switch">
-        <input type="checkbox" id="interface-mode-toggle">
-        <span class="slider round"></span>
-    </label>
-    <span class="mode-label" data-i18n-key="quickLookup">Tra cứu nhanh</span>
-</div>
-<!-- ========================================================== -->
-
+                <div class="quick-search-toggle-container">
+                    <span class="mode-label" data-i18n-key="traditionalLookup">Truyền thống</span>
+                    <label class="switch">
+                      <input type="checkbox" id="interface-mode-toggle">
+                      <span class="slider round"></span>
+                    </label>
+                    <span class="mode-label" data-i18n-key="quickLookup">Tra cứu nhanh</span>
+                  </div>
+                    </div>
                 <div id="controls">
                     <!-- === TRA CỨU XUÔI === -->
                     <div id="forward-controls">
