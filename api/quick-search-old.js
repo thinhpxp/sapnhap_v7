@@ -1,5 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY,
+  { db: { schema: 'api' } } // <-- THAY ĐỔI QUAN TRỌNG
+);
 
 export default async function handler(request, response) {
   const { term } = request.query;
