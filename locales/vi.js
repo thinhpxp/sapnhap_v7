@@ -95,7 +95,7 @@ window.translations = {
   "reverseSplitContextNote": "Các phần còn lại đã được sáp nhập vào xã phường khác: {parts}",
   // ...
   // ...
-  "traditionalLookup": "Truyền thống",
+  "traditionalLookup": "Tìm nhanh",
   "quickLookup": "Tra cứu nhanh",
   "quickSearchOldLabel": "Tìm theo tên địa chỉ cũ",
   "quickSearchOldPlaceholder": "Gõ tên xã/phường cũ...",
