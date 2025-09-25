@@ -84,6 +84,8 @@
             // Gán dữ liệu vào element để sử dụng khi click
             li.dataset.code = result.code;
             li.dataset.type = type;
+             li.dataset.name = result.name; // Lưu lại tên
+            li.dataset.context = result.context; // Lưu lại ngữ cảnh (Quận, Tỉnh)
             li.addEventListener('click', handleResultClick);
             container.appendChild(li);
         });
@@ -95,6 +97,10 @@
         const li = event.currentTarget;
         const code = li.dataset.code;
         const type = li.dataset.type;
+        // === THÊM MỚI: Lấy lại thông tin đã lưu ===
+        const name = li.dataset.name;
+        const context = li.dataset.context;
+        const fullAddress = `${name}, ${context}`;
 
         // Ẩn danh sách kết quả
         oldResultsContainer.classList.add('hidden');
@@ -111,16 +117,11 @@
             const response = await fetch(`/api/get-details?code=${code}&type=${type}`);
             const data = await response.json();
 
-            // GHI CHÚ: Tái sử dụng logic hiển thị từ script.js
-            // Đây là một ví dụ, bạn có thể tạo một hàm render chung để cả 2 script cùng gọi
+             // Truyền `fullAddress` vào các hàm render
             if (type === 'old') {
-                // Nếu tìm theo xã cũ, kết quả sẽ là tra cứu xuôi
-                // Chúng ta có thể gọi lại hàm render của `handleForwardLookup` nếu nó được đưa ra global
-                // Tạm thời, chúng ta sẽ render trực tiếp ở đây
-                renderForwardLookupResult(data, {code: code, label: li.querySelector('.result-name').textContent});
+                renderForwardLookupResult(data, fullAddress);
             } else {
-                // Nếu tìm theo xã mới, kết quả là tra cứu ngược
-                renderReverseLookupResult(data, {code: code, label: li.querySelector('.result-name').textContent});
+                renderReverseLookupResult(data, fullAddress);
             }
         } catch (error) {
             console.error('Lỗi khi lấy chi tiết:', error);
@@ -129,11 +130,9 @@
     }
 
     // === CÁC HÀM RENDER KẾT QUẢ CHI TIẾT ===
-    // GHI CHÚ: Chúng ta tách logic render ra để tái sử dụng
     function renderForwardLookupResult(events, oldCommune) {
         // ... (Copy và điều chỉnh logic hiển thị từ hàm handleForwardLookup của script.js)
-        // Ví dụ:
-        const fullOldAddress = oldCommune.label; // Cần thêm thông tin huyện/tỉnh nếu muốn đầy đủ
+        //const fullOldAddress = oldCommune.label; // Cần thêm thông tin huyện/tỉnh nếu muốn đầy đủ
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
 
         if (events.length === 0) {
@@ -150,8 +149,9 @@
 
     function renderReverseLookupResult(events, newCommune) {
         // ... (Copy và điều chỉnh logic hiển thị từ hàm handleReverseLookup của script.js)
-        const fullNewAddress = newCommune.label;
+        //const fullNewAddress = newCommune.label;
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel').replace(':','')}</span> ${fullNewAddress}</p></div>`;
+
 
         if (events.length > 0) {
             const oldUnitsHtml = events.map(record => `<li>${record.old_ward_name}, ${record.old_district_name}, ${record.old_province_name}</li>`).join('');
