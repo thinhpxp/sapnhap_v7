@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   const { term } = request.query;
   if (!term || term.trim().length < 2) return response.status(200).json([]);
   try {
-    const { data, error } = await supabase.rpc('search_new_wards', { search_term: term.trim() });
+    const { data, error } = await supabase.rpc('search_new_wards', { p_search_term: term.trim() });
     if (error) throw error;
     response.status(200).json(data);
   } catch (error) {
