@@ -840,7 +840,7 @@ body.modal-open {
     color: #000000;
     text-transform: uppercase;
 }
-.split-context-note {
+.split-context-note .split-description {
     font-size: 0.85em;
     font-style: italic;
     color: #cf469c;; /* Một màu tối hơn một chút so với text-muted */
@@ -866,14 +866,15 @@ body.modal-open {
     font-size: 0.9em;
     color: #03101e;
 }
+/*
 .split-description {
-  margin-top: 4px;              /* tạo khoảng cách với dòng trên */
-  font-size: 0.8em;             /* nhỏ hơn text chính */
-  font-style: italic;           /* chữ nghiêng để phân biệt */
+  margin-top: 4px;
+  font-size: 0.8em;
+  font-style: italic;
   color: #cf469c;
-  line-height: 1.4;             /* dễ đọc hơn khi mô tả dài */
+  line-height: 1.4;
 }
-
+*/
 /* === THÊM MỚI: Style cho ghi chú lịch sử tĩnh === */
 .history-note {
     font-size: 0.9em;
