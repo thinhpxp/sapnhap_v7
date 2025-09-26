@@ -180,11 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (traditionalControls) traditionalControls.classList.add('hidden');
             if (quickSearchInterface) quickSearchInterface.classList.remove('hidden');
             resultContainer.classList.add('hidden'); // Ẩn kết quả cũ
-            // === GHI CHÚ THAY ĐỔI: Ẩn switch Cũ/Mới khi ở chế độ Nhanh ===
-            if (traditionalModeSwitcher) {
-                traditionalModeSwitcher.classList.add('hidden');
-                lookupDescription.classList.remove('hidden');
-            }
+            // === Ẩn switch Cũ/Mới khi ở chế độ Nhanh ===
+            if (traditionalModeSwitcher) traditionalModeSwitcher.classList.add('hidden');
+            // === Ẩn dòng mô tả ===
+            if (lookupDescription) lookupDescription.classList.add('hidden');
 
             // GHI CHÚ CỐT LÕI: Tải động script cho tra cứu nhanh
             // Chỉ tải script này một lần duy nhất.
@@ -209,8 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Chuyển về chế độ Tra cứu Truyền thống
             if (traditionalControls) traditionalControls.classList.remove('hidden');
             if (quickSearchInterface) quickSearchInterface.classList.add('hidden');
-            // === GHI CHÚ THAY ĐỔI: Hiện lại switch Cũ/Mới khi quay về ===
+            // === Hiện lại switch Cũ/Mới khi quay về ===
             if (traditionalModeSwitcher) traditionalModeSwitcher.classList.remove('hidden');
+            // === Hiện lại dòng mô tả ===
+            if (lookupDescription) lookupDescription.classList.remove('hidden');
         }
     }
 
