@@ -840,7 +840,7 @@ body.modal-open {
     color: #000000;
     text-transform: uppercase;
 }
-.split-context-note .split-description {
+.split-context-note {
     font-size: 0.85em;
     font-style: italic;
     color: #cf469c; /* Một màu tối hơn một chút so với text-muted */
@@ -866,7 +866,7 @@ body.modal-open {
     font-size: 0.9em;
     color: #03101e;
 }
-/*
+
 .split-description {
   margin-top: 4px;
   font-size: 0.8em;
@@ -874,7 +874,7 @@ body.modal-open {
   color: #cf469c;
   line-height: 1.4;
 }
-*/
+
 /* === THÊM MỚI: Style cho ghi chú lịch sử tĩnh === */
 .history-note {
     font-size: 0.9em;
