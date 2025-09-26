@@ -843,7 +843,7 @@ body.modal-open {
 .split-context-note .split-description {
     font-size: 0.85em;
     font-style: italic;
-    color: #cf469c;; /* Một màu tối hơn một chút so với text-muted */
+    color: #cf469c; /* Một màu tối hơn một chút so với text-muted */
     background-color: #f0f2f5; /* Nền xám nhẹ, nhất quán */
     padding: 8px 12px;
     margin-top: 8px;
