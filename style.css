@@ -999,11 +999,12 @@ body.modal-open {
     border-radius: 8px;
     max-height: 250px;
     overflow-y: auto;
-    background-color: #fff;
+    background-color: #d3f8fa96;
 }
 
 .quick-search-results li {
-    padding: 12px 15px;
+    font-size: smaller;
+    padding: 9px 15px;
     cursor: pointer;
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s;
