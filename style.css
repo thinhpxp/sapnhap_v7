@@ -449,8 +449,6 @@ button#lookup-btn:disabled {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-
-
 .qr-column img {
    /*  width: 100%;            /* Ảnh co giãn theo chiều rộng của cột */
     /* height: 80%;
@@ -459,15 +457,6 @@ button#lookup-btn:disabled {
     border-radius: 6px;
     display: block;
     padding: 2px;
-}
-
-.qr-caption {
-    margin-top: 10px;       /* Khoảng cách giữa ảnh và chú thích */
-    margin-bottom: 0;
-    font-size: 0.9em;
-    font-weight: 500;
-    color: var(--text-color);
-    text-align: center;
 }
 
 /* CSS cho phần hỗ trợ Buy me a Coffee */
@@ -499,15 +488,13 @@ button#lookup-btn:disabled {
     border-radius: 8px; /* Bo tròn nhẹ góc ảnh (tùy chọn) */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng nhẹ cho ảnh (tùy chọn) */
 }
-.qr-column p qr-caption { /* Áp dụng cho tất cả p trừ .qr-caption */
-    color: var(--text-muted); /* Sử dụng biến CSS nếu có */
-    font-size: 0.85em; /* Tăng nhẹ font size để dễ đọc hơn */
-}
 
 /* Định dạng cho chú thích ảnh */
 .qr-column .qr-caption{
-    font-weight: bold; /* In đậm chú thích */
-    margin-bottom: 5px; /* Khoảng cách dưới chú thích */
+    margin: 5px; /* Khoảng cách dưới chú thích */
+    font-size: 0.8em;
+    color: black;
+    text-align: justify;
 }
 
 /* === CSS CHO HỘP MÙ VUI VẺ === */
