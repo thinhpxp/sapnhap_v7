@@ -97,7 +97,7 @@
         results.forEach(result => {
             const li = document.createElement('li');
             li.innerHTML = `
-                <span class="result-name">${result.name}</span>
+                <span id="result-ward" class="result-name">${result.name}</span>
                 <span class="result-context">${result.context}</span>
             `;
             // Gán dữ liệu vào element để sử dụng khi click
