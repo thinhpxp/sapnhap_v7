@@ -67,26 +67,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <a href="/vi" class="active" style="color: #f54d4d; font-size: 0.8em;">Tiếng Việt</a> |
                     <a class="eng" href="/en" style="font-size: 0.8em; color: #054b6c;">English</a>
                   </div>
+                <!-- Dòng thông báo -->
                 <p id="lookup-description" data-i18n-key="lookupDescriptionOldToNew">Chọn địa chỉ cũ để tìm thông tin đơn vị hành chính mới tương ứng.</p>
+                <!-- Khu vực chứa 2 nút switch tra cứu cũ mới và quick search -->
                 <div class="header-bar">
                         <div id="traditional-mode-switcher" class="lookup-mode-container">
                             <span class="mode-label" data-i18n-key="oldToNew">Cũ → Mới</span>
-                            <label class="switch">
-                                <input type="checkbox" id="mode-toggle">
-                                <span class="slider round"></span>
-                            </label>
+                                <label class="switch">
+                                    <input type="checkbox" id="mode-toggle">
+                                    <span class="slider round"></span>
+                                </label>
                             <span class="mode-label" data-i18n-key="newToOld">Mới → Cũ</span>
                         </div>
                         <div class="quick-search-toggle-container">
                             <span class="mode-label" data-i18n-key="traditionalLookup">Tìm nhanh</span>
-                            <label class="switch">
-                              <input type="checkbox" id="interface-mode-toggle">
-                              <span class="slider round"></span>
-                            </label>
+                                <label class="switch">
+                                  <input type="checkbox" id="interface-mode-toggle">
+                                  <span class="slider round"></span>
+                                </label>
                          </div>
                 </div>
                 <div id="controls">
-                    <!-- === TRA CỨU XUÔI === -->
+                    <!-- === DROP BOX TRA CỨU XUÔI === -->
                     <div id="forward-controls">
                         <div class="form-group">
                             <label for="province-select" data-i18n-key="oldProvinceLabel">Tỉnh / Thành phố (Cũ)</label>
@@ -101,7 +103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <select id="commune-select" class="form-control" disabled></select>
                         </div>
                     </div>
-                    <!-- ===TRA CỨU NGƯỢC === -->
+                    <!-- === DROP BOX TRA CỨU NGƯỢC === -->
                     <div id="reverse-controls" class="hidden">
                          <div class="form-group">
                             <label for="new-province-select" data-i18n-key="newProvinceLabel">Tỉnh / Thành phố (Mới)</label>
@@ -114,9 +116,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                     <button id="lookup-btn" disabled data-i18n-key="lookupButton">Tra Cứu</button>
                 </div>
-                <!-- === THÊM MỚI: Khung chứa toàn bộ giao diện Tra cứu Nhanh === -->
+                <!-- === KHUNG CHỨA TRA CỨU NHANH, MẶC ĐỊNH BỊ ẨN ĐI === -->
                 <div id="quick-search-interface" class="hidden">
-
                     <!-- Ô tìm kiếm địa chỉ CŨ -->
                     <div class="quick-search-group">
                         <label for="quick-search-old-input" data-i18n-key="quickSearchOldLabel">Tìm theo tên địa chỉ cũ</label>
@@ -126,19 +127,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                         <ul id="quick-search-old-results" class="quick-search-results"></ul>
                     </div>
-
-                <!-- Ô tìm kiếm địa chỉ MỚI -->
-                <div class="quick-search-group">
-                    <label for="quick-search-new-input" data-i18n-key="quickSearchNewLabel">Tìm theo tên địa chỉ mới</label>
-                    <div class="search-input-wrapper">
-                        <input type="text" id="quick-search-new-input" class="quick-search-input" data-i18n-placeholder="quickSearchNewPlaceholder" placeholder="Gõ tên xã/phường mới...">
-                        <div class="spinner-inline hidden"></div>
+                    <!-- Ô tìm kiếm địa chỉ MỚI -->
+                    <div class="quick-search-group">
+                        <label for="quick-search-new-input" data-i18n-key="quickSearchNewLabel">Tìm theo tên địa chỉ mới</label>
+                        <div class="search-input-wrapper">
+                            <input type="text" id="quick-search-new-input" class="quick-search-input" data-i18n-placeholder="quickSearchNewPlaceholder" placeholder="Gõ tên xã/phường mới...">
+                            <div class="spinner-inline hidden"></div>
+                        </div>
+                        <ul id="quick-search-new-results" class="quick-search-results"></ul>
                     </div>
-                    <ul id="quick-search-new-results" class="quick-search-results"></ul>
                 </div>
-            </div>
-<!-- ========================================================== -->
-                <!-- VÙNG HIỂN THỊ KẾT QUẢ -->
+            <!-- ========================================================== -->
+                <!-- VÙNG HIỂN THỊ KẾT QUẢ KHI TRA CỨU TRUYỀN THỐNG LẪN TRA CỨU NHANH -->
                 <div id="result-container" class="hidden">
                     <h2 data-i18n-key="resultsTitle">Kết Quả Tra Cứu</h2>
                     <div id="result-content">

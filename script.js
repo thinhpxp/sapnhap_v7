@@ -388,8 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-   // === LOGIC TRA CỨU CHÍNH ===
-
+   // === 2 HÀM TRA CỨU CHÍNH ===
+   // handleForwardLookup - Tra cứu xuôi
+   // handleReverseLookup - Tra cứu ngược
      async function handleForwardLookup() {
         // === KHAI BÁO BIẾN (Giữ nguyên) ===
         const selectedProvince = provinceChoices.getValue(true);

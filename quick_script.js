@@ -159,11 +159,12 @@
             const splitHtml = events.map(result => {
                 const newAddress = `${localize(result.new_ward_name, result.new_ward_en_name)}, ${localize(result.new_province_name, result.new_province_en_name)}`;
                 const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
-                return `
-                    <li>
-                        <b>${result.split_description}:</b> ${t('mergedInto')} <b>${newAddress}</b>
-                        <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
-                    </li>`;
+               return `
+                <li>
+                    ${newAddress}
+                    <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
+                    <div class="split-description">${result.split_description}</div>
+                </li>`;
             }).join('');
             newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>`;
         }
