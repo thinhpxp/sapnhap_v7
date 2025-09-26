@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (quickSearchInterface) quickSearchInterface.classList.remove('hidden');
             resultContainer.classList.add('hidden'); // Ẩn kết quả cũ
             // === GHI CHÚ THAY ĐỔI: Ẩn switch Cũ/Mới khi ở chế độ Nhanh ===
-            if {
+            if (traditionalModeSwitcher) {
                 traditionalModeSwitcher.classList.add('hidden');
                 lookupDescription.classList.remove('hidden');
             }
