@@ -1,6 +1,6 @@
 ---
 title: "Hướng Dẫn Sử Dụng Supabase Cho Người Mới Bắt Đầu"
-slug: "huong-dan-su-dung-supabase"
+slug: "huong-dan-su-dung"
 date: "2024-09-26"
 description: "Bài viết này sẽ hướng dẫn bạn từng bước cách thiết lập và sử dụng các tính năng cốt lõi của Supabase như Database, Authentication một cách hiệu quả."
 cover_image: "/images/blog/supabase-banner.png"

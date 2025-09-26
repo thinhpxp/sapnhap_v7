@@ -1,7 +1,7 @@
 ---
 title: "Chào mừng đến với Blog mới của tôi"
 date: "2024-09-26"
-slug: "bai-viet-dau-tien"
+slug: "bai-viet-so-1"
 excerpt: "Đây là bài viết đầu tiên trên blog được tạo bằng Markdown và Next.js. Hãy cùng khám phá cách hoạt động của nó."
 cover_image: "/images/blog/cover1.jpg"
 ---
