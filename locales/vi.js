@@ -8,8 +8,8 @@ window.translations = {
 
   // Giao diện chính
   "mainHeading": "Tra cứu địa chỉ sáp nhập-v4",
-  "lookupDescriptionOldToNew": "Chọn địa chỉ cũ để tìm thông tin đơn vị hành chính mới tương ứng.",
-  "lookupDescriptionNewToOld": "Chọn địa chỉ mới để tìm các đơn vị hành chính cũ tương ứng.",
+  "lookupDescriptionOldToNew": "Chọn địa chỉ cũ để tìm thông tin đơn vị hành chính mới tương ứng",
+  "lookupDescriptionNewToOld": "Chọn địa chỉ mới để tìm các đơn vị hành chính cũ tương ứng",
   "oldToNew": "Cũ → Mới",
   "newToOld": "Mới → Cũ",
 

@@ -72,6 +72,14 @@ body.modal-open {
     max-width: 80%;
     margin: 0 auto;
 }
+
+.head-lookup-description{
+    text-align: center;
+    color: #1e76c4;
+    margin: 15px;
+    font-size: 1em;
+    line-height: 1.6;
+}
 /*----------CỘT BÊN PHẢI VÀ CÁC PHẦN TỪ CON BÊN TRONG---------*/
 .right-column {
     flex: 1;
