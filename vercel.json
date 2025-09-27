@@ -21,6 +21,10 @@
       "destination": "/vi.html"
     },
     {
+      "source": "/blog",
+      "destination": "/pages/blog/index.js"
+    },
+    {
       "source": "/blog/:path*",
       "destination": "/pages/blog/:path*"
     }
