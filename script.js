@@ -440,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         if (historyDisplay) historyDisplay.classList.add('hidden');
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
+                // <<< THÊM DÒNG NÀY (1/2): Ẩn ghi chú tỉnh cũ trước mỗi lần tra cứu mới >>>
         if(provinceNoteDisplay) provinceNoteDisplay.classList.add('hidden');
         resultContainer.classList.remove('hidden');
 
@@ -459,8 +460,8 @@ document.addEventListener('DOMContentLoaded', () => {
         //if(provinceNoteDisplay) provinceNoteDisplay.classList.add('hidden');
         try {
             const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
-            const events = await response.json();
-            if (!response.ok) throw new Error(events.error || 'Server error');
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Server error');
             // <<< THÊM DÒNG NÀY (2/2): Gọi hàm hiển thị ghi chú tỉnh ngay sau khi nhận được dữ liệu >>>
             displayProvinceNote(responseData.province_merger_note);
             // 3. XỬ LÝ KẾT QUẢ TRẢ VỀ
