@@ -1,34 +1,4 @@
 {
-  "rewrites": [
-    {
-      "source": "/vi",
-      "destination": "/vi.html"
-    },
-    {
-      "source": "/vi/:path*",
-      "destination": "/vi.html"
-    },
-    {
-      "source": "/en",
-      "destination": "/en.html"
-    },
-    {
-      "source": "/en/:path*",
-      "destination": "/en.html"
-    },
-    {
-      "source": "/",
-      "destination": "/vi.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/pages/blog/index.js"
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "/pages/blog/:path*"
-    }
-  ],
   "crons": [
     {
       "path": "/api/send-weekly-feedback",
