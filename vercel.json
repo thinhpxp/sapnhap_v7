@@ -22,7 +22,7 @@
     },
     {
       "source": "/blog",
-      "destination": "/pages/blog/index.js"
+      "destination": "/pages/blog/"
     },
     {
       "source": "/blog/:path*",
