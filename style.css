@@ -1,3 +1,4 @@
+/*style*/
 /* --- NHẬP FONT CHỮ MỀM MẠI HƠN TỪ GOOGLE FONTS --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -388,16 +389,6 @@ button#lookup-btn:disabled {
 }
 
 /* --- (Các style cũ khác) --- */
-
-#province-note-display {
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    background-color: #e2e3e5;
-    border-left: 4px solid #6c757d;
-    font-size: 0.9em;
-    color: #343a40;
-    text-align: left;
-}
 #result-content .label {
     font-weight: 600;
     color: var(--text-color);
