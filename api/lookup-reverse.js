@@ -1,5 +1,5 @@
+//lookup-reverse.js
 import { createClient } from '@supabase/supabase-js';
-//const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { db: { schema: 'api' }});
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY

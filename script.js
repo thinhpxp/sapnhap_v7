@@ -1,3 +1,4 @@
+//script.js
 document.addEventListener('DOMContentLoaded', () => {
     // === PHÁT HIỆN NGÔN NGỮ HIỆN TẠI ===
     const currentLang = document.documentElement.lang || 'vi';
