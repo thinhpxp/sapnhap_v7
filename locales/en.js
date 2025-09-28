@@ -98,11 +98,12 @@ window.translations = {
   // ...
   "reverseSplitContextNote": "Note: This is part of a former unit. Other parts ({parts}) were merged elsewhere.",
   // ...
-  // ...
   "traditionalLookup": "Quick Search",
   "quickSearchOldLabel": "Search by old address name",
   "quickSearchOldPlaceholder": "Type old commune/ward name...",
   "quickSearchNewLabel": "Search by new address name",
   "quickSearchNewPlaceholder": "Type new commune/ward name...",
 // ...
+"provinceBecameNote": "Note: <b>{old_name}</b> has now become part of <b>{new_name}</b>.",
+"provinceFormedFromNote": "Note: <b>{new_name}</b> was formed from the following provinces/cities: <b>{source_names}</b>.",
 };

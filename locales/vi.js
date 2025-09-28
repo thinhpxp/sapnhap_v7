@@ -94,7 +94,6 @@ window.translations = {
   // ...
   "reverseSplitContextNote": "Các phần còn lại đã được sáp nhập vào xã phường khác: {parts}",
   // ...
-  // ...
   "traditionalLookup": "Tìm nhanh",
   "quickLookup": "Tra cứu nhanh",
   "quickSearchOldLabel": "Tìm theo tên Xã Phường cũ",
@@ -102,4 +101,6 @@ window.translations = {
   "quickSearchNewLabel": "Tìm theo tên Xã Phường mới",
   "quickSearchNewPlaceholder": "Gõ tên xã/phường mới...",
 // ...
+"provinceBecameNote": "Ghi chú: <b>{old_name}</b> nay đã trở thành một phần của <b>{new_name}</b>.",
+"provinceFormedFromNote": "Ghi chú: <b>{new_name}</b> được hợp thành từ các tỉnh/thành phố: <b>{source_names}</b>.",
 };

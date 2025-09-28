@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
 
     // === DOM Elements ===
+    const provinceNoteDisplay = document.getElementById('province-note-display');
     const lookupBtn = document.getElementById('lookup-btn');
     const resultContainer = document.getElementById('result-container');
     const oldAddressDisplay = document.getElementById('old-address-display');
@@ -62,11 +63,28 @@ document.addEventListener('DOMContentLoaded', () => {
     let isQuickSearchMode = false;
 
     // === CÁC HÀM TIỆN ÍCH ===
+    //Khai thác lịch sử sáp nhập cấp tỉnh
+    function displayProvinceNote(note) {
+    if (!provinceNoteDisplay || !note) {
+        if(provinceNoteDisplay) provinceNoteDisplay.classList.add('hidden');
+        return;
+    }
+    let noteHtml = '';
+    if (note.type === 'BECAME') {
+        noteHtml = t('provinceBecameNote').replace('{old_name}', note.old_name).replace('{new_name}', note.new_name);
+    } else if (note.type === 'FORMED_FROM') {
+        noteHtml = t('provinceFormedFromNote').replace('{new_name}', note.new_name).replace('{source_names}', note.source_names.join(', '));
+    }
+    provinceNoteDisplay.innerHTML = noteHtml;
+    provinceNoteDisplay.classList.remove('hidden');
+}
+    //hàm chuẩn hóa chuỗi
     function toNormalizedString(str) {
         if (!str) return '';
         str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
         return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
+    // Hàm hiển thị thông báo
     function showNotification(message, type = 'loading') {
         if (notificationArea) {
             notificationArea.textContent = message;
@@ -74,12 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
             notificationArea.classList.remove('hidden');
         }
     }
+    // Ẩn thông báo
     function hideNotification() {
         if (notificationArea) {
             notificationArea.classList.add('hidden');
             notificationArea.textContent = '';
         }
     }
+    // HÀM COPY
     function updateChoices(choicesInstance, placeholder, data, valueKey = 'code', labelKey = 'name') {
         choicesInstance.clearStore();
         choicesInstance.setChoices(
@@ -87,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'value', 'label', false
         );
     }
+    // Hàm đặt lại dropdown về trạng thái ban đầu
     function resetChoice(choicesInstance, placeholder) {
         choicesInstance.clearStore();
         choicesInstance.setChoices([{ value: '', label: placeholder, selected: true, disabled: true }], 'value', 'label', false);
@@ -420,6 +441,8 @@ document.addEventListener('DOMContentLoaded', () => {
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         if (historyDisplay) historyDisplay.classList.add('hidden');
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
+                // <<< THÊM DÒNG NÀY (1/2): Ẩn ghi chú tỉnh cũ trước mỗi lần tra cứu mới >>>
+        if(provinceNoteDisplay) provinceNoteDisplay.classList.add('hidden');
         resultContainer.classList.remove('hidden');
 
         // === GHI CHÚ CỐT LÕI: LOGIC MỚI, ĐƠN GIẢN HÓA ===
@@ -435,11 +458,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 2. NẾU KHÔNG, GỌI API MỘT LẦN DUY NHẤT
+        //if(provinceNoteDisplay) provinceNoteDisplay.classList.add('hidden');
         try {
             const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
-            const events = await response.json();
-            if (!response.ok) throw new Error(events.error || 'Server error');
-
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Server error');
+            // <<< THÊM DÒNG NÀY (2/2): Gọi hàm hiển thị ghi chú tỉnh ngay sau khi nhận được dữ liệu >>>
+            displayProvinceNote(responseData.province_merger_note);
             // 3. XỬ LÝ KẾT QUẢ TRẢ VỀ
             if (events.length === 0) {
                 // Trường hợp KHÔNG THAY ĐỔI
@@ -506,10 +531,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset biến trạng thái
         newWardCodeForModal = null;
         newProvinceCodeForModal = null;
-
+        if(provinceNoteDisplay) provinceNoteDisplay.classList.add('hidden');
         try {
             const response = await fetch(`/api/lookup-reverse?code=${newWardCode}`);
-            const data = await response.json();
+            //const data = await response.json();
+            const responseData = await response.json();
+            displayProvinceNote(responseData.province_merger_note); // Hiển thị ghi chú
+            const data = responseData.results; // Lấy dữ liệu chính để xử lý tiếp
             if (!response.ok) throw new Error(data.error || 'Server error');
 
             if (data.length > 0) {

@@ -22,11 +22,11 @@
     },
     {
       "source": "/blog",
-      "destination": "/pages/blog/"
+      "destination": "/api/_next/data/latest/blog.json"
     },
     {
-      "source": "/blog/:path*",
-      "destination": "/pages/blog/:path*"
+      "source": "/blog/:slug",
+      "destination": "/api/_next/data/latest/blog/:slug.json"
     }
   ],
   "crons": [
