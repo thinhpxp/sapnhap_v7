@@ -151,4 +151,18 @@
                href="https://sapnhap.org/en/policies.html"/>
     </url>
 
+     <!-- === TRANG BLOG === -->
+
+    <!-- Phiên bản Tiếng Việt -->
+    <url>
+        <loc>https://sapnhap.org/blog</loc>
+        <lastmod>2025-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link
+               rel="alternate"
+               hreflang="vi-VN"
+               href="https://sapnhap.org/blog"/>
+    </url>
+
 </urlset>
