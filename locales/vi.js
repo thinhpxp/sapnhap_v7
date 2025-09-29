@@ -53,6 +53,7 @@ window.translations = {
   "footerAbout": "Giới thiệu",
   "footerContact": "Liên hệ",
   "footerPolicies": "Chính sách",
+  "footerBlog": "Blog",
 
   //google
   "realtimeActivity": "Hoạt động gần đây",
