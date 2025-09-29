@@ -1,19 +1,13 @@
 {
   "rewrites": [
-    // --- ƯU TIÊN 1: CÁC QUY TẮC CỤ THỂ CHO BLOG ---
-    // Xử lý trang danh sách blog
     {
       "source": "/blog",
       "destination": "/blog/index.html"
     },
-    // Xử lý các trang chi tiết bài viết (với Clean URL)
     {
       "source": "/blog/:slug",
       "destination": "/blog/:slug.html"
     },
-
-    // --- ƯU TIÊN 2: CÁC QUY TẮC CHUNG CHO NGÔN NGỮ ---
-    // Các quy tắc này chỉ được áp dụng nếu request không khớp với các quy tắc blog ở trên
     {
       "source": "/vi",
       "destination": "/vi.html"
