@@ -37,7 +37,7 @@ h1, h2 {
 
 .post-meta {
   font-size: 0.9rem;
-  color: white;
+  color: #5063cd;
 }
 
 .read-more {
@@ -101,4 +101,10 @@ h1, h2 {
     flex-direction: column;
     gap: 1rem;
   }
+}
+.back-link{
+    display: inline-block;
+    margin-top: 1rem;
+    color: white;
+    text-decoration: none;
 }
