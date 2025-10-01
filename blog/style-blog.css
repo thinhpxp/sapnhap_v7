@@ -1,114 +1,183 @@
+/* ==========================================================================
+   1. Global Styles & Typography
+   ========================================================================== */
+
+/* Import font từ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-  font-family: system-ui, sans-serif;
+  font-family: 'Roboto', sans-serif; /* Font chữ hiện đại, dễ đọc */
+  line-height: 1.6; /* Tăng khoảng cách dòng giúp dễ đọc hơn */
   margin: 0;
-  line-height: 1.6;
-  color: #333;
-  background: #fafafa;
+  background-color: #f4f4f9; /* Màu nền xám rất nhạt cho toàn trang */
+  color: #333; /* Màu chữ chính */
 }
 
 .container {
-  max-width: 800px;
-  margin: auto;
-  padding: 1rem;
+  max-width: 1200px; /* Giới hạn chiều rộng nội dung */
+  margin: 0 auto; /* Căn giữa nội dung */
+  padding: 20px;
 }
 
-.site-header, .site-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #004d40;
+/* ==========================================================================
+   2. Header & Footer
+   ========================================================================== */
+
+.site-header {
+  background-color: #2c3e50; /* Màu xanh đậm hải quân */
   color: white;
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 5px solid #3498db; /* Màu xanh dương làm điểm nhấn */
 }
 
-h1, h2 {
-  margin: 0.5em 0;
+.site-header h1 {
+  margin: 0;
+  font-size: 2.8rem;
 }
 
-.post-list {
-  margin: 2rem 0;
+.site-header p {
+  margin: 5px 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
-.post-item {
-  background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.post-meta {
-  font-size: 0.9rem;
-  color: #5063cd;
-}
-.post-description{
-    color: white;}
-    font-size: 0.9rem;
-    }
-
-.read-more {
-  color: #00695c;
-  font-weight: bold;
+.site-header a {
+  color: #3498db; /* Màu link nổi bật */
   text-decoration: none;
+  font-weight: bold;
 }
 
-.read-more:hover {
+.site-header a:hover {
   text-decoration: underline;
 }
 
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  background-color: #ffffff;
+  border-top: 1px solid #e7e7e7;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* ==========================================================================
+   3. Post List & Post Items (Card Design)
+   ========================================================================== */
+
+.post-list {
+  display: grid;
+  /* Tự động chia cột, mỗi cột tối thiểu 350px */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px; /* Khoảng cách giữa các bài viết */
+}
+
+.post-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px; /* Bo góc mềm mại */
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Đổ bóng nhẹ nhàng */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
+}
+
+.post-item:hover {
+  transform: translateY(-5px); /* Hiệu ứng nâng thẻ lên khi di chuột */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.post-item h2 {
+  font-size: 1.6rem;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+.post-meta {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.post-excerpt {
+  margin-bottom: 20px;
+  flex-grow: 1; /* Đẩy nút "Đọc tiếp" xuống dưới cùng */
+}
+
+.read-more {
+  display: inline-block;
+  align-self: flex-start; /* Căn nút về bên trái */
+  padding: 10px 20px;
+  background-color: #3498db; /* Màu xanh dương */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.read-more:hover {
+  background-color: #2980b9; /* Màu đậm hơn khi di chuột */
+}
+
+
+/* ==========================================================================
+   4. Pagination
+   ========================================================================== */
+
+.pagination {
+  margin-top: 40px;
+}
+
 .pagination ul {
-  list-style: none;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  list-style: none;
   padding: 0;
-  margin: 2rem 0 0;
 }
 
-.pagination li {
+.pagination li a {
+  color: #3498db;
+  padding: 10px 18px;
   margin: 0 5px;
-}
-
-.pagination a {
-  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   text-decoration: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: bold;
 }
 
-.pagination a.active {
-  background: #004d40;
+.pagination li a:hover,
+.pagination li a.active {
+  background-color: #3498db;
   color: white;
+  border-color: #3498db;
 }
 
-.pagination a.disabled {
-  opacity: 0.5;
-  pointer-events: none;
+.pagination li a.disabled {
+  color: #aaaaaa;
+  pointer-events: none; /* Vô hiệu hóa click */
+  background-color: #f8f9fa;
 }
 
-.post-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
 
-.post-navigation {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-}
+/* ==========================================================================
+   5. Mobile Responsiveness
+   ========================================================================== */
 
-@media (max-width: 600px) {
-  body {
-    font-size: 16px;
+@media (max-width: 768px) {
+  .post-list {
+    grid-template-columns: 1fr; /* Chỉ hiển thị 1 cột trên màn hình nhỏ */
   }
-  .post-navigation {
-    flex-direction: column;
-    gap: 1rem;
+
+  .site-header h1 {
+    font-size: 2.2rem; /* Giảm kích thước tiêu đề trên mobile */
   }
-}
-.back-link{
-    display: inline-block;
-    margin-top: 1rem;
-    color: white;
-    text-decoration: none;
+
+  .pagination li a {
+    padding: 8px 12px; /* Giảm kích thước nút phân trang */
+    margin: 0 3px;
+  }
 }
