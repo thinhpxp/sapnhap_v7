@@ -31,7 +31,7 @@ export default async function handler(request, response) {
         eventCounts[eventName] = eventCount;
 
         // Ví dụ: Cộng dồn các sự kiện click bạn quan tâm
-        if (eventName === 'Event_lookup' || eventName === 'Event_switch_old_new') {
+        if (eventName === 'Event_lookup' || eventName === 'Event_Quick_Search_Old' ) || eventName === 'Event_Quick_Search_New') {
             totalClicks += eventCount;
         }
     });
