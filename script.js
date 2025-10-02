@@ -7,12 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === KHÓA API (CHỈ DÀNH CHO MYSTERY BOX) ===
     const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
-    // --- CẤU HÌNH CHIA SẺ ---
+
+    // --- CẤU HÌNH CHỨC NĂNG CHIA SẺ MXH ---
     const urlToShare = 'https://sapnhap.org';
     const textToShare = 'Tra cứu thông tin sáp nhập đơn vị hành chính Việt Nam 2025 một cách nhanh chóng và chính xác!';
+    const hashtag = '#SapNhapHanhChinh'; // Thêm hashtag để tăng nhận diện
     const accountVia = 'thinhpxp'; // Tên tài khoản X của bạn (không có @) để được nhắc đến
     const facebookBtn = document.getElementById('share-facebook');
     const xBtn = document.getElementById('share-x');
+    // --- HÀM KIỂM TRA THIẾT BỊ DI ĐỘNG ---
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // === DOM Elements ===
     const lookupBtn = document.getElementById('lookup-btn');
@@ -401,31 +405,66 @@ document.addEventListener('DOMContentLoaded', () => {
         // LẮNG NGHE SỰ KIỆN CHIA SẺ
          if (facebookBtn) {
                     facebookBtn.addEventListener('click', function(e) {
-                            e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
-                            const encodedUrl = encodeURIComponent(urlToShare);
-                            // Mã hóa văn bản để dùng làm trích dẫn (quote)
-                            const encodedQuote = encodeURIComponent(textToShare);
-                            // URL Scheme để mở app Facebook
-                            // Lưu ý: Không phải tất cả các phiên bản app đều hỗ trợ 'quote' qua URL scheme
-                            const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}&quote=${encodedQuote}`;
-                            // URL web dự phòng với tham số quote
-                            const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedQuote}`;
-                            openAppOrFallback(facebookAppUrl, facebookWebUrl);
-                });
+                        e.preventDefault();
+
+                        const encodedUrl = encodeURIComponent(urlToShare);
+                        const encodedQuote = encodeURIComponent(textToShare);
+
+                        // URL chia sẻ web luôn được tạo ra, có cả quote và hashtag
+                        const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedQuote}&hashtag=${encodeURIComponent(hashtag)}`;
+
+                        if (isMobile) {
+                            // Trên di động: Thử mở app trước
+                            const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}`;
+
+                            // Sử dụng logic fallback
+                            const startTime = new Date().getTime();
+                            window.location.href = facebookAppUrl;
+
+                            setTimeout(function() {
+                                const endTime = new Date().getTime();
+                                // Nếu không mở được app sau 1.2 giây, fallback ra web
+                                if (endTime - startTime < 1200) {
+                                    window.location.href = facebookWebUrl; // Trên di động, mở cùng tab cho tiện
+                                }
+                            }, 1000);
+
+                        } else {
+                            // Trên máy tính: Mở thẳng link web trong tab mới
+                            window.open(facebookWebUrl, '_blank', 'noopener,noreferrer');
+                        }
+                    });
         }
 
     // --- SỰ KIỆN CLICK CHO NÚT X (TWITTER) ---
         if (xBtn) {
             xBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const encodedUrl = encodeURIComponent(urlToShare);
-                    const encodedText = encodeURIComponent(textToShare);
-                    // URL Scheme để mở app X/Twitter
-                    const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
-                    // URL web dự phòng
-                    const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
-                    openAppOrFallback(xAppUrl, xWebUrl);
-            });
+            e.preventDefault();
+
+            const encodedUrl = encodeURIComponent(urlToShare);
+            const encodedText = encodeURIComponent(textToShare);
+
+            const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
+
+            if (isMobile) {
+                // Trên di động: Thử mở app
+                const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
+
+                const startTime = new Date().getTime();
+                window.location.href = xAppUrl;
+
+                setTimeout(function() {
+                    const endTime = new Date().getTime();
+                    if (endTime - startTime < 1200) {
+                        window.location.href = xWebUrl;
+                    }
+                }, 1000);
+
+            } else {
+                // Trên máy tính: Mở thẳng link web trong tab mới
+                window.open(xWebUrl, '_blank', 'noopener,noreferrer');
+            }
+        });
         }
 
     }
