@@ -1030,16 +1030,13 @@ body.modal-open {
 /* === CSS CHO NÚT CHIA SẺ === */
 .social-share-container {
   text-align: center;
-  margin: 40px 20px;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  border: 1px solid #eee;
+  /*margin: 40px 20px;*/
+  padding: 5px;
+  border-radius: 4px;
 }
-
-.social-share-container p {
-  margin-top: 0;
-  font-size: 1.1em;
+.sharing-descrtiption {
+  margin-bottom: 6px;
+  font-size: 0.8em;
   font-weight: bold;
 }
 
@@ -1053,7 +1050,7 @@ body.modal-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
+  /*padding: 4px 8px;*/
   border-radius: 5px;
   color: #fff;
   text-decoration: none;
@@ -1068,9 +1065,9 @@ body.modal-open {
 }
 
 .share-btn.facebook {
-  background-color: #1877F2; /* Màu của Facebook */
+  /*  background-color: #1877F2;Màu của Facebook */
 }
 
 .share-btn.x {
-  background-color: #000000; /* Màu của X */
+   /* background-color: #000000;  Màu của X */
 }
