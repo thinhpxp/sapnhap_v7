@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === KHÓA API (CHỈ DÀNH CHO MYSTERY BOX) ===
     const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
+    // --- CẤU HÌNH CHIA SẺ ---
+    const urlToShare = 'https://sapnhap.org';
+    const textToShare = 'Tra cứu thông tin sáp nhập đơn vị hành chính Việt Nam 2025 một cách nhanh chóng và chính xác!';
+    const accountVia = 'thinhpxp'; // Tên tài khoản X của bạn (không có @) để được nhắc đến
+    const facebookBtn = document.getElementById('share-facebook');
+    const xBtn = document.getElementById('share-x');
 
     // === DOM Elements ===
     const lookupBtn = document.getElementById('lookup-btn');
@@ -391,6 +397,61 @@ document.addEventListener('DOMContentLoaded', () => {
         if (interfaceModeToggle) {
             interfaceModeToggle.addEventListener('change', toggleInterfaceMode);
         }
+        // LẮNG NGHE SỰ KIỆN CHIA SẺ
+         if (facebookBtn) {
+        facebookBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
+
+            const encodedUrl = encodeURIComponent(urlToShare);
+
+            // URL Scheme để mở app Facebook
+            const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}`;
+
+            // URL web dự phòng
+            const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+            openAppOrFallback(facebookAppUrl, facebookWebUrl);
+        });
+    }
+
+    // --- SỰ KIỆN CLICK CHO NÚT X (TWITTER) ---
+    if (xBtn) {
+        xBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const encodedUrl = encodeURIComponent(urlToShare);
+            const encodedText = encodeURIComponent(textToShare);
+
+            // URL Scheme để mở app X/Twitter
+            const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
+
+            // URL web dự phòng
+            const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
+
+            openAppOrFallback(xAppUrl, xWebUrl);
+        });
+    }
+
+    }
+
+     // CHIA SẺ: Hàm xử lý việc mở app hoặc fallback ra web
+    function openAppOrFallback(appUrl, webUrl) {
+        // Ghi lại thời điểm bắt đầu
+        const startTime = new Date().getTime();
+
+        // Thử mở URL Scheme của app
+        window.location.href = appUrl;
+
+        // Đặt một khoảng thời gian chờ
+        setTimeout(function() {
+            const endTime = new Date().getTime();
+            // Nếu không có ứng dụng nào xử lý URL scheme,
+            // trang sẽ không bị ẩn đi và thời gian trôi qua sẽ rất ngắn.
+            if (endTime - startTime < 1500) {
+                // Chuyển hướng đến link web như một phương án dự phòng
+                window.location.href = webUrl;
+            }
+        }, 1000); // 1 giây chờ
     }
 
    // === 2 HÀM TRA CỨU CHÍNH ===
