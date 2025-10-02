@@ -397,40 +397,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (interfaceModeToggle) {
             interfaceModeToggle.addEventListener('change', toggleInterfaceMode);
         }
+
         // LẮNG NGHE SỰ KIỆN CHIA SẺ
          if (facebookBtn) {
-        facebookBtn.addEventListener('click', function(e) {
-            e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
-
-            const encodedUrl = encodeURIComponent(urlToShare);
-
-            // URL Scheme để mở app Facebook
-            const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}`;
-
-            // URL web dự phòng
-            const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-
-            openAppOrFallback(facebookAppUrl, facebookWebUrl);
-        });
-    }
+                    facebookBtn.addEventListener('click', function(e) {
+                            e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a>
+                            const encodedUrl = encodeURIComponent(urlToShare);
+                            // Mã hóa văn bản để dùng làm trích dẫn (quote)
+                            const encodedQuote = encodeURIComponent(textToShare);
+                            // URL Scheme để mở app Facebook
+                            // Lưu ý: Không phải tất cả các phiên bản app đều hỗ trợ 'quote' qua URL scheme
+                            const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}&quote=${encodedQuote}`;
+                            // URL web dự phòng với tham số quote
+                            const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedQuote}`;
+                            openAppOrFallback(facebookAppUrl, facebookWebUrl);
+                });
+        }
 
     // --- SỰ KIỆN CLICK CHO NÚT X (TWITTER) ---
-    if (xBtn) {
-        xBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            const encodedUrl = encodeURIComponent(urlToShare);
-            const encodedText = encodeURIComponent(textToShare);
-
-            // URL Scheme để mở app X/Twitter
-            const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
-
-            // URL web dự phòng
-            const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
-
-            openAppOrFallback(xAppUrl, xWebUrl);
-        });
-    }
+        if (xBtn) {
+            xBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const encodedUrl = encodeURIComponent(urlToShare);
+                    const encodedText = encodeURIComponent(textToShare);
+                    // URL Scheme để mở app X/Twitter
+                    const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
+                    // URL web dự phòng
+                    const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
+                    openAppOrFallback(xAppUrl, xWebUrl);
+            });
+        }
 
     }
 
@@ -438,10 +434,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function openAppOrFallback(appUrl, webUrl) {
         // Ghi lại thời điểm bắt đầu
         const startTime = new Date().getTime();
-
         // Thử mở URL Scheme của app
         window.location.href = appUrl;
-
         // Đặt một khoảng thời gian chờ
         setTimeout(function() {
             const endTime = new Date().getTime();
@@ -449,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // trang sẽ không bị ẩn đi và thời gian trôi qua sẽ rất ngắn.
             if (endTime - startTime < 1500) {
                 // Chuyển hướng đến link web như một phương án dự phòng
-                window.location.href = webUrl;
+                window.open(webUrl, '_blank');
             }
         }, 1000); // 1 giây chờ
     }
