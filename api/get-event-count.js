@@ -11,7 +11,8 @@ const propertyId = process.env.GA4_PROPERTY_ID;
 const CLICK_EVENTS_TO_SUM = [
     'Event_lookup',
     'Event_Quick_Search_Old',
-    'Event_Quick_Search_New'
+    'Event_Quick_Search_New',
+    'Event_lookup_button_click' //Sự kiện này đã bị đổi tên trong google tag rồi, nhưng vẫn sử dụng ở đây để chương trình tính được tổng các sự kiện trong quá khứ
 ];
 
 // Vercel sẽ cache kết quả của hàm này
