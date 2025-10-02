@@ -104,6 +104,7 @@ async function handleGetRequest(request, response) {
         if(msg.context.mode) telegramMessage += `- Chế độ: ${msg.context.mode}\n`;
         if(msg.context.province) telegramMessage += `- Tỉnh: ${msg.context.province.name}\n`;
         if(msg.context.district) telegramMessage += `- Huyện: ${msg.context.district.name}\n`;
+        if(msg.context.commune) telegramMessage += `- Xã: ${msg.context.commune.name}\n`;
       }
       telegramMessage += `\n---\n\n`;
     });
