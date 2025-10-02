@@ -7,6 +7,13 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
 });
 const propertyId = process.env.GA4_PROPERTY_ID;
 
+// Định nghĩa một mảng chứa tất cả các sự kiện bạn muốn tính tổng
+const CLICK_EVENTS_TO_SUM = [
+    'Event_lookup',
+    'Event_Quick_Search_Old',
+    'Event_Quick_Search_New'
+];
+
 // Vercel sẽ cache kết quả của hàm này
 export default async function handler(request, response) {
   // Cho phép trình duyệt từ mọi nguồn gọi API này (CORS)
@@ -30,8 +37,8 @@ export default async function handler(request, response) {
         const eventCount = parseInt(row.metricValues[0].value, 10);
         eventCounts[eventName] = eventCount;
 
-        // Ví dụ: Cộng dồn các sự kiện click bạn quan tâm
-        if (eventName === 'Event_lookup') {
+        // Kiểm tra xem eventName có nằm trong mảng CLICK_EVENTS_TO_SUM không
+        if (CLICK_EVENTS_TO_SUM.includes(eventName)) {
             totalClicks += eventCount;
         }
     });
