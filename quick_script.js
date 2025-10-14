@@ -72,7 +72,7 @@
         spinner.classList.remove('hidden');
 
         try {
-            const apiUrl = '/api/quick-search?term=${term}&type=${type}';
+            const apiUrl = `/api/quick-search?term=${term}&type=${type}`;
             const response = await fetch(apiUrl);
             const results = await response.json();
 
