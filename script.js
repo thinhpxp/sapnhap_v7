@@ -409,6 +409,14 @@ document.addEventListener('DOMContentLoaded', () => {
             lookupBtn.disabled = !event.detail.value;
         });
 
+        // Xử lý nút mở rộng thông tin thôn/xóm
+        const toggleButton = event.target.closest('.village-toggle-button');
+        if (toggleButton) {
+            const content = toggleButton.nextElementSibling;
+            toggleButton.classList.toggle('active');
+            content.classList.toggle('hidden');
+        }
+
         // === THÊM MỚI: Các sự kiện cho nút và modal ===
         if (showAdminCentersBtn) {
             showAdminCentersBtn.addEventListener('click', handleShowAdminCenters);
@@ -527,36 +535,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === THÊM MỚI: HÀM TÁI SỬ DỤNG ĐỂ HIỂN THỊ THAY ĐỔI THÔN/XÓM ===
-    // Trả về chuỗi HTML hoặc chuỗi rỗng nếu không có dữ liệu
-    function renderVillageChanges(villageData, title) {
-        if (!villageData || villageData.length === 0) {
-            return ''; // Trả về chuỗi rỗng nếu không có dữ liệu
-        }
-
-        const listItems = villageData.map(item => `
-                        <tr>
-                            <td>${item.old_village_name}</td>
-                            <td>&rarr;</td>
-                            <td>${item.new_village_name}</td>
-                        </tr>
-                    `).join('');
-
-        return `
-                            <div class="village-changes-container">
-                                <h4>${title}</h4>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Tên cũ</th>
-                                            <th></th>
-                                            <th>Tên mới</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>${listItems}</tbody>
-                                </table>
-                            </div>
-                        `;
+function renderVillageChanges(villageData, title) {
+    // Nếu không có dữ liệu thay đổi thôn, trả về chuỗi rỗng
+    if (!villageData || villageData.length === 0) {
+        return '';
     }
+
+    // Icon mũi tên hướng xuống
+    const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
+
+    // Tạo bảng HTML chứa dữ liệu
+    const tableRows = villageData.map(item => `
+        <tr>
+            <td>${item.old_village_name}</td>
+            <td>→</td>
+            <td>${item.new_village_name}</td>
+        </tr>
+    `).join('');
+
+    const tableHtml = `
+        <table>
+            <thead>
+                <tr>
+                    <th>${t('oldName', 'Tên cũ')}</th>
+                    <th></th>
+                    <th>${t('newName', 'Tên mới')}</th>
+                </tr>
+            </thead>
+            <tbody>${tableRows}</tbody>
+        </table>
+    `;
+
+    // Trả về toàn bộ cấu trúc HTML của Accordion
+    return `
+        <div class="village-changes-wrapper">
+            <button class="village-toggle-button">
+                ${arrowIcon}
+                <span>${title}</span>
+            </button>
+            <div class="village-changes-content hidden">
+                ${tableHtml}
+            </div>
+        </div>
+    `;
+}
 
     // === 2 HÀM TRA CỨU CHÍNH ===
     // handleForwardLookup - Tra cứu xuôi
