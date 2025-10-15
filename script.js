@@ -571,6 +571,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const oldWardCode = selectedCommune;
         const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+        const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
+
+        // --- Hiển thị thông tin địa chỉ cũ ---
+        let oldAddressHtml = `
+            <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
+            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
 
         // Reset giao diện
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
