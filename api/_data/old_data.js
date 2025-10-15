@@ -55831,6 +55831,15 @@ export const allProvincesData = [
             "short_codename": "thanh_cong"
           },
           {
+            "name": "Phường Thắng Lợi",
+            "code": 20241193,
+            "codename": "phuong_thang_loi",
+            "division_type": "xã",
+            "short_codename": "thang_loi",
+            "has_history": true,
+            "history_description": "Nghị quyết 1193/NQ-UBTVQH15 hiệu lực từ 1/11/2024: Sáp nhập toàn bộ 0,87 km² diện tích tự nhiên và quy mô dân số là 7.720 người của phường Thắng Lợi vào phường Thành Công. Bạn hãy chuyển sang tra cứu phường Thành Công."
+          },
+          {
             "name": "Phường Tân Lợi",
             "code": 24136,
             "codename": "phuong_tan_loi",
