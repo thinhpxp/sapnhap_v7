@@ -604,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
 
                     if (events.length === 0) {
-                        newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
+                        newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`+ villageHtml;
                     } else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
                         const splitHtml = events.map(result => {
                             const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
