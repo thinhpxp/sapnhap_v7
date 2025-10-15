@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === KHÓA API (CHỈ DÀNH CHO MYSTERY BOX) ===
     const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
-
+    const toggleButton = event.target.closest('.village-toggle-button');
     // --- CẤU HÌNH CHỨC NĂNG CHIA SẺ MXH ---
     const urlToShare = 'https://sapnhap.org';
     const textToShare = 'Tra cứu thông tin sáp nhập đơn vị hành chính Việt Nam 2025 một cách nhanh chóng và chính xác!';
@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Xử lý nút mở rộng thông tin thôn/xóm
-        const toggleButton = event.target.closest('.village-toggle-button');
+        //const toggleButton = event.target.closest('.village-toggle-button');
         if (toggleButton) {
             const content = toggleButton.nextElementSibling;
             toggleButton.classList.toggle('active');
