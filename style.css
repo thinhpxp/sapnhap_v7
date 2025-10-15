@@ -1176,76 +1176,76 @@ body.modal-open {
 .share-btn.x {
 	/* background-color: #000000;  Màu của X */
 }
+/* === CSS CHO KHỐI THAY ĐỔI CẤP THÔN/XÓM === */
 
-/* === CSS CHO NÚT MỞ RỘNG THÔNG TIN THÔN/XÓM === */
-
-/* Container chính bao bọc cả nút và nội dung */
+/* Wrapper chính */
 .village-changes-wrapper {
-  margin-top: 20px;
-  border-top: 1px solid #eee;
-  padding-top: 15px;
+    margin-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
 }
 
-/* Nút bấm */
-.village-toggle-button {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  padding: 10px 5px; /* Thêm chút padding */
-  font-size: 1em; /* Cỡ chữ bằng với chữ thường */
-  font-weight: 600;
-  color: #007bff; /* Màu xanh để thể hiện có thể click */
-  cursor: pointer;
-  text-align: left;
-  transition: background-color 0.2s ease;
+/* Nút bấm để đóng/mở */
+.village-toggle-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: left;
+    transition: background-color 0.2s ease;
 }
 
-.village-toggle-button:hover {
-  background-color: #f0f8ff; /* Hiệu ứng hover nhẹ */
-  border-radius: 5px;
+.village-toggle-btn:hover {
+    background-color: #efefef;
 }
 
 /* Icon mũi tên */
-.village-toggle-button svg {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-  transition: transform 0.3s ease; /* Hiệu ứng xoay mượt mà */
+.toggle-arrow {
+    transition: transform 0.3s ease;
 }
 
-/* Khi nút được kích hoạt (active), xoay mũi tên 180 độ */
-.village-toggle-button.active svg {
-  transform: rotate(180deg);
+/* Khi nút active (đang mở), xoay mũi tên 180 độ */
+.village-toggle-btn.active .toggle-arrow {
+    transform: rotate(180deg);
 }
 
-/* Vùng chứa nội dung (bảng thôn/xóm) */
-.village-changes-content {
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  margin-top: 10px;
-  border: 1px solid #e0e0e0;
+/* Container chứa nội dung (cái bàn) */
+.village-changes-container {
+    max-height: 0; /* Quan trọng: Ban đầu ẩn đi */
+    overflow: hidden; /* Quan trọng: Ẩn nội dung khi thu gọn */
+    transition: max-height 0.4s ease-out; /* Hiệu ứng đóng/mở mượt mà */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none; /* Bỏ viền trên để dính vào nút */
+    border-radius: 0 0 5px 5px;
+    padding: 0; /* Reset padding */
 }
 
-/* Class để ẩn/hiện nội dung */
-.village-changes-content.hidden {
-  display: none;
+/* Style cho bảng bên trong */
+.village-changes-container table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* Căn chỉnh lại bảng bên trong cho đẹp */
-.village-changes-content table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.village-changes-content th,
-.village-changes-content td {
-  text-align: left;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
-.village-changes-content td:nth-child(2) {
-    text-align: center;
+.village-changes-container th,
+.village-changes-container td {
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
 }
 
+.village-changes-container th {
+    background-color: #f9f9f9;
+}
+
+.village-changes-container tr:last-child td {
+    border-bottom: none; /* Bỏ viền cho dòng cuối */
+}

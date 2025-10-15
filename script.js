@@ -256,6 +256,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // /script.js - bên trong hàm addEventListeners()
+
+    // Tìm đến đoạn document.body.addEventListener('click', ...) nếu có,
+    // hoặc thêm mới nếu chưa có.
+    document.body.addEventListener('click', function(event) {
+         // GHI CHÚ: Thêm logic mới cho nút đóng/mở thôn/xóm
+        const villageToggleButton = event.target.closest('.village-toggle-btn');
+        if (villageToggleButton) {
+            handleVillageToggle(villageToggleButton);
+        }
+    }
+
     // THÊM MỚI: Hàm riêng để tải dữ liệu ban đầu
     function loadInitialData() {
         if (window.allProvincesData && window.allProvincesData.length > 0) {
@@ -409,14 +421,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lookupBtn.disabled = !event.detail.value;
         });
 
-        // Xử lý nút mở rộng thông tin thôn/xóm
-        //const toggleButton = event.target.closest('.village-toggle-button');
-        if (toggleButton) {
-            const content = toggleButton.nextElementSibling;
-            toggleButton.classList.toggle('active');
-            content.classList.toggle('hidden');
-        }
-
         // === THÊM MỚI: Các sự kiện cho nút và modal ===
         if (showAdminCentersBtn) {
             showAdminCentersBtn.addEventListener('click', handleShowAdminCenters);
@@ -534,47 +538,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000); // 1 giây chờ
     }
 
-    // === THÊM MỚI: HÀM TÁI SỬ DỤNG ĐỂ HIỂN THỊ THAY ĐỔI THÔN/XÓM ===
+/**
+ * TẠO HTML CHO PHẦN THAY ĐỔI CẤP THÔN/XÓM CÓ THỂ THU GỌN
+ * @param {Array} villageData - Mảng dữ liệu các thôn thay đổi.
+ * @param {string} title - Tiêu đề cho nút bấm.
+ * @returns {string} - Chuỗi HTML của thành phần hoặc chuỗi rỗng.
+ */
 function renderVillageChanges(villageData, title) {
-    // Nếu không có dữ liệu thay đổi thôn, trả về chuỗi rỗng
     if (!villageData || villageData.length === 0) {
-        return '';
+        return ''; // Trả về rỗng nếu không có dữ liệu
     }
 
-    // Icon mũi tên hướng xuống
-    const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
-
-    // Tạo bảng HTML chứa dữ liệu
+    // Tạo các hàng của bảng
     const tableRows = villageData.map(item => `
         <tr>
             <td>${item.old_village_name}</td>
-            <td>→</td>
             <td>${item.new_village_name}</td>
         </tr>
     `).join('');
 
-    const tableHtml = `
-        <table>
-            <thead>
-                <tr>
-                    <th>${t('oldName', 'Tên cũ')}</th>
-                    <th></th>
-                    <th>${t('newName', 'Tên mới')}</th>
-                </tr>
-            </thead>
-            <tbody>${tableRows}</tbody>
-        </table>
-    `;
+    // Icon mũi tên SVG
+    const arrowIcon = `
+        <svg class="toggle-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>`;
 
-    // Trả về toàn bộ cấu trúc HTML của Accordion
+    // Trả về toàn bộ cấu trúc HTML của khối có thể thu gọn
     return `
         <div class="village-changes-wrapper">
-            <button class="village-toggle-button">
+            <button class="village-toggle-btn" aria-expanded="false">
+                <span class="toggle-text">${title}</span>
                 ${arrowIcon}
-                <span>${title}</span>
             </button>
-            <div class="village-changes-content hidden">
-                ${tableHtml}
+            <div class="village-changes-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>${t('villageOldName', 'Tên cũ')}</th>
+                            <th>${t('villageNewName', 'Tên mới')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tableRows}
+                    </tbody>
+                </table>
             </div>
         </div>
     `;
@@ -738,6 +745,26 @@ function renderVillageChanges(villageData, title) {
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
     }
+
+ /**
+ * Xử lý việc đóng/mở khối thông tin thôn/xóm.
+ * @param {HTMLElement} button - Nút bấm được click.
+ */
+function handleVillageToggle(button) {
+    button.classList.toggle('active'); // Để xoay mũi tên
+    const content = button.nextElementSibling; // Lấy phần nội dung ngay sau nút bấm
+
+    if (content.style.maxHeight) {
+        // Nếu đang mở, thì đóng lại
+        content.style.maxHeight = null;
+        button.setAttribute('aria-expanded', 'false');
+    } else {
+        // Nếu đang đóng, thì mở ra
+        // scrollHeight là chiều cao thực tế của nội dung
+        content.style.maxHeight = content.scrollHeight + 'px';
+        button.setAttribute('aria-expanded', 'true');
+    }
+}
 
     // === XỬ LÝ GÓP Ý - FEEDBACK ===
     async function handleSubmitFeedback() {
