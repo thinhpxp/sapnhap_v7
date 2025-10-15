@@ -1,540 +1,539 @@
 //script.js
 document.addEventListener('DOMContentLoaded', () => {
-            // === PHÁT HIỆN NGÔN NGỮ HIỆN TẠI ===
-            const currentLang = document.documentElement.lang || 'vi';
-            const translations = window.translations || {};
-            const t = (key, fallback = '') => translations[key] || fallback;
+    // === PHÁT HIỆN NGÔN NGỮ HIỆN TẠI ===
+    const currentLang = document.documentElement.lang || 'vi';
+    const translations = window.translations || {};
+    const t = (key, fallback = '') => translations[key] || fallback;
 
-            // === KHÓA API (CHỈ DÀNH CHO MYSTERY BOX) ===
-            const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
+    // === KHÓA API (CHỈ DÀNH CHO MYSTERY BOX) ===
+    const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
 
-            // --- CẤU HÌNH CHỨC NĂNG CHIA SẺ MXH ---
-            const urlToShare = 'https://sapnhap.org';
-            const textToShare = 'Tra cứu thông tin sáp nhập đơn vị hành chính Việt Nam 2025 một cách nhanh chóng và chính xác!';
-            const hashtag = '#SapNhapHanhChinh'; // Thêm hashtag để tăng nhận diện
-            const accountVia = 'thinhpxp'; // Tên tài khoản X của bạn (không có @) để được nhắc đến
-            const facebookBtn = document.getElementById('share-facebook');
-            const xBtn = document.getElementById('share-x');
-            // --- HÀM KIỂM TRA THIẾT BỊ DI ĐỘNG ---
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // --- CẤU HÌNH CHỨC NĂNG CHIA SẺ MXH ---
+    const urlToShare = 'https://sapnhap.org';
+    const textToShare = 'Tra cứu thông tin sáp nhập đơn vị hành chính Việt Nam 2025 một cách nhanh chóng và chính xác!';
+    const hashtag = '#SapNhapHanhChinh'; // Thêm hashtag để tăng nhận diện
+    const accountVia = 'thinhpxp'; // Tên tài khoản X của bạn (không có @) để được nhắc đến
+    const facebookBtn = document.getElementById('share-facebook');
+    const xBtn = document.getElementById('share-x');
+    // --- HÀM KIỂM TRA THIẾT BỊ DI ĐỘNG ---
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-            // === DOM Elements ===
-            const lookupBtn = document.getElementById('lookup-btn');
-            const resultContainer = document.getElementById('result-container');
-            const oldAddressDisplay = document.getElementById('old-address-display');
-            const newAddressDisplay = document.getElementById('new-address-display');
-            const notificationArea = document.getElementById('notification-area');
-            const mysteryBox = document.getElementById('mystery-box');
-            const spinner = mysteryBox ? mysteryBox.querySelector('.loading-spinner') : null;
-            const modeToggle = document.getElementById('mode-toggle');
-            const lookupDescription = document.getElementById('lookup-description');
-            const provinceSelectEl = document.getElementById('province-select');
-            const districtSelectEl = document.getElementById('district-select');
-            const communeSelectEl = document.getElementById('commune-select');
-            const newProvinceSelectEl = document.getElementById('new-province-select');
-            const newCommuneSelectEl = document.getElementById('new-commune-select');
-            // Element cho switch accent
-            const accentToggleContainer = document.getElementById('accent-toggle-container');
-            const accentToggle = document.getElementById('accent-toggle');
-            const forwardControls = document.getElementById('forward-controls');
-            const reverseControls = document.getElementById('reverse-controls');
-            // THÊM MỚI: Các element cho nút và modal để xem địa chỉ hành chính
-            const adminCenterActions = document.getElementById('admin-center-actions');
-            const showAdminCentersBtn = document.getElementById('show-admin-centers-btn');
-            const adminCenterModal = document.getElementById('admin-center-modal');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            const modalBody = document.getElementById('modal-body');
-            // Khung góp ý
-            const feedbackInput = document.getElementById('feedback-input');
-            const feedbackSendBtn = document.getElementById('feedback-send-btn');
-            const feedbackMessage = document.getElementById('feedback-message');
-            // Lịch sử sáp nhập
-            const historyDisplay = document.getElementById('history-display');
-            // QUICK SEARCH
-            const traditionalControls = document.getElementById('controls');
-            const quickSearchInterface = document.getElementById('quick-search-interface');
-            const interfaceModeToggle = document.getElementById('interface-mode-toggle');
-            // === THÊM MỚI: DOM element cho switch Cũ/Mới ===
-            const traditionalModeSwitcher = document.getElementById('traditional-mode-switcher');
+    // === DOM Elements ===
+    const lookupBtn = document.getElementById('lookup-btn');
+    const resultContainer = document.getElementById('result-container');
+    const oldAddressDisplay = document.getElementById('old-address-display');
+    const newAddressDisplay = document.getElementById('new-address-display');
+    const notificationArea = document.getElementById('notification-area');
+    const mysteryBox = document.getElementById('mystery-box');
+    const spinner = mysteryBox ? mysteryBox.querySelector('.loading-spinner') : null;
+    const modeToggle = document.getElementById('mode-toggle');
+    const lookupDescription = document.getElementById('lookup-description');
+    const provinceSelectEl = document.getElementById('province-select');
+    const districtSelectEl = document.getElementById('district-select');
+    const communeSelectEl = document.getElementById('commune-select');
+    const newProvinceSelectEl = document.getElementById('new-province-select');
+    const newCommuneSelectEl = document.getElementById('new-commune-select');
+    // Element cho switch accent
+    const accentToggleContainer = document.getElementById('accent-toggle-container');
+    const accentToggle = document.getElementById('accent-toggle');
+    const forwardControls = document.getElementById('forward-controls');
+    const reverseControls = document.getElementById('reverse-controls');
+    // THÊM MỚI: Các element cho nút và modal để xem địa chỉ hành chính
+    const adminCenterActions = document.getElementById('admin-center-actions');
+    const showAdminCentersBtn = document.getElementById('show-admin-centers-btn');
+    const adminCenterModal = document.getElementById('admin-center-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalBody = document.getElementById('modal-body');
+    // Khung góp ý
+    const feedbackInput = document.getElementById('feedback-input');
+    const feedbackSendBtn = document.getElementById('feedback-send-btn');
+    const feedbackMessage = document.getElementById('feedback-message');
+    // Lịch sử sáp nhập
+    const historyDisplay = document.getElementById('history-display');
+    // QUICK SEARCH
+    const traditionalControls = document.getElementById('controls');
+    const quickSearchInterface = document.getElementById('quick-search-interface');
+    const interfaceModeToggle = document.getElementById('interface-mode-toggle');
+    // === THÊM MỚI: DOM element cho switch Cũ/Mới ===
+    const traditionalModeSwitcher = document.getElementById('traditional-mode-switcher');
 
-            // === BIỂU TƯỢNG SVG ===
-            const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
-            const copiedIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
+    // === BIỂU TƯỢNG SVG ===
+    const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
+    const copiedIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>`;
 
-            // === QUẢN LÝ TRẠNG THÁI ===
-            let allProvincesData = [];
-            let isReverseMode = false;
-            let newWardCodeForModal = null; // THÊM MỚI: Biến để lưu mã xã mới cho modal
-            let newProvinceCodeForModal = null; // THÊM MỚI: Biến để lưu mã tỉnh mới cho modal
-            let removeAccents = false; // Mặc định là TẮT (hiển thị có dấu)
-            let provinceChoices, districtChoices, communeChoices;
-            let newProvinceChoices, newCommuneChoices;
-            let isQuickSearchMode = false;
+    // === QUẢN LÝ TRẠNG THÁI ===
+    let allProvincesData = [];
+    let isReverseMode = false;
+    let newWardCodeForModal = null; // THÊM MỚI: Biến để lưu mã xã mới cho modal
+    let newProvinceCodeForModal = null; // THÊM MỚI: Biến để lưu mã tỉnh mới cho modal
+    let removeAccents = false; // Mặc định là TẮT (hiển thị có dấu)
+    let provinceChoices, districtChoices, communeChoices;
+    let newProvinceChoices, newCommuneChoices;
+    let isQuickSearchMode = false;
 
-            // === CÁC HÀM TIỆN ÍCH ===
-            function toNormalizedString(str) {
-                if (!str) return '';
-                str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
-                return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // === CÁC HÀM TIỆN ÍCH ===
+    function toNormalizedString(str) {
+        if (!str) return '';
+        str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
+        return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function showNotification(message, type = 'loading') {
+        if (notificationArea) {
+            notificationArea.textContent = message;
+            notificationArea.className = type;
+            notificationArea.classList.remove('hidden');
+        }
+    }
+
+    function hideNotification() {
+        if (notificationArea) {
+            notificationArea.classList.add('hidden');
+            notificationArea.textContent = '';
+        }
+    }
+
+    function updateChoices(choicesInstance, placeholder, data, valueKey = 'code', labelKey = 'name') {
+        choicesInstance.clearStore();
+        choicesInstance.setChoices(
+            [{
+                value: '',
+                label: placeholder,
+                selected: true,
+                disabled: true
+            }, ...data.map(item => ({
+                value: item[valueKey],
+                label: item[labelKey]
+            }))],
+            'value', 'label', false
+        );
+    }
+
+    function resetChoice(choicesInstance, placeholder) {
+        choicesInstance.clearStore();
+        choicesInstance.setChoices([{
+            value: '',
+            label: placeholder,
+            selected: true,
+            disabled: true
+        }], 'value', 'label', false);
+        choicesInstance.disable();
+    }
+
+    // === HÀM DỊCH THUẬT & BẢN ĐỊA HÓA ===
+    function applyTranslations() {
+        // Dịch nội dung text (innerHTML)
+        document.querySelectorAll('[data-i18n-key]').forEach(el => {
+            const key = el.getAttribute('data-i18n-key');
+            el.innerHTML = t(key, el.innerHTML);
+        });
+
+        // === THÊM MỚI: Dịch các thuộc tính placeholder ===
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            const translation = t(key);
+            if (translation) {
+                el.setAttribute('placeholder', translation);
             }
+        });
 
-            function showNotification(message, type = 'loading') {
-                if (notificationArea) {
-                    notificationArea.textContent = message;
-                    notificationArea.className = type;
-                    notificationArea.classList.remove('hidden');
-                }
-            }
+        // Cập nhật các thuộc tính meta và title
+        document.title = t('pageTitle', "Tra Cứu Sáp Nhập");
+        const descEl = document.querySelector('meta[name="description"]');
+        if (descEl) descEl.setAttribute('content', t('pageDescription'));
+    }
 
-            function hideNotification() {
-                if (notificationArea) {
-                    notificationArea.classList.add('hidden');
-                    notificationArea.textContent = '';
-                }
-            }
+    // Hàm quyết định hiển thị tên nào dựa trên ngôn ngữ và trạng thái switch
+    function localize(name, en_name) {
+        if (currentLang === 'en') {
+            return removeAccents ? (en_name || toNormalizedString(name)) : name;
+        }
+        return name;
+    }
 
-            function updateChoices(choicesInstance, placeholder, data, valueKey = 'code', labelKey = 'name') {
-                choicesInstance.clearStore();
-                choicesInstance.setChoices(
-                    [{
-                        value: '',
-                        label: placeholder,
-                        selected: true,
-                        disabled: true
-                    }, ...data.map(item => ({
-                        value: item[valueKey],
-                        label: item[labelKey]
-                    }))],
-                    'value', 'label', false
-                );
-            }
+    // === CÁC HÀM KHỞI TẠO & GIAO DIỆN ===
+    function initialize() {
+        applyTranslations();
 
-            function resetChoice(choicesInstance, placeholder) {
-                choicesInstance.clearStore();
-                choicesInstance.setChoices([{
-                    value: '',
-                    label: placeholder,
-                    selected: true,
-                    disabled: true
-                }], 'value', 'label', false);
-                choicesInstance.disable();
-            }
+        if (currentLang === 'en' && accentToggleContainer && accentToggle) {
+            accentToggleContainer.classList.remove('hidden');
+            accentToggle.checked = removeAccents; // Cập nhật trạng thái switch
+        }
 
-            // === HÀM DỊCH THUẬT & BẢN ĐỊA HÓA ===
-            function applyTranslations() {
-                // Dịch nội dung text (innerHTML)
-                document.querySelectorAll('[data-i18n-key]').forEach(el => {
-                    const key = el.getAttribute('data-i18n-key');
-                    el.innerHTML = t(key, el.innerHTML);
-                });
+        const choicesConfig = {
+            searchEnabled: true,
+            itemSelectText: t('selectChoice', 'Chọn'),
+            removeItemButton: true
+        };
 
-                // === THÊM MỚI: Dịch các thuộc tính placeholder ===
-                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                    const key = el.getAttribute('data-i18n-placeholder');
-                    const translation = t(key);
-                    if (translation) {
-                        el.setAttribute('placeholder', translation);
+        // Hủy các instance cũ nếu có để tránh lỗi "already initialised"
+        if (provinceChoices) provinceChoices.destroy();
+        if (districtChoices) districtChoices.destroy();
+        if (communeChoices) communeChoices.destroy();
+        if (newProvinceChoices) newProvinceChoices.destroy();
+        if (newCommuneChoices) newCommuneChoices.destroy();
+        // Xử lý lịch sử
+        if (window.allProvincesData && window.allProvincesData.length > 0) {
+            updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
+        } else {
+            showNotification(t('errorLoadOldData'), "error");
+        }
+
+        provinceChoices = new Choices(provinceSelectEl, {
+            ...choicesConfig
+        });
+        districtChoices = new Choices(districtSelectEl, {
+            ...choicesConfig
+        });
+        communeChoices = new Choices(communeSelectEl, {
+            ...choicesConfig
+        });
+        newProvinceChoices = new Choices(newProvinceSelectEl, {
+            ...choicesConfig
+        });
+        newCommuneChoices = new Choices(newCommuneSelectEl, {
+            ...choicesConfig
+        });
+
+        resetChoice(districtChoices, t('oldDistrictPlaceholder'));
+        resetChoice(communeChoices, t('oldCommunePlaceholder'));
+        resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
+
+        addEventListeners();
+        loadOldDataDropdowns(); //Gọi địa chỉ mới
+        loadNewProvincesDropdown(); //Gọi địa chỉ cũ
+        // gọi hàm hiển thị lượt tra cứu GOOGLE ANALYTICS
+        displayEventCount();
+        setInterval(displayEventCount, 30000);
+        // GỌI HÀM HIỂN THỊ GOOGLE REAL TIME
+        displayRealtimeLocations(); // Hàm mới
+        // Tự động làm mới sau mỗi 60 giây
+        setInterval(displayRealtimeLocations, 75000);
+        setTimeout(() => {
+            loadInitialData();
+        }, 0);
+    }
+
+    //QUẢN LÝ CHUYỂN ĐỔI GIAO DIỆN TRA CỨU TRUYỀN THỐNG VÀ QUICK SEARCH
+    function toggleInterfaceMode() {
+        isQuickSearchMode = interfaceModeToggle.checked;
+        if (isQuickSearchMode) {
+            // Chuyển sang chế độ Tra cứu Nhanh
+            if (traditionalControls) traditionalControls.classList.add('hidden');
+            if (quickSearchInterface) quickSearchInterface.classList.remove('hidden');
+            resultContainer.classList.add('hidden'); // Ẩn kết quả cũ
+            // === Ẩn switch Cũ/Mới khi ở chế độ Nhanh ===
+            if (traditionalModeSwitcher) traditionalModeSwitcher.classList.add('hidden');
+            // === Ẩn dòng mô tả ===
+            if (lookupDescription) lookupDescription.classList.add('hidden');
+
+            // Chỉ tải script này một lần duy nhất.
+            if (!document.getElementById('quick-search-script')) {
+                console.log("Lần đầu kích hoạt Tra cứu Nhanh. Đang tải script...");
+                const script = document.createElement('script');
+                script.id = 'quick-search-script';
+                script.src = '/quick_script.js';
+                script.defer = true;
+                // Gán một hàm callback để biết khi nào script đã tải xong
+                script.onload = () => {
+                    console.log("quick_script.js đã tải xong.");
+                    // Nếu có một hàm khởi tạo trong quick_script.js, gọi nó ở đây
+                    if (window.initializeQuickSearch) {
+                        window.initializeQuickSearch();
                     }
-                });
-
-                // Cập nhật các thuộc tính meta và title
-                document.title = t('pageTitle', "Tra Cứu Sáp Nhập");
-                const descEl = document.querySelector('meta[name="description"]');
-                if (descEl) descEl.setAttribute('content', t('pageDescription'));
-            }
-
-            // Hàm quyết định hiển thị tên nào dựa trên ngôn ngữ và trạng thái switch
-            function localize(name, en_name) {
-                if (currentLang === 'en') {
-                    return removeAccents ? (en_name || toNormalizedString(name)) : name;
-                }
-                return name;
-            }
-
-            // === CÁC HÀM KHỞI TẠO & GIAO DIỆN ===
-            function initialize() {
-                applyTranslations();
-
-                if (currentLang === 'en' && accentToggleContainer && accentToggle) {
-                    accentToggleContainer.classList.remove('hidden');
-                    accentToggle.checked = removeAccents; // Cập nhật trạng thái switch
-                }
-
-                const choicesConfig = {
-                    searchEnabled: true,
-                    itemSelectText: t('selectChoice', 'Chọn'),
-                    removeItemButton: true
                 };
+                document.body.appendChild(script);
+            }
 
-                // Hủy các instance cũ nếu có để tránh lỗi "already initialised"
-                if (provinceChoices) provinceChoices.destroy();
-                if (districtChoices) districtChoices.destroy();
-                if (communeChoices) communeChoices.destroy();
-                if (newProvinceChoices) newProvinceChoices.destroy();
-                if (newCommuneChoices) newCommuneChoices.destroy();
-                // Xử lý lịch sử
-                if (window.allProvincesData && window.allProvincesData.length > 0) {
-                    updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
+        } else {
+            // Chuyển về chế độ Tra cứu Truyền thống
+            if (traditionalControls) traditionalControls.classList.remove('hidden');
+            if (quickSearchInterface) quickSearchInterface.classList.add('hidden');
+            // === Hiện lại switch Cũ/Mới khi quay về ===
+            if (traditionalModeSwitcher) traditionalModeSwitcher.classList.remove('hidden');
+            // === Hiện lại dòng mô tả ===
+            if (lookupDescription) lookupDescription.classList.remove('hidden');
+        }
+    }
+
+    // THÊM MỚI: Hàm riêng để tải dữ liệu ban đầu
+    function loadInitialData() {
+        if (window.allProvincesData && window.allProvincesData.length > 0) {
+            window.allProvincesData.sort((a, b) => a.code - b.code);
+            updateChoices(provinceChoices, t('oldProvincePlaceholder'), window.allProvincesData);
+        } else {
+            showNotification(t('errorLoadOldData', "Lỗi tải dữ liệu cũ."), "error");
+        }
+
+        resetChoice(districtChoices, t('oldDistrictPlaceholder'));
+        resetChoice(communeChoices, t('oldCommunePlaceholder'));
+        resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
+
+        loadNewProvincesDropdown();
+        displayEventCount();
+        displayRealtimeLocations();
+        setInterval(displayRealtimeLocations, 90000);
+    }
+    // THÊM MỚI: Hàm tải dữ liệu cho dropdown Cũ
+    async function loadOldDataDropdowns() {
+        resetChoice(provinceChoices, t('oldProvinceLoading', 'Đang tải tỉnh/thành...'));
+        try {
+            const response = await fetch('/api/get-old-data');
+            if (!response.ok) throw new Error(t('errorLoadOldData'));
+
+            allProvincesData = await response.json(); // Lưu dữ liệu vào biến cục bộ
+
+            const localizedOldData = allProvincesData.map(province => ({
+                ...province,
+                name: localize(province.name, null),
+                districts: province.districts.map(district => ({
+                    ...district,
+                    name: localize(district.name, null),
+                    wards: district.wards.map(ward => ({
+                        ...ward,
+                        name: localize(ward.name, null)
+                    }))
+                }))
+            }));
+
+            updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
+            provinceChoices.enable();
+
+        } catch (error) {
+            console.error(error);
+            resetChoice(provinceChoices, t('errorLoadOldData'));
+            showNotification(error.message, 'error');
+        }
+    }
+
+
+    async function loadNewProvincesDropdown() {
+        resetChoice(newProvinceChoices, t('newProvinceLoading'));
+        try {
+            const response = await fetch('/api/new-geo-data');
+            if (!response.ok) throw new Error(t('errorFetchNewProvinces'));
+            let data = await response.json();
+            const localizedData = data.map(province => ({
+                ...province,
+                name: localize(province.name, province.en_name)
+            }));
+            updateChoices(newProvinceChoices, t('newProvincePlaceholder'), localizedData, 'province_code', 'name');
+            newProvinceChoices.enable();
+        } catch (error) {
+            console.error(error);
+            resetChoice(newProvinceChoices, t('newProvinceError'));
+        }
+    }
+
+    function toggleLookupUI() {
+        isReverseMode = modeToggle.checked;
+        forwardControls.classList.toggle('hidden', isReverseMode);
+        reverseControls.classList.toggle('hidden', !isReverseMode);
+        resultContainer.classList.add('hidden');
+        lookupBtn.disabled = true;
+        lookupDescription.textContent = isReverseMode ?
+            t('lookupDescriptionNewToOld') :
+            t('lookupDescriptionOldToNew');
+    }
+
+    // === LẮNG NGHE SỰ KIỆN ===
+    function addEventListeners() {
+        if (modeToggle) modeToggle.addEventListener('change', toggleLookupUI);
+        if (lookupBtn) lookupBtn.addEventListener('click', () => {
+            if (isReverseMode) handleReverseLookup();
+            else handleForwardLookup();
+        });
+        if (mysteryBox) mysteryBox.addEventListener('click', fetchRandomImage);
+        if (resultContainer) resultContainer.addEventListener('click', handleCopy);
+
+        if (accentToggle) {
+            accentToggle.addEventListener('change', () => {
+                removeAccents = accentToggle.checked;
+                initialize(); // Khởi tạo lại toàn bộ giao diện
+            });
+        }
+
+        if (provinceSelectEl) provinceSelectEl.addEventListener('choice', (event) => {
+            const selectedProvince = allProvincesData.find(p => p.code == event.detail.value);
+            if (selectedProvince && selectedProvince.districts) {
+                const localizedDistricts = selectedProvince.districts.map(d => ({
+                    ...d,
+                    name: localize(d.name, null)
+                }));
+                updateChoices(districtChoices, t('oldDistrictPlaceholder'), localizedDistricts);
+            }
+            districtChoices.enable();
+            resetChoice(communeChoices, t('oldCommunePlaceholder'));
+            lookupBtn.disabled = true;
+        });
+        if (districtSelectEl) districtSelectEl.addEventListener('choice', (event) => {
+            const provinceCode = provinceChoices.getValue(true);
+            const selectedProvince = allProvincesData.find(p => p.code == provinceCode);
+            const selectedDistrict = selectedProvince?.districts.find(d => d.code == event.detail.value);
+            if (selectedDistrict && selectedDistrict.wards) {
+                const localizedWards = selectedDistrict.wards.map(w => ({
+                    ...w,
+                    name: localize(w.name, null)
+                }));
+                updateChoices(communeChoices, t('oldCommunePlaceholder'), localizedWards);
+            }
+            communeChoices.enable();
+            lookupBtn.disabled = true;
+        });
+        if (communeSelectEl) communeSelectEl.addEventListener('choice', (event) => {
+            lookupBtn.disabled = !event.detail.value;
+        });
+
+        if (newProvinceSelectEl) newProvinceSelectEl.addEventListener('choice', async (event) => {
+            const provinceCode = event.detail.value;
+            if (!provinceCode) return;
+            resetChoice(newCommuneChoices, t('newCommuneLoading'));
+            lookupBtn.disabled = true;
+            try {
+                const response = await fetch(`/api/new-geo-data?province_code=${provinceCode}`);
+                if (!response.ok) throw new Error(t('newCommuneError'));
+                let data = await response.json();
+                const localizedData = data.map(ward => ({
+                    ...ward,
+                    name: localize(ward.name, ward.en_name)
+                }));
+                updateChoices(newCommuneChoices, t('newCommunePlaceholder'), localizedData, 'ward_code', 'name');
+                newCommuneChoices.enable();
+            } catch (error) {
+                console.error(error);
+                resetChoice(newCommuneChoices, t('newCommuneError'));
+                showNotification(error.message, 'error');
+            }
+        });
+        if (newCommuneSelectEl) newCommuneSelectEl.addEventListener('choice', (event) => {
+            lookupBtn.disabled = !event.detail.value;
+        });
+
+        // === THÊM MỚI: Các sự kiện cho nút và modal ===
+        if (showAdminCentersBtn) {
+            showAdminCentersBtn.addEventListener('click', handleShowAdminCenters);
+        }
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+        if (adminCenterModal) {
+            // Đóng modal khi click vào lớp phủ bên ngoài
+            adminCenterModal.addEventListener('click', (event) => {
+                if (event.target === adminCenterModal) {
+                    closeModal();
+                }
+            });
+        }
+        // === THÊM MỚI: Lắng nghe sự kiện cho form Góp ý ===
+        if (feedbackSendBtn) {
+            feedbackSendBtn.addEventListener('click', handleSubmitFeedback);
+        }
+        if (feedbackInput) {
+            // Cho phép gửi bằng phím Enter
+            feedbackInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    handleSubmitFeedback();
+                }
+            });
+        }
+        // === THÊM MỚI: Listener cho switch chính ===
+        if (interfaceModeToggle) {
+            interfaceModeToggle.addEventListener('change', toggleInterfaceMode);
+        }
+
+        // LẮNG NGHE SỰ KIỆN CHIA SẺ
+        if (facebookBtn) {
+            facebookBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const encodedUrl = encodeURIComponent(urlToShare);
+                const encodedQuote = encodeURIComponent(textToShare);
+
+                // URL chia sẻ web luôn được tạo ra, có cả quote và hashtag
+                const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedQuote}&hashtag=${encodeURIComponent(hashtag)}`;
+
+                if (isMobile) {
+                    // Trên di động: Thử mở app trước
+                    const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}`;
+
+                    // Sử dụng logic fallback
+                    const startTime = new Date().getTime();
+                    window.location.href = facebookAppUrl;
+
+                    setTimeout(function() {
+                        const endTime = new Date().getTime();
+                        // Nếu không mở được app sau 1.2 giây, fallback ra web
+                        if (endTime - startTime < 1200) {
+                            window.location.href = facebookWebUrl; // Trên di động, mở cùng tab cho tiện
+                        }
+                    }, 1000);
+
                 } else {
-                    showNotification(t('errorLoadOldData'), "error");
+                    // Trên máy tính: Mở thẳng link web trong tab mới
+                    window.open(facebookWebUrl, '_blank', 'noopener,noreferrer');
                 }
+            });
+        }
 
-                provinceChoices = new Choices(provinceSelectEl, {
-                    ...choicesConfig
-                });
-                districtChoices = new Choices(districtSelectEl, {
-                    ...choicesConfig
-                });
-                communeChoices = new Choices(communeSelectEl, {
-                    ...choicesConfig
-                });
-                newProvinceChoices = new Choices(newProvinceSelectEl, {
-                    ...choicesConfig
-                });
-                newCommuneChoices = new Choices(newCommuneSelectEl, {
-                    ...choicesConfig
-                });
+        // --- SỰ KIỆN CLICK CHO NÚT X (TWITTER) ---
+        if (xBtn) {
+            xBtn.addEventListener('click', function(e) {
+                e.preventDefault();
 
-                resetChoice(districtChoices, t('oldDistrictPlaceholder'));
-                resetChoice(communeChoices, t('oldCommunePlaceholder'));
-                resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
+                const encodedUrl = encodeURIComponent(urlToShare);
+                const encodedText = encodeURIComponent(textToShare);
 
-                addEventListeners();
-                loadOldDataDropdowns(); //Gọi địa chỉ mới
-                loadNewProvincesDropdown(); //Gọi địa chỉ cũ
-                // gọi hàm hiển thị lượt tra cứu GOOGLE ANALYTICS
-                displayEventCount();
-                setInterval(displayEventCount, 30000);
-                // GỌI HÀM HIỂN THỊ GOOGLE REAL TIME
-                displayRealtimeLocations(); // Hàm mới
-                // Tự động làm mới sau mỗi 60 giây
-                setInterval(displayRealtimeLocations, 75000);
-                setTimeout(() => {
-                    loadInitialData();
-                }, 0);
-            }
+                const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
 
-            //QUẢN LÝ CHUYỂN ĐỔI GIAO DIỆN TRA CỨU TRUYỀN THỐNG VÀ QUICK SEARCH
-            function toggleInterfaceMode() {
-                isQuickSearchMode = interfaceModeToggle.checked;
-                if (isQuickSearchMode) {
-                    // Chuyển sang chế độ Tra cứu Nhanh
-                    if (traditionalControls) traditionalControls.classList.add('hidden');
-                    if (quickSearchInterface) quickSearchInterface.classList.remove('hidden');
-                    resultContainer.classList.add('hidden'); // Ẩn kết quả cũ
-                    // === Ẩn switch Cũ/Mới khi ở chế độ Nhanh ===
-                    if (traditionalModeSwitcher) traditionalModeSwitcher.classList.add('hidden');
-                    // === Ẩn dòng mô tả ===
-                    if (lookupDescription) lookupDescription.classList.add('hidden');
+                if (isMobile) {
+                    // Trên di động: Thử mở app
+                    const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
 
-                    // GHI CHÚ CỐT LÕI: Tải động script cho tra cứu nhanh
-                    // Chỉ tải script này một lần duy nhất.
-                    if (!document.getElementById('quick-search-script')) {
-                        console.log("Lần đầu kích hoạt Tra cứu Nhanh. Đang tải script...");
-                        const script = document.createElement('script');
-                        script.id = 'quick-search-script';
-                        script.src = '/quick_script.js';
-                        script.defer = true;
-                        // Gán một hàm callback để biết khi nào script đã tải xong
-                        script.onload = () => {
-                            console.log("quick_script.js đã tải xong.");
-                            // Nếu có một hàm khởi tạo trong quick_script.js, gọi nó ở đây
-                            if (window.initializeQuickSearch) {
-                                window.initializeQuickSearch();
-                            }
-                        };
-                        document.body.appendChild(script);
-                    }
+                    const startTime = new Date().getTime();
+                    window.location.href = xAppUrl;
+
+                    setTimeout(function() {
+                        const endTime = new Date().getTime();
+                        if (endTime - startTime < 1200) {
+                            window.location.href = xWebUrl;
+                        }
+                    }, 1000);
 
                 } else {
-                    // Chuyển về chế độ Tra cứu Truyền thống
-                    if (traditionalControls) traditionalControls.classList.remove('hidden');
-                    if (quickSearchInterface) quickSearchInterface.classList.add('hidden');
-                    // === Hiện lại switch Cũ/Mới khi quay về ===
-                    if (traditionalModeSwitcher) traditionalModeSwitcher.classList.remove('hidden');
-                    // === Hiện lại dòng mô tả ===
-                    if (lookupDescription) lookupDescription.classList.remove('hidden');
+                    // Trên máy tính: Mở thẳng link web trong tab mới
+                    window.open(xWebUrl, '_blank', 'noopener,noreferrer');
                 }
+            });
+        }
+
+    }
+
+    // CHIA SẺ: Hàm xử lý việc mở app hoặc fallback ra web
+    function openAppOrFallback(appUrl, webUrl) {
+        // Ghi lại thời điểm bắt đầu
+        const startTime = new Date().getTime();
+        // Thử mở URL Scheme của app
+        window.location.href = appUrl;
+        // Đặt một khoảng thời gian chờ
+        setTimeout(function() {
+            const endTime = new Date().getTime();
+            // Nếu không có ứng dụng nào xử lý URL scheme,
+            // trang sẽ không bị ẩn đi và thời gian trôi qua sẽ rất ngắn.
+            if (endTime - startTime < 1500) {
+                // Chuyển hướng đến link web như một phương án dự phòng
+                window.open(webUrl, '_blank');
             }
+        }, 1000); // 1 giây chờ
+    }
 
-            // THÊM MỚI: Hàm riêng để tải dữ liệu ban đầu
-            function loadInitialData() {
-                if (window.allProvincesData && window.allProvincesData.length > 0) {
-                    window.allProvincesData.sort((a, b) => a.code - b.code);
-                    updateChoices(provinceChoices, t('oldProvincePlaceholder'), window.allProvincesData);
-                } else {
-                    showNotification(t('errorLoadOldData', "Lỗi tải dữ liệu cũ."), "error");
-                }
+    // === THÊM MỚI: HÀM TÁI SỬ DỤNG ĐỂ HIỂN THỊ THAY ĐỔI THÔN/XÓM ===
+    // Trả về chuỗi HTML hoặc chuỗi rỗng nếu không có dữ liệu
+    function renderVillageChanges(villageData, title) {
+        if (!villageData || villageData.length === 0) {
+            return ''; // Trả về chuỗi rỗng nếu không có dữ liệu
+        }
 
-                resetChoice(districtChoices, t('oldDistrictPlaceholder'));
-                resetChoice(communeChoices, t('oldCommunePlaceholder'));
-                resetChoice(newCommuneChoices, t('newCommunePlaceholder'));
-
-                loadNewProvincesDropdown();
-                displayEventCount();
-                displayRealtimeLocations();
-                setInterval(displayRealtimeLocations, 90000);
-            }
-            // THÊM MỚI: Hàm tải dữ liệu cho dropdown Cũ
-            async function loadOldDataDropdowns() {
-                resetChoice(provinceChoices, t('oldProvinceLoading', 'Đang tải tỉnh/thành...'));
-                try {
-                    const response = await fetch('/api/get-old-data');
-                    if (!response.ok) throw new Error(t('errorLoadOldData'));
-
-                    allProvincesData = await response.json(); // Lưu dữ liệu vào biến cục bộ
-
-                    const localizedOldData = allProvincesData.map(province => ({
-                        ...province,
-                        name: localize(province.name, null),
-                        districts: province.districts.map(district => ({
-                            ...district,
-                            name: localize(district.name, null),
-                            wards: district.wards.map(ward => ({
-                                ...ward,
-                                name: localize(ward.name, null)
-                            }))
-                        }))
-                    }));
-
-                    updateChoices(provinceChoices, t('oldProvincePlaceholder'), localizedOldData);
-                    provinceChoices.enable();
-
-                } catch (error) {
-                    console.error(error);
-                    resetChoice(provinceChoices, t('errorLoadOldData'));
-                    showNotification(error.message, 'error');
-                }
-            }
-
-
-            async function loadNewProvincesDropdown() {
-                resetChoice(newProvinceChoices, t('newProvinceLoading'));
-                try {
-                    const response = await fetch('/api/new-geo-data');
-                    if (!response.ok) throw new Error(t('errorFetchNewProvinces'));
-                    let data = await response.json();
-                    const localizedData = data.map(province => ({
-                        ...province,
-                        name: localize(province.name, province.en_name)
-                    }));
-                    updateChoices(newProvinceChoices, t('newProvincePlaceholder'), localizedData, 'province_code', 'name');
-                    newProvinceChoices.enable();
-                } catch (error) {
-                    console.error(error);
-                    resetChoice(newProvinceChoices, t('newProvinceError'));
-                }
-            }
-
-            function toggleLookupUI() {
-                isReverseMode = modeToggle.checked;
-                forwardControls.classList.toggle('hidden', isReverseMode);
-                reverseControls.classList.toggle('hidden', !isReverseMode);
-                resultContainer.classList.add('hidden');
-                lookupBtn.disabled = true;
-                lookupDescription.textContent = isReverseMode ?
-                    t('lookupDescriptionNewToOld') :
-                    t('lookupDescriptionOldToNew');
-            }
-
-            // === LẮNG NGHE SỰ KIỆN ===
-            function addEventListeners() {
-                if (modeToggle) modeToggle.addEventListener('change', toggleLookupUI);
-                if (lookupBtn) lookupBtn.addEventListener('click', () => {
-                    if (isReverseMode) handleReverseLookup();
-                    else handleForwardLookup();
-                });
-                if (mysteryBox) mysteryBox.addEventListener('click', fetchRandomImage);
-                if (resultContainer) resultContainer.addEventListener('click', handleCopy);
-
-                if (accentToggle) {
-                    accentToggle.addEventListener('change', () => {
-                        removeAccents = accentToggle.checked;
-                        initialize(); // Khởi tạo lại toàn bộ giao diện
-                    });
-                }
-
-                if (provinceSelectEl) provinceSelectEl.addEventListener('choice', (event) => {
-                    const selectedProvince = allProvincesData.find(p => p.code == event.detail.value);
-                    if (selectedProvince && selectedProvince.districts) {
-                        const localizedDistricts = selectedProvince.districts.map(d => ({
-                            ...d,
-                            name: localize(d.name, null)
-                        }));
-                        updateChoices(districtChoices, t('oldDistrictPlaceholder'), localizedDistricts);
-                    }
-                    districtChoices.enable();
-                    resetChoice(communeChoices, t('oldCommunePlaceholder'));
-                    lookupBtn.disabled = true;
-                });
-                if (districtSelectEl) districtSelectEl.addEventListener('choice', (event) => {
-                    const provinceCode = provinceChoices.getValue(true);
-                    const selectedProvince = allProvincesData.find(p => p.code == provinceCode);
-                    const selectedDistrict = selectedProvince?.districts.find(d => d.code == event.detail.value);
-                    if (selectedDistrict && selectedDistrict.wards) {
-                        const localizedWards = selectedDistrict.wards.map(w => ({
-                            ...w,
-                            name: localize(w.name, null)
-                        }));
-                        updateChoices(communeChoices, t('oldCommunePlaceholder'), localizedWards);
-                    }
-                    communeChoices.enable();
-                    lookupBtn.disabled = true;
-                });
-                if (communeSelectEl) communeSelectEl.addEventListener('choice', (event) => {
-                    lookupBtn.disabled = !event.detail.value;
-                });
-
-                if (newProvinceSelectEl) newProvinceSelectEl.addEventListener('choice', async (event) => {
-                    const provinceCode = event.detail.value;
-                    if (!provinceCode) return;
-                    resetChoice(newCommuneChoices, t('newCommuneLoading'));
-                    lookupBtn.disabled = true;
-                    try {
-                        const response = await fetch(`/api/new-geo-data?province_code=${provinceCode}`);
-                        if (!response.ok) throw new Error(t('newCommuneError'));
-                        let data = await response.json();
-                        const localizedData = data.map(ward => ({
-                            ...ward,
-                            name: localize(ward.name, ward.en_name)
-                        }));
-                        updateChoices(newCommuneChoices, t('newCommunePlaceholder'), localizedData, 'ward_code', 'name');
-                        newCommuneChoices.enable();
-                    } catch (error) {
-                        console.error(error);
-                        resetChoice(newCommuneChoices, t('newCommuneError'));
-                        showNotification(error.message, 'error');
-                    }
-                });
-                if (newCommuneSelectEl) newCommuneSelectEl.addEventListener('choice', (event) => {
-                    lookupBtn.disabled = !event.detail.value;
-                });
-
-                // === THÊM MỚI: Các sự kiện cho nút và modal ===
-                if (showAdminCentersBtn) {
-                    showAdminCentersBtn.addEventListener('click', handleShowAdminCenters);
-                }
-                if (modalCloseBtn) {
-                    modalCloseBtn.addEventListener('click', closeModal);
-                }
-                if (adminCenterModal) {
-                    // Đóng modal khi click vào lớp phủ bên ngoài
-                    adminCenterModal.addEventListener('click', (event) => {
-                        if (event.target === adminCenterModal) {
-                            closeModal();
-                        }
-                    });
-                }
-                // === THÊM MỚI: Lắng nghe sự kiện cho form Góp ý ===
-                if (feedbackSendBtn) {
-                    feedbackSendBtn.addEventListener('click', handleSubmitFeedback);
-                }
-                if (feedbackInput) {
-                    // Cho phép gửi bằng phím Enter
-                    feedbackInput.addEventListener('keydown', (event) => {
-                        if (event.key === 'Enter') {
-                            handleSubmitFeedback();
-                        }
-                    });
-                }
-                // === THÊM MỚI: Listener cho switch chính ===
-                if (interfaceModeToggle) {
-                    interfaceModeToggle.addEventListener('change', toggleInterfaceMode);
-                }
-
-                // LẮNG NGHE SỰ KIỆN CHIA SẺ
-                if (facebookBtn) {
-                    facebookBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-
-                        const encodedUrl = encodeURIComponent(urlToShare);
-                        const encodedQuote = encodeURIComponent(textToShare);
-
-                        // URL chia sẻ web luôn được tạo ra, có cả quote và hashtag
-                        const facebookWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedQuote}&hashtag=${encodeURIComponent(hashtag)}`;
-
-                        if (isMobile) {
-                            // Trên di động: Thử mở app trước
-                            const facebookAppUrl = `fb://sharer/link?href=${encodedUrl}`;
-
-                            // Sử dụng logic fallback
-                            const startTime = new Date().getTime();
-                            window.location.href = facebookAppUrl;
-
-                            setTimeout(function() {
-                                const endTime = new Date().getTime();
-                                // Nếu không mở được app sau 1.2 giây, fallback ra web
-                                if (endTime - startTime < 1200) {
-                                    window.location.href = facebookWebUrl; // Trên di động, mở cùng tab cho tiện
-                                }
-                            }, 1000);
-
-                        } else {
-                            // Trên máy tính: Mở thẳng link web trong tab mới
-                            window.open(facebookWebUrl, '_blank', 'noopener,noreferrer');
-                        }
-                    });
-                }
-
-                // --- SỰ KIỆN CLICK CHO NÚT X (TWITTER) ---
-                if (xBtn) {
-                    xBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-
-                        const encodedUrl = encodeURIComponent(urlToShare);
-                        const encodedText = encodeURIComponent(textToShare);
-
-                        const xWebUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
-
-                        if (isMobile) {
-                            // Trên di động: Thử mở app
-                            const xAppUrl = `twitter://intent/tweet?text=${encodedText}&url=${encodedUrl}&via=${accountVia}`;
-
-                            const startTime = new Date().getTime();
-                            window.location.href = xAppUrl;
-
-                            setTimeout(function() {
-                                const endTime = new Date().getTime();
-                                if (endTime - startTime < 1200) {
-                                    window.location.href = xWebUrl;
-                                }
-                            }, 1000);
-
-                        } else {
-                            // Trên máy tính: Mở thẳng link web trong tab mới
-                            window.open(xWebUrl, '_blank', 'noopener,noreferrer');
-                        }
-                    });
-                }
-
-            }
-
-            // CHIA SẺ: Hàm xử lý việc mở app hoặc fallback ra web
-            function openAppOrFallback(appUrl, webUrl) {
-                // Ghi lại thời điểm bắt đầu
-                const startTime = new Date().getTime();
-                // Thử mở URL Scheme của app
-                window.location.href = appUrl;
-                // Đặt một khoảng thời gian chờ
-                setTimeout(function() {
-                    const endTime = new Date().getTime();
-                    // Nếu không có ứng dụng nào xử lý URL scheme,
-                    // trang sẽ không bị ẩn đi và thời gian trôi qua sẽ rất ngắn.
-                    if (endTime - startTime < 1500) {
-                        // Chuyển hướng đến link web như một phương án dự phòng
-                        window.open(webUrl, '_blank');
-                    }
-                }, 1000); // 1 giây chờ
-            }
-
-            // === THÊM MỚI: HÀM TÁI SỬ DỤNG ĐỂ HIỂN THỊ THAY ĐỔI THÔN/XÓM ===
-            // Trả về chuỗi HTML hoặc chuỗi rỗng nếu không có dữ liệu
-            function renderVillageChanges(villageData, title) {
-                if (!villageData || villageData.length === 0) {
-                    return ''; // Trả về chuỗi rỗng nếu không có dữ liệu
-                }
-
-                const listItems = villageData.map(item => `
+        const listItems = villageData.map(item => `
                         <tr>
                             <td>${item.old_village_name}</td>
                             <td>&rarr;</td>
@@ -542,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                     `).join('');
 
-                return `
+        return `
                             <div class="village-changes-container">
                                 <h4>${title}</h4>
                                 <table>
@@ -557,433 +556,428 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </table>
                             </div>
                         `;
-            }
-
-            // === 2 HÀM TRA CỨU CHÍNH ===
-            // handleForwardLookup - Tra cứu xuôi
-            // handleReverseLookup - Tra cứu ngược
-            // === HÀM TRA CỨU XUÔI (ĐÃ SỬA LỖI CÚ PHÁP) ===
-async function handleForwardLookup() {
-    const selectedCommune = communeChoices.getValue(true);
-    if (!selectedCommune) {
-        alert(t('alertSelectOldCommune'));
-        return;
     }
 
-    const oldWardCode = selectedCommune;
-    const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+    // === 2 HÀM TRA CỨU CHÍNH ===
+    // handleForwardLookup - Tra cứu xuôi
+    // handleReverseLookup - Tra cứu ngược
+    // === HÀM TRA CỨU XUÔI (ĐÃ SỬA LỖI CÚ PHÁP) ===
+    async function handleForwardLookup() {
+        const selectedCommune = communeChoices.getValue(true);
+        if (!selectedCommune) {
+            alert(t('alertSelectOldCommune'));
+            return;
+        }
 
-    // Reset giao diện
-    oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
-    newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
-    resultContainer.classList.remove('hidden');
-    if (adminCenterActions) adminCenterActions.classList.add('hidden');
+        const oldWardCode = selectedCommune;
+        const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
 
-    try {
-        const response = await fetch(`/api/lookup?code=${oldWardCode}&type=forward`);
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error || 'Server error');
+        // Reset giao diện
+        oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
+        newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
+        resultContainer.classList.remove('hidden');
+        if (adminCenterActions) adminCenterActions.classList.add('hidden');
 
-        const { events, village_changes } = data;
-        const villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
+        try {
+            const response = await fetch(`/api/lookup?code=${oldWardCode}&type=forward`);
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Server error');
 
-        if (events.length === 0) {
-            // Trường hợp không có sự kiện sáp nhập xã, nhưng có thể có thay đổi thôn
-            let noChangeHtml = `<p class="no-change">${t('noChangeMessage')}</p>`;
-            newAddressDisplay.innerHTML = noChangeHtml + villageHtml;
-        } else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
-            // Trường hợp chia tách
-            const splitHtml = events.map(result => {
-                const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
-                const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
-                return `
+            const {
+                events,
+                village_changes
+            } = data;
+            const villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
+
+            if (events.length === 0) {
+                // Trường hợp không có sự kiện sáp nhập xã, nhưng có thể có thay đổi thôn
+                let noChangeHtml = `<p class="no-change">${t('noChangeMessage')}</p>`;
+                newAddressDisplay.innerHTML = noChangeHtml + villageHtml;
+            } else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
+                // Trường hợp chia tách
+                const splitHtml = events.map(result => {
+                    const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
+                    const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
+                    return `
                     <li>
                          ${newAddress}
                          <div class="split-description">${result.split_description}</div>
                         <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
                     </li>`;
-            }).join('');
-            newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>` + villageHtml;
-        } else {
-            // Trường hợp sáp nhập đơn giản
-            const finalUnitData = events[0];
-            const newAddressForDisplay = `${finalUnitData.new_ward_name}, ${finalUnitData.new_province_name}`;
-            const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
-            const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
-            let resultsHtml = `
+                }).join('');
+                newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>` + villageHtml;
+            } else {
+                // Trường hợp sáp nhập đơn giản
+                const finalUnitData = events[0];
+                const newAddressForDisplay = `${finalUnitData.new_ward_name}, ${finalUnitData.new_province_name}`;
+                const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
+                const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+                let resultsHtml = `
                 <div class="address-line">
                     <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
                     <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
                 </div>
                 <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
-            newAddressDisplay.innerHTML = resultsHtml + villageHtml;
-        }
+                newAddressDisplay.innerHTML = resultsHtml + villageHtml;
+            }
 
-        // Kích hoạt nút xem TTHC nếu có sự kiện sáp nhập
-        if (events.length > 0) {
-            newWardCodeForModal = events[0].new_ward_code;
-            newProvinceCodeForModal = events[0].new_province_code;
-            if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+            // Kích hoạt nút xem TTHC nếu có sự kiện sáp nhập
+            if (events.length > 0) {
+                newWardCodeForModal = events[0].new_ward_code;
+                newProvinceCodeForModal = events[0].new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Lỗi khi tra cứu xuôi:', error);
+            newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
-    // GHI CHÚ SỬA LỖI: Đặt khối catch ra ngoài, ngay sau khi khối try kết thúc
-    } catch (error) {
-        console.error('Lỗi khi tra cứu xuôi:', error);
-        newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
     }
-}
 
-                // Hàm xử lý tra cứu ngược
-                async function handleReverseLookup() {
-                    const selectedNewProvince = newProvinceChoices.getValue();
-                    const selectedNewCommune = newCommuneChoices.getValue();
-                    if (!selectedNewCommune || !selectedNewCommune.value) {
-                        alert(t('alertSelectNewCommune'));
-                        return;
-                    }
-                    const newWardCode = selectedNewCommune.value;
-                    const fullNewAddress = `${selectedNewCommune.label}, ${selectedNewProvince.label}`;
+    // Hàm xử lý tra cứu ngược
+    async function handleReverseLookup() {
+        const selectedNewProvince = newProvinceChoices.getValue();
+        const selectedNewCommune = newCommuneChoices.getValue();
+        if (!selectedNewCommune || !selectedNewCommune.value) {
+            alert(t('alertSelectNewCommune'));
+            return;
+        }
+        const newWardCode = selectedNewCommune.value;
+        const fullNewAddress = `${selectedNewCommune.label}, ${selectedNewProvince.label}`;
 
-                    oldAddressDisplay.innerHTML = '';
-                    newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
-                    if (historyDisplay) historyDisplay.classList.add('hidden'); // Ẩn lịch sử cũ
-                    if (adminCenterActions) adminCenterActions.classList.add('hidden'); // Ẩn nút hành chính
-                    resultContainer.classList.remove('hidden');
-                    // Reset biến trạng thái
-                    newWardCodeForModal = null;
-                    newProvinceCodeForModal = null;
+        oldAddressDisplay.innerHTML = '';
+        newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
+        if (historyDisplay) historyDisplay.classList.add('hidden'); // Ẩn lịch sử cũ
+        if (adminCenterActions) adminCenterActions.classList.add('hidden'); // Ẩn nút hành chính
+        resultContainer.classList.remove('hidden');
+        // Reset biến trạng thái
+        newWardCodeForModal = null;
+        newProvinceCodeForModal = null;
 
-                    try {
-                        const response = await fetch(`/api/lookup?code=${newWardCode}&type=reverse`);
-                        const data = await response.json();
-                        if (!response.ok) throw new Error(data.error || 'Server error');
+        try {
+            const response = await fetch(`/api/lookup?code=${newWardCode}&type=reverse`);
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Server error');
 
-                        if (data && data.length > 0) {
-                            // Hiển thị thông tin địa chỉ mới (phần trên)
-                            const newCodesReverse = `${data[0].new_ward_code}, ${data[0].new_province_code}`;
-                            const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodesReverse})`;
-                            let newAddressHtml = `
+            if (data && data.length > 0) {
+                // Hiển thị thông tin địa chỉ mới (phần trên)
+                const newCodesReverse = `${data[0].new_ward_code}, ${data[0].new_province_code}`;
+                const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodesReverse})`;
+                let newAddressHtml = `
                                                             <div class="address-line">
                                                                 <p><span class="label">${t('newAddressLabel').replace(':', '')}</span> ${fullNewAddress}</p>
                                                                 <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
                                                             </div>
                                                             <div class="address-codes"><span class="label">New Code:</span> ${newCodesReverse}</div>`;
-                            // Hiển thị thông tin địa chỉ cũ (phần dưới)
-                            oldAddressDisplay.innerHTML = newAddressHtml;
+                // Hiển thị thông tin địa chỉ cũ (phần dưới)
+                oldAddressDisplay.innerHTML = newAddressHtml;
 
-                            // Xây dựng danh sách các đơn vị cũ
-                            const oldUnitsFullAddresses = data.map(record => {
-                                let noteHtml = '';
-                                if (record.event_type === 'SPLIT_MERGE' && record.split_description) {
-                                    noteHtml = `<div class="split-context-note">${record.split_description}</div>`;
-                                }
-                                //TẠM ẨN CÁC BIẾN KHÔNG SỬ DỤNG THAY BỞI fullOldAddress VÀ oldCodes
-                                //const ward = record.old_ward_name;
-                                //const district = record.old_district_name;
-                                //const province = record.old_province_name;
-                                // === GHI CHÚ THAY ĐỔI: Hiển thị mã code cũ ===
-                                const fullOldAddress = `${record.old_ward_name}, ${record.old_district_name}, ${record.old_province_name}`;
-                                const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
-                                // GHI CHÚ THAY ĐỔI: Gọi hàm renderVillageChanges cho từng xã cũ
-                                const villageHtml = renderVillageChanges(record.village_changes, `Thay đổi tại ${record.old_ward_name}:`);
-                                return `
+                // Xây dựng danh sách các đơn vị cũ
+                const oldUnitsFullAddresses = data.map(record => {
+                    let noteHtml = '';
+                    if (record.event_type === 'SPLIT_MERGE' && record.split_description) {
+                        noteHtml = `<div class="split-context-note">${record.split_description}</div>`;
+                    }
+                    //const ward = record.old_ward_name;
+                    //const district = record.old_district_name;
+                    //const province = record.old_province_name;
+                    const fullOldAddress = `${record.old_ward_name}, ${record.old_district_name}, ${record.old_province_name}`;
+                    const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
+                    const villageHtml = renderVillageChanges(record.village_changes, `Thay đổi tại ${record.old_ward_name}:`);
+                    return `
                                         <li>
                                             ${fullOldAddress}
                                             <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
                                             ${noteHtml}
                                             ${villageHtml}
                                         </li>`;
-                            }).join('');
-                            newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsFullAddresses}</ul>`;
+                }).join('');
+                newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsFullAddresses}</ul>`;
 
-                            //Cập nhật lại các biến modal
-                            newWardCodeForModal = data[0].new_ward_code;
-                            newProvinceCodeForModal = data[0].new_province_code;
-                            if (adminCenterActions) adminCenterActions.classList.remove('hidden');
-                        } else {
-                            oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel').replace(':', '')}</span> ${fullNewAddress}</p></div>`;
-                            newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
-                        }
-                    } catch (error) {
-                        console.error('Lỗi khi tra cứu ngược:', error);
-                        oldAddressDisplay.innerHTML = '';
-                        newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
+                //Cập nhật lại các biến modal
+                newWardCodeForModal = data[0].new_ward_code;
+                newProvinceCodeForModal = data[0].new_province_code;
+                if (adminCenterActions) adminCenterActions.classList.remove('hidden');
+            } else {
+                oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('newAddressLabel').replace(':', '')}</span> ${fullNewAddress}</p></div>`;
+                newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
+            }
+        } catch (error) {
+            console.error('Lỗi khi tra cứu ngược:', error);
+            oldAddressDisplay.innerHTML = '';
+            newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
+        }
+    }
+
+    // === XỬ LÝ GÓP Ý - FEEDBACK ===
+    async function handleSubmitFeedback() {
+        if (!feedbackInput || !feedbackSendBtn || !feedbackMessage) return;
+
+        const message = feedbackInput.value.trim();
+        if (message.length === 0) {
+            return; // Không làm gì nếu input rỗng
+        }
+        const context = {};
+
+        // Xác định chế độ tra cứu hiện tại
+        context.mode = isReverseMode ? 'Tra cứu ngược' : 'Tra cứu xuôi';
+
+        // Lấy thông tin từ các dropdown đang được chọn
+        if (isReverseMode) {
+            const newProvince = newProvinceChoices.getValue();
+            if (newProvince) {
+                context.province = {
+                    code: newProvince.value,
+                    name: newProvince.label
+                };
+            }
+            const newCommune = newCommuneChoices.getValue();
+            if (newCommune) {
+                context.commune = {
+                    code: newCommune.value,
+                    name: newCommune.label
+                };
+            }
+        } else {
+            const oldProvince = provinceChoices.getValue();
+            if (oldProvince) {
+                context.province = {
+                    code: oldProvince.value,
+                    name: oldProvince.label
+                };
+            }
+            const oldDistrict = districtChoices.getValue();
+            if (oldDistrict) {
+                context.district = {
+                    code: oldDistrict.value,
+                    name: oldDistrict.label
+                };
+            }
+            const oldCommune = communeChoices.getValue();
+            if (oldCommune) {
+                context.commune = {
+                    code: oldCommune.value,
+                    name: oldCommune.label
+                };
+            }
+        } // Kết thúc thu thập ngữ cảnh
+        // Vô hiệu hóa form để tránh gửi nhiều lần
+        feedbackSendBtn.disabled = true;
+        feedbackInput.disabled = true;
+        feedbackSendBtn.textContent = '...';
+
+        try {
+            const response = await fetch('/api/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    context: context
+                }),
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Lỗi không xác định');
+            }
+
+            // Hiển thị thông báo thành công
+            feedbackMessage.textContent = t('feedbackSuccess', 'Gửi thành công!');
+            feedbackMessage.className = 'success';
+            feedbackMessage.classList.remove('hidden');
+            feedbackInput.value = ''; // Xóa nội dung input
+
+        } catch (error) {
+            console.error('Lỗi khi gửi góp ý:', error);
+            // Hiển thị thông báo lỗi
+            feedbackMessage.textContent = t('feedbackError', 'Gửi thất bại.');
+            feedbackMessage.className = 'error';
+            feedbackMessage.classList.remove('hidden');
+        } finally {
+            setTimeout(() => {
+                feedbackSendBtn.disabled = false;
+                feedbackInput.disabled = false;
+                feedbackSendBtn.textContent = t('feedbackSendBtn', 'Gửi');
+                feedbackMessage.classList.add('hidden');
+            }, 4000);
+        }
+    }
+
+    // === HÀM PHỤ TRỢ KHÁC ===
+    function handleCopy(event) {
+        const button = event.target.closest('.copy-btn');
+        if (!button) return;
+        const textToCopy = button.dataset.copyText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            button.innerHTML = copiedIconSvg;
+            button.classList.add('copied');
+            button.disabled = true;
+            setTimeout(() => {
+                button.innerHTML = copyIconSvg;
+                button.classList.remove('copied');
+                button.disabled = false;
+            }, 2000);
+        }).catch(err => {
+            console.error('Lỗi khi copy: ', err);
+        });
+    }
+    // Tải ảnh ngẩu nhiên từ unsplash và hiển thị trong mysteryBox ở giao diện tiếng Anh
+    async function fetchRandomImage() {
+        if (!mysteryBox || !spinner) return;
+        spinner.classList.remove('hidden');
+        mysteryBox.classList.add('loading-state');
+        const oldImg = mysteryBox.querySelector('img');
+        if (oldImg) oldImg.style.opacity = '0.3';
+
+        const apiUrl = `https://api.unsplash.com/photos/random?client_id=${UNSPLASH_ACCESS_KEY}&query=vietnam&orientation=portrait`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Unsplash API error');
+            const data = await response.json();
+            const newImage = new Image();
+            newImage.src = data.urls.regular;
+            newImage.alt = data.alt_description || "Random image from Unsplash";
+            newImage.style.opacity = '0';
+            newImage.onload = () => {
+                mysteryBox.innerHTML = '';
+                mysteryBox.appendChild(newImage);
+                setTimeout(() => {
+                    newImage.style.opacity = '1';
+                }, 50);
+                mysteryBox.classList.remove('loading-state');
+            };
+            newImage.onerror = () => {
+                throw new Error("Could not load image file.");
+            }
+        } catch (error) {
+            console.error("Error fetching image:", error);
+            mysteryBox.innerHTML = `<p style="color: red; font-size: 0.9em;">Could not load image.</p>`;
+        }
+    }
+    // Hiển thị lượt tra cứu từ GOOGLE ANALYTICS
+    async function displayEventCount() {
+        const counterElement = document.getElementById('event-counter');
+        if (!counterElement) return;
+
+        try {
+            const response = await fetch('/api/ga-stats?report=events');
+            if (!response.ok) throw new Error('Failed to fetch event count');
+            const data = await response.json();
+
+            if (data.totalClicks) {
+                // Sử dụng toLocaleString để định dạng số cho đẹp
+                const formattedCount = data.totalClicks.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
+                // Kết hợp số và nhãn đã dịch
+                counterElement.textContent = `${formattedCount} ${t('realtimeTotalLookups', 'lượt tra cứu')}`;
+            }
+        } catch (error) {
+            console.error("Không thể hiển thị số lượt tra cứu:", error);
+            counterElement.textContent = `N/A ${t('realtimeTotalLookups', 'lượt tra cứu')}`;
+        }
+    }
+
+    // Lấy và hiển thị dữ liệu người truy cập thời gian thực GOOGLE ANALYTICS
+    async function displayRealtimeLocations() {
+        const listElement = document.getElementById('realtime-locations-list');
+        const totalUsersElement = document.getElementById('realtime-total-users');
+        if (!listElement || !totalUsersElement) return;
+
+        const oldContent = listElement.innerHTML;
+        // Chỉ hiển thị "Đang tải..." lần đầu tiên
+        if (listElement.children.length === 0 || !listElement.textContent.includes(t('realtimeLoading', 'Đang tải...'))) {
+            listElement.innerHTML = `<li>${t('realtimeLoading', 'Đang tải...')}</li>`;
+        }
+
+        try {
+            const response = await fetch('/api/ga-stats?report=realtime');
+            if (!response.ok) throw new Error('Failed to fetch realtime locations');
+            const data = await response.json();
+
+            if (data.totalActiveUsers !== undefined) {
+                const formattedTotal = data.totalActiveUsers.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
+                totalUsersElement.textContent = `${formattedTotal} ${t('realtimeTotalUsers', 'người dùng trực tuyến')}`;
+            }
+
+            if (data.activeLocations && data.activeLocations.length > 0) {
+                listElement.innerHTML = '';
+                data.activeLocations.forEach(location => {
+                    const li = document.createElement('li');
+                    const translatedCity = t(`city_${location.city.toLowerCase().replace(/ /g, '_')}`, location.city);
+                    let locationDisplay = translatedCity;
+                    if (location.country && location.country !== 'Vietnam') {
+                        const translatedCountry = t(`country_${location.country.toLowerCase().replace(/ /g, '_')}`, location.country);
+                        locationDisplay = `${translatedCity} - ${translatedCountry}`;
                     }
-                }
+                    const userText = t('realtimeUserFrom', '{count} người dùng từ').replace('{count}', location.count);
+                    li.innerHTML = `${userText} <strong>${locationDisplay}</strong>`;
+                    listElement.appendChild(li);
+                });
+            } else {
+                listElement.innerHTML = `<li>${t('realtimeNoActivity', 'Chưa có hoạt động nào gần đây.')}</li>`;
+            }
+        } catch (error) {
+            console.error("Không thể hiển thị hoạt động thời gian thực:", error);
+            listElement.innerHTML = oldContent || `<li>${t('realtimeError', 'Không thể tải dữ liệu.')}</li>`;
+        }
+    }
 
-                // === XỬ LÝ GÓP Ý - FEEDBACK ===
-                async function handleSubmitFeedback() {
-                    if (!feedbackInput || !feedbackSendBtn || !feedbackMessage) return;
+    //Các hàm chức năng Xem địa chỉ hành chính
+    function openModal() {
+        if (adminCenterModal) {
+            adminCenterModal.classList.remove('hidden');
+        }
+    }
 
-                    const message = feedbackInput.value.trim();
-                    if (message.length === 0) {
-                        return; // Không làm gì nếu input rỗng
-                    }
-                    // GHI CHÚ THAY ĐỔI: Bắt đầu thu thập ngữ cảnh
-                    const context = {};
+    function closeModal() {
+        if (adminCenterModal) {
+            adminCenterModal.classList.add('hidden');
+        }
+    }
 
-                    // Xác định chế độ tra cứu hiện tại
-                    context.mode = isReverseMode ? 'Tra cứu ngược' : 'Tra cứu xuôi';
+    async function handleShowAdminCenters() {
+        // Biến newWardCodeForModal và newProvinceCodeForModal sẽ được gán trong các hàm tra cứu.
+        if (!newWardCodeForModal || !newProvinceCodeForModal) {
+            console.error("Thiếu mã xã hoặc tỉnh để tra cứu trung tâm hành chính.");
+            return;
+        }
 
-                    // Lấy thông tin từ các dropdown đang được chọn
-                    if (isReverseMode) {
-                        const newProvince = newProvinceChoices.getValue();
-                        if (newProvince) {
-                            context.province = {
-                                code: newProvince.value,
-                                name: newProvince.label
-                            };
-                        }
-                        const newCommune = newCommuneChoices.getValue();
-                        if (newCommune) {
-                            context.commune = {
-                                code: newCommune.value,
-                                name: newCommune.label
-                            };
-                        }
-                    } else {
-                        const oldProvince = provinceChoices.getValue();
-                        if (oldProvince) {
-                            context.province = {
-                                code: oldProvince.value,
-                                name: oldProvince.label
-                            };
-                        }
-                        const oldDistrict = districtChoices.getValue();
-                        if (oldDistrict) {
-                            context.district = {
-                                code: oldDistrict.value,
-                                name: oldDistrict.label
-                            };
-                        }
-                        const oldCommune = communeChoices.getValue();
-                        if (oldCommune) {
-                            context.commune = {
-                                code: oldCommune.value,
-                                name: oldCommune.label
-                            };
-                        }
-                    } // Kết thúc thu thập ngữ cảnh
-                    // Vô hiệu hóa form để tránh gửi nhiều lần
-                    feedbackSendBtn.disabled = true;
-                    feedbackInput.disabled = true;
-                    feedbackSendBtn.textContent = '...';
+        openModal();
+        modalBody.innerHTML = `<p>${t('loading', 'Đang tải...')}</p>`;
 
-                    try {
-                        const response = await fetch('/api/feedback', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                message: message,
-                                context: context
-                            }),
-                        });
+        try {
+            const response = await fetch(`/api/get-admin-centers?ward_code=${newWardCodeForModal}&province_code=${newProvinceCodeForModal}`);
 
-                        const data = await response.json();
-                        if (!response.ok) {
-                            throw new Error(data.error || 'Lỗi không xác định');
-                        }
+            if (!response.ok) throw new Error('Could not fetch administrative centers.');
+            const data = await response.json();
 
-                        // Hiển thị thông báo thành công
-                        feedbackMessage.textContent = t('feedbackSuccess', 'Gửi thành công!');
-                        feedbackMessage.className = 'success';
-                        feedbackMessage.classList.remove('hidden');
-                        feedbackInput.value = ''; // Xóa nội dung input
-
-                    } catch (error) {
-                        console.error('Lỗi khi gửi góp ý:', error);
-                        // Hiển thị thông báo lỗi
-                        feedbackMessage.textContent = t('feedbackError', 'Gửi thất bại.');
-                        feedbackMessage.className = 'error';
-                        feedbackMessage.classList.remove('hidden');
-                    } finally {
-                        setTimeout(() => {
-                            feedbackSendBtn.disabled = false;
-                            feedbackInput.disabled = false;
-                            feedbackSendBtn.textContent = t('feedbackSendBtn', 'Gửi');
-                            feedbackMessage.classList.add('hidden');
-                        }, 4000);
-                    }
-                }
-
-                // === HÀM PHỤ TRỢ KHÁC ===
-                function handleCopy(event) {
-                    const button = event.target.closest('.copy-btn');
-                    if (!button) return;
-                    const textToCopy = button.dataset.copyText;
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        button.innerHTML = copiedIconSvg;
-                        button.classList.add('copied');
-                        button.disabled = true;
-                        setTimeout(() => {
-                            button.innerHTML = copyIconSvg;
-                            button.classList.remove('copied');
-                            button.disabled = false;
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Lỗi khi copy: ', err);
-                    });
-                }
-                // Tải ảnh ngẩu nhiên từ unsplash và hiển thị trong mysteryBox ở giao diện tiếng Anh
-                async function fetchRandomImage() {
-                    if (!mysteryBox || !spinner) return;
-                    spinner.classList.remove('hidden');
-                    mysteryBox.classList.add('loading-state');
-                    const oldImg = mysteryBox.querySelector('img');
-                    if (oldImg) oldImg.style.opacity = '0.3';
-
-                    const apiUrl = `https://api.unsplash.com/photos/random?client_id=${UNSPLASH_ACCESS_KEY}&query=vietnam&orientation=portrait`;
-                    try {
-                        const response = await fetch(apiUrl);
-                        if (!response.ok) throw new Error('Unsplash API error');
-                        const data = await response.json();
-                        const newImage = new Image();
-                        newImage.src = data.urls.regular;
-                        newImage.alt = data.alt_description || "Random image from Unsplash";
-                        newImage.style.opacity = '0';
-                        newImage.onload = () => {
-                            mysteryBox.innerHTML = '';
-                            mysteryBox.appendChild(newImage);
-                            setTimeout(() => {
-                                newImage.style.opacity = '1';
-                            }, 50);
-                            mysteryBox.classList.remove('loading-state');
-                        };
-                        newImage.onerror = () => {
-                            throw new Error("Could not load image file.");
-                        }
-                    } catch (error) {
-                        console.error("Error fetching image:", error);
-                        mysteryBox.innerHTML = `<p style="color: red; font-size: 0.9em;">Could not load image.</p>`;
-                    }
-                }
-                // Hiển thị lượt tra cứu từ GOOGLE ANALYTICS
-                async function displayEventCount() {
-                    const counterElement = document.getElementById('event-counter');
-                    if (!counterElement) return;
-
-                    try {
-                        const response = await fetch('/api/ga-stats?report=events');
-                        if (!response.ok) throw new Error('Failed to fetch event count');
-                        const data = await response.json();
-
-                        if (data.totalClicks) {
-                            // Sử dụng toLocaleString để định dạng số cho đẹp
-                            const formattedCount = data.totalClicks.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
-                            // Kết hợp số và nhãn đã dịch
-                            counterElement.textContent = `${formattedCount} ${t('realtimeTotalLookups', 'lượt tra cứu')}`;
-                        }
-                    } catch (error) {
-                        console.error("Không thể hiển thị số lượt tra cứu:", error);
-                        counterElement.textContent = `N/A ${t('realtimeTotalLookups', 'lượt tra cứu')}`;
-                    }
-                }
-
-                // Lấy và hiển thị dữ liệu người truy cập thời gian thực GOOGLE ANALYTICS
-                async function displayRealtimeLocations() {
-                    const listElement = document.getElementById('realtime-locations-list');
-                    const totalUsersElement = document.getElementById('realtime-total-users');
-                    if (!listElement || !totalUsersElement) return;
-
-                    const oldContent = listElement.innerHTML;
-                    // Chỉ hiển thị "Đang tải..." lần đầu tiên
-                    if (listElement.children.length === 0 || !listElement.textContent.includes(t('realtimeLoading', 'Đang tải...'))) {
-                        listElement.innerHTML = `<li>${t('realtimeLoading', 'Đang tải...')}</li>`;
-                    }
-
-                    try {
-                        const response = await fetch('/api/ga-stats?report=realtime');
-                        if (!response.ok) throw new Error('Failed to fetch realtime locations');
-                        const data = await response.json();
-
-                        if (data.totalActiveUsers !== undefined) {
-                            const formattedTotal = data.totalActiveUsers.toLocaleString(currentLang === 'vi' ? 'vi-VN' : 'en-US');
-                            totalUsersElement.textContent = `${formattedTotal} ${t('realtimeTotalUsers', 'người dùng trực tuyến')}`;
-                        }
-
-                        if (data.activeLocations && data.activeLocations.length > 0) {
-                            listElement.innerHTML = '';
-                            data.activeLocations.forEach(location => {
-                                const li = document.createElement('li');
-                                const translatedCity = t(`city_${location.city.toLowerCase().replace(/ /g, '_')}`, location.city);
-                                let locationDisplay = translatedCity;
-                                if (location.country && location.country !== 'Vietnam') {
-                                    const translatedCountry = t(`country_${location.country.toLowerCase().replace(/ /g, '_')}`, location.country);
-                                    locationDisplay = `${translatedCity} - ${translatedCountry}`;
-                                }
-                                const userText = t('realtimeUserFrom', '{count} người dùng từ').replace('{count}', location.count);
-                                li.innerHTML = `${userText} <strong>${locationDisplay}</strong>`;
-                                listElement.appendChild(li);
-                            });
-                        } else {
-                            listElement.innerHTML = `<li>${t('realtimeNoActivity', 'Chưa có hoạt động nào gần đây.')}</li>`;
-                        }
-                    } catch (error) {
-                        console.error("Không thể hiển thị hoạt động thời gian thực:", error);
-                        listElement.innerHTML = oldContent || `<li>${t('realtimeError', 'Không thể tải dữ liệu.')}</li>`;
-                    }
-                }
-
-                //Các hàm chức năng Xem địa chỉ hành chính
-                function openModal() {
-                    if (adminCenterModal) {
-                        adminCenterModal.classList.remove('hidden');
-                    }
-                }
-
-                function closeModal() {
-                    if (adminCenterModal) {
-                        adminCenterModal.classList.add('hidden');
-                    }
-                }
-
-                async function handleShowAdminCenters() {
-                    // GHI CHÚ THAY ĐỔI: Kiểm tra cả hai mã code cần thiết trước khi tiếp tục.
-                    // Biến newWardCodeForModal và newProvinceCodeForModal sẽ được gán trong các hàm tra cứu.
-                    if (!newWardCodeForModal || !newProvinceCodeForModal) {
-                        console.error("Thiếu mã xã hoặc tỉnh để tra cứu trung tâm hành chính.");
-                        return;
-                    }
-
-                    openModal();
-                    modalBody.innerHTML = `<p>${t('loading', 'Đang tải...')}</p>`;
-
-                    try {
-                        // GHI CHÚ THAY ĐỔI: Gọi API với cả hai tham số ward_code và province_code.
-                        const response = await fetch(`/api/get-admin-centers?ward_code=${newWardCodeForModal}&province_code=${newProvinceCodeForModal}`);
-
-                        if (!response.ok) throw new Error('Could not fetch administrative centers.');
-                        const data = await response.json();
-
-                        if (data.length > 0) {
-                            const listHtml = data.map(item => {
-                                // === GHI CHÚ THAY ĐỔI: Sử dụng hàm t() để dịch agency_type ===
-                                // 1. Xây dựng khóa dịch, ví dụ: "agency_ubnd"
-                                const translationKey = `agency_${item.agency_type.toLowerCase()}`;
-                                // 2. Dùng hàm t() để lấy bản dịch.
-                                //    Nếu không có, dùng lại giá trị gốc và viết hoa chữ cái đầu.
-                                const fallbackName = item.agency_type.charAt(0).toUpperCase() + item.agency_type.slice(1);
-                                const agencyName = t(translationKey, fallbackName);
-                                // ==========================================================
-                                return `
+            if (data.length > 0) {
+                const listHtml = data.map(item => {
+                    // 1. Xây dựng khóa dịch, ví dụ: "agency_ubnd"
+                    const translationKey = `agency_${item.agency_type.toLowerCase()}`;
+                    // 2. Dùng hàm t() để lấy bản dịch.
+                    //    Nếu không có, dùng lại giá trị gốc và viết hoa chữ cái đầu.
+                    const fallbackName = item.agency_type.charAt(0).toUpperCase() + item.agency_type.slice(1);
+                    const agencyName = t(translationKey, fallbackName);
+                    // ==========================================================
+                    return `
                         <li>
                             <span class="agency-type">${agencyName}</span>
                             <span class="agency-address">${item.address}</span>
                         </li>
                     `;
-                            }).join('');
-                            modalBody.innerHTML = `<ul>${listHtml}</ul>`;
-                        } else {
-                            modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Không có dữ liệu.')}</p>`;
-                        }
+                }).join('');
+                modalBody.innerHTML = `<ul>${listHtml}</ul>`;
+            } else {
+                modalBody.innerHTML = `<p>${t('noAdminCenterData', 'Không có dữ liệu.')}</p>`;
+            }
 
-                    } catch (error) {
-                        console.error("Lỗi khi lấy địa chỉ TTHC:", error);
-                        modalBody.innerHTML = `<p class="error">${error.message}</p>`;
-                    }
-                }
+        } catch (error) {
+            console.error("Lỗi khi lấy địa chỉ TTHC:", error);
+            modalBody.innerHTML = `<p class="error">${error.message}</p>`;
+        }
+    }
 
-                // --- KHỞI CHẠY ỨNG DỤNG ---
-                initialize();
-            });
+    // --- KHỞI CHẠY ỨNG DỤNG ---
+    initialize();
+});
