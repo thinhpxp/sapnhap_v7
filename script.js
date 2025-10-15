@@ -875,7 +875,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!counterElement) return;
 
                     try {
-                        const response = await fetch('/api/get-event-count');
+                        const response = await fetch('/api/ga-stats');
                         if (!response.ok) throw new Error('Failed to fetch event count');
                         const data = await response.json();
 
