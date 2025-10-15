@@ -564,6 +564,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // === HÀM TRA CỨU XUÔI (ĐÃ SỬA LỖI CÚ PHÁP) ===
     async function handleForwardLookup() {
         const selectedCommune = communeChoices.getValue(true);
+        const selectedProvince = provinceChoices.getValue(true);
+        const selectedDistrict = districtChoices.getValue(true);
         if (!selectedCommune) {
             alert(t('alertSelectOldCommune'));
             return;
