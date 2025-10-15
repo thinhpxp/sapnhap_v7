@@ -655,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             newProvinceCodeForModal = events[0].new_province_code;
                             if (adminCenterActions) adminCenterActions.classList.remove('hidden');
                         }
-                    } catch (error) {
+                    catch (error) {
                         console.error('Lỗi khi tra cứu xuôi:', error);
                         newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
                     }
