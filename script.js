@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. NẾU KHÔNG, GỌI API MỘT LẦN DUY NHẤT
         try {
-            const response = await fetch(`/api/lookup-forward?code=${oldWardCode}`);
+            const response = await fetch(`/api/lookup?code=${oldWardCode}&type=forward`);
             const events = await response.json();
             if (!response.ok) throw new Error(events.error || 'Server error');
 
@@ -581,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
         }
     }
-
+// Hàm xử lý tra cứu ngược
     async function handleReverseLookup() {
         const selectedNewProvince = newProvinceChoices.getValue();
         const selectedNewCommune = newCommuneChoices.getValue();
@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newProvinceCodeForModal = null;
 
         try {
-            const response = await fetch(`/api/lookup-reverse?code=${newWardCode}`);
+            const response = await fetch(`/api/lookup?code=${newWardCode}&type=reverse`);
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Server error');
 

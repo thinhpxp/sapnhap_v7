@@ -112,6 +112,7 @@
     }
 
     // === HÀM XỬ LÝ KHI CLICK VÀO MỘT KẾT QUẢ ===
+    //=== PHỤC VỤ CHO CHỨC NĂNG TRA CỨU NHANH ===
     async function handleResultClick(event) {
         const li = event.currentTarget;
         const code = li.dataset.code;
@@ -133,7 +134,9 @@
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
 
         try {
-            const response = await fetch(`/api/get-details?code=${code}&type=${type}`);
+        // 'type' ở đây sẽ là 'old' hoặc 'new', chúng ta cần đổi nó thành 'forward' hoặc 'reverse'.
+            const lookupType = type === 'old' ? 'forward' : 'reverse';
+            const response = await fetch(`/api/lookup?code=${code}&type=${lookupType}`);
             const data = await response.json();
 
              // Truyền `fullAddress` vào các hàm render

@@ -1,4 +1,7 @@
 // /api/ga-stats.js
+// KẾT HỢP CẢ HAI BÁO CÁO: SỰ KIỆN VÀ THỜI GIAN THỰC TỪ GOOGLE ANALYTICS 4
+// YÊU CẦU THAM SỐ: report (events hoặc realtime)
+// ==================================================================
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
 // --- PHẦN KHỞI TẠO CHUNG ---
