@@ -579,11 +579,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // --- Hiển thị thông tin địa chỉ cũ ---
                 let oldAddressHtml = `
-            <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
-            <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
+                    <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
+                    <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
 
                 oldAddressDisplay.innerHTML = oldAddressHtml;
                 newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
+
                 if (historyDisplay) historyDisplay.classList.add('hidden');
                 if (adminCenterActions) adminCenterActions.classList.add('hidden');
                 resultContainer.classList.remove('hidden');
@@ -614,22 +615,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Tạo HTML cho phần thay đổi thôn/xóm
                     let villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
 
-                    // 3. XỬ LÝ KẾT QUẢ TRẢ VỀ
+                // 3. XỬ LÝ KẾT QUẢ TRẢ VỀ
                     if (events.length === 0) {
-                        // Trường hợp KHÔNG THAY ĐỔI
-                        newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
+                            // Trường hợp KHÔNG THAY ĐỔI
+                            newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>`;
                     } else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
-                        // Trường hợp CHIA TÁCH (có nhiều hơn 1 sự kiện, hoặc loại là SPLIT_MERGE)
-                        const splitHtml = events.map(result => {
+                            // Trường hợp CHIA TÁCH (có nhiều hơn 1 sự kiện, hoặc loại là SPLIT_MERGE)
+                            const splitHtml = events.map(result => {
                             const newAddress = `${result.new_ward_name}, ${result.new_province_name}`;
                             const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
                             return `
-                        <li>
-                             ${newAddress}
-                             <div class="split-description">${result.split_description}</div>
-                            <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
-                        </li>`;
-                        }).join('');
+                                        <li>
+                                             ${newAddress}
+                                             <div class="split-description">${result.split_description}</div>
+                                            <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
+                                        </li>`;
+                                        }).join('');
                         newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>` + villageHtml;
                         // Kích hoạt nút xem TTHC cho mảnh ghép đầu tiên
                         newWardCodeForModal = events[0].new_ward_code;
@@ -642,11 +643,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
                         const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
                         let resultsHtml = `
-                    <div class="address-line">
-                        <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
-                        <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
-                    </div>
-                    <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+                                        <div class="address-line">
+                                            <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
+                                            <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
+                                        </div>
+                                        <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
                         newAddressDisplay.innerHTML = resultsHtml + villageHtml;
 
                         // Cập nhật lại các biến modal
@@ -655,11 +656,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             newProvinceCodeForModal = events[0].new_province_code;
                             if (adminCenterActions) adminCenterActions.classList.remove('hidden');
                         }
-                    catch (error) {
+                    } catch (error) {
                         console.error('Lỗi khi tra cứu xuôi:', error);
                         newAddressDisplay.innerHTML = `<p class="error">${error.message}</p>`;
                     }
                 }
+            }
 
                 // Hàm xử lý tra cứu ngược
                 async function handleReverseLookup() {
