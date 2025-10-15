@@ -563,25 +563,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // handleReverseLookup - Tra cứu ngược
     // === HÀM TRA CỨU XUÔI (ĐÃ SỬA LỖI CÚ PHÁP) ===
     async function handleForwardLookup() {
-        const selectedCommune = communeChoices.getValue(true);
         const selectedProvince = provinceChoices.getValue(true);
         const selectedDistrict = districtChoices.getValue(true);
-        if (!selectedCommune) {
+        const selectedCommune = communeChoices.getValue(true);
+
+        if (!selectedProvince || !selectedDistrict || !selectedCommune) {
             alert(t('alertSelectOldCommune'));
             return;
         }
-
         const oldWardCode = selectedCommune;
         const fullOldAddress = `${communeChoices.getValue().label}, ${districtChoices.getValue().label}, ${provinceChoices.getValue().label}`;
+        // --- THÊM LẠI: Tạo biến oldCodes ---
         const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
-
-        // --- Hiển thị thông tin địa chỉ cũ ---
+        // --- SỬA LẠI: Hiển thị cả địa chỉ và Old Code ---
         let oldAddressHtml = `
             <div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>
             <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
+        oldAddressDisplay.innerHTML = oldAddressHtml;
 
-        // Reset giao diện
-        oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
         newAddressDisplay.innerHTML = `<p>${t('lookingUp')}</p>`;
         resultContainer.classList.remove('hidden');
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
