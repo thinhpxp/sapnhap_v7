@@ -875,7 +875,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!counterElement) return;
 
                     try {
-                        const response = await fetch('/api/ga-stats');
+                        const response = await fetch('/api/ga-stats?report=events');
                         if (!response.ok) throw new Error('Failed to fetch event count');
                         const data = await response.json();
 
@@ -904,7 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     try {
-                        const response = await fetch('/api/get-realtime-locations');
+                        const response = await fetch('/api/ga-stats?report=realtime');
                         if (!response.ok) throw new Error('Failed to fetch realtime locations');
                         const data = await response.json();
 
