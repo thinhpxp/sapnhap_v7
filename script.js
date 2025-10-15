@@ -581,6 +581,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`/api/lookup?code=${oldWardCode}&type=forward`);
             const data = await response.json();
+            console.log('API Response:', data); // Kiểm tra dữ liệu API trả về
+            console.log('Village Changes:', data.village_changes); // Kiểm tra village_changes
             if (!response.ok) throw new Error(data.error || 'Server error');
 
             const {
