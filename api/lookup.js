@@ -23,22 +23,54 @@ export default async function handler(request, response) {
     const wardCode = parseInt(code, 10);
     let rpcFunctionName;
 
-    // GHI CHÚ CỐT LÕI: Chọn hàm RPC dựa trên 'type'
+    // Chọn hàm RPC dựa trên 'type'
     if (type === 'forward') {
       rpcFunctionName = 'get_forward_lookup_details';
     } else {
       rpcFunctionName = 'get_reverse_lookup_details';
     }
 
+    console.log('=== DEBUG API LOOKUP ===');
+    console.log('Type:', type);
+    console.log('Ward Code:', wardCode);
+    console.log('RPC Function:', rpcFunctionName);
+
     const { data, error } = await supabase.rpc(rpcFunctionName, {
-      // Tên tham số phải khớp với tên trong hàm SQL
       [type === 'forward' ? 'p_old_ward_code' : 'p_new_ward_code']: wardCode
     });
 
+    console.log('=== SUPABASE RESPONSE ===');
+    console.log('Error:', error);
+    console.log('Data type:', typeof data);
+    console.log('Data:', JSON.stringify(data, null, 2));
+
     if (error) throw error;
 
-    // Dữ liệu trả về từ RPC đã có cấu trúc chuẩn, chỉ cần gửi lại cho client
-    return response.status(200).json(data);
+    // ⚠️ QUAN TRỌNG: Kiểm tra cấu trúc dữ liệu trả về
+    // Supabase RPC có thể trả về dữ liệu theo nhiều cách:
+    // 1. Trực tiếp: { events: [...], village_changes: [...] }
+    // 2. Wrapped trong array: [{ get_forward_lookup_details: {...} }]
+
+    let finalData = data;
+
+    // Nếu data là array và có phần tử đầu tiên
+    if (Array.isArray(data) && data.length > 0) {
+      // Kiểm tra xem có wrap trong key function name không
+      const firstItem = data[0];
+      if (firstItem[rpcFunctionName]) {
+        finalData = firstItem[rpcFunctionName];
+        console.log('⚠️ Data was wrapped, unwrapped to:', JSON.stringify(finalData, null, 2));
+      } else {
+        // Có thể data trực tiếp là array kết quả
+        finalData = data;
+      }
+    }
+
+    console.log('=== FINAL DATA TO SEND ===');
+    console.log(JSON.stringify(finalData, null, 2));
+
+    // Dữ liệu trả về từ RPC đã có cấu trúc chuẩn
+    return response.status(200).json(finalData);
 
   } catch (error) {
     console.error(`Lỗi API lookup (type: ${type}):`, error);
