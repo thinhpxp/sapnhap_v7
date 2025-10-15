@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadNewProvincesDropdown() {
         resetChoice(newProvinceChoices, t('newProvinceLoading'));
         try {
-            const response = await fetch('/api/get-new-provinces');
+            const response = await fetch('/api/new-geo-data');
             if(!response.ok) throw new Error(t('errorFetchNewProvinces'));
             let data = await response.json();
             const localizedData = data.map(province => ({
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resetChoice(newCommuneChoices, t('newCommuneLoading'));
             lookupBtn.disabled = true;
             try {
-                const response = await fetch(`/api/get-new-wards?province_code=${provinceCode}`);
+                const response = await fetch(`/api/new-geo-data?province_code=${provinceCode}`);
                 if(!response.ok) throw new Error(t('newCommuneError'));
                 let data = await response.json();
                 const localizedData = data.map(ward => ({
