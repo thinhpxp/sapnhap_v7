@@ -224,8 +224,7 @@
     }
 
     function renderReverseLookupResult(data, fullNewAddress) {
-        // Hiển thị thông tin địa chỉ mới đã chọn
-        const { events, village_changes } = data;
+        const events = data;
         const newCodes = events.length > 0 ? `${events[0].new_ward_code}, ${events[0].new_province_code}` : '';
         const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodes})`;
         let newAddressHtml = `
