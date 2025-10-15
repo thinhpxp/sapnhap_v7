@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === KHÓA API (CHỈ DÀNH CHO MYSTERY BOX) ===
     const UNSPLASH_ACCESS_KEY = 'Ln1_SF9l3ee_fsc320rUZjfB5fgSVCZlMg2JbSdh_XY';
-    const toggleButton = event.target.closest('.village-toggle-button');
     // --- CẤU HÌNH CHỨC NĂNG CHIA SẺ MXH ---
     const urlToShare = 'https://sapnhap.org';
     const textToShare = 'Tra cứu thông tin sáp nhập đơn vị hành chính Việt Nam 2025 một cách nhanh chóng và chính xác!';
@@ -256,18 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // /script.js - bên trong hàm addEventListeners()
-
-    // Tìm đến đoạn document.body.addEventListener('click', ...) nếu có,
-    // hoặc thêm mới nếu chưa có.
-    document.body.addEventListener('click', function(event) {
-         // GHI CHÚ: Thêm logic mới cho nút đóng/mở thôn/xóm
-        const villageToggleButton = event.target.closest('.village-toggle-btn');
-        if (villageToggleButton) {
-            handleVillageToggle(villageToggleButton);
-        }
-    }
-
     // THÊM MỚI: Hàm riêng để tải dữ liệu ban đầu
     function loadInitialData() {
         if (window.allProvincesData && window.allProvincesData.length > 0) {
@@ -356,7 +343,26 @@ document.addEventListener('DOMContentLoaded', () => {
             else handleForwardLookup();
         });
         if (mysteryBox) mysteryBox.addEventListener('click', fetchRandomImage);
-        if (resultContainer) resultContainer.addEventListener('click', handleCopy);
+        //if (resultContainer) resultContainer.addEventListener('click', handleCopy);
+
+        // GHI CHÚ: THAY ĐỔI BẮT ĐẦU TỪ ĐÂY
+    // Thay vì gán listener cho 'resultContainer', chúng ta gán cho 'document.body'
+    // để xử lý các element được tạo động.
+    document.body.addEventListener('click', function(event) {
+        // 1. Xử lý cho nút Copy
+        const copyButton = event.target.closest('.copy-btn');
+        if (copyButton) {
+            handleCopy(event); // Gọi hàm copy như cũ
+            return;
+        }
+
+        // 2. Xử lý cho nút đóng/mở thôn/xóm
+        const villageToggleButton = event.target.closest('.village-toggle-btn');
+        if (villageToggleButton) {
+            handleVillageToggle(villageToggleButton);
+        }
+    });
+    // GHI CHÚ: KẾT THÚC THAY ĐỔI
 
         if (accentToggle) {
             accentToggle.addEventListener('change', () => {
