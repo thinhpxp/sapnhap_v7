@@ -1,4 +1,8 @@
 // /api/new-geo-data.js
+// KẾT HỢP DỮ LIỆU ĐỊA LÝ MỚI: TỈNH/THÀNH VÀ XÃ/PHƯỜNG
+// YÊU CẦU THAM SỐ: province_code (nếu có thì trả về xã/phường, không thì trả về tỉnh/thành)
+// API NÀY DÙNG ĐỂ LẤY DỮ LIỆU CHO DROPDOWN TỈNH/THÀNH VÀ XÃ/PHƯỜNG MỚI
+// ==================================================================
 import { createClient } from '@supabase/supabase-js';
 
 // Khởi tạo Supabase client một lần duy nhất

@@ -1,7 +1,4 @@
 // /api/ga-stats.js
-// KẾT HỢP CẢ HAI BÁO CÁO: SỰ KIỆN VÀ THỜI GIAN THỰC TỪ GOOGLE ANALYTICS 4
-// YÊU CẦU THAM SỐ: report (events hoặc realtime)
-// ==================================================================
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
 // --- PHẦN KHỞI TẠO CHUNG ---
@@ -10,7 +7,6 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
 });
 const propertyId = process.env.GA4_PROPERTY_ID;
 
-// Mảng các sự kiện cần tính tổng (từ get-event-count.js)
 const CLICK_EVENTS_TO_SUM = [
     'Event_lookup',
     'Event_Quick_Search_Old',
@@ -20,32 +16,29 @@ const CLICK_EVENTS_TO_SUM = [
 
 // --- BỘ ĐIỀU KHIỂN CHÍNH (HANDLER) ---
 export default async function handler(request, response) {
-  // Cho phép CORS
   response.setHeader('Access-Control-Allow-Origin', '*');
-
-  // GHI CHÚ QUAN TRỌNG: Dùng tham số 'report' để phân luồng
   const { report } = request.query;
 
   switch (report) {
     case 'events':
-      // Nếu client yêu cầu báo cáo sự kiện
-      return await handleEventCount(request, response);
+      // GHI CHÚ THAY ĐỔI: Không còn 'return' ở đây
+      await handleEventCount(request, response);
+      break; // Thêm break để thoát khỏi switch
     case 'realtime':
-      // Nếu client yêu cầu báo cáo thời gian thực
-      return await handleRealtimeLocations(request, response);
+      // GHI CHÚ THAY ĐỔI: Không còn 'return' ở đây
+      await handleRealtimeLocations(request, response);
+      break; // Thêm break để thoát khỏi switch
     default:
-      // Nếu tham số 'report' không hợp lệ hoặc bị thiếu
-      return response.status(400).json({ error: "Tham số 'report' không hợp lệ. Phải là 'events' hoặc 'realtime'." });
+      // GHI CHÚ THAY ĐỔI: Chỉ cần gọi response, không return
+      response.status(400).json({ error: "Tham số 'report' không hợp lệ. Phải là 'events' hoặc 'realtime'." });
   }
 }
 
 // ==================================================================
-// HÀM XỬ LÝ ĐẾM SỰ KIỆN (LOGIC TỪ get-event-count.js)
+// HÀM XỬ LÝ ĐẾM SỰ KIỆN
 // ==================================================================
 async function handleEventCount(request, response) {
-  // Cache kết quả trong 30 phút
   response.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate');
-
   try {
     const [gaResponse] = await analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
@@ -56,34 +49,35 @@ async function handleEventCount(request, response) {
 
     let totalClicks = 0;
     let eventCounts = {};
+    if (gaResponse.rows) {
+        gaResponse.rows.forEach(row => {
+            const eventName = row.dimensionValues[0].value;
+            const eventCount = parseInt(row.metricValues[0].value, 10);
+            eventCounts[eventName] = eventCount;
+            if (CLICK_EVENTS_TO_SUM.includes(eventName)) {
+                totalClicks += eventCount;
+            }
+        });
+    }
 
-    gaResponse.rows.forEach(row => {
-        const eventName = row.dimensionValues[0].value;
-        const eventCount = parseInt(row.metricValues[0].value, 10);
-        eventCounts[eventName] = eventCount;
-        if (CLICK_EVENTS_TO_SUM.includes(eventName)) {
-            totalClicks += eventCount;
-        }
-    });
-
-    return response.status(200).json({
+    // GHI CHÚ THAY ĐỔI: Không 'return'
+    response.status(200).json({
       totalClicks: totalClicks,
       allEvents: eventCounts
     });
 
   } catch (error) {
     console.error('Lỗi khi gọi GA Data API (Event Count):', error);
-    return response.status(500).json({ error: 'Không thể lấy dữ liệu sự kiện từ Google Analytics.' });
+    // GHI CHÚ THAY ĐỔI: Không 'return'
+    response.status(500).json({ error: 'Không thể lấy dữ liệu sự kiện từ Google Analytics.' });
   }
 }
 
 // ==================================================================
-// HÀM XỬ LÝ VỊ TRÍ THỜI GIAN THỰC (LOGIC TỪ get-realtime-locations.js)
+// HÀM XỬ LÝ VỊ TRÍ THỜI GIAN THỰC
 // ==================================================================
 async function handleRealtimeLocations(request, response) {
-  // Cache kết quả trong 60 giây
   response.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
-
   try {
     const [realtimeResponse] = await analyticsDataClient.runRealtimeReport({
       property: `properties/${propertyId}`,
@@ -106,13 +100,15 @@ async function handleRealtimeLocations(request, response) {
     locations.sort((a, b) => b.count - a.count);
     const totalActiveUsers = locations.reduce((total, location) => total + location.count, 0);
 
-    return response.status(200).json({
+    // GHI CHÚ THAY ĐỔI: Không 'return'
+    response.status(200).json({
       totalActiveUsers: totalActiveUsers,
       activeLocations: locations
     });
 
   } catch (error) {
     console.error('Lỗi khi gọi GA Realtime API:', error);
-    return response.status(500).json({ error: 'Không thể lấy dữ liệu thời gian thực.' });
+    // GHI CHÚ THAY ĐỔI: Không 'return'
+    response.status(500).json({ error: 'Không thể lấy dữ liệu thời gian thực.' });
   }
 }
