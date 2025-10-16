@@ -23,7 +23,6 @@ export default async function handler(request, response) {
     const wardCode = parseInt(code, 10);
     let rpcFunctionName;
 
-    // Chọn hàm RPC dựa trên 'type'
     if (type === 'forward') {
       rpcFunctionName = 'get_forward_lookup_details';
     } else {
@@ -39,41 +38,63 @@ export default async function handler(request, response) {
       [type === 'forward' ? 'p_old_ward_code' : 'p_new_ward_code']: wardCode
     });
 
-    console.log('=== SUPABASE RESPONSE ===');
+    console.log('=== SUPABASE RAW RESPONSE ===');
     console.log('Error:', error);
     console.log('Data type:', typeof data);
     console.log('Data:', JSON.stringify(data, null, 2));
 
     if (error) throw error;
 
-    // ⚠️ QUAN TRỌNG: Kiểm tra cấu trúc dữ liệu trả về
-    // Supabase RPC có thể trả về dữ liệu theo nhiều cách:
-    // 1. Trực tiếp: { events: [...], village_changes: [...] }
-    // 2. Wrapped trong array: [{ get_forward_lookup_details: {...} }]
-
     let finalData = data;
 
-    // Nếu data là array và có phần tử đầu tiên
+    // Xử lý các trường hợp cấu trúc dữ liệu khác nhau
     if (Array.isArray(data) && data.length > 0) {
-      // Kiểm tra xem có wrap trong key function name không
       const firstItem = data[0];
+
+      // Case 1: Wrapped trong function name key
       if (firstItem[rpcFunctionName]) {
         finalData = firstItem[rpcFunctionName];
-        console.log('⚠️ Data was wrapped, unwrapped to:', JSON.stringify(finalData, null, 2));
-      } else {
-        // Có thể data trực tiếp là array kết quả
+        console.log('📦 Unwrapped from function key');
+      }
+      // Case 2: Data trực tiếp là array events
+      else {
         finalData = data;
       }
     }
 
-    console.log('=== FINAL DATA TO SEND ===');
+    // Chuẩn hóa cấu trúc dữ liệu trả về
+    // Forward lookup: { events: [...], village_changes: [...] }
+    // Reverse lookup: array of events with village_changes embedded
+
+    if (type === 'forward') {
+      // Đảm bảo có cấu trúc đúng cho forward lookup
+      if (!finalData.events && Array.isArray(finalData)) {
+        finalData = { events: finalData, village_changes: [] };
+      }
+      // Kiểm tra village_changes
+      if (!finalData.village_changes) {
+        finalData.village_changes = [];
+      }
+    } else {
+      // Reverse lookup: đảm bảo mỗi event có village_changes
+      if (Array.isArray(finalData)) {
+        finalData = finalData.map(event => ({
+          ...event,
+          village_changes: event.village_changes || []
+        }));
+      }
+    }
+
+    console.log('=== FINAL NORMALIZED DATA ===');
     console.log(JSON.stringify(finalData, null, 2));
 
-    // Dữ liệu trả về từ RPC đã có cấu trúc chuẩn
     return response.status(200).json(finalData);
 
   } catch (error) {
     console.error(`Lỗi API lookup (type: ${type}):`, error);
-    return response.status(500).json({ error: 'Lỗi máy chủ.' });
+    return response.status(500).json({
+      error: 'Lỗi máy chủ.',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 }
