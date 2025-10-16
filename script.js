@@ -554,12 +554,12 @@ function renderVillageChanges(villageData, title) {
     if (!villageData || villageData.length === 0) {
         return ''; // Trả về rỗng nếu không có dữ liệu
     }
-
     // Tạo các hàng của bảng
     const tableRows = villageData.map(item => `
         <tr>
-            <td>${item.old_village_name}</td>
-            <td>${item.new_village_name}</td>
+            <td>${item.old_village_name || 'N/A'}</td>
+            <td>&rarr;</td>
+            <td>${item.new_village_name || 'N/A'}</td>
         </tr>
     `).join('');
 
