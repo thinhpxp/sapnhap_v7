@@ -1185,7 +1185,7 @@ body.modal-open {
 
 /* Nút bấm để đóng/mở */
 .village-toggle-btn {
-    width: 50%
+    width: 50%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
