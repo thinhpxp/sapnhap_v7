@@ -1181,12 +1181,13 @@ body.modal-open {
 /* Wrapper chính */
 .village-changes-wrapper {
     padding-top: 5px;
+    display: flex;
+    flex-direction: column;  /* Xếp các phần tử con theo chiều dọc */
+    align-items: center;
 }
 
 /* Nút bấm để đóng/mở */
 .village-toggle-btn {
-    width: 45%;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1217,6 +1218,7 @@ body.modal-open {
 
 /* Container chứa nội dung (cái bàn) */
 .village-changes-container {
+    width: 100%;
     font-size: 0.8em;
     max-height: 0; /* Quan trọng: Ban đầu ẩn đi */
     overflow: hidden; /* Quan trọng: Ẩn nội dung khi thu gọn */
