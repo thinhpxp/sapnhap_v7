@@ -35,6 +35,7 @@
     const newResultsContainer = document.getElementById('quick-search-new-results');
     const resultContainer = document.getElementById('result-container');
     const oldAddressDisplay = document.getElementById('old-address-display');
+    const oldCodeDisplay = document.getElementById('old-code-display');
     const newAddressDisplay = document.getElementById('new-address-display');
     const historyDisplay = document.getElementById('history-display');
     const adminCenterActions = document.getElementById('admin-center-actions');
@@ -195,8 +196,10 @@ function renderVillageChanges(villageData, title) {
     function renderForwardLookupResult(data, fullOldAddress) {
         const { events, village_changes } = data; // Destructure dữ liệu
         const villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
-        // ... (Copy và điều chỉnh logic hiển thị từ hàm handleForwardLookup của script.js)
+        // --- THÊM LẠI: Tạo biến oldCodes ---
+        const oldCodes = `${selectedCommune}, ${selectedDistrict}, ${selectedProvince}`;
         oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
+        oldCodeDisplay.innerHTML =`<div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
         if (events.length === 0) {
             newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>` + villageHtml;
         }
