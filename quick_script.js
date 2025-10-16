@@ -152,36 +152,46 @@
     }
 
     // === THÊM MỚI: HÀM TÁI SỬ DỤNG ĐỂ HIỂN THỊ THAY ĐỔI THÔN/XÓM ===
-            // Trả về chuỗi HTML hoặc chuỗi rỗng nếu không có dữ liệu
-            function renderVillageChanges(villageData, title) {
-                if (!villageData || villageData.length === 0) {
-                    return ''; // Trả về chuỗi rỗng nếu không có dữ liệu
-                }
+     function renderVillageChanges(villageData, title) {
+    console.log('🏘️ renderVillageChanges called:', {
+        title,
+        hasData: !!villageData,
+        length: villageData?.length,
+        data: villageData
+    });
 
-                const listItems = villageData.map(item => `
-                        <tr>
-                            <td>${item.old_village_name}</td>
-                            <td>&rarr;</td>
-                            <td>${item.new_village_name}</td>
-                        </tr>
-                    `).join('');
+    if (!villageData || villageData.length === 0) {
+        console.log('⚠️ No village data to render');
+        return '';
+    }
 
-                return `
-                            <div class="village-changes-container">
-                                <h4>${title}</h4>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Tên cũ</th>
-                                            <th></th>
-                                            <th>Tên mới</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>${listItems}</tbody>
-                                </table>
-                            </div>
-                        `;
-            }
+    const listItems = villageData.map(item => `
+        <tr>
+            <td>${item.old_village_name || 'N/A'}</td>
+            <td>&rarr;</td>
+            <td>${item.new_village_name || 'N/A'}</td>
+        </tr>
+    `).join('');
+
+    const html = `
+        <div class="village-changes-container">
+            <h4>${title}</h4>
+            <table class="village-changes-table">
+                <thead>
+                    <tr>
+                        <th>Tên cũ</th>
+                        <th></th>
+                        <th>Tên mới</th>
+                    </tr>
+                </thead>
+                <tbody>${listItems}</tbody>
+            </table>
+        </div>
+    `;
+
+    console.log('✅ Village HTML generated, length:', html.length);
+    return html;
+}
 
     // === CÁC HÀM RENDER KẾT QUẢ CHI TIẾT ===
     function renderForwardLookupResult(data, fullOldAddress) {
@@ -223,9 +233,14 @@
         }
     }
 
-// Chỉ cần thay thế hàm renderReverseLookupResult trong quick_script.js
-
+    // === PHẦN 2: Cập nhật hàm renderReverseLookupResult với debug chi tiết ===
 function renderReverseLookupResult(data, fullNewAddress) {
+    console.log('🔄 renderReverseLookupResult called:', {
+        dataType: Array.isArray(data) ? 'array' : typeof data,
+        eventsCount: data?.length || 0,
+        data: data
+    });
+
     const events = data;
     const newCodes = events.length > 0 ? `${events[0].new_ward_code}, ${events[0].new_province_code}` : '';
     const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodes})`;
@@ -239,7 +254,14 @@ function renderReverseLookupResult(data, fullNewAddress) {
     oldAddressDisplay.innerHTML = newAddressHtml;
 
     if (events.length > 0) {
-        const oldUnitsHtml = events.map(record => {
+        const oldUnitsHtml = events.map((record, index) => {
+            console.log(`📍 Processing event ${index + 1}:`, {
+                ward: record.old_ward_name,
+                hasVillageChanges: !!record.village_changes,
+                villageCount: record.village_changes?.length || 0,
+                villageChanges: record.village_changes
+            });
+
             let noteHtml = '';
             if (record.event_type === 'SPLIT_MERGE' && record.split_description) {
                 noteHtml = `<div class="split-context-note">${record.split_description}</div>`;
@@ -250,11 +272,17 @@ function renderReverseLookupResult(data, fullNewAddress) {
             const province = localize(record.old_province_name, record.old_province_en_name);
             const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
 
-            // FIX: Tạo villageHtml và THÊM VÀO OUTPUT
+            // ✅ CRITICAL: Gọi renderVillageChanges với dữ liệu từ record
             const villageHtml = renderVillageChanges(
                 record.village_changes,
                 `Thay đổi tại ${record.old_ward_name}:`
             );
+
+            console.log(`🏘️ Village HTML for ${record.old_ward_name}:`, {
+                hasContent: villageHtml.length > 0,
+                htmlLength: villageHtml.length,
+                preview: villageHtml.substring(0, 100)
+            });
 
             return `
                 <li>
@@ -265,11 +293,14 @@ function renderReverseLookupResult(data, fullNewAddress) {
                 </li>`;
         }).join('');
 
+        console.log('📋 Final oldUnitsHtml length:', oldUnitsHtml.length);
         newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsHtml}</ul>`;
+        console.log('✅ HTML inserted into newAddressDisplay');
     } else {
         newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
     }
 }
+
     // === HÀM KHỞI TẠO CHÍNH ===
     function initializeQuickSearch() {
         if (!quickSearchOldInput || !quickSearchNewInput) return;
