@@ -1217,6 +1217,7 @@ body.modal-open {
 
 /* Container chứa nội dung (cái bàn) */
 .village-changes-container {
+    font-size: 0.8em;
     max-height: 0; /* Quan trọng: Ban đầu ẩn đi */
     overflow: hidden; /* Quan trọng: Ẩn nội dung khi thu gọn */
     transition: max-height 0.4s ease-out; /* Hiệu ứng đóng/mở mượt mà */
@@ -1236,7 +1237,7 @@ body.modal-open {
 .village-changes-container th,
 .village-changes-container td {
     text-align: left;
-    padding: 10px 15px;
+    padding: 5px 5px;
     border-bottom: 1px solid #eee;
 }
 
