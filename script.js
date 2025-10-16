@@ -554,6 +554,8 @@ function renderVillageChanges(villageData, title) {
     if (!villageData || villageData.length === 0) {
         return ''; // Trả về rỗng nếu không có dữ liệu
     }
+    // Tạo ID duy nhất cho mỗi container
+    const containerId = `village-container-${Math.random().toString(36).substr(2, 9)}`;
     // Tạo các hàng của bảng
     const tableRows = villageData.map(item => `
         <tr>
