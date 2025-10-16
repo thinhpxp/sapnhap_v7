@@ -223,45 +223,53 @@
         }
     }
 
-    function renderReverseLookupResult(data, fullNewAddress) {
-        const events = data;
-        const newCodes = events.length > 0 ? `${events[0].new_ward_code}, ${events[0].new_province_code}` : '';
-        const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodes})`;
-        let newAddressHtml = `
-            <div class="address-line">
-                <p><span class="label">${t('newAddressLabel').replace(':','')}</span> ${fullNewAddress}</p>
-                <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
-            </div>
-            <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
-        oldAddressDisplay.innerHTML = newAddressHtml;
+// Chỉ cần thay thế hàm renderReverseLookupResult trong quick_script.js
 
-        if (events.length > 0) {
-            const oldUnitsHtml = events.map(record => {
-                let noteHtml = '';
-                if (record.event_type === 'SPLIT_MERGE' && record.split_description) {
-                     noteHtml = `<div class="split-context-note">${record.split_description}</div>`;
-                }
+function renderReverseLookupResult(data, fullNewAddress) {
+    const events = data;
+    const newCodes = events.length > 0 ? `${events[0].new_ward_code}, ${events[0].new_province_code}` : '';
+    const newAddressForCopy = `${fullNewAddress} (Codes: ${newCodes})`;
 
-                const ward = localize(record.old_ward_name, record.old_ward_en_name);
-                const district = localize(record.old_district_name, record.old_district_en_name);
-                const province = localize(record.old_province_name, record.old_province_en_name);
-                const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
-                const villageHtml = renderVillageChanges(record.village_changes, `Thay đổi tại ${record.old_ward_name}:`);
-                return `
-                    <li>
-                        ${ward}, ${district}, ${province}
-                        <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
-                        ${noteHtml}
-                        ${villageHtml}
-                    </li>`;
-            }).join('');
-            newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsHtml}</ul>`;
-        } else {
-            newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
-        }
+    let newAddressHtml = `
+        <div class="address-line">
+            <p><span class="label">${t('newAddressLabel').replace(':','')}</span> ${fullNewAddress}</p>
+            <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
+        </div>
+        <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+    oldAddressDisplay.innerHTML = newAddressHtml;
+
+    if (events.length > 0) {
+        const oldUnitsHtml = events.map(record => {
+            let noteHtml = '';
+            if (record.event_type === 'SPLIT_MERGE' && record.split_description) {
+                noteHtml = `<div class="split-context-note">${record.split_description}</div>`;
+            }
+
+            const ward = localize(record.old_ward_name, record.old_ward_en_name);
+            const district = localize(record.old_district_name, record.old_district_en_name);
+            const province = localize(record.old_province_name, record.old_province_en_name);
+            const oldCodes = `${record.old_ward_code}, ${record.old_district_code}, ${record.old_province_code}`;
+
+            // FIX: Tạo villageHtml và THÊM VÀO OUTPUT
+            const villageHtml = renderVillageChanges(
+                record.village_changes,
+                `Thay đổi tại ${record.old_ward_name}:`
+            );
+
+            return `
+                <li>
+                    ${ward}, ${district}, ${province}
+                    <div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>
+                    ${noteHtml}
+                    ${villageHtml}
+                </li>`;
+        }).join('');
+
+        newAddressDisplay.innerHTML = `<p class="label">${t('mergedFromLabel')}</p><ul class="old-units-list">${oldUnitsHtml}</ul>`;
+    } else {
+        newAddressDisplay.innerHTML = `<p class="no-change">${t('noDataFoundMessage')}</p>`;
     }
-
-
+}
     // === HÀM KHỞI TẠO CHÍNH ===
     function initializeQuickSearch() {
         if (!quickSearchOldInput || !quickSearchNewInput) return;

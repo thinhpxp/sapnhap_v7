@@ -1,4 +1,8 @@
 // /api/quick-search.js
+//KHI USER NHẬP TÊN ĐỊA DANH VÀO INPUT, API NÀY SẼ TRẢ VỀ KẾT QUẢ TÌM KIẾM NHANH DỰA TRÊN TÊN ĐỊA DANH ẤY
+//DỮ LIÊU ĐƯỢC LẤY TỪ BẢNG 'old_wards' VÀ 'new_wards' TRONG CSDL SUPABASE
+//API NÀY SỬ DỤNG RPC FUNCTION 'search_old_wards' VÀ 'search_new_wards' NẰM TRÊN SUPABASE ĐỂ THỰC HIỆN TÌM KIẾM
+//KHI USER CLICK VÀO KẾT QUẢ TÌM KIẾM, HỆ THỐNG SẼ LẤY 'ward_code' TỪ KẾT QUẢ VÀ GỬI ĐẾN API lookup.js ĐỂ LẤY THÔNG TIN CHI TIẾT VỀ ĐỊA DANH ẤY
 import { createClient } from '@supabase/supabase-js';
 
 // Khởi tạo Supabase client một lần duy nhất
