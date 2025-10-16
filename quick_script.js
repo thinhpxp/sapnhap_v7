@@ -151,19 +151,15 @@
         }
     }
 
-    // === THÊM MỚI: HÀM TÁI SỬ DỤNG ĐỂ HIỂN THỊ THAY ĐỔI THÔN/XÓM ===
-     function renderVillageChanges(villageData, title) {
-    console.log('🏘️ renderVillageChanges called:', {
-        title,
-        hasData: !!villageData,
-        length: villageData?.length,
-        data: villageData
-    });
-
+    // === CẬP NHẬT HÀM renderVillageChanges ===
+// Thêm nút toggle và wrapper để phù hợp với CSS có sẵn
+function renderVillageChanges(villageData, title) {
     if (!villageData || villageData.length === 0) {
-        console.log('⚠️ No village data to render');
         return '';
     }
+
+    // Tạo ID duy nhất cho mỗi container
+    const containerId = `village-container-${Math.random().toString(36).substr(2, 9)}`;
 
     const listItems = villageData.map(item => `
         <tr>
@@ -173,24 +169,26 @@
         </tr>
     `).join('');
 
-    const html = `
-        <div class="village-changes-container">
-            <h4>${title}</h4>
-            <table class="village-changes-table">
-                <thead>
-                    <tr>
-                        <th>Tên cũ</th>
-                        <th></th>
-                        <th>Tên mới</th>
-                    </tr>
-                </thead>
-                <tbody>${listItems}</tbody>
-            </table>
+    return `
+        <div class="village-changes-wrapper">
+            <button class="village-toggle-btn" data-target="${containerId}">
+                ${title} (${villageData.length} thay đổi)
+                <span class="toggle-arrow">▼</span>
+            </button>
+            <div id="${containerId}" class="village-changes-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên cũ</th>
+                            <th></th>
+                            <th>Tên mới</th>
+                        </tr>
+                    </thead>
+                    <tbody>${listItems}</tbody>
+                </table>
+            </div>
         </div>
     `;
-
-    console.log('✅ Village HTML generated, length:', html.length);
-    return html;
 }
 
     // === CÁC HÀM RENDER KẾT QUẢ CHI TIẾT ===
@@ -301,16 +299,37 @@ function renderReverseLookupResult(data, fullNewAddress) {
     }
 }
 
-    // === HÀM KHỞI TẠO CHÍNH ===
-    function initializeQuickSearch() {
-        if (!quickSearchOldInput || !quickSearchNewInput) return;
+    // === THÊM EVENT DELEGATION CHO CÁC NÚT TOGGLE ===
+// Thêm vào cuối hàm initializeQuickSearch()
+function initializeQuickSearch() {
+    if (!quickSearchOldInput || !quickSearchNewInput) return;
 
-        // Gán sự kiện 'input' với hàm debounce
-        quickSearchOldInput.addEventListener('input', debounce(handleQuickSearch, 300));
-        quickSearchNewInput.addEventListener('input', debounce(handleQuickSearch, 300));
+    quickSearchOldInput.addEventListener('input', debounce(handleQuickSearch, 300));
+    quickSearchNewInput.addEventListener('input', debounce(handleQuickSearch, 300));
 
-        console.log("Giao diện Tra cứu Nhanh đã được khởi tạo.");
-    }
+    // ✅ THÊM: Event delegation cho toggle buttons
+    document.addEventListener('click', function(event) {
+        if (event.target.closest('.village-toggle-btn')) {
+            const btn = event.target.closest('.village-toggle-btn');
+            const targetId = btn.dataset.target;
+            const container = document.getElementById(targetId);
+
+            if (container) {
+                // Toggle active class
+                btn.classList.toggle('active');
+
+                // Toggle max-height
+                if (btn.classList.contains('active')) {
+                    container.style.maxHeight = container.scrollHeight + 'px';
+                } else {
+                    container.style.maxHeight = '0';
+                }
+            }
+        }
+    });
+
+    console.log("Giao diện Tra cứu Nhanh đã được khởi tạo.");
+}
 
     // Gán hàm khởi tạo vào window để script.js có thể gọi nó
     window.initializeQuickSearch = initializeQuickSearch;
