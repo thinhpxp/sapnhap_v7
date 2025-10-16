@@ -563,30 +563,22 @@ function renderVillageChanges(villageData, title) {
         </tr>
     `).join('');
 
-    // Icon mũi tên SVG
-    const arrowIcon = `
-        <svg class="toggle-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>`;
-
-    // Trả về toàn bộ cấu trúc HTML của khối có thể thu gọn
-    return `
+   return `
         <div class="village-changes-wrapper">
-            <button class="village-toggle-btn" aria-expanded="false">
-                <span class="toggle-text">${title}</span>
-                ${arrowIcon}
+            <button class="village-toggle-btn" data-target="${containerId}">
+                ${title} (${villageData.length} thay đổi)
+                <span class="toggle-arrow">▼</span>
             </button>
-            <div class="village-changes-container">
+            <div id="${containerId}" class="village-changes-container">
                 <table>
                     <thead>
                         <tr>
-                            <th>${t('villageOldName', 'Tên cũ')}</th>
-                            <th>${t('villageNewName', 'Tên mới')}</th>
+                            <th>Tên cũ</th>
+                            <th></th>
+                            <th>Tên mới</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        ${tableRows}
-                    </tbody>
+                    <tbody>${listItems}</tbody>
                 </table>
             </div>
         </div>
