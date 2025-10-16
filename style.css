@@ -1185,7 +1185,7 @@ body.modal-open {
 
 /* Nút bấm để đóng/mở */
 .village-toggle-btn {
-    width: 50%;
+    width: 45%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -1198,7 +1198,7 @@ body.modal-open {
     cursor: pointer;
     border-radius: 5px;
     text-align: left;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s;
 }
 
 .village-toggle-btn:hover {
