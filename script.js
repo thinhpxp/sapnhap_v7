@@ -557,7 +557,7 @@ function renderVillageChanges(villageData, title) {
     // Tạo ID duy nhất cho mỗi container
     const containerId = `village-container-${Math.random().toString(36).substr(2, 9)}`;
     // Tạo các hàng của bảng
-    const tableRows = villageData.map(item => `
+    const listItems = villageData.map(item => `
         <tr>
             <td>${item.old_village_name || 'N/A'}</td>
             <td>&rarr;</td>
