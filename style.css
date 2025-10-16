@@ -1180,9 +1180,10 @@ body.modal-open {
 
 /* Wrapper chính */
 .village-changes-wrapper {
-    margin-top: 20px;
-    border-top: 1px solid #e0e0e0;
-    padding-top: 15px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;  /* Xếp các phần tử con theo chiều dọc */
+    align-items: center;
 }
 
 /* Nút bấm để đóng/mở */
@@ -1190,13 +1191,11 @@ body.modal-open {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    background-color: #f7f7f7;
+    background-color: #5b75e0;
     border: 1px solid #ddd;
     padding: 12px 15px;
-    font-size: 1em;
-    font-weight: bold;
-    color: #333;
+    font-size: 0.9em;
+    color: #ffffff;
     cursor: pointer;
     border-radius: 5px;
     text-align: left;
