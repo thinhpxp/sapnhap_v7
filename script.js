@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const xBtn = document.getElementById('share-x');
     // --- HÀM KIỂM TRA THIẾT BỊ DI ĐỘNG ---
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
+    // === THÊM MỚI: DOM elements cho Popup ===
+    const popupOverlay = document.getElementById('custom-popup-overlay');
+    const closePopupBtn = document.getElementById('close-popup-btn');
     // === DOM Elements ===
     const lookupBtn = document.getElementById('lookup-btn');
     const resultContainer = document.getElementById('result-container');
@@ -337,6 +339,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === LẮNG NGHE SỰ KIỆN ===
     function addEventListeners() {
+        // === THÊM MỚI: Logic hiển thị và đóng Popup ===
+                if (popupOverlay && closePopupBtn) {
+                    // 1. Lên lịch hiển thị popup sau 3 giây
+                    setTimeout(() => {
+                        popupOverlay.classList.remove('hidden');
+                    }, 3000); // 3000 mili giây = 3 giây
+
+                    // 2. Hàm để đóng popup
+                    const closePopup = () => {
+                        popupOverlay.classList.add('hidden');
+                    };
+
+                    // 3. Gán sự kiện click cho nút đóng
+                    closePopupBtn.addEventListener('click', closePopup);
+
+                    // 4. (Tùy chọn) Đóng popup khi click vào nền mờ bên ngoài
+                    popupOverlay.addEventListener('click', (event) => {
+                        if (event.target === popupOverlay) {
+                            closePopup();
+                        }
+                    });
+
+                    // 5. (Tùy chọn) Đóng popup khi nhấn phím Escape
+                    document.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape' && !popupOverlay.classList.contains('hidden')) {
+                            closePopup();
+                        }
+                    });
+                }
+
         if (modeToggle) modeToggle.addEventListener('change', toggleLookupUI);
         if (lookupBtn) lookupBtn.addEventListener('click', () => {
             if (isReverseMode) handleReverseLookup();
@@ -346,15 +378,15 @@ document.addEventListener('DOMContentLoaded', () => {
         //if (resultContainer) resultContainer.addEventListener('click', handleCopy);
 
         // GHI CHÚ: THAY ĐỔI BẮT ĐẦU TỪ ĐÂY
-    // Thay vì gán listener cho 'resultContainer', chúng ta gán cho 'document.body'
-    // để xử lý các element được tạo động.
-    document.body.addEventListener('click', function(event) {
-        // 1. Xử lý cho nút Copy
-        const copyButton = event.target.closest('.copy-btn');
-        if (copyButton) {
-            handleCopy(event); // Gọi hàm copy như cũ
-            return;
-        }
+            // Thay vì gán listener cho 'resultContainer', chúng ta gán cho 'document.body'
+            // để xử lý các element được tạo động.
+            document.body.addEventListener('click', function(event) {
+                // 1. Xử lý cho nút Copy
+                const copyButton = event.target.closest('.copy-btn');
+                if (copyButton) {
+                    handleCopy(event); // Gọi hàm copy như cũ
+                    return;
+                }
 
         // 2. Xử lý cho nút đóng/mở thôn/xóm
         const villageToggleButton = event.target.closest('.village-toggle-btn');
