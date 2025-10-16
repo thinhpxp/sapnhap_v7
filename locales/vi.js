@@ -81,7 +81,7 @@ window.translations = {
   "agency_cong_an_xa": "Công an xã",
 
    // ...
-  "feedbackDescription": "Mọi góp ý, bổ sung xin hãy nhắn tin thật chi tiết cho mình nhé. Ví dụ: Trung tâm 1 cửa mới của phường X nay ở địa chỉ Y",
+  "feedbackDescription": "Mọi góp ý, bổ sung xin hãy nhắn tin thật chi tiết cho mình nhé. Ví dụ: Trung tâm 1 cửa mới của phường X nay ở địa chỉ Y. Các bạn Việt Nam ở Campuchia cần giúp đỡ cũng có thể nhắn tin ở đây!",
   "feedbackPlaceholder": "Nhập góp ý của bạn...",
   "feedbackSendBtn": "Gửi",
   "feedbackSuccess": "Cám ơn, các phản hồi sẽ được mình xử lý vào mỗi cuối tuần",
