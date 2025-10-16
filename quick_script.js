@@ -192,46 +192,63 @@ function renderVillageChanges(villageData, title) {
     `;
 }
 
-    // === CÁC HÀM RENDER KẾT QUẢ CHI TIẾT ===
     function renderForwardLookupResult(data, fullOldAddress) {
-        const { events, village_changes } = data; // Destructure dữ liệu
-        const oldCodes = events.length > 0 ? `${events[0].old_ward_code},${events[0].old_district_code}, ${events[0].new_province_code}` : '';
-        const villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
-        oldAddressDisplay.innerHTML = `<div class="address-line"><p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p></div>`;
-        oldCodeDisplay.innerHTML = `<div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>`;
-        if (events.length === 0) {
-            newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>` + villageHtml;
-        }
-        else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
-            const splitHtml = events.map(result => {
-                const newAddress = `${localize(result.new_ward_name, result.new_ward_en_name)}, ${localize(result.new_province_name, result.new_province_en_name)}`;
-                const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
-               return `
-                <li>
-                    ${newAddress}
-                    <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
-                    <div class="split-description">${result.split_description}</div>
-                </li>`;
-            }).join('');
-            newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>` + villageHtml;
-        }
-        else {
-            const finalUnitData = events[0];
-            const newWardName = localize(finalUnitData.new_ward_name, finalUnitData.new_ward_en_name);
-            const newProvinceName = localize(finalUnitData.new_province_name, finalUnitData.new_province_en_name);
-            const newAddressForDisplay = `${newWardName}, ${newProvinceName}`;
-            const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
-            const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+    const { events, village_changes } = data;
+    const villageHtml = renderVillageChanges(village_changes, t('villageChangesTitle', 'Thay đổi cấp Thôn/Tổ dân phố:'));
 
-            let resultsHtml = `
-                <div class="address-line">
-                    <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
-                    <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
-                </div>
-                <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
-            newAddressDisplay.innerHTML = resultsHtml + villageHtml;
-        }
+    //  THÊM: Lấy old codes từ event đầu tiên (vì forward lookup từ 1 old ward)
+    let oldCodes = '';
+    let oldAddressForCopy = fullOldAddress;
+
+    if (events.length > 0) {
+        const firstEvent = events[0];
+        oldCodes = `${firstEvent.old_ward_code}, ${firstEvent.old_district_code}, ${firstEvent.old_province_code}`;
+        oldAddressForCopy = `${fullOldAddress} (Codes: ${oldCodes})`;
     }
+
+    //  CẢI TIẾN: Hiển thị Old Address với codes và nút copy
+    oldAddressDisplay.innerHTML = `
+        <div class="address-line">
+            <p><span class="label">${t('oldAddressLabel')}</span> ${fullOldAddress}</p>
+            ${oldCodes ? `<button class="copy-btn" title="Copy" data-copy-text="${oldAddressForCopy}">${copyIconSvg}</button>` : ''}
+        </div>
+        ${oldCodes ? `<div class="address-codes"><span class="label">Old Code:</span> ${oldCodes}</div>` : ''}
+    `;
+
+    // === Phần còn lại giữ nguyên ===
+    if (events.length === 0) {
+        newAddressDisplay.innerHTML = `<p class="no-change">${t('noChangeMessage')}</p>` + villageHtml;
+    }
+    else if (events.length > 1 || (events[0] && events[0].event_type === 'SPLIT_MERGE')) {
+        const splitHtml = events.map(result => {
+            const newAddress = `${localize(result.new_ward_name, result.new_ward_en_name)}, ${localize(result.new_province_name, result.new_province_en_name)}`;
+            const newCodes = `${result.new_ward_code}, ${result.new_province_code}`;
+            return `
+            <li>
+                ${newAddress}
+                <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>
+                <div class="split-description">${result.split_description}</div>
+            </li>`;
+        }).join('');
+        newAddressDisplay.innerHTML = `<p class="split-case-note">${t('splitCaseNote')}</p><ul class="split-results-list">${splitHtml}</ul>` + villageHtml;
+    }
+    else {
+        const finalUnitData = events[0];
+        const newWardName = localize(finalUnitData.new_ward_name, finalUnitData.new_ward_en_name);
+        const newProvinceName = localize(finalUnitData.new_province_name, finalUnitData.new_province_en_name);
+        const newAddressForDisplay = `${newWardName}, ${newProvinceName}`;
+        const newCodes = `${finalUnitData.new_ward_code}, ${finalUnitData.new_province_code}`;
+        const newAddressForCopy = `${newAddressForDisplay} (Codes: ${newCodes})`;
+
+        let resultsHtml = `
+            <div class="address-line">
+                <p><span class="label">${t('newAddressLabel')}</span> ${newAddressForDisplay}</p>
+                <button class="copy-btn" title="Copy" data-copy-text="${newAddressForCopy}">${copyIconSvg}</button>
+            </div>
+            <div class="address-codes"><span class="label">New Code:</span> ${newCodes}</div>`;
+        newAddressDisplay.innerHTML = resultsHtml + villageHtml;
+    }
+}
 
     // === PHẦN 2: Cập nhật hàm renderReverseLookupResult với debug chi tiết ===
 function renderReverseLookupResult(data, fullNewAddress) {
