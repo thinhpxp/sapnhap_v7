@@ -859,6 +859,7 @@ body.modal-open {
 	font-size: 0.85em !important;
 	color: #9f2154 !important;
 	margin-bottom: 15px !important;
+	margin-top: auto;
 	text-align: left !important;
 }
 
