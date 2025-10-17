@@ -646,6 +646,17 @@ function renderVillageChanges(villageData, title) {
         resultContainer.classList.remove('hidden');
         if (adminCenterActions) adminCenterActions.classList.add('hidden');
 
+        // 1. KIỂM TRA LỊCH SỬ TĨNH TRƯỚC
+        const provinceData = allProvincesData.find(p => p.code == selectedProvince);
+        const districtData = provinceData ? provinceData.districts.find(d => d.code == selectedDistrict) : null;
+        const wardData = districtData ? districtData.wards.find(w => w.code == oldWardCode) : null;
+
+        if (wardData && wardData.has_history && wardData.history_description) {
+            newAddressDisplay.innerHTML = `<p class="history-note">${wardData.history_description}</p>`;
+            return;
+        }
+        // KẾT THÚC KIÊM TRA LỊCH SỬ TỈNH TRƯỚC
+
         try {
             const response = await fetch(`/api/lookup?code=${oldWardCode}&type=forward`);
             const data = await response.json();
