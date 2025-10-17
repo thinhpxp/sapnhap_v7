@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // 1. Lên lịch hiển thị popup sau 3 giây
                     setTimeout(() => {
                         popupOverlay.classList.remove('hidden');
-                    }, 3000); // 3000 mili giây = 3 giây
+                    }, 1000); // 1000 mili giây = 1 giây
 
                     // 2. Hàm để đóng popup
                     const closePopup = () => {
